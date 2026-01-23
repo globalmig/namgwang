@@ -1,65 +1,118 @@
+import MainSlide from "@/components/MainSlide";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+
+      <main>
+        <MainSlide />
+        <div>
+          <h1>HYDRAULIC CYLINDER</h1>
+          <p>보이지 않는 힘으로 세상을 움직입니다.</p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div>
+          <p>SCROLL</p>
+          <div>
+            <Image src="/icons/scroll.png" alt="scroll" width={50} height={50} />
+          </div>
+        </div>
+        <div>
+          <Image className="mo" src="/images/banner_crop_mo" alt="image" width={720} height={339} />
+          <Image className="pc" src="/images/banner_crop_pc" alt="image" width={2560} height={162} />
         </div>
       </main>
-    </div>
+
+      <article className="home">
+        <div>
+          <div>
+            <h2>NAMGWANG HYDRAULICS</h2>
+            <p>기술의 깊이로 신뢰를 쌓아온 유압 전문 기업, 남광유압</p>
+          </div>
+          <div className="display-flex-flow">
+            <section>
+              <Link href="/product/cylinder">
+                <div>
+                  <Image src="/images/유압실린더.jpg" alt="유압 실린더" width={378} height={378} />
+                </div>
+                <div>
+                  <p>유압 실린더</p>
+                  <h3>HYDRAULIC CYLINDER</h3>
+                </div>
+              </Link>
+            </section>
+            <section>
+              <Link href="/product/unit">
+                <div>
+                  <Image src="/images/유압유니트.jpg" alt="유압 유니트" width={378} height={378} />
+                </div>
+                <div>
+                  <p>유압 유니트</p>
+                  <h3>HYDRAULIC UNIT</h3>
+                </div>
+              </Link>
+            </section>
+            <section>
+              <Link href="/product/other">
+                <div>
+                  <Image src="/images/기타기기.jpg" alt="기타 기기 제작" width={378} height={378} />
+                </div>
+                <div>
+                  <p>기타 기기</p>
+                  <h3>OTHER</h3>
+                </div>
+              </Link>
+            </section>
+          </div>
+        </div>
+      </article>
+
+      <article className="home2">
+        <div>
+          <div>
+            <h2>NAMGWANG PRODUCTS</h2>
+            <p>축적된 기술력으로 완성한 유압 실린더와 유압 유니트 솔루션</p>
+          </div>
+          <div className="display-flex-flow">
+            <section>
+              <h3>유압 실린더</h3>
+              <p>HYDRAULIC CYLINDER</p>
+              <button>
+                <Link href="/technology/cylinder">자세히 보기</Link>
+              </button>
+              <div>
+                <Image src="/images/tech-유압실린더.jpg" alt="유압실린더" width={354} height={236} />
+              </div>
+            </section>
+            <section>
+              <h3>유압 유니트</h3>
+              <p>HYDRAULIC UNIT</p>
+              <button>
+                <Link href="/technology/unit">자세히 보기</Link>
+              </button>
+              <div>
+                <Image src="/images/tech-유압유니트.jpg" alt="유압유니트" width={354} height={236} />
+              </div>
+            </section>
+          </div>
+        </div>
+      </article>
+
+      <article className="contact">
+        <div>
+          <div>
+            <h2>CONTACT US</h2>
+            <p>남광유압 제품과 관련하여 문의가 있는 경우<br />접수해주시면 빠른 시일 내에 연락 드리겠습니다.</p>
+          </div>
+          <div>
+            <button>
+              <Link href="/inquire/write">문의하기</Link>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </>
   );
 }
