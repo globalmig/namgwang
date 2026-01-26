@@ -10,6 +10,7 @@ export default function ProductPage() {
                 </div>
                 <div>
                     {/* productList */}
+                    {/* performanceList + 등록버튼 : /admin/write/performance */}
                     {/* pagination? */}
                 </div>
             </div>

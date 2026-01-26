@@ -1,7 +1,7 @@
 export default function CushionLength() {
     // 쿠션길이
     return (
-        <table className="cushion-length">
+        <table className="cushion-length standard">
         <thead>
           <tr>
             <th>내경</th>

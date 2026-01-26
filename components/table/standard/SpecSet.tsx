@@ -8,7 +8,7 @@ import StrokeLimit from "./StrokeLimit";
 
 export default function StandardSpecSet() {
    return (
-      <>
+      <div>
          <section>
             <h3>사양</h3>
             <Specifications />
@@ -59,6 +59,6 @@ export default function StandardSpecSet() {
             <h3>패킹 부품도</h3>
             <SealPartsDiagram />
          </section>
-      </>
+      </div>
    )
 }

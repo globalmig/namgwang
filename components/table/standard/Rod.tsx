@@ -1,7 +1,7 @@
 export default function Rod() {
     // 내경/기호 표 (제품설명 초반 표)
     return (
-        <table className="rod">
+        <table className="rod standard">
             <thead>
                 <tr>
                     <th rowSpan={2}>
@@ -159,7 +159,6 @@ export default function Rod() {
                     <td>365</td>
                     <td>220</td>
                 </tr>
-
                 <tr>
                     <td>Ø140</td>
                     <td>110</td>
@@ -181,7 +180,6 @@ export default function Rod() {
                     <td>400</td>
                     <td>230</td>
                 </tr>
-
                 <tr>
                     <td>Ø160</td>
                     <td>120</td>

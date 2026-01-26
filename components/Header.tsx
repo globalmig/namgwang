@@ -7,7 +7,7 @@ export default function Header() {
             <div>
                 <div>
                     <Link href="/">
-                    <Image src="/icons/logo.png" alt="남광유업" width={100} height={100}/>
+                    <Image src="/icons/logo.png" alt="남광유압" width={100} height={100}/>
                     </Link>
                 </div>
                 <nav>

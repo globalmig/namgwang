@@ -65,4 +65,5 @@ export const CYLINDER_SUBCATEGORY:
         { name: "제철 원형 실린더", category: "round" },
         { name: "박형 실린더", category: "compact" },
         { name: "2단 복동 텔레스코픽 실린더", category: "double" },
+        { name: "실적", category: "performance" },
     ]
