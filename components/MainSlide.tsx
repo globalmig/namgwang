@@ -18,6 +18,7 @@ export default function MainSlide() {
         autoplay: true,
         autoplaySpeed: 4500,
         pauseOnHover: false,
+        fade: true,
     };
 
     return (

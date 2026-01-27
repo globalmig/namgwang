@@ -1,7 +1,7 @@
 export default function Rod() {
     // 내경/기호 표 (제품설명 초반 표)
     return (
-        <table className="rod standard">
+        <table className="rod compact">
             <thead>
                 <tr>
                     <th rowSpan={2}>

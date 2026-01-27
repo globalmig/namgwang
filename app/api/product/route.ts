@@ -8,8 +8,8 @@ export async function POST(req: NextRequest) {
     const name = formData.get("name") as string;
     const category = formData.get("category") as string;
 
-    const thumnail = formData.get("thumnail") as File | null;
-    if (!thumnail) throw new Error("대표 이미지 없음");
+    const thumbnail = formData.get("thumbnail") as File | null;
+    if (!thumbnail) throw new Error("대표 이미지 없음");
 
     const imagesFiles = formData.getAll("images") as File[];
     if (imagesFiles.length === 0) throw new Error("상세 이미지 없음");
@@ -20,21 +20,21 @@ export async function POST(req: NextRequest) {
       return `${Date.now()}_${crypto.randomUUID()}.${ext}`;
     }
 
-    const thumnailBuffer = await thumnail.arrayBuffer();
-    const safeName = safeFileName(thumnail.name);
-    const thumnailPath = `products/thumnail/${safeName}`;
+    const thumbnailBuffer = await thumbnail.arrayBuffer();
+    const safeName = safeFileName(thumbnail.name);
+    const thumbnailPath = `products/thumbnail/${safeName}`;
 
     const { error: thumError } = await supabaseServer.storage
       .from("products")
-      .upload(thumnailPath, thumnailBuffer, {
-        contentType: thumnail.type,
+      .upload(thumbnailPath, thumbnailBuffer, {
+        contentType: thumbnail.type,
       });
 
     if (thumError) throw thumError;
 
     const { data: thumUrl } = supabaseServer.storage
       .from("products")
-      .getPublicUrl(thumnailPath);
+      .getPublicUrl(thumbnailPath);
 
     /* ---------- 상세 이미지 업로드 ---------- */
     const imagesUrls: string[] = [];
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
     const { error: dbError } = await supabaseServer.from("products").insert({
       name,
       category,
-      thumnail: thumUrl.publicUrl,
+      thumbnail: thumUrl.publicUrl,
       images: imagesUrls,
     });
 

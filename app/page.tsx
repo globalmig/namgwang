@@ -6,10 +6,10 @@ export default function Home() {
   return (
     <>
 
-      <main>
+      <main className="home-main">
         <MainSlide />
         <div>
-          <h1>HYDRAULIC CYLINDER</h1>
+          <h2>HYDRAULIC CYLINDER</h2>
           <p>보이지 않는 힘으로 세상을 움직입니다.</p>
         </div>
         <div>
@@ -19,8 +19,8 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <Image className="mo" src="/images/banner_crop_mo" alt="image" width={720} height={339} />
-          <Image className="pc" src="/images/banner_crop_pc" alt="image" width={2560} height={162} />
+          <Image className="mo" src="/images/banner_crop_mo.png" alt="image" width={720} height={339} />
+          <Image className="pc" src="/images/banner_crop_pc.png" alt="image" width={2560} height={162} />
         </div>
       </main>
 
@@ -82,7 +82,7 @@ export default function Home() {
                 <Link href="/technology/cylinder">자세히 보기</Link>
               </button>
               <div>
-                <Image src="/images/tech-유압실린더.jpg" alt="유압실린더" width={354} height={236} />
+                <Image src="/images/tech-유압실린더.jpg" alt="유압실린더" width={158} height={106} />
               </div>
             </section>
             <section>
@@ -92,7 +92,7 @@ export default function Home() {
                 <Link href="/technology/unit">자세히 보기</Link>
               </button>
               <div>
-                <Image src="/images/tech-유압유니트.jpg" alt="유압유니트" width={354} height={236} />
+                <Image src="/images/tech-유압유니트.jpg" alt="유압유니트" width={158} height={106} />
               </div>
             </section>
           </div>

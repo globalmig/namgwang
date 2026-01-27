@@ -14,18 +14,22 @@ export default function StandardSpecSet() {
             <Specifications />
             <ul>
                <li>1. 지지형식중 70kgf/cm²용입니다.</li>
-               <li>2. 사용온도 100도 이상 장시간 작동 시, 고속작동 시 (별도문의요망)</li>
+               <li>2. 사용온도 100도 이상 장시간 작동 시, 고속작동 시 (별도문의 요망)</li>
                <li>단동형 사용 시 별도문의 요망</li>
             </ul>
          </section>
          <section>
-            <h3>쿠션길이</h3>
-            <p>단위 mm</p>
+            <div className="display-flex">
+               <h3>쿠션길이</h3>
+               <p>단위 mm</p>
+            </div>
             <CushionLength />
          </section>
          <section>
-            <h3>스트로크 한계</h3>
-            <p>단위 mm</p>
+             <div className="display-flex">
+               <h3>스트로크 한계</h3>
+               <p>단위 mm</p>
+            </div>
             <StrokeLimit />
             <ul>
                <li>1. 지지형식에 따른 좌굴은 별도로 계산해주세요.</li>

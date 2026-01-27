@@ -27,6 +27,7 @@ export const CATEGORY_MAP: {
             { name: "유압 실린더", url: "/cylinder" },
             { name: "유압 유니트", url: "/unit" },
             { name: "기타 기기 제작", url: "/other" },
+             { name: "실적", url: "/performance" },
         ],
     },
     inquire: {
@@ -52,7 +53,6 @@ export const CATEGORY_MAP: {
     },
 };
 
-// 유압 유니트, 기타 기기는 서브 카테고리 X
 export const CYLINDER_SUBCATEGORY:
     {
         name: string,
@@ -66,4 +66,23 @@ export const CYLINDER_SUBCATEGORY:
         { name: "박형 실린더", category: "compact" },
         { name: "2단 복동 텔레스코픽 실린더", category: "double" },
         { name: "실적", category: "performance" },
-    ]
+    ];
+
+export const UNIT_SUBCATEGORY : {
+    name: string,
+    category: string,
+} [] = [
+    { name: "소형 유니트", category: "small" },
+    { name: "중형 유니트", category: "medium" },
+    { name: "대형 유니트", category: "large" },
+    { name: "특수형 유니트", category: "extra" },
+]
+
+export const ADMIN_SUBCATEGORY : {
+    name: string,
+    category: string,
+} [] = [
+    { name: "실적게시판", category: "performance" },
+    { name: "유압 유니트 게시판", category: "unit" },
+    { name: "기타 기기 게시판", category: "other" },
+]

@@ -1,18 +1,21 @@
+"use client";
+import PerformanceList from "@/components/board/PerformanceList";
+import ProductList from "@/components/board/ProductList";
 import SubCategoryTab from "@/components/SubCategoryTab";
+import { useParams } from "next/navigation";
 
-export default function ProductPage() {
+export default function ProductListPage() {
+    const { category } = useParams();
+
     return (
         <article className="product">
             <div>
                 <div>
-                    {/* 유압실린더만 서브카테고리 */}
-                    <SubCategoryTab/>
+                    <h2></h2>
+                    {/* 서브카테고리가 있는 경우에만 생성 : cylinder, unit */}
+                    <SubCategoryTab />
                 </div>
-                <div>
-                    {/* productList */}
-                    {/* performanceList + 등록버튼 : /admin/write/performance */}
-                    {/* pagination? */}
-                </div>
+                {category === "performance" ? <PerformanceList /> : <ProductList />}
             </div>
         </article>
     )

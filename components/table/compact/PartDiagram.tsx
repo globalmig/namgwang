@@ -2,7 +2,7 @@ export default function PartDiagram() {
     // 부품도
     return (
         <div className="display-flex-flow">
-            <table className="part-diagram standard">
+            <table className="part-diagram compact">
                 <thead>
                     <tr>
                         <th>NO</th>
@@ -20,7 +20,7 @@ export default function PartDiagram() {
                     <tr><td>8</td><td>피스톤</td><td>기계구조용탄소강 강재</td><td>1</td></tr>
                 </tbody>
             </table>
-            <table className="part-diagram standard">
+            <table className="part-diagram compact">
                 <thead>
                     <tr>
                         <th>NO</th>

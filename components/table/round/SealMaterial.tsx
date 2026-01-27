@@ -1,7 +1,7 @@
 export default function SealMaterial() {
     // 패킹재질
     return (
-        <table className="seal-material standard">
+        <table className="seal-material round">
             <thead>
                 <tr>
                     <th rowSpan={2}>작동유</th>

@@ -1,10 +1,18 @@
+'use client';
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
+    const handleScroll = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     return (
         <footer>
             <div>
+                <div onClick={handleScroll}>
+                    <Image src="/icons/top.png" alt="맨 위로 이동" width={50} height={50}/>
+                </div>
                 <ul className="display-flex-flow">
                     <li><Link href="/company/about">회사소개</Link></li>
                     <li><Link href="/product/cylinder">제품소개</Link></li>

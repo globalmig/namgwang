@@ -35,38 +35,38 @@ export async function PATCH(
     // [기존 데이터 조회] 삭제된 파일 찾기
     const { data: currentProduct } = await supabaseServer
       .from("products")
-      .select("images, thumnail")
+      .select("images, thumbnail")
       .eq("id", id)
       .single();
     const oldImagesUrls: string[] = currentProduct?.images || [];
 
     // 1. 썸네일 처리
-    let thumnailUrl = formData.get("thumnail"); // 클라이언트가 보낸 값 (파일 혹은 기존 URL)
-    const thumnailFile = formData.get("thumnail") as File | null;
+    let thumbnailUrl = formData.get("thumbnail"); // 클라이언트가 보낸 값 (파일 혹은 기존 URL)
+    const thumbnailFile = formData.get("thumbnail") as File | null;
 
     // [추가] 새 파일 추가한 경우, 기존 썸네일은 스토리지에서 삭제
-    if (thumnailFile instanceof File && thumnailFile.size > 0) {
+    if (thumbnailFile instanceof File && thumbnailFile.size > 0) {
 
       // A. 기존 썸네일 URL: 스토리지에서 삭제
-      // currentProduct: 이전의 select("thumnail")로 가져온 기존 DB
-      const oldThumnailUrl = currentProduct?.thumnail;
-      if (oldThumnailUrl) {
-        // URL에서 스토리지 경로(path) 추출 (예: products/thumnail/...)
-        const oldPath = oldThumnailUrl.split("/public/products/")[1];
+      // currentProduct: 이전의 select("thumbnail")로 가져온 기존 DB
+      const oldThumbnailUrl = currentProduct?.thumbnail;
+      if (oldThumbnailUrl) {
+        // URL에서 스토리지 경로(path) 추출 (예: products/thumbnail/...)
+        const oldPath = oldThumbnailUrl.split("/public/products/")[1];
         if (oldPath) {
           await supabaseServer.storage.from("products").remove([oldPath]);
         }
       }
 
       // B. 새 썸네일 파일 업로드
-      const buffer = await thumnailFile.arrayBuffer();
-      const ext = thumnailFile.name.split(".").pop();
-      const newPath = `products/thumnail/${Date.now()}_${crypto.randomUUID()}.${ext}`;
+      const buffer = await thumbnailFile.arrayBuffer();
+      const ext = thumbnailFile.name.split(".").pop();
+      const newPath = `products/thumbnail/${Date.now()}_${crypto.randomUUID()}.${ext}`;
 
       const { error: uploadError } = await supabaseServer.storage
         .from("products")
         .upload(newPath, buffer, {
-          contentType: thumnailFile.type,
+          contentType: thumbnailFile.type,
           upsert: true
         });
 
@@ -80,7 +80,7 @@ export async function PATCH(
         .from("products")
         .getPublicUrl(newPath);
 
-      thumnailUrl = urlData.publicUrl;
+      thumbnailUrl = urlData.publicUrl;
     }
 
     // 2. 상세 이미지 처리
@@ -118,7 +118,7 @@ export async function PATCH(
       .update({
         name: formData.get("name"),
         category: formData.get("category"),
-        thumnail: thumnailUrl,
+        thumbnail: thumbnailUrl,
         images: finalImages,
         updated_at: new Date().toISOString(),
       })
@@ -143,7 +143,7 @@ export async function DELETE(
     // 해당 상품의 이미지 URL 정보 조회
     const { data: product, error: fetchError } = await supabaseServer
       .from("products")
-      .select("thumnail, images")
+      .select("thumbnail, images")
       .eq("id", id)
       .single();
 
@@ -155,8 +155,8 @@ export async function DELETE(
     const pathsToDelete: string[] = [];
 
     // 썸네일 경로 추출
-    if (product.thumnail) {
-      const thumbPath = product.thumnail.split("/public/products/")[1];
+    if (product.thumbnail) {
+      const thumbPath = product.thumbnail.split("/public/products/")[1];
       if (thumbPath) pathsToDelete.push(thumbPath);
     }
 

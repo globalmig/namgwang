@@ -1,7 +1,7 @@
 export default function StrokeLimit() {
     // 스트로크 한계
     return (
-        <table className="stroke-limit standard">
+        <table className="stroke-limit compact">
             <thead>
                 <tr>
                     <th>내 경</th>

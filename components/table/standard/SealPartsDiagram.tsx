@@ -4,7 +4,6 @@ export default function SealPartsDiagram() {
         <table className="seal-parts-diagram standard">
             <thead>
                 <tr>
-                    <th rowSpan={4}>내경</th>
                     <th>NO</th>
                     <th>4</th>
                     <th>7</th>

@@ -19,13 +19,17 @@ export default function DoubleSpecSet() {
             </ul>
          </section>
          <section>
-            <h3>쿠션길이</h3>
-            <p>단위 mm</p>
+            <div className="display-flex">
+               <h3>쿠션길이</h3>
+               <p>단위 mm</p>
+            </div>
             <CushionLength />
          </section>
          <section>
-            <h3>스트로크 한계</h3>
-            <p>단위 mm</p>
+            <div className="display-flex">
+               <h3>스트로크 한계</h3>
+               <p>단위 mm</p>
+            </div>
             <StrokeLimit />
             <ul>
                <li>1. 지지형식에 따른 좌굴은 별도로 계산해주세요.</li>

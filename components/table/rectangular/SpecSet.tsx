@@ -19,18 +19,25 @@ export default function RectangularSpecSet() {
             </ul>
          </section>
          <section>
-            <h3>쿠션길이</h3>
-            <p>단위 mm</p>
+            <div className="display-flex">
+               <h3>쿠션길이</h3>
+               <p>단위 mm</p>
+            </div>
             <CushionLength />
+            <ul>
+               <li>* 하기 내용은 쿠션을 취부할 수 없음 </li>
+               <li>1. 로드 A TYPE : ø40, ø50, ø63의 로드축 </li>
+               <li>2. 로드 B TYPE : ø40의 로드축</li>
+            </ul>
          </section>
          <section>
-            <h3>스트로크 한계</h3>
-            <p>단위 mm</p>
+            <div className="display-flex">
+               <h3>스트로크 한계</h3>
+               <p>단위 mm</p>
+            </div>
             <StrokeLimit />
             <ul>
-               <li>1. 지지형식에 따른 좌굴은 별도로 계산해주세요.</li>
-               <li>2. 스트로크 한계 이상 시 상담 바랍니다.</li>
-               <li>* HA SERIES SWTCH는 Ro Sensor입니다.</li>
+               <li>* 상가 이외의 스트로크는 별도 설계 제작합니다. (문의 요망)</li>
             </ul>
          </section>
          <section>

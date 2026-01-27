@@ -1,7 +1,7 @@
 export default function Specifications() {
     // 사양
     return (
-        <table className="specifications standard">
+        <table className="specifications high-pressure">
             <thead>
                 <tr>
                     <th colSpan={2}>분류</th>

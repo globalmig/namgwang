@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function PerformanceDetailPage() {
+export default function PerformanceDetail() {
 
     const router = useRouter();
     const { id } = useParams();
@@ -41,7 +41,7 @@ export default function PerformanceDetailPage() {
 
     // 수정
     const goEdit = (id: string) => {
-        router.push(`/admin/write/performance/${id}/edit`);
+        router.push(`/admin/board/performance/${id}/edit`);
     };
 
     if(!performance) return <div className="loading">정보를 불러오는 중입니다.</div>

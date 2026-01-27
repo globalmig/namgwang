@@ -1,7 +1,7 @@
 export default function Specifications() {
     // 사양
     return (
-        <table className="specifications standard">
+        <table className="specifications rectangular">
             <thead>
                 <tr>
                     <th colSpan={2}>분류</th>
@@ -23,7 +23,7 @@ export default function Specifications() {
                 </tr>
                 <tr>
                     <td colSpan={2}>내압력</td>
-                    <td>105kgf/cm² (10.297 Mpa) | 210kgf/cm² (20.594 Mpa)</td>
+                    <td>105kgf/cm² (16.67 Mpa) | 210kgf/cm² (27.459 Mpa)</td>
                 </tr>
                 <tr>
                     <td colSpan={2}>최저 작동 압력</td>
@@ -31,15 +31,15 @@ export default function Specifications() {
                 </tr>
                 <tr>
                     <td colSpan={2}>사용 속도 범위</td>
-                    <td>10~300 mm/sec (쿠션부위제외)</td>
+                    <td>500 mm/sec</td>
                 </tr>
                 <tr>
                     <td colSpan={2}>사용 온도 범위</td>
-                    <td>-10℃~+80℃ (100℃ 이상 패킹 VITON 사용)</td>
+                    <td>-10℃~+80℃</td>
                 </tr>
                 <tr>
                     <td colSpan={2}>적용 작동유</td>
-                    <td>일반 광물성 작동유</td>
+                    <td>일반 광물성 작동유 (그외 작동유를 사용하는 장소는 별도 지시)</td>
                 </tr>
                 <tr>
                     <td colSpan={2}>로드선단 나사공차</td>
@@ -54,16 +54,12 @@ export default function Specifications() {
                 </tr>
                 <tr>
                     <td colSpan={2}>도장색</td>
-                    <td>튜브 : 5.7BG/5.2/3.5 커버 및 TYPE : 흑착색</td>
+                    <td>튜브 : 7.6BG/5.6/5.0 커버 및 TYPE : 흑착색</td>
                 </tr>
                 <tr>
                     <td rowSpan={2}>지지형식</td>
                     <td>표준형</td>
-                    <td>표준형 SD, LA, (LB), (FA), (FB), FC, FD, TA, TC, CA, CB</td>
-                </tr>
-                <tr>
-                    <td>양로드형</td>
-                    <td>SD, LA, (LB), (FA), (FB), FC, FD, TA, TC</td>
+                    <td>SD, LA, TC, FA, FB, CA</td>
                 </tr>
                 <tr>
                     <td rowSpan={3}>기타부품</td>
@@ -72,7 +68,7 @@ export default function Specifications() {
                 </tr>
                 <tr>
                     <td>선단 접속구</td>
-                    <td>1산 (I고리), 2산 (Y고리), IB고리</td>
+                    <td>1산 (I고리), 2산 (Y고리)</td>
                 </tr>
                 <tr>
                     <td>그 외</td>

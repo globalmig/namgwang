@@ -1,29 +1,8 @@
 "use client";
+import { type ProductForm, ProductFormProps } from "@/types/product";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useCallback, useEffect, useState } from "react"
-
-type ProductFormMode = "upload" | "edit";
-
-interface InitialDataProps { // 등록된 데이터
-    id: string;
-    name: string;
-    category: string;
-    thumnail: string;
-    images: string[];
-}
-
-interface ProductForm {
-    name: string, // 제품명
-    category: string, // 카테고리
-    thumnail: File | null, // 대표이미지
-    images: File[], // 제품 이미지
-}
-
-interface ProductFormProps {
-    mode: ProductFormMode; // upload OR edit
-    initialData?: InitialDataProps; // edit data (등록된 데이터)
-}
 
 export default function ProductForm({ mode, initialData }: ProductFormProps) {
 
@@ -36,7 +15,7 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
     const [form, setForm] = useState<ProductForm>({
         name: initialData?.name ?? "",
         category: initialData?.category ?? "",
-        thumnail: null,
+        thumbnail: null,
         images: []
     });
 
@@ -70,8 +49,8 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
     const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, files } = e.target;
         if (!files) return;
-        if (name === "thumnail") {
-            setForm(prev => ({ ...prev, thumnail: files[0] }));
+        if (name === "thumbnail") {
+            setForm(prev => ({ ...prev, thumbnail: files[0] }));
         }
         if (name === "images") {
             setForm(prev => ({ ...prev, images: Array.from(files) }));
@@ -98,7 +77,7 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
         setForm({
             name: initialData?.name ?? "",
             category: initialData?.category ?? "",
-            thumnail: null,
+            thumbnail: null,
             images: []
         });
         router.back();
@@ -119,18 +98,18 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
             return;
         }
 
-        if (isUpload && !form.thumnail) {
+        if (isUpload && !form.thumbnail) {
             alert("제품 대표 이미지를 등록해주세요.");
             return;
         }
 
-        if (isEdit && !form.thumnail && !initialData?.thumnail) {
+        if (isEdit && !form.thumbnail && !initialData?.thumbnail) {
             alert("제품 대표 이미지를 등록해주세요.");
             return;
         }
 
-        if (form.thumnail) {
-            const ext = form.thumnail.name.split('.').pop()?.toLowerCase() ?? "";
+        if (form.thumbnail) {
+            const ext = form.thumbnail.name.split('.').pop()?.toLowerCase() ?? "";
             const allowedExtensions = ["jpg", "jpeg", "png"];
 
             if (!allowedExtensions.includes(ext)) {
@@ -159,12 +138,12 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
         formData.append("name", form.name);
         formData.append("category", form.category);
 
-        if (form.thumnail) {
+        if (form.thumbnail) {
             // 사용자가 파일을 새로 선택한 경우
-            formData.append("thumnail", form.thumnail);
-        } else if (initialData?.thumnail) {
+            formData.append("thumbnail", form.thumbnail);
+        } else if (initialData?.thumbnail) {
             // 파일을 선택하지 않았지만 기존 데이터가 있는 경우 (수정 시 유지)
-            formData.append("thumnail", initialData.thumnail);
+            formData.append("thumbnail", initialData.thumbnail);
         }
 
         // 상세 이미지 처리
@@ -197,27 +176,6 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
 
     }, [form, existingImages, newImageFiles, initialData, id, isUpload, router]);
 
-    // 삭제
-    const onProductDelete = async () => {
-        if (!initialData) return;
-        if (!confirm("제품을 삭제하시겠습니까?")) return;
-        try {
-            const res = await fetch(`/api/product/${initialData.id}`, { method: "DELETE" });
-            const result = await res.json();
-            if (!res.ok) throw new Error(result.error || "제품 삭제를 실패했습니다. 다시 시도해주세요.");
-
-            alert(result.message);
-            router.push("/admin");
-            router.refresh();
-        } catch (err: any) {
-            alert(err.message);
-        }
-    };
-
-    const goEdit = (id: string) => {
-        router.push(`/admin/write/product/${id}/edit`);
-    };
-
     return (
             <form onSubmit={onSubmitForm}>
                 <div className="fm-name">
@@ -239,15 +197,15 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
                         <option value="other">기타 기기</option>
                     </select>
                 </div>
-                <div className="fm-thumnail">
-                    <label htmlFor="thumnail">
+                <div className="fm-thumbnail">
+                    <label htmlFor="thumbnail">
                         <h3>대표 이미지</h3>
                         <p>이미지는 가로 1000px 이상의 크기, 가로형 이미지를 권장합니다.<br />이미지의 크기가 작거나 세로형 이미지를 업로드하실 경우, 화질이 낮거나 잘릴 수 있습니다.</p>
                     </label>
-                    <input type="file" id="thumnail" name="thumnail" accept=".jpg,.jpeg, .png" onChange={onChangeFile} />
-                    <div className="fm-thumnail-img">
-                        {isEdit && initialData?.thumnail && !form.thumnail && (
-                            <Image src={initialData.thumnail} alt="image" width={1000} height={619} />
+                    <input type="file" id="thumbnail" name="thumbnail" accept=".jpg,.jpeg, .png" onChange={onChangeFile} />
+                    <div className="fm-thumbnail-img">
+                        {isEdit && initialData?.thumbnail && !form.thumbnail && (
+                            <Image src={initialData.thumbnail} alt="image" width={1000} height={619} />
                         )}
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 export default function SealPartsDiagram() {
     // 패킹 부품도
     return (
-        <table className="seal-parts-diagram standard">
+        <table className="seal-parts-diagram double">
             <thead>
                 <tr>
                     <th rowSpan={4}>내경</th>

@@ -1,19 +1,13 @@
 'use client';
-import PerformanceForm from "@/components/form/PerformanceForm";
+import ProductForm from "@/components/form/ProductForm";
 import { supabase } from "@/lib/supabase/clinet";
+import { InitialProductDataProps } from "@/types/product";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface InitialDataProps {
-    id: string;
-    name: string; 
-    spec: string; 
-    img: string;
-}
-
-export default function PerformanceEditPage () {
+export default function ProductEditPage () {
      const { id } = useParams();
-    const [initialData, setInitialData] = useState<InitialDataProps | null>(null);
+    const [initialData, setInitialData] = useState<InitialProductDataProps | null>(null);
     const [loading, setLoading] = useState(true);
 
      useEffect(() => { 
@@ -23,7 +17,7 @@ export default function PerformanceEditPage () {
             setLoading(true);
             try {
                 const { data, error } = await supabase
-                    .from("performances")
+                    .from("products")
                     .select("*")
                     .eq("id", id)
                     .single();
@@ -32,17 +26,18 @@ export default function PerformanceEditPage () {
                 if (!data) throw new Error("정보를 찾을 수 없습니다.");
 
                 // Form 초기 데이터 타입에 맞게 변환
-                const formattedData: InitialDataProps = {
+                const formattedData: InitialProductDataProps = {
                     id: String(data.id),
                     name: data.name,
-                    spec: data.spec,
-                    img: data.img,
+                    category: data.category,
+                    thumbnail: data.thumbnail,
+                    images: data.images,
                 };
 
                 setInitialData(formattedData);
             } catch (err: any) {
-                console.error("실적 조회 실패:", err);
-                alert("실적 조회 중 오류가 발생했습니다.");
+                console.error("제품 조회 실패:", err);
+                alert("제품 조회 중 오류가 발생했습니다.");
             } finally {
                 setLoading(false);
             }
@@ -51,16 +46,16 @@ export default function PerformanceEditPage () {
         fetchProduct();
     }, [id]);
     
-    if (loading) return <div className="loading">실적 정보를 불러오는 중입니다.</div>;
+    if (loading) return <div className="loading">제품 정보를 불러오는 중입니다.</div>;
     if (!initialData) return <div className="loading">데이터가 존재하지 않습니다.</div>;
 
     return (
         <article className="admin-form">
                     <div>
                         <div>
-                            <h2>실적 수정하기</h2>
+                            <h2>제품 수정하기</h2>
                         </div>
-                        <PerformanceForm mode="edit" initialData={initialData}/>
+                        <ProductForm mode="edit" initialData={initialData}/>
                     </div>
                 </article>
     )

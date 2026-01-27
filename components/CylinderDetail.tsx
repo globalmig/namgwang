@@ -7,31 +7,71 @@ import RoundSpecSet from "./table/round/SpecSet";
 import CompactSpecSet from "./table/compact/SpecSet";
 import DoubleSpecSet from "./table/double/SpecSet";
 import Link from "next/link";
-import { useParams, usePathname, useRouter } from "next/navigation";
-import { CYLINDER } from "@/data/cylinder";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { CYLINDER_SUBCATEGORY } from "@/data/category";
+import ProductNavigator from "./ProductNavigator";
+import { useEffect, useState } from "react";
+import { NavItem } from "@/types/common";
+import { CylinderProps } from "@/types/product";
+import { supabase } from "@/lib/supabase/clinet";
 
 
 export default function CylinderDetail() {
 
-    const pathname = usePathname();
-    const pathnameSplit = pathname.split('/').filter(Boolean);
-    const subCategory = pathnameSplit[2]; // standard, high-pressure ...
-    const specLayout = CYLINDER_SUBCATEGORY.find(c => c.category === subCategory)?.category
     const router = useRouter();
-
     const params = useParams();
-    const { id } = params;
-    const detailId = Number(id);
-    const detail = CYLINDER.find(c => c.id === detailId);
-    const currentIndex = CYLINDER.findIndex(c => c.id === detailId);
-    const prevItem = CYLINDER[currentIndex -1];
-    const nextItem = CYLINDER[currentIndex +1];
+    const { id, category } = params;
+    const searchParams = useSearchParams();
+    const subCategory = searchParams.get("sub") || "standard";
+    const [detail, setDetail] = useState<CylinderProps>();
+    const [prevItem, setPrevItem] = useState<NavItem | null>(null);
+    const [nextItem, setNextItem] = useState<NavItem | null>(null);
 
-    const goDetail = (targetIndex: number) => {
-        const target = CYLINDER[targetIndex];
-        router.push(`/product/cylinder/${target.id}`)
-    }
+    useEffect(() => {
+        const fetchCylinderData = async () => {
+            try {
+                // 상세 데이터 가져오기
+                const { data: current, error } = await supabase
+                    .from("cylinders")
+                    .select("*")
+                    .eq("id", id)
+                    .single();
+
+                if (error || !current) throw error;
+                setDetail(current);
+
+                // 이전 제품
+                const { data: prev } = await supabase
+                    .from("cylinders")
+                    .select("id, name")
+                    .eq("category", current.category) // 같은 타입 내에서 탐색
+                    .lt("created_at", current.created_at)
+                    .order("created_at", { ascending: false })
+                    .limit(1)
+                    .maybeSingle();
+
+                // 다음 제품
+                const { data: next } = await supabase
+                    .from("cylinders")
+                    .select("id, name")
+                    .eq("category", current.category)
+                    .gt("created_at", current.created_at)
+                    .order("created_at", { ascending: true })
+                    .limit(1)
+                    .maybeSingle();
+
+                setPrevItem(prev);
+                setNextItem(next);
+
+            } catch (err) {
+                console.error("Cylinder load error:", err);
+            }
+        };
+
+        if (id) fetchCylinderData();
+    }, [id]);
+
+    const specLayout = CYLINDER_SUBCATEGORY.find(c => c.category === subCategory)?.category
 
     if (!detail) return <div className="loading">정보를 불러오는 중입니다.</div>
 
@@ -75,12 +115,11 @@ export default function CylinderDetail() {
                     {specLayout === "double" && <DoubleSpecSet />}
                 </div>
             </div>
-            <div>
-                <ul>
-                    <li onClick={()=> goDetail(currentIndex -1)}><span>이전 제품</span>{prevItem.name}</li>
-                    <li onClick={()=> goDetail(currentIndex +1)}><span>다음 제품</span>{nextItem.name}</li>
-                </ul>
-            </div>
+            <ProductNavigator
+                prevItem={prevItem}
+                nextItem={nextItem}
+                onPrev={() => router.push(`/product/cylinder/${prevItem?.id}?sub=${subCategory}`)}
+                onNext={() => router.push(`/product/cylinder/${nextItem?.id}?sub=${subCategory}`)} />
         </div>
     )
 }

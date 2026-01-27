@@ -1,5 +1,9 @@
 export default function CategoryBanner() {
     return (
-        <div></div>
+        <main>
+            <div>
+                
+            </div>
+        </main>
     )
 }

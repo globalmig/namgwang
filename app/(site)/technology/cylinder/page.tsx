@@ -1,5 +1,5 @@
 import BType from "@/components/table/technology/BType";
-import CType from "@/components/table/technology/Ctype";
+import CType from "@/components/table/technology/CType";
 import Image from "next/image";
 
 export default function TechnologyCylinderPage () {

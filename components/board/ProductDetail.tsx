@@ -1,16 +1,10 @@
 "use client";
+import { ProductProps } from "@/types/product";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface ProductProps {
-     name: string,
-    category: string, 
-    thumnail: string,
-    images: string[],
-}
-
-export default function ProductDetailPage() {
+export default function ProductDetail() {
 
     const router = useRouter();
     const { id } = useParams();
@@ -48,7 +42,7 @@ export default function ProductDetailPage() {
 
     // 수정
     const goEdit = (id: string) => {
-        router.push(`/admin/write/product/${id}/edit`);
+        router.push(`/admin/board/product/${id}/edit`);
     };
 
     if(!product) return <div className="loading">정보를 불러오는 중입니다.</div>
@@ -61,7 +55,7 @@ export default function ProductDetailPage() {
                     <h2>{product.name}</h2>
                 </div>
                 <div>
-                    <Image src={product.thumnail} alt={product.name} width={1000} height={500}/>
+                    <Image src={product.thumbnail} alt={product.name} width={1000} height={500}/>
                 </div>
                 <div>
                     <div>

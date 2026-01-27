@@ -1,27 +1,8 @@
 "use client";
+import { type PerformanceForm, PerformanceFormProps } from "@/types/performance";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useCallback, useEffect, useState } from "react"
-
-type PerformanceFormMode = "upload" | "edit";
-
-interface InitialDataProps { // 등록된 데이터
-    id: string;
-    name: string;
-    spec: string;
-    img: string;
-}
-
-interface PerformanceForm {
-    name: string, // 프로젝트명
-    spec: string, // spec
-    img: File | null // 이미지
-}
-
-interface PerformanceFormProps {
-    mode: PerformanceFormMode; // upload OR edit
-    initialData?: InitialDataProps; // edit data (등록된 데이터)
-}
 
 export default function PerformanceForm({ mode, initialData }: PerformanceFormProps) {
 
