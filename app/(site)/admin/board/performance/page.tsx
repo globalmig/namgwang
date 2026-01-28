@@ -5,7 +5,7 @@ export default function PerformanceWritePage () {
         <article className="admin-form">
             <div>
                 <div>
-                    <h2>실적 등록하기</h2>
+                    <h2 className="page-title">실적 등록하기</h2>
                 </div>
                 <PerformanceForm mode="upload"/>
             </div>

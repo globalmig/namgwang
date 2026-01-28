@@ -52,7 +52,7 @@ export default function PerformanceEditPage() {
         <article className="admin-form">
             <div>
                 <div>
-                    <h2>실적 수정하기</h2>
+                    <h2 className="page-title">실적 수정하기</h2>
                 </div>
                 <PerformanceForm mode="edit" initialData={initialData} />
             </div>

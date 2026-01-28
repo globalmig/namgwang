@@ -1,7 +1,7 @@
 'use client';
 import { ADMIN_SUBCATEGORY, CYLINDER_SUBCATEGORY, UNIT_SUBCATEGORY } from "@/data/category";
 import { useRouter, useSearchParams, useParams, usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SubCategoryTab() {
 
@@ -11,35 +11,44 @@ export default function SubCategoryTab() {
   const { category: mainCategory } = useParams();
 
   const [tabList, setTabList] = useState<{ name: string, category: string }[]>([]);
-  const [currentBoard, setCurrentBoard] = useState<String>("");
   const isAdmin = pathname.startsWith('/admin');
+  const isPerformance = pathname.includes("/performance");
 
-  if (isAdmin) {
+  useEffect(()=> {
+    if (isAdmin) {
     setTabList(ADMIN_SUBCATEGORY);
-    setCurrentBoard("performance");
   } else {
-    if (mainCategory === "cylinder") {
+    if (mainCategory === "cylinder" || mainCategory === "performance") {
       setTabList(CYLINDER_SUBCATEGORY);
     } else if (mainCategory === "unit") {
       setTabList(UNIT_SUBCATEGORY);
-    }
-    setCurrentBoard(searchParams.get("sub") || tabList[0]?.category);
-  }
-
-  const onClickTab = (category: string) => {
-    if (isAdmin) {
-      router.push(`/admin/board/${category}`);
     } else {
-      router.push(`${pathname}?sub=${category}`);
-      // ex: /product/cylinder?=sub=standard
+      setTabList([]);
     }
   }
+  },[pathname, mainCategory]);
+
+  const subParams = searchParams.get("sub");
+  const currentBoard = isAdmin ? (pathname.split('/').pop()) : (isPerformance ? "performance" : (subParams || tabList[0]?.category));;
+
+const onClickTab = (category: string) => {
+  if (isAdmin) {
+    router.push(`/admin/board/${category}`);
+  } else {
+    if (category === "performance") {
+      router.push(`/product/performance`);
+    } else {
+      const targetMain = (mainCategory === "performance") ? "cylinder" : mainCategory;
+      router.push(`/product/${targetMain}?sub=${category}`);
+    }
+  }
+}
 
   if (tabList.length === 0) return null;
 
   return (
     <div className="tab-menu">
-      <ul>
+      <ul className="display-flex-flow">
         {tabList.map(tab => {
           const isFocus = currentBoard === tab.category;
           return (

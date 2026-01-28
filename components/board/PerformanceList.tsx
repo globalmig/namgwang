@@ -32,6 +32,9 @@ export default function PerformanceList() {
 
         fetchPerformances();
     }, []);
+
+    if(!performances) return <div className="loading">정보를 불러오는 중입니다.</div>
+
     return (
         <>
             <div className="common-list">
@@ -40,10 +43,10 @@ export default function PerformanceList() {
                     <li>프로젝트명</li>
                     <li>SPEC</li>
                 </ul>
-                {performances.map(p =>
+                {performances.map((p, index) =>
                     <Link href={`/product/performance/${p.id}`} key={p.id}>
                         <ul className="display-flex">
-                            <li></li>
+                            <li>{performances.length - index}</li>
                             <li>{p.name}</li>
                             <li>{p.spec}</li>
                         </ul>

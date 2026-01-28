@@ -23,7 +23,7 @@ export default function AdminPage() {
                 <article className="auth">
                     <div>
                         <div>
-                            <h2>로그인</h2>
+                            <h2 className="page-title">로그인</h2>
                         </div>
                         <AuthForm setIsAuth={setIsAuth} />
                     </div>

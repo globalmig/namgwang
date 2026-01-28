@@ -53,7 +53,7 @@ export default function ProductEditPage () {
         <article className="admin-form">
                     <div>
                         <div>
-                            <h2>제품 수정하기</h2>
+                            <h2 className="page-title">제품 수정하기</h2>
                         </div>
                         <ProductForm mode="edit" initialData={initialData}/>
                     </div>

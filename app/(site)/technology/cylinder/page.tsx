@@ -8,7 +8,7 @@ export default function TechnologyCylinderPage () {
             <div>
 
                 <div>
-                    <h2>유압 실린더</h2>
+                    <h2 className="page-title">유압 실린더</h2>
                 </div>
                 
                 <div>
@@ -18,49 +18,49 @@ export default function TechnologyCylinderPage () {
                     </section>
                     <div className="display-flex-flow">
                         <section>
-                            <h4>01</h4>
+                            <h3>01</h3>
                             <p>실린더 내경</p>
                         </section>
                         <div className="pc">
-                            <Image src="/icons/process_arrow.png" alt="순서"/>
+                            <Image src="/icons/process_arrow.png" alt="순서" width={32} height={32}/>
                         </div>
                         <section>
-                            <h4>02</h4>
+                            <h3>02</h3>
                             <p>실린더 작동속도</p>
                         </section>
                         <div className="pc">
-                            <Image src="/icons/process_arrow.png" alt="순서"/>
+                            <Image src="/icons/process_arrow.png" alt="순서" width={32} height={32}/>
                         </div>
                         <section>
-                            <h4>03</h4>
+                            <h3>03</h3>
                             <p>지지방법</p>
                         </section>
                         <div className="pc">
-                            <Image src="/icons/process_arrow.png" alt="순서"/>
+                            <Image src="/icons/process_arrow.png" alt="순서" width={32} height={32}/>
                         </div>
                         <section>
-                            <h4>04</h4>
+                            <h3>04</h3>
                             <p>피스톤 로드경 결정</p>
                         </section>
                         <div className="pc">
-                            <Image src="/icons/process_arrow.png" alt="순서"/>
+                            <Image src="/icons/process_arrow.png" alt="순서" width={32} height={32}/>
                         </div>
                         <section>
-                            <h4>05</h4>
+                            <h3>05</h3>
                             <p>패킹재질</p>
                         </section>
                         <div className="pc">
-                            <Image src="/icons/process_arrow.png" alt="순서"/>
+                            <Image src="/icons/process_arrow.png" alt="순서" width={32} height={32}/>
                         </div>
                         <section>
-                            <h4>06</h4>
+                            <h3>06</h3>
                             <p>쿠션 유무</p>
                         </section>
                         <div className="pc">
-                            <Image src="/icons/process_arrow.png" alt="순서"/>
+                            <Image src="/icons/process_arrow.png" alt="순서" width={32} height={32}/>
                         </div>
                         <section>
-                            <h4>07</h4>
+                            <h3>07</h3>
                             <p>방진망 결정 (자바라)</p>
                         </section>
                     </div>

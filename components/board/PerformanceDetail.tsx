@@ -1,10 +1,12 @@
 "use client";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function PerformanceDetail() {
 
+    const pathname = usePathname();
+    const isPathnameProduct = pathname.startsWith("/product");
     const router = useRouter();
     const { id } = useParams();
 
@@ -57,10 +59,12 @@ export default function PerformanceDetail() {
                 <div>
                     <Image src={performance.img} alt={performance.name} width={1000} height={500}/>
                 </div>
-                <div className="display-flex">
+                {!isPathnameProduct &&
+                <div className="display-flex admin-btn">
                     <button type="button" onClick={()=> goEdit(String(id))}>수정하기</button>
                     <button type="button" onClick={onPerformanceDelete}>삭제하기</button>
                 </div>
+                }
             </div>
         </article>
     )

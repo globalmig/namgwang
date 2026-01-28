@@ -3,7 +3,7 @@ export const CATEGORY_MAP: {
     {
         title: string;
         banner: { mo: string, pc: string };
-        categories: { name: string, url: string }[]
+        categories?: { name: string, url: string }[]
     }
 } = {
     company: {
@@ -13,8 +13,8 @@ export const CATEGORY_MAP: {
             pc: "/images/company_banner.jpg"
         },
         categories: [
-            { name: "회사개요", url: "/about" },
-            { name: "인사말", url: "/about2" },
+            { name: "회사개요", url: "about" },
+            { name: "인사말", url: "about2" },
         ],
     },
     product: {
@@ -24,10 +24,10 @@ export const CATEGORY_MAP: {
             pc: "/images/product_banner_pc.jpg"
         },
         categories: [
-            { name: "유압 실린더", url: "/cylinder" },
-            { name: "유압 유니트", url: "/unit" },
-            { name: "기타 기기 제작", url: "/other" },
-             { name: "실적", url: "/performance" },
+            { name: "유압 실린더", url: "cylinder" },
+            { name: "유압 유니트", url: "unit" },
+            { name: "기타 기기 제작", url: "other" },
+             { name: "실적", url: "performance" },
         ],
     },
     inquire: {
@@ -37,7 +37,7 @@ export const CATEGORY_MAP: {
             pc: "/images/inquire_banner_pc.jpg"
         },
         categories: [
-            { name: "제품문의", url: "/write" },
+            { name: "제품문의", url: "write" },
         ],
     },
     technology: {
@@ -47,9 +47,16 @@ export const CATEGORY_MAP: {
             pc: "/images/technology_banner_pc.jpg"
         },
         categories: [
-            { name: "유압 실린더", url: "/cylinder" },
-            { name: "유압 유니트", url: "/unit" },
+            { name: "유압 실린더", url: "cylinder" },
+            { name: "유압 유니트", url: "unit" },
         ],
+    },
+    admin: {
+        title: '관리자 페이지',
+        banner: {
+            mo: "/images/admin_banner_mo.jpg",
+            pc: "/images/admin_banner_pc.jpg"
+        },
     },
 };
 

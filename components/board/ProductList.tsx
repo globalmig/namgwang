@@ -26,24 +26,25 @@ export default function ProductList() { // 사용자페이지 리스트
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const table = category === "cylinder" ? "cylinders" : "products";
-                let query = supabase.from(table).select("*");
+                // 테이블 결정 (cylinder면 전용 테이블, 아니면 공통 테이블)
+            const table = category === "cylinder" ? "cylinders" : "products";
+            let query = supabase.from(table).select("*");
 
-                // 필터링 조건 추가 (메인 카테고리 및 서브카테고리)
-                if (category) {
-                    query = query.eq("category", category);
-                }
-
-                // 만약 URL이나 상태값에 subCategory가 있다면 추가
-                // interface 의 category 필드: subCategory
+            // 2. 필터링
+            if (category === "cylinder") {
+                // 실린더 페이지일 때는 subCategory(standard, high-pressure 등) 값으로 필터링
                 if (subCategory) {
                     query = query.eq("category", subCategory);
                 }
+            } else if (category) {
+                // 실린더가 아닌 일반 카테고리(unit, other)일 때
+                query = query.eq("category", category);
+            }
 
-                const { data, error } = await query.order("created_at", { ascending: false });
+            const { data, error } = await query.order("id", { ascending: true }); // 정렬 기준 확인
 
-                if (error) throw error;
-                setProducts(data || []);
+            if (error) throw error;
+            setProducts(data || []);
             } catch (error) {
                 console.error("data load error: ", error);
             }
@@ -52,16 +53,22 @@ export default function ProductList() { // 사용자페이지 리스트
         fetchProducts();
     }, [category, subCategory]);
 
+    if(!products) return <div className="loading">정보를 불러오는 중입니다.</div>
+
+    if(products.length === 0) return <div className="loading">제품이 존재하지 않습니다.</div>
 
     return (
         <>
-            <div className="product-list">
+            <div className="product-list display-flex-flow">
                 {products.map(p =>
-                    <section key={p.data.id}>
-                        <Link href={`/`}>
-                            <Image src={p.data.thumbnail} alt={p.data.name} width={400} height={400} />
+                    <section key={p.id}>
+                        <Link href={`/product/${category}/${p.id}`}>
+                            <Image src={p.thumbnail} alt={p.name} width={400} height={400} />
                         </Link>
-                        <div></div>
+                        <div>
+                            <h5>{p.name}</h5>
+                            {'type' in p && <p>{p.type}</p>}
+                        </div>
                     </section>
                 )}
             </div>

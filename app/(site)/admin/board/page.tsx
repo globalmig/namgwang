@@ -1,1 +1,0 @@
-// /board/page.tsx : 로그인 인증 완료 > redirect /board/performance

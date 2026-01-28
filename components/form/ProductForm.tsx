@@ -180,13 +180,13 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
             <form onSubmit={onSubmitForm}>
                 <div className="fm-name">
                     <label htmlFor="name">
-                        <h3>제품명</h3>
+                        <h3 className="required">제품명</h3>
                     </label>
                     <input type="text" id="name" name="name" placeholder="제품명을 입력해주세요." onChange={onChangeForm} value={form.name}/>
                 </div>
                 <div className="fm-category">
                     <label htmlFor="category">
-                        <h3>카테고리</h3>
+                        <h3 className="required">카테고리</h3>
                     </label>
                     <select id="category" name="category" onChange={onChangeForm} value={form.category}>
                         <option value="">카테고리를 선택해주세요</option>
@@ -199,7 +199,7 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
                 </div>
                 <div className="fm-thumbnail">
                     <label htmlFor="thumbnail">
-                        <h3>대표 이미지</h3>
+                        <h3 className="required">대표 이미지</h3>
                         <p>이미지는 가로 1000px 이상의 크기, 가로형 이미지를 권장합니다.<br />이미지의 크기가 작거나 세로형 이미지를 업로드하실 경우, 화질이 낮거나 잘릴 수 있습니다.</p>
                     </label>
                     <input type="file" id="thumbnail" name="thumbnail" accept=".jpg,.jpeg, .png" onChange={onChangeFile} />
@@ -211,7 +211,7 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
                 </div>
                 <div className="fm-images">
                     <label htmlFor="images">
-                        <h3>상세 이미지</h3>
+                        <h3 className="required">상세 이미지</h3>
                         <p>이미지는 가로 1000px 이상의 크기, 가로형 이미지를 권장합니다.<br />이미지의 크기가 작거나 세로형 이미지를 업로드하실 경우, 화질이 낮거나 잘릴 수 있습니다.</p>
                     </label>
 

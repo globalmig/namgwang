@@ -5,7 +5,7 @@ export default function ProductWritePage () {
         <article className="admin-form">
             <div>
                 <div>
-                    <h2>제품 등록하기</h2>
+                    <h2 className="page-title">제품 등록하기</h2>
                 </div>
                 <ProductForm mode="upload"/>
             </div>

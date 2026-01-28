@@ -30,9 +30,7 @@ export interface CylinderProps {
     series_img: string,
 }
 
-export interface AllProductDataProps {
-     data: ProductProps | CylinderProps
-}
+export type AllProductDataProps = ProductProps | CylinderProps;
 
 type ProductFormMode = "upload" | "edit";
 

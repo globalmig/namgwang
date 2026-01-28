@@ -5,13 +5,25 @@ import SealMaterial from "./SealMaterial";
 import SealPartsDiagram from "./SealPartsDiagram";
 import Specifications from "./Specifications";
 import StrokeLimit from "./StrokeLimit";
+import Rod from "./Rod";
 
 export default function StandardSpecSet() {
    return (
-      <div>
+      <>
+         <section>
+            <div>
+               {/* product_img */}
+               <Image src="" alt="" width={500} height={500} />
+            </div>
+            <div className="table-wrapper">
+               <Rod />
+            </div>
+         </section>
          <section>
             <h3>사양</h3>
-            <Specifications />
+            <div className="table-wrapper">
+               <Specifications />
+            </div>
             <ul>
                <li>1. 지지형식중 70kgf/cm²용입니다.</li>
                <li>2. 사용온도 100도 이상 장시간 작동 시, 고속작동 시 (별도문의 요망)</li>
@@ -23,14 +35,18 @@ export default function StandardSpecSet() {
                <h3>쿠션길이</h3>
                <p>단위 mm</p>
             </div>
-            <CushionLength />
+            <div className="table-wrapper">
+               <CushionLength />
+            </div>
          </section>
          <section>
-             <div className="display-flex">
+            <div className="display-flex">
                <h3>스트로크 한계</h3>
                <p>단위 mm</p>
             </div>
-            <StrokeLimit />
+            <div className="table-wrapper">
+               <StrokeLimit />
+            </div>
             <ul>
                <li>1. 지지형식에 따른 좌굴은 별도로 계산해주세요.</li>
                <li>2. 스트로크 한계 이상 시 상담 바랍니다.</li>
@@ -46,7 +62,9 @@ export default function StandardSpecSet() {
                <div>
                   <Image src="" alt="작동유와 적합한 패킹재질" width={300} height={300} />
                </div>
-               <SealMaterial />
+               <div className="table-wrapper">
+                  <SealMaterial />
+               </div>
             </div>
          </section>
          <section>
@@ -57,12 +75,16 @@ export default function StandardSpecSet() {
          </section>
          <section>
             <h3>부품도</h3>
-            <PartDiagram />
+            <div className="table-wrapper">
+               <PartDiagram />
+            </div>
          </section>
          <section>
             <h3>패킹 부품도</h3>
-            <SealPartsDiagram />
+            <div className="table-wrapper">
+               <SealPartsDiagram />
+            </div>
          </section>
-      </div>
+      </>
    )
 }

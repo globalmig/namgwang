@@ -15,7 +15,7 @@ export default function Home() {
         <div>
           <p>SCROLL</p>
           <div>
-            <Image src="/icons/scroll.png" alt="scroll" width={50} height={50} />
+            <Image src="/icons/scroll.png" alt="scroll" width={55} height={43} />
           </div>
         </div>
         <div>
@@ -27,7 +27,7 @@ export default function Home() {
       <article className="home">
         <div>
           <div>
-            <h2>NAMGWANG HYDRAULICS</h2>
+            <h2>NAMGWANG HYDRAULICS <span></span></h2>
             <p>기술의 깊이로 신뢰를 쌓아온 유압 전문 기업, 남광유압</p>
           </div>
           <div className="display-flex-flow">
@@ -71,7 +71,7 @@ export default function Home() {
       <article className="home2">
         <div>
           <div>
-            <h2>NAMGWANG PRODUCTS</h2>
+            <h2>NAMGWANG PRODUCTS<span></span></h2>
             <p>축적된 기술력으로 완성한 유압 실린더와 유압 유니트 솔루션</p>
           </div>
           <div className="display-flex-flow">
@@ -82,7 +82,7 @@ export default function Home() {
                 <Link href="/technology/cylinder">자세히 보기</Link>
               </button>
               <div>
-                <Image src="/images/tech-유압실린더.jpg" alt="유압실린더" width={158} height={106} />
+                <Image src="/images/tech-유압실린더.jpg" alt="유압실린더" width={354} height={236} />
               </div>
             </section>
             <section>
@@ -92,7 +92,7 @@ export default function Home() {
                 <Link href="/technology/unit">자세히 보기</Link>
               </button>
               <div>
-                <Image src="/images/tech-유압유니트.jpg" alt="유압유니트" width={158} height={106} />
+                <Image src="/images/tech-유압유니트.jpg" alt="유압유니트" width={354} height={236} />
               </div>
             </section>
           </div>

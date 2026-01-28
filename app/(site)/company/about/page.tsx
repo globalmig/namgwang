@@ -5,13 +5,13 @@ export default function AboutPage() {
         <article className="about">
             <div>
                 <div>
-                    <h2>회사개요</h2>
+                    <h2 className="page-title">회사개요</h2>
                 </div>
                 <div>
                     지도오
                 </div>
                 <div>
-                    <h3>(주)남광유압</h3>
+                    <h4>(주)남광유압</h4>
                     <h2>인천 미추홀구 도화동 969-6</h2>
                     <div className="display-flex">
                         <p>(지번) 도화동 969-6</p>

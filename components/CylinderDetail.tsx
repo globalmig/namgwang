@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { NavItem } from "@/types/common";
 import { CylinderProps } from "@/types/product";
 import { supabase } from "@/lib/supabase/clinet";
+import "../app/table.css";
 
 
 export default function CylinderDetail() {
@@ -76,50 +77,56 @@ export default function CylinderDetail() {
     if (!detail) return <div className="loading">정보를 불러오는 중입니다.</div>
 
     return (
-        <div className="cylinder-detail">
-            <div className="display-flex-flow">
+        <article className="cylinder-detail">
+            <div >
                 <div>
-                    <Image src={detail.thumbnail} alt={detail.name} width={500} height={500} />
+                    <h2 className="page-title">{category}</h2>
+                </div>
+                <div className="display-flex-flow">
+                    <div>
+                        <Image src={detail.thumbnail} alt={detail.name} width={500} height={373} />
+                    </div>
+                    <div>
+                        <div className="stroke-text">
+                            <h3>{detail.name}</h3>
+                        </div>
+                        <ul>
+                            {detail.type &&
+                                <li>
+                                    <p>TYPE</p>
+                                    <p>{detail.type}</p>
+                                </li>}
+                            {detail.cad &&
+                                <li>
+                                    <p>CAD</p>
+                                    <p><Link href={`/cad/${detail.cad}`} download>{detail.cad}</Link><br />*100ST 기준 1:1 도면</p>
+                                </li>}
+                        </ul>
+                        <button>
+                            <Link href="/inquire/write">문의하기</Link>
+                        </button>
+                    </div>
                 </div>
                 <div>
                     <div className="stroke-text">
-                        <h3>{detail.name}</h3>
+                        <h3>제품 특징</h3>
                     </div>
-                    <ul>
-                        {detail.type &&
-                            <li>
-                                <p>TYPE</p>
-                                <p>{detail.type}</p>
-                            </li>}
-                        {detail.cad &&
-                            <li>
-                                <p>CAD</p>
-                                <p><Link href={`/cad/${detail.cad}`} download>{detail.cad}</Link><br />*100ST 기준 1:1 도면</p>
-                            </li>}
-                    </ul>
-                    <button>
-                        <Link href="/inquire/write">문의하기</Link>
-                    </button>
+                    <div className="spec-set">
+                        {specLayout === "standard" && <StandardSpecSet />}
+                        {specLayout === "high-pressure" && <HighPressureSpecSet />}
+                        {specLayout === "rectangular" && <RectangularSpecSet />}
+                        {specLayout === "round" && <RoundSpecSet />}
+                        {specLayout === "compact" && <CompactSpecSet />}
+                        {specLayout === "double" && <DoubleSpecSet />}
+                    </div>
                 </div>
+                {/* error fix: prevItem, prevItem.id : undefined */}
+                <ProductNavigator
+                    prevItem={prevItem}
+                    nextItem={nextItem}
+                    onPrev={() => router.push(`/product/cylinder/${prevItem?.id}`)}
+                    onNext={() => router.push(`/product/cylinder/${nextItem?.id}`)} />
             </div>
-            <div>
-                <div className="stroke-text">
-                    <h3>제품 특징</h3>
-                </div>
-                <div>
-                    {specLayout === "standard" && <StandardSpecSet />}
-                    {specLayout === "high-pressure" && <HighPressureSpecSet />}
-                    {specLayout === "rectangular" && <RectangularSpecSet />}
-                    {specLayout === "round" && <RoundSpecSet />}
-                    {specLayout === "compact" && <CompactSpecSet />}
-                    {specLayout === "double" && <DoubleSpecSet />}
-                </div>
-            </div>
-            <ProductNavigator
-                prevItem={prevItem}
-                nextItem={nextItem}
-                onPrev={() => router.push(`/product/cylinder/${prevItem?.id}?sub=${subCategory}`)}
-                onNext={() => router.push(`/product/cylinder/${nextItem?.id}?sub=${subCategory}`)} />
-        </div>
+        </article>
     )
 }

@@ -66,7 +66,7 @@ export default function InquireForm() {
             return;
         }
 
-        if(!form.email.trim()){
+        if (!form.email.trim()) {
             alert("이메일 항목을 입력해주세요.")
             return;
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
@@ -142,7 +142,7 @@ export default function InquireForm() {
                     <input type="text" id="phone" name="phone" placeholder="연락처를 입력해주세요. (숫자만)" onChange={onChangeForm} value={form.phone} />
                 </div>
                 <div>
-                    <label htmlFor="email"><h3>이메일</h3></label>
+                    <label htmlFor="email"><h3 className="required">이메일</h3></label>
                     <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." onChange={onChangeForm} value={form.email} />
                 </div>
                 <div>
@@ -150,20 +150,23 @@ export default function InquireForm() {
                     <input type="text" id="fax" name="fax" placeholder="이메일을 입력해주세요." onChange={onChangeForm} value={form.fax} />
                 </div>
                 <div>
-                    <label htmlFor="contents"><h3>문의 내용</h3></label>
+                    <label htmlFor="contents"><h3 className="required">문의 내용</h3></label>
                     <textarea id="contents" name="contents" rows={7} placeholder="문의 내용을 입력해주세요." onChange={onChangeForm} value={form.contents} />
                 </div>
                 <div>
-                    <label htmlFor="file"><h3>
-                        첨부파일 (선택)<br /><span>사진(JPG)만 업로드 가능하며, 최대 용량 200KB입니다.</span>
-                    </h3></label>
+                    <label htmlFor="file">
+                        <h3>
+                            첨부파일 (선택)
+                        </h3>
+                        <p>사진(JPG)만 업로드 가능하며, 최대 용량 200KB입니다.</p>
+                    </label>
                     <input type="file" id="file" name="file" accept=".jpg,.jpeg" onChange={onChangeForm} />
                 </div>
 
                 <div>
-                    <label htmlFor=""><h3>개인정보처리방침안내</h3></label>
+                    <label htmlFor=""><h3 className="required">개인정보처리방침안내</h3></label>
                     <div>
-                        <h4>(주)남광유압은 고객님을 위한 개인정보 처리방침을 다음과 같이 알려드립니다.<br/>아래의 개인 정보를 수집하며, 상담 외 다른 목적으로 사용되지 않습니다.</h4>
+                        <h5>(주)남광유압은 고객님을 위한 개인정보 처리방침을 다음과 같이 알려드립니다.<br />아래의 개인 정보를 수집하며, 상담 외 다른 목적으로 사용되지 않습니다.</h5>
                         <ul>
                             <li>- 수집 항목 : 회사명, 이름, 연락처, 이메일, 문의 내용</li>
                             <li>- 수집 및 이용 목적 : 문의 상담 및 고객 응대</li>

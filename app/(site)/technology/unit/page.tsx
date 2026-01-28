@@ -6,7 +6,7 @@ export default function TechnologyUnitPage() {
             <article className="tech-unit">
                 <div>
                     <div>
-                        <h2>유압 유니트</h2>
+                        <h2 className="page-title">유압 유니트</h2>
                         <p>유압유니트 (Hydraulic Power Unit)는 장비의 성능과 안정성을 좌우하는 핵심 설비입니다.<br /><span>사용 목적, 필요한 힘, 작동 속도</span>를 기준으로 정확한 사양 선정이 필요합니다.</p>
                     </div>
                     <section>
@@ -100,7 +100,7 @@ export default function TechnologyUnitPage() {
                 <div>
                     <div>
                         <h2>맞춤형 유압 유니트 설계·제작 </h2>
-                        <p>당사는 고객 장비 조건에 최적화된 유압 유니트 설계 및 제작 서비스를 제공합니다.<br />사양 문의 및 상담은 언제든지 가능합니다.</p>
+                        <p>당사는 고객 장비 조건에 최적화된 <span>유압 유니트 설계 및 제작 서비스를 제공합니다.</span><br />사양 문의 및 상담은 언제든지 가능합니다.</p>
                     </div>
                     <div>
                         <button>

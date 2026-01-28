@@ -67,12 +67,12 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
 
         // 유효성 검증
         if (!form.name.trim()) {
-            alert("실적명을 입력해주세요.")
+            alert("프로젝트명을 입력해주세요.")
             return;
         }
 
         if (!form.spec.trim()) {
-            alert("스펙을 입력해주세요.")
+            alert("SPEC을 입력해주세요.")
             return;
         }
 
@@ -133,15 +133,21 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
 
     return (
         <form onSubmit={onSubmitForm}>
-            <div className="fm-name">
+            <div>
                 <label htmlFor="name">
-                    <h3>프로젝트명</h3>
+                    <h3 className="required">프로젝트명</h3>
                 </label>
                 <input type="text" id="name" name="name" placeholder="프로젝트명을 입력해주세요." onChange={onChangeForm} value={form.name} />
             </div>
-            <div className="fm-img">
+            <div>
+                <label htmlFor="spec">
+                    <h3 className="required">SPEC</h3>
+                </label>
+                <input type="text" id="spec" name="spec" placeholder="SPEC을 입력해주세요." onChange={onChangeForm} value={form.spec} />
+            </div>
+            <div>
                 <label htmlFor="img">
-                    <h3>첨부파일</h3>
+                    <h3 className="required">첨부파일</h3>
                     <p>이미지는 가로 1000px 이상의 크기, 가로형 이미지를 권장합니다.<br />이미지의 크기가 작거나 세로형 이미지를 업로드하실 경우, 화질이 낮거나 잘릴 수 있습니다.</p>
                 </label>
                 <input type="file" id="img" name="img" accept=".jpg,.jpeg, .png" onChange={onChangeFile} />

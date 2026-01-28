@@ -11,7 +11,7 @@ export default function Footer() {
         <footer>
             <div>
                 <div onClick={handleScroll}>
-                    <Image src="/icons/top.png" alt="맨 위로 이동" width={50} height={50}/>
+                    <Image src="/icons/top.png" alt="맨 위로 이동" width={45} height={45}/>
                 </div>
                 <ul className="display-flex-flow">
                     <li><Link href="/company/about">회사소개</Link></li>

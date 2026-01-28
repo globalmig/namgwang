@@ -21,7 +21,7 @@
   list-style: none;
   box-sizing: border-box;
   word-break: keep-all;
-  outline: 1px solid silver;
+  outline: 0px solid silver;
   font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -42,11 +42,6 @@ a {
   transition: 0.3s;
   text-transform: uppercase;
   color: black;
-}
-
-table {
-  border-collapse: collapse;
-  border: 1px;
 }
 
 textarea {
@@ -101,49 +96,42 @@ button {
   margin: 0 auto;
   padding: 100px 0;
   text-align: center;
+  font-size: 0.9rem;
 }
 
-article>div {
-  padding: 80px 5%;
+.page-title {
+  position: relative;
 }
 
-article>div>:first-child {
-  margin-bottom: 50px;
-  text-align: center;
-}
-
-article>div>:first-child>p {
-  margin-top: 10px;
-}
-
-/* pagination */
-
-.pagination {
-  margin-top: 50px;
-}
-
-.pagination>button {
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: #eee;
-  color: #555;
-  cursor: pointer;
-}
-
-.pagination>div>button {
-  width: 30px;
-  height: 30px;
-  border-radius: 100%;
-  cursor: pointer;
-}
-
-.pagination>button:hover {
-  background-color: #aaa;
-}
-
-.pagination>div>button.select {
+.page-title::before {
+  content: '';
+  width: 32px;
+  height: 3px;
   background-color: #222;
-  color: white;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.stroke-text {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 8px;
+}
+
+.stroke-text>h3 {
+  display: inline-block;
+  position: relative;
+}
+
+.stroke-text>h3::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: #034694;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
 }
 
 /* header */
@@ -155,6 +143,11 @@ header {
 
 header>div {
   padding: 15px 5%;
+}
+
+header>div>:first-child img {
+  width: 70px;
+  height: auto;
 }
 
 header>div>:last-child {
@@ -175,11 +168,198 @@ nav {
   z-index: 40;
 }
 
+/* tab-menu */
+
+.tab-menu {
+  margin-top: 50px;
+}
+
+.tab-menu>ul {
+  justify-content: left;
+  gap: 10px;
+}
+
+.tab-menu>ul>li {
+  width: 48%;
+  height: 2.5rem;
+  padding: 0px 10px;
+  border-radius: 50px;
+  border: 1px solid #aaa;
+  line-height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-break: keep-all;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.tab-menu>ul>li.focus {
+  background-color: #034694;
+  border: 1px solid #034694;
+  font-weight: bold;
+  color: white;
+}
+
 /* main */
+
 main {
-width: 100%;
- display: block;
- position: relative;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+/* article */
+
+article>div {
+  padding: 100px 5% 80px;
+}
+
+article>div>:first-child {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+article>div>:first-child>p {
+  margin-top: 10px;
+}
+
+article>div>:first-child>p span {
+  font-weight: bold;
+}
+
+/* form */
+
+form>div>label h3 {
+  position: relative;
+  font-size: 1rem;
+}
+
+form>div>label h3.required::after {
+  content: '*';
+  color: #00A8E9;
+  margin-left: 5px;
+}
+
+form>div>label>p {
+  margin-top: 5px;
+}
+
+form>div {
+  margin: 30px 0;
+}
+
+form>div>input,
+form>div>textarea,
+form>div>select {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+}
+
+form>div>div>img {
+  margin-top: 30px;
+  width: 100%;
+  height: 259px;
+  object-fit: cover;
+}
+
+form>button {
+  margin-top: 40px;
+  width: 100%;
+  padding: 15px;
+  background-color: #034694;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+form>div>button {
+  width: 48%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+form>div>button:first-of-type {
+  background-color: #034694;
+  color: white;
+}
+
+form>div>button:last-of-type {
+  background-color: #eee;
+  color: #555;
+}
+
+/* table */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  padding-top: 20px;
+  height: 8px;
+  background-color: #eee;
+}
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #034694;
+  border-radius: 10px;
+}
+
+.table-wrapper table {
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
+
+thead {
+  background-color: rgba(3, 71, 148, 0.5);
+  color: white;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 5px;
+  font-size: 0.9rem;
+}
+
+tfoot {
+  background-color: #eee;
+}
+
+/* pagination */
+
+.pagination {
+  margin-top: 50px;
+}
+
+.pagination button {
+  cursor: pointer;
+}
+
+.pagination>div>button {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #ccc;
+  color: #555;
+  margin: 0 5px;
+}
+
+.pagination>div>button.select {
+  background-color: #034694;
+  border: 1px solid #034694;
+  color: white;
 }
 
 /* footer */
@@ -187,6 +367,7 @@ width: 100%;
 footer {
   background-color: #222;
   position: relative;
+  color: #aaa;
 }
 
 footer>div {
@@ -199,6 +380,51 @@ footer>div>:first-child {
   right: 5%;
   bottom: 80px;
   cursor: pointer;
+}
+
+footer>div>ul {
+  justify-content: left !important;
+  gap: 15px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 30px;
+}
+
+footer>div>ul li {
+  position: relative;
+  padding-left: 10px;
+}
+
+footer>div>ul li::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  border-radius: 100%;
+  background-color: #aaa;
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  transform: translate(0, -50%);
+}
+
+footer>div>ul li a {
+  color: #aaa;
+}
+
+footer>div>:last-child>:last-child ul {
+  margin-top: 20px;
+}
+
+footer>div>:last-child>:last-child ul li {
+  margin: 10px 0;
+}
+
+footer>div>:last-child>:last-child ul li span {
+  font-weight: bold;
+}
+
+footer>div>:last-child>:last-child>p {
+  margin-top: 40px;
 }
 
 @media screen and (min-width: 768px) {}
@@ -222,6 +448,14 @@ footer>div>:first-child {
     font-size: 1.2rem;
   }
 
+  /* header */
+
+  /* nav */
+
+  /* main */
+
+  /* article */
+
   article>div {
     padding: 150px 0px;
     width: 1200px;
@@ -232,11 +466,9 @@ footer>div>:first-child {
     padding: 150px 0;
   }
 
+  /* form */
+
   /* pagination */
-
-  /* header */
-
-  /* nav */
 
   /* footer */
 }

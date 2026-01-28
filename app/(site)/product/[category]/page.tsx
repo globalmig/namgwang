@@ -2,17 +2,21 @@
 import PerformanceList from "@/components/board/PerformanceList";
 import ProductList from "@/components/board/ProductList";
 import SubCategoryTab from "@/components/SubCategoryTab";
-import { useParams } from "next/navigation";
+import { CATEGORY_MAP } from "@/data/category";
+import { useParams, usePathname } from "next/navigation";
 
 export default function ProductListPage() {
     const { category } = useParams();
+    const pathname = usePathname();
+    const pathnameSplit = pathname.split('/').filter(Boolean);
+    const categoryKey = pathnameSplit[0]; //product, company ....
+    const categoryTitle = CATEGORY_MAP[categoryKey].categories?.find(c => c.url === category)?.name;
 
     return (
         <article className="product">
             <div>
                 <div>
-                    <h2></h2>
-                    {/* 서브카테고리가 있는 경우에만 생성 : cylinder, unit */}
+                    <h2 className="page-title">{categoryTitle}</h2>
                     <SubCategoryTab />
                 </div>
                 {category === "performance" ? <PerformanceList /> : <ProductList />}

@@ -52,7 +52,7 @@ export default function ProductDetail() {
         <article className="product-detail">
             <div>
                 <div>
-                    <h2>{product.name}</h2>
+                    <h2 className="page-title">{product.name}</h2>
                 </div>
                 <div>
                     <Image src={product.thumbnail} alt={product.name} width={1000} height={500}/>
