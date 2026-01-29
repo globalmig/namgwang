@@ -1,3 +1,5 @@
+import { PerformanceProps } from "./performance";
+
 // 기본 속성
 export interface ProductProps {
     id: string;
@@ -31,6 +33,8 @@ export interface CylinderProps {
 }
 
 export type AllProductDataProps = ProductProps | CylinderProps;
+
+export type AllAdminDataProps = ProductProps | PerformanceProps;
 
 type ProductFormMode = "upload" | "edit";
 

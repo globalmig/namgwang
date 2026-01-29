@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ProductEditPage () {
-     const { id } = useParams();
+     const { id, category } = useParams();
     const [initialData, setInitialData] = useState<InitialProductDataProps | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -17,7 +17,7 @@ export default function ProductEditPage () {
             setLoading(true);
             try {
                 const { data, error } = await supabase
-                    .from("products")
+                    .from(`${category}s`)
                     .select("*")
                     .eq("id", id)
                     .single();

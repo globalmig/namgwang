@@ -8,6 +8,9 @@ export async function POST(req: NextRequest) {
     const name = formData.get("name") as string;
     const category = formData.get("category") as string;
 
+    const unitCategories = ["small", "medium", "large"]; // 프로젝트에 맞게 리스트업
+    const targetTable = unitCategories.includes(category) ? "units" : "others";
+
     const thumbnail = formData.get("thumbnail") as File | null;
     if (!thumbnail) throw new Error("대표 이미지 없음");
 
@@ -22,10 +25,10 @@ export async function POST(req: NextRequest) {
 
     const thumbnailBuffer = await thumbnail.arrayBuffer();
     const safeName = safeFileName(thumbnail.name);
-    const thumbnailPath = `products/thumbnail/${safeName}`;
+    const thumbnailPath = `${targetTable}/thumbnail/${safeName}`;
 
     const { error: thumError } = await supabaseServer.storage
-      .from("products")
+      .from(targetTable)
       .upload(thumbnailPath, thumbnailBuffer, {
         contentType: thumbnail.type,
       });
@@ -33,7 +36,7 @@ export async function POST(req: NextRequest) {
     if (thumError) throw thumError;
 
     const { data: thumUrl } = supabaseServer.storage
-      .from("products")
+      .from(targetTable)
       .getPublicUrl(thumbnailPath);
 
     /* ---------- 상세 이미지 업로드 ---------- */
@@ -42,23 +45,23 @@ export async function POST(req: NextRequest) {
     for (const file of imagesFiles) {
       const buffer = await file.arrayBuffer();
       const safeName = safeFileName(file.name);
-      const path = `products/images/${safeName}`;
+      const path = `${targetTable}/images/${safeName}`;
 
       const { error } = await supabaseServer.storage
-        .from("products")
+        .from(targetTable)
         .upload(path, buffer, { contentType: file.type });
 
       if (error) throw error;
 
       const { data } = supabaseServer.storage
-        .from("products")
+        .from(targetTable)
         .getPublicUrl(path);
 
       imagesUrls.push(data.publicUrl);
     }
 
     /* ---------- DB 저장 ---------- */
-    const { error: dbError } = await supabaseServer.from("products").insert({
+    const { error: dbError } = await supabaseServer.from(targetTable).insert({
       name,
       category,
       thumbnail: thumUrl.publicUrl,

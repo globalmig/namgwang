@@ -43,7 +43,7 @@ export default function PerformanceDetail() {
 
     // 수정
     const goEdit = (id: string) => {
-        router.push(`/admin/board/performance/${id}/edit`);
+        router.push(`/admin/write/performance/${id}/edit`);
     };
 
     if(!performance) return <div className="loading">정보를 불러오는 중입니다.</div>

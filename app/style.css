@@ -288,17 +288,18 @@ main.category-main>div>h2 {
 
 .product-list>section>a img {
     width: 100%;
-    height: auto;
+    height: 140px;
+    object-fit: cover;
 }
 
-.product-list>section h5 {
-    margin-top: 5px;
+.product-list>section h4 {
+    margin-top: 10px;
     padding-top: 8px;
     border-top: 1px solid #aaa;
     transform: 0.1s;
 }
 
-.product-list>section:hover h5 {
+.product-list>section:hover h4 {
     border-top: 2px solid #00A8E9;
 }
 
@@ -316,18 +317,27 @@ main.category-main>div>h2 {
 .common-list>ul>li {
     font-weight: bold;
     padding: 10px 0;
-    width: 15%;
     text-align: center;
+    font-size: 0.8rem;
+}
+
+.common-list>ul>li:first-of-type {
+    width: 18%;
+    padding: 10px 5px;
 }
 
 .common-list>a>ul li {
-    width: 15%;
     text-align: center;
-    white-space: normal;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 0px;
+    padding: 10px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.common-list>a>ul li:first-of-type {
+    padding: 10px 5px;
+    width: 18%;
 }
 
 .common-list>ul>li:nth-of-type(2),
@@ -336,11 +346,23 @@ main.category-main>div>h2 {
     position: relative;
 }
 
+.common-list>ul>li:nth-of-type(2)::before,
+.common-list>a>ul li:nth-of-type(2)::before {
+    content: '';
+    width: 2px;
+    height: 15px;
+    background-color: #ccc;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+}
+
 .common-list>ul>li:nth-of-type(2)::after,
 .common-list>a>ul li:nth-of-type(2)::after {
     content: '';
     width: 2px;
-    height: 20px;
+    height: 15px;
     background-color: #ccc;
     position: absolute;
     top: 50%;
@@ -459,6 +481,22 @@ main.category-main>div>h2 {
     color: #555;
 }
 
+/* board */
+
+.board > div >:nth-child(3) {
+    text-align: right;
+}
+
+.board > div >:nth-child(3)> button {
+    margin-top: 20px;
+    padding: 5px 10px;
+    background-color: #034694;
+}
+
+.board > div>:nth-child(3)> button a {
+    color: white;
+}
+
 /* technology */
 
 .tech-cylinder>div>div:not(.tech-cylinder>div>:first-child) {
@@ -486,32 +524,17 @@ main.category-main>div>h2 {
     transform: translate(0%, -50%);
 }
 
-.tech-cylinder>div>:nth-child(2)>div {
-    margin: 40px 0;
-    justify-content: center;
-    gap: 12px;
+.tech-cylinder>div>div>ul {
+    margin-top: 40px;
 }
 
-.tech-cylinder>div>:nth-child(2)>div>section {
-    border-radius: 5px;
-    border: 1px solid #aaa;
-    padding: 30px 10px;
-    text-align: center;
-    width: 48%;
-}
-
-.tech-cylinder>div>:nth-child(2)>div>section h3 {
-    color: #034694;
-    margin: -5px 0 3px
-}
-
-.tech-cylinder>div>:nth-child(2)>ul li {
+.tech-cylinder>div>div>ul li {
     position: relative;
     padding-left: 15px;
     margin: 10px 0;
 }
 
-.tech-cylinder>div>:nth-child(2)>ul li::before {
+.tech-cylinder>div>div>ul li::before {
     content: '';
     width: 5px;
     height: 5px;
@@ -523,8 +546,174 @@ main.category-main>div>h2 {
     transform: translate(0%, -50%);
 }
 
-.tech-cylinder>div>:nth-child(2)>ul li span {
+.tech-cylinder>div>div>ul li span {
     font-weight: bold;
+}
+
+.tech-cylinder>div img {
+    width: 100%;
+    height: auto;
+}
+
+.tech-cylinder .process>div {
+    margin-top: 40px;
+    justify-content: center;
+    gap: 12px;
+}
+
+.tech-cylinder .process>div>section {
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 30px 5px;
+    text-align: center;
+    width: 46%;
+}
+
+.tech-cylinder .process>div>section h3 {
+    color: #034694;
+    margin: -5px 0 3px
+}
+
+.tech-cylinder .cy-calculator>div {
+    margin-top: 40px;
+}
+
+.tech-cylinder .cy-calculator>div>section>div {
+    margin: 20px 0;
+}
+
+.tech-cylinder .cy-calculator>div>section>div>button {
+    padding: 5px 8px;
+    background-color: #034694;
+    color: white;
+    margin: 0 0 auto;
+}
+
+.tech-cylinder .cy-calculator>div>section>div:last-of-type>button {
+    background-color: #9DCDDF;
+}
+
+.tech-cylinder .cy-calculator>div>section>div>:last-child {
+    width: 80%;
+}
+
+.tech-cylinder .cy-calculator>div>section>div>div img {
+    margin: 15px 0;
+    width: 100%;
+    height: auto;
+}
+
+.tech-cylinder .type-table h5 {
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    font-weight: 300;
+    color: black;
+}
+
+.tech-cylinder .type-table>section>p {
+    margin: 30px 0 8px;
+    font-size: 0.8rem;
+    text-align: right;
+    color: #555;
+    white-space: nowrap;
+}
+
+.tech-cylinder .type-table>p {
+    margin-top: 20px;
+}
+
+.tech-cylinder .stroke>section>p:last-of-type {
+    margin-top: 15px;
+}
+
+.tech-cylinder .buckling>div>section {
+    margin: 40px 0;
+}
+
+.tech-cylinder .buckling>div>section>:last-child>ul {
+    margin: 10px 0 40px;
+}
+
+.tech-cylinder .buckling>div>section>:first-child {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.tech-cylinder .buckling>div>section>:last-child>section>div {
+    margin: 20px 0;
+}
+
+.tech-cylinder .buckling>div>section>:last-child>section>div>button {
+    padding: 5px 12px;
+    background-color: #034694;
+    color: white;
+    margin: 0 0 auto;
+}
+
+.tech-cylinder .buckling>div>section>:last-child>section>div:last-of-type>button {
+    background-color: #9DCDDF;
+}
+
+.tech-cylinder .buckling>div>section>:last-child>section>div>:last-child {
+    width: 80%;
+}
+
+.tech-cylinder .buckling>div>section>:last-child>section>div>ul li {
+    margin: 8px 0;
+}
+
+.tech-cylinder .support>div>section,
+.tech-cylinder .caution>div>section {
+    width: 100%;
+    margin: 15px 0;
+}
+
+.tech-cylinder .support>div>section h4,
+.tech-cylinder .caution>div>section h4 {
+    margin-bottom: 8px;
+}
+
+.tech-cylinder .support>div>section>div,
+.tech-cylinder .caution>div>section>div {
+    border: 1px solid #aaa;
+}
+
+.tech-cylinder .caution>div {
+    margin-top: 20px;
+}
+
+.tech-cylinder .speed-piping>:nth-child(2) {
+    margin: 20px 0 50px;
+}
+
+.tech-cylinder .speed-piping>:nth-child(2)>ul li {
+    margin: 8px 0;
+}
+
+.tech-cylinder .speed-piping>:last-child>p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.tech-cylinder .caution2>div {
+    margin: 40px 0;
+}
+
+.tech-cylinder .caution2 h4 {
+    margin-bottom: 8px;
+}
+
+.tech-cylinder .caution2>div>section {
+    margin: 20px 0;
+}
+
+.tech-cylinder .caution2>div>div>div {
+    width: 100%;
+    margin: 15px 0;
+}
+
+.tech-cylinder .caution2>div>div>section {
+    width: 100%;
 }
 
 .tech-unit>div>section {
@@ -556,7 +745,6 @@ main.category-main>div>h2 {
     left: 0;
     transform: translate(0%, -50%);
 }
-
 
 .tech-unit>div>section>table {
     border: 0px solid #ccc;
@@ -605,6 +793,31 @@ main.category-main>div>h2 {
 
 .contact.technology {
     background-image: url('/images/contact_bg2.jpg');
+}
+
+.inquire>div>form>div:last-of-type>:nth-child(2) {
+    margin-top: 10px;
+    padding: 20px 10px;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+}
+
+.inquire>div>form>div:last-of-type>:nth-child(2) ul {
+    margin: 30px 0;
+}
+
+.inquire>div>form>div:last-of-type>:nth-child(2) ul li {
+    margin: 5px 0;
+}
+
+.inquire>div>form>div:last-of-type>:nth-child(2) >p {
+    margin: 10px 0;
+}
+
+.inquire>div>form>div:last-of-type>:last-child {
+    margin-top: 10px;
+    justify-content: left;
+    gap: 5px;
 }
 
 @media screen and (min-width: 768px) {}

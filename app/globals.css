@@ -155,17 +155,119 @@ header>div>:last-child {
   margin: auto 0;
 }
 
+header>div>:last-child img {
+  width: 30px;
+  height: auto;
+  margin: auto 0;
+}
+
 /* nav */
 
 nav {
-  display: none;
   position: fixed;
   top: 0;
-  left: 0;
+  right: -100%;
   width: 100%;
   height: 100vh;
   background-color: white;
+  transition: 0.3s;
   z-index: 40;
+  padding: 15px 5%;
+}
+
+nav.open-menu {
+ right: 0;
+}
+
+nav>div {
+  display: flex;
+  justify-content: right;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
+nav>div>img {
+  width: 20px;
+  height: auto;
+}
+
+nav>ul>li>div {
+  padding: 15px 0;
+  cursor: pointer;
+  border-bottom: 2px solid #ccc;
+}
+
+nav>ul>li>div.open-sub {
+  border-bottom: 2px solid #034694;
+}
+
+nav>ul>li>div>img {
+  width: 15px;
+  height: auto;
+}
+
+nav>ul>li>ul {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+        max-height 1.5s ease,
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+nav>ul>li>ul.open-sub {
+  padding: 15px 0;
+    max-height: 240px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+nav>ul>li>ul>li {
+  position: relative;
+  margin: 15px 0;
+    color: #555;
+    padding-left: 20px;
+}
+
+nav>ul>li>ul>li::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  background-color: #555;
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translate(-50%, 0);
+}
+
+nav>ul>li>ul>li.select a{
+  color: #034694;
+  font-weight: bold;
+}
+
+nav>ul>li>ul>li.select::before{
+    background-color:#034694;
+     width: 5px;
+  height: 5px;
+}
+
+nav>ul>li>ul>li a:hover {
+  color: #034694;
+  font-weight: bold;
+}
+
+.sub {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+        max-height 0.8s ease,
+        opacity 0.4s ease,
+        transform 0.4s ease;
 }
 
 /* tab-menu */
@@ -230,6 +332,12 @@ article>div>:first-child>p span {
 }
 
 /* form */
+
+form {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
 form>div>label h3 {
   position: relative;

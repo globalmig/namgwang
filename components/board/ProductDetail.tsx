@@ -1,27 +1,40 @@
 "use client";
 import { ProductProps } from "@/types/product";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ProductDetail() {
 
+    const pathname = usePathname();
+    const isPathnameProduct = pathname.startsWith("/product");
     const router = useRouter();
-    const { id } = useParams();
+    const { id, category } = useParams();
 
     const [product, setProduct] = useState<ProductProps>();
 
     useEffect(() => {
-        if (!id) return;
+    const fetchDetail = async () => {
+        if (!id || !category) return;
 
-        fetch(`/api/product/${id}`)
-            .then(res => {
-                if (!res.ok) throw new Error("제품 조회를 실패했습니다.");
-                return res.json();
-            })
-            .then(setProduct)
-            .catch(console.error);
-    }, [id]);
+        try {
+            const res = await fetch(`/api/product/${category}/${id}`);
+            
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.error || "제품을 찾을 수 없습니다.");
+            }
+
+            const data = await res.json();
+            setProduct(data);
+        } catch (err: any) {
+            console.error("Data load error: ", err);
+            // 여기서 발생하는 에러가 현재 보시는 콘솔 에러입니다.
+        }
+    };
+
+    fetchDetail();
+}, [id, category]);
 
     // 삭제
     const onProductDelete = async () => {
@@ -42,10 +55,10 @@ export default function ProductDetail() {
 
     // 수정
     const goEdit = (id: string) => {
-        router.push(`/admin/board/product/${id}/edit`);
+        router.push(`/admin/write/product/${id}/edit`);
     };
 
-    if(!product) return <div className="loading">정보를 불러오는 중입니다.</div>
+    if (!product) return <div className="loading">정보를 불러오는 중입니다.</div>
 
     return (
         // 제품 상세페이지
@@ -55,7 +68,7 @@ export default function ProductDetail() {
                     <h2 className="page-title">{product.name}</h2>
                 </div>
                 <div>
-                    <Image src={product.thumbnail} alt={product.name} width={1000} height={500}/>
+                    <Image src={product.thumbnail} alt={product.name} width={1000} height={500} />
                 </div>
                 <div>
                     <div>
@@ -64,15 +77,17 @@ export default function ProductDetail() {
                     <div>
                         {product.images.map((p, index) =>
                             <div key={index}>
-                                <Image src={p} alt={`${product.name} ${index}`} width={1000} height={600}/>
+                                <Image src={p} alt={`${product.name} ${index}`} width={1000} height={600} />
                             </div>
                         )}
                     </div>
                 </div>
-                <div className="display-flex">
-                    <button type="button" onClick={()=> goEdit(String(id))}>수정하기</button>
-                    <button type="button" onClick={onProductDelete}>삭제하기</button>
-                </div>
+                {!isPathnameProduct &&
+                    <div className="display-flex admin-btn">
+                        <button type="button" onClick={() => goEdit(String(id))}>수정하기</button>
+                        <button type="button" onClick={onProductDelete}>삭제하기</button>
+                    </div>
+                }
             </div>
         </article>
     )

@@ -1,40 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase/server";
-
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ category: string; id: string }> }
 ) {
-  const { id } = await params;
+  try {
+    const { category, id } = await params; 
 
-  const { data, error } = await supabaseServer
-    .from("products")
-    .select("*")
-    .eq("id", id)
-    .maybeSingle();
+    const tableName = `${category}s`;
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    const { data, error } = await supabaseServer
+      .from(tableName)
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+
+    if (error) throw error;
+    if (!data) return NextResponse.json({ error: "제품 없음" }, { status: 404 });
+
+    return NextResponse.json(data);
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
-
-  if (!data) {
-    return NextResponse.json({ error: "제품 없음" }, { status: 404 });
-  }
-
-  return NextResponse.json(data);
 }
+
+const isUnit = (cat: string) => ["small", "medium", "large", "extra", "unit"].includes(cat);
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string, category: string }> }
 ) {
   try {
+    const { id, category: oldCategory } = await params;
     const formData = await req.formData();
-    const { id } = await params;
+    const newCategory = formData.get("category") as string;
+
+    const oldTable = isUnit(oldCategory) ? "units" : "others";
+    const newTable = isUnit(newCategory) ? "units" : "others";
 
     // [기존 데이터 조회] 삭제된 파일 찾기
     const { data: currentProduct } = await supabaseServer
-      .from("products")
+      .from(oldTable)
       .select("images, thumbnail")
       .eq("id", id)
       .single();
@@ -54,7 +60,7 @@ export async function PATCH(
         // URL에서 스토리지 경로(path) 추출 (예: products/thumbnail/...)
         const oldPath = oldThumbnailUrl.split("/public/products/")[1];
         if (oldPath) {
-          await supabaseServer.storage.from("products").remove([oldPath]);
+          await supabaseServer.storage.from(oldTable).remove([oldPath]);
         }
       }
 
@@ -64,7 +70,7 @@ export async function PATCH(
       const newPath = `products/thumbnail/${Date.now()}_${crypto.randomUUID()}.${ext}`;
 
       const { error: uploadError } = await supabaseServer.storage
-        .from("products")
+        .from(newTable)
         .upload(newPath, buffer, {
           contentType: thumbnailFile.type,
           upsert: true
@@ -77,7 +83,7 @@ export async function PATCH(
 
       // C. 새 URL 발급
       const { data: urlData } = supabaseServer.storage
-        .from("products")
+        .from(newTable)
         .getPublicUrl(newPath);
 
       thumbnailUrl = urlData.publicUrl;
@@ -90,7 +96,7 @@ export async function PATCH(
     const toDelete = oldImagesUrls.filter(url => !existingImages.includes(url));
     for (const url of toDelete) {
       const path = url.split("/public/products/")[1];
-      if (path) await supabaseServer.storage.from("products").remove([path]);
+      if (path) await supabaseServer.storage.from(oldTable).remove([path]);
     }
 
     // [추가] 새로 넘어온 파일들 업로드
@@ -100,11 +106,11 @@ export async function PATCH(
     for (const file of imageFiles) {
       const path = `products/images/${Date.now()}_${crypto.randomUUID()}`;
       const { error: err } = await supabaseServer.storage
-        .from("products")
+        .from(newTable)
         .upload(path, await file.arrayBuffer(), { contentType: file.type });
 
       if (!err) {
-        newUrls.push(supabaseServer.storage.from("products").getPublicUrl(path).data.publicUrl);
+        newUrls.push(supabaseServer.storage.from(newTable).getPublicUrl(path).data.publicUrl);
       } else {
         console.error("파일 업로드 오류:", err.message);
       }
@@ -114,7 +120,7 @@ export async function PATCH(
 
     // 3. DB 업데이트
     const { error: dbError } = await supabaseServer
-      .from("products")
+      .from(newTable)
       .update({
         name: formData.get("name"),
         category: formData.get("category"),
@@ -135,14 +141,15 @@ export async function PATCH(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string, category: string }> }
 ) {
   try {
-    const { id } = await params;
+    const { id, category } = await params;
+    const table = category === "unit" ? "units" : "others";
 
     // 해당 상품의 이미지 URL 정보 조회
     const { data: product, error: fetchError } = await supabaseServer
-      .from("products")
+      .from(table)
       .select("thumbnail, images")
       .eq("id", id)
       .single();
@@ -171,7 +178,7 @@ export async function DELETE(
     // 3. 스토리지에서 파일 삭제 (파일이 있을 때만 실행)
     if (pathsToDelete.length > 0) {
       const { error: storageError } = await supabaseServer.storage
-        .from("products")
+        .from(table)
         .remove(pathsToDelete);
 
       if (storageError) {
@@ -181,7 +188,7 @@ export async function DELETE(
 
     // 4. DB 삭제
     const { error: dbError } = await supabaseServer
-      .from("products")
+      .from(table)
       .delete()
       .eq("id", id);
 
