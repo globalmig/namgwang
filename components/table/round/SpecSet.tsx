@@ -4,13 +4,25 @@ import SealMaterial from "./SealMaterial";
 import SealPartsDiagram from "./SealPartsDiagram";
 import Specifications from "./Specifications";
 import StrokeLimit from "./StrokeLimit";
+import Rod from "./Rod";
 
 export default function RoundSpecSet() {
    return (
-      <div>
+      <>
+         <section>
+            <div>
+               {/* product_img */}
+               <Image src="" alt="" width={500} height={500} />
+            </div>
+            <div className="table-wrapper">
+               <Rod />
+            </div>
+         </section>
          <section>
             <h3>사양</h3>
-            <Specifications />
+            <div className="table-wrapper">
+               <Specifications />
+            </div>
             <ul>
                <li>1. 사용온도 100도 이상 장시간 작동 시, 별도문의 요망</li>
                <li>2. 250도 이상 대형 실린더를 제작합니다.</li>
@@ -21,7 +33,9 @@ export default function RoundSpecSet() {
                <h3>스트로크 한계</h3>
                <p>단위 mm</p>
             </div>
-            <StrokeLimit />
+            <div className="table-wrapper">
+               <StrokeLimit />
+            </div>
             <ul>
                <li>1. 지지형식에 따른 좌굴은 별도로 계산해주세요.</li>
                <li>2. 스트로크 한계 이상 시 설계 제작합니다. (문의 요망)</li>
@@ -36,7 +50,9 @@ export default function RoundSpecSet() {
                <div>
                   <Image src="" alt="작동유와 적합한 패킹재질" width={300} height={300} />
                </div>
-               <SealMaterial />
+               <div className="table-wrapper">
+                  <SealMaterial />
+               </div>
             </div>
          </section>
          <section>
@@ -53,6 +69,6 @@ export default function RoundSpecSet() {
             <h3>패킹 부품도</h3>
             <SealPartsDiagram />
          </section>
-      </div>
+      </>
    )
 }

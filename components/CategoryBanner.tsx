@@ -14,7 +14,7 @@ export default function CategoryBanner() {
             <div>
                 <div>
                     <Image src={category.banner.mo} alt={category.title} className="mo" width={720} height={700} />
-                    <Image src={category.banner.pc} alt={category.title} className="pc" width={720} height={700} />
+                    <Image src={category.banner.pc} alt={category.title} className="pc" width={2560} height={500} />
                 </div>
                 <h2>{category.title}</h2>
             </div>

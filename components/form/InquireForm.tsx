@@ -130,8 +130,8 @@ export default function InquireForm() {
         <>
             <form onSubmit={onSubmitForm}>
                 <div>
-                    <label htmlFor="name"><h3 className="required">제목</h3></label>
-                    <input type="text" id="name" name="name" placeholder="제목을 입력해주세요." onChange={onChangeForm} value={form.name} />
+                    <label htmlFor="title"><h3 className="required">제목</h3></label>
+                    <input type="text" id="title" name="title" placeholder="제목을 입력해주세요." onChange={onChangeForm} value={form.title} />
                 </div>
                 <div>
                     <label htmlFor="name"><h3 className="required">회사명/이름</h3></label>

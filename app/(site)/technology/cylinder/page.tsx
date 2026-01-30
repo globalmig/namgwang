@@ -123,8 +123,8 @@ export default function TechnologyCylinderPage() {
 
                 <div className="type-table">
                     <section>
-                        <h3>C TYPE 이론 출력표</h3>
-                        <h5>(이론 효율 100%)</h5>
+                        <h3>C TYPE 이론 출력표<span className="pc">(이론 효율 100%)</span></h3>
+                        <h5 className="mo">(이론 효율 100%)</h5>
                         <p>단위: kgf(1000kg = 1 Ton)</p>
                     </section>
                     <div className="table-wrapper">
@@ -135,8 +135,8 @@ export default function TechnologyCylinderPage() {
 
                 <div className="type-table">
                     <section>
-                        <h3>B TYPE 이론 출력표</h3>
-                        <h5>(이론 효율 100%)</h5>
+                        <h3>B TYPE 이론 출력표<span className="pc">(이론 효율 100%)</span></h3>
+                        <h5 className="mo">(이론 효율 100%)</h5>
                         <p>단위: kgf (1000kg = 1 Ton)</p>
                     </section>
                     <div className="table-wrapper">

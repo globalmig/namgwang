@@ -56,7 +56,7 @@ export default function PerformanceDetail() {
         <article className="performance-detail">
             <div>
                 <div>
-                    <h2>{performance.name}</h2>
+                    <h2 className="page-title">{performance.name}</h2>
                     <p><span>SPEC</span> | {performance.spec}</p>
                 </div>
                 <div>

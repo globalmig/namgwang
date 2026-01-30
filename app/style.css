@@ -46,6 +46,12 @@ main.home-main>:nth-child(3)>div {
     margin-top: 10px;
 }
 
+main.home-main>:nth-child(3)>div img {
+    width: 40px;
+    height: auto;
+    margin: 0 auto;
+}
+
 main.home-main>:last-child {
     position: absolute;
     bottom: 0px;
@@ -55,7 +61,7 @@ main.home-main>:last-child {
 
 main.home-main>:last-child>img {
     width: 100%;
-    height: auto;
+    height: 150px;
 }
 
 main.category-main>div>div>img {
@@ -304,7 +310,7 @@ main.category-main>div>h2 {
 }
 
 .product-list>section p {
-    color: #555;
+    color: #aaa;
 }
 
 /* commmon-list */
@@ -383,7 +389,7 @@ main.category-main>div>h2 {
 
 .cylinder-detail>div>:nth-child(2)>div>img {
     width: 100%;
-    height: auto;
+    height: 400px;
     object-fit: cover;
 }
 
@@ -483,17 +489,17 @@ main.category-main>div>h2 {
 
 /* board */
 
-.board > div >:nth-child(3) {
+.board>div>:nth-child(3) {
     text-align: right;
 }
 
-.board > div >:nth-child(3)> button {
+.board>div>:nth-child(3)>button {
     margin-top: 20px;
     padding: 5px 10px;
     background-color: #034694;
 }
 
-.board > div>:nth-child(3)> button a {
+.board>div>:nth-child(3)>button a {
     color: white;
 }
 
@@ -552,7 +558,9 @@ main.category-main>div>h2 {
 
 .tech-cylinder>div img {
     width: 100%;
+    max-width: 1000px;
     height: auto;
+    margin: 0 auto;
 }
 
 .tech-cylinder .process>div {
@@ -810,7 +818,7 @@ main.category-main>div>h2 {
     margin: 5px 0;
 }
 
-.inquire>div>form>div:last-of-type>:nth-child(2) >p {
+.inquire>div>form>div:last-of-type>:nth-child(2)>p {
     margin: 10px 0;
 }
 
@@ -820,17 +828,497 @@ main.category-main>div>h2 {
     gap: 5px;
 }
 
-@media screen and (min-width: 768px) {}
+@media screen and (min-width: 768px) {
+
+    /* main */
+
+    main.home-main>:nth-child(2) h2 {
+        font-size: 2.2rem;
+    }
+
+    main.home-main>:last-child {
+        bottom: -1px;
+    }
+
+    main.category-main>div>h2 {
+        font-size: 2.5rem;
+    }
+
+    /* home */
+
+    .home>div>:first-child>h2 {
+        font-size: 2rem;
+    }
+
+    .home>div>:first-child>h2 span::after {
+        width: 200px;
+    }
+
+    .home>div>:last-child section img {
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .home>div>:last-child section>a>:last-child {
+        bottom: 30px;
+    }
+
+    .home>div>:last-child section>a>:last-child h3 {
+        font-size: 1.5rem;
+    }
+
+    .home2>div>:first-child>h2 {
+        font-size: 2rem;
+    }
+
+    .home2>div>:first-child>h2 span::after {
+        width: 200px;
+    }
+
+    .home2>div>:last-child section {
+        padding: 20px;
+        height: 250px;
+        margin: 15px 0;
+    }
+
+    .home2>div>:last-child section h3 {
+        font-size: 1.5rem;
+    }
+
+    .home2>div>:last-child section>button {
+        margin-top: 20px;
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+
+    .home2>div>:last-child section>:last-child img {
+        width: 250px;
+    }
+
+    .contact>div>:first-child h2 {
+        font-size: 2rem;
+    }
+
+    .contact>div>:last-child button {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+
+    /* product-list */
+
+    .product-list>section {
+        margin-bottom: 50px;
+    }
+
+    .product-list>section>a img {
+        height: 220px;
+    }
+
+    .product-list>section h4 {
+        margin-top: 15px;
+        padding-top: 15px;
+        font-size: 1.2rem;
+    }
+
+    /* commmon-list */
+
+    .common-list>ul>li {
+        padding: 15px 0;
+        font-size: 1rem;
+    }
+
+    .common-list>ul>li:first-of-type {
+        padding: 15px 5px;
+    }
+
+    .common-list>a>ul li {
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    .common-list>a>ul li:first-of-type {
+        padding: 15px 5px;
+    }
+
+    .common-list>ul>li:nth-of-type(2)::before,
+    .common-list>a>ul li:nth-of-type(2)::before {
+        height: 20px;
+    }
+
+    .common-list>ul>li:nth-of-type(2)::after,
+    .common-list>a>ul li:nth-of-type(2)::after {
+        height: 20px;
+    }
+
+    /* cylinder-detail */
+
+    .cylinder-detail>div>:nth-child(2)>div>img {
+        height: 450px;
+    }
+
+    .cylinder-detail>div>:nth-child(2)>:last-child>ul {
+        padding: 30px 0 60px;
+    }
+
+    .cylinder-detail>div>:nth-child(2)>div>button {
+        margin-top: 50px;
+        padding: 20px;
+        font-size: 1rem;
+    }
+
+    /* performance-detail */
+
+    .performance-detail>div>div>img {
+        height: 500px;
+    }
+
+    .admin-btn button {
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    /* board */
+
+    .board>div>:nth-child(3)>button {
+        margin-top: 40px;
+        padding: 8px 20px;
+        font-size: 1rem;
+    }
+
+    /* technology */
+
+    .tech-cylinder>div>div>section h3,
+    .tech-unit>div>section>h3 {
+        font-size: 1.5rem;
+    }
+
+    .tech-cylinder>div>div>ul {
+        margin-top: 50px;
+    }
+
+    .tech-cylinder .process>div {
+        margin-top: 50px;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .tech-cylinder .process>div>section {
+        padding: 50px 5px;
+    }
+
+    .tech-cylinder .cy-calculator>div>section>div>button {
+        padding: 5px 15px;
+    }
+
+    .tech-cylinder .cy-calculator>div>section>div>div img {
+        width: 255px;
+    }
+
+    .tech-cylinder .type-table h5 {
+        font-size: 1rem;
+    }
+
+    .tech-cylinder .type-table>section>p {
+        font-size: 1rem;
+    }
+
+    .tech-cylinder .buckling>div>section>:last-child>ul {
+        margin: 10px 0 50px;
+    }
+
+    .tech-cylinder .buckling>div>section>:first-child {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .tech-cylinder .buckling>div>section>:last-child>section>div>button {
+        padding: 8px 23px;
+    }
+
+    .tech-unit>div>section>table thead th {
+        padding: 20px;
+    }
+
+    .tech-unit>div>section>table tbody td {
+        padding: 20px 0;
+    }
+
+    .tech-unit>div>section>div>div {
+        padding: 20px 0;
+    }
+
+    /* inquire */
+
+    .inquire>div>form>div:last-of-type>:nth-child(2) {
+        padding: 20px;
+    }
+
+    .inquire>div>form>div:last-of-type>:nth-child(2) h5 {
+        font-size: 1rem;
+    }
+}
 
 @media screen and (min-width: 1366px) {
 
     /* main */
 
+    main.home-main>:nth-child(2) h2 {
+        font-size: 3rem;
+    }
+
+    main.home-main>:last-child {
+        bottom: -2px;
+    }
+
     /* home */
+
+    .home>div>:first-child>h2 span::after {
+        width: 500px;
+    }
+
+    .home>div>:last-child section {
+        width: 378px;
+    }
+
+    .home>div>:last-child section img {
+        height: auto;
+    }
+
+    .home>div>:last-child section>a>:last-child {
+        bottom: 35px;
+    }
+
+    .home>div>:last-child section>a>:last-child h3 {
+        margin-top: 8px;
+    }
+
+    .home2>div>:first-child>h2 span::after {
+        width: 500px;
+    }
+
+    .home2>div>:last-child section {
+        width: 580px;
+        height: 378px;
+        margin: 0;
+    }
+
+    .home2>div>:last-child section h3 {
+        font-size: 1.7rem;
+    }
+
+    .home2>div>:last-child section p {
+        font-size: 1.5rem;
+    }
+
+    .home2>div>:last-child section>:last-child img {
+        width: 360px;
+    }
+
+    .contact {
+        background-position: center;
+    }
+
+    .contact>div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .contact>div>:first-child {
+        margin: auto 0;
+    }
+
+    .contact>div>:first-child h2 {
+        margin-bottom: 20px;
+    }
+
+    .contact>div>:last-child {
+        margin: auto 0;
+    }
+
+    .contact>div>:last-child button {
+        padding: 12px 40px;
+        margin: auto 0;
+    }
 
     /* product-list */
 
     .product-list {
         justify-content: left;
+        gap: 0 30px;
+    }
+
+    .product-list>section {
+        width: 277px;
+    }
+
+    .product-list>section>a img {
+        height: 250px;
+    }
+
+    .product-list>section h4 {
+        font-size: 1.1rem;
+    }
+
+    .product-list>section p {
+        font-size: 1rem;
+    }
+
+    /* commmon-list */
+
+    .common-list>ul>li {
+        padding: 20px 0;
+        font-size: 1.1rem;
+    }
+
+    .common-list>ul>li:first-of-type {
+        padding: 20px 5px;
+    }
+
+    .common-list>a>ul li {
+        padding: 20px;
+    }
+
+    .common-list>a>ul li:first-of-type {
+        padding: 20px 5px;
+    }
+
+    /* cylinder-detail */
+
+    .cylinder-detail>div>:nth-child(2)>div {
+        width: 500px;
+    }
+
+    .cylinder-detail>div>:nth-child(2)>:last-child {
+        width: 600px;
+        margin: auto 0;
+    }
+
+    .cylinder-detail>div>:nth-child(2)>:last-child>ul {
+        padding: 20px 0 100px;
+    }
+
+    .cylinder-detail>div>:nth-child(2)>div>button {
+        margin-top: 40px;
+    }
+
+    /* performance-detail */
+
+    .performance-detail>div>div>img {
+        width: 1000px;
+        height: 610px;
+        margin: 0 auto;
+    }
+
+    .admin-btn {
+        margin-top: 80px;
+    }
+
+    .admin-btn button {
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    /* board */
+
+    .board>div>:nth-child(3)>button {
+        margin-top: 70px;
+        padding: 10px 35px;
+    }
+
+    /* technology */
+
+    .tech-cylinder .process>div {
+        margin-top: 50px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 0;
+    }
+
+    .tech-cylinder .process>div>section {
+        padding: 20px 5px;
+    }
+
+    .tech-cylinder .process>div>div {
+        margin: auto 0;
+    }
+
+    .tech-cylinder .process>div>div img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .tech-cylinder .cy-calculator>div>section>div>button {
+        padding: 5px 15px;
+    }
+
+    .tech-cylinder .cy-calculator>div>section>div>div img {
+        width: 100%;
+    }
+
+    .tech-cylinder .type-table h3 span {
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: black;
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    .tech-cylinder .type-table>p {
+        margin-top: 8px;
+    }
+
+    .tech-cylinder .buckling>div>section {
+        flex-wrap: nowrap;
+    }
+
+    .tech-cylinder .buckling>div>section>:first-child {
+        width: 480px;
+        margin: 0;
+    }
+
+    .tech-cylinder .buckling>div>section>:last-child {
+        width: 640px;
+        margin: auto 0;
+    }
+
+    .tech-cylinder .buckling>div>section>:last-child h4 {
+        font-size: 1.2rem;
+    }
+
+    .tech-cylinder .buckling>div>section>:last-child>ul {
+        margin: 30px 0 50px;
+    }
+
+    .tech-cylinder .buckling>div>section>:last-child>ul li {
+        margin: 8px 0;
+    }
+
+    .tech-cylinder .buckling>div>section>:last-child>section>div>button {
+        padding: 5px 23px;
+        font-size: 1rem;
+    }
+
+    .tech-unit>div>section>table thead th {
+        padding: 25px 0px;
+        font-size: 1.2rem;
+    }
+
+    .tech-unit>div>section>table tbody td {
+        padding: 25px 0;
+         font-size: 1.2rem;
+    }
+
+    .tech-unit>div>section>div>div {
+        padding: 20px 0;
+    }
+
+    /* inquire */
+
+    .inquire>div>form>div:last-of-type>:nth-child(2) {
+        padding: 20px;
+    }
+
+    .inquire>div>form>div:last-of-type>:nth-child(2) h5 {
+        font-size: 1rem;
     }
 }

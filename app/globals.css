@@ -175,7 +175,7 @@ nav {
 }
 
 nav.open-menu {
- right: 0;
+  right: 0;
 }
 
 nav>div {
@@ -206,28 +206,28 @@ nav>ul>li>div>img {
 }
 
 nav>ul>li>ul {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(-6px);
-    transition:
-        max-height 1.5s ease,
-        opacity 0.8s ease,
-        transform 0.8s ease;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    max-height 1.5s ease,
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
 nav>ul>li>ul.open-sub {
   padding: 15px 0;
-    max-height: 240px;
-    opacity: 1;
-    transform: translateY(0);
+  max-height: 240px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 nav>ul>li>ul>li {
   position: relative;
   margin: 15px 0;
-    color: #555;
-    padding-left: 20px;
+  color: #555;
+  padding-left: 20px;
 }
 
 nav>ul>li>ul>li::before {
@@ -242,14 +242,14 @@ nav>ul>li>ul>li::before {
   transform: translate(-50%, 0);
 }
 
-nav>ul>li>ul>li.select a{
+nav>ul>li>ul>li.select a {
   color: #034694;
   font-weight: bold;
 }
 
-nav>ul>li>ul>li.select::before{
-    background-color:#034694;
-     width: 5px;
+nav>ul>li>ul>li.select::before {
+  background-color: #034694;
+  width: 5px;
   height: 5px;
 }
 
@@ -259,14 +259,14 @@ nav>ul>li>ul>li a:hover {
 }
 
 .sub {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(-6px);
-    transition:
-        max-height 0.8s ease,
-        opacity 0.4s ease,
-        transform 0.4s ease;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    max-height 0.8s ease,
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
 
 /* tab-menu */
@@ -413,6 +413,7 @@ form>div>button:last-of-type {
   height: 8px;
   background-color: #eee;
 }
+
 .table-wrapper::-webkit-scrollbar-thumb {
   background: #034694;
   border-radius: 10px;
@@ -534,7 +535,119 @@ footer>div>:last-child>:last-child>p {
   margin-top: 40px;
 }
 
-@media screen and (min-width: 768px) {}
+@media screen and (min-width: 768px) {
+
+  p,
+  li {
+    font-size: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.7rem;
+  }
+
+  .stroke-text {
+    padding-bottom: 8px;
+  }
+
+  .stroke-text>h3 {
+    font-size: 1.5rem;
+  }
+
+  /* header */
+
+  header>div {
+    padding: 25px 5%;
+  }
+
+  header>div>:first-child img {
+    width: 90px;
+  }
+
+  header>div>:last-child img {
+    width: 35px;
+  }
+
+  /* nav */
+
+  nav {
+    padding: 25px 5%;
+  }
+
+  nav>ul>li>div {
+    padding: 20px 0;
+  }
+
+  /* tab-menu */
+
+  .tab-menu {
+    margin-top: 50px;
+  }
+
+  .tab-menu>ul>li {
+    height: 2.8rem;
+  }
+
+  /* form */
+
+  form>div>label h3 {
+    font-size: 1.2rem;
+  }
+
+  form>div>input,
+  form>div>textarea,
+  form>div>select {
+    width: 100%;
+    padding: 15px;
+  }
+
+  form>div>input::placeholder,
+  form>div>textarea::placeholder,
+  form>div>select::placeholder {
+    font-size: 1rem;
+  }
+
+  form>div>button {
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 1rem;
+  }
+
+  form>button {
+    padding: 20px;
+    font-size: 1rem;
+  }
+
+  /* table */
+
+  th,
+  td {
+    font-size: 1rem;
+  }
+
+  /* pagination */
+
+  .pagination {
+    margin-top: 70px;
+  }
+
+  .pagination>div>button {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  /* footer */
+
+  footer>div>ul {
+    gap: 30px;
+  }
+
+  footer>div>:last-child>:last-child ul {
+    margin-top: 40px;
+  }
+
+}
 
 @media screen and (min-width: 1366px) {
   .pc-flex {
@@ -552,7 +665,7 @@ footer>div>:last-child>:last-child>p {
 
   li,
   p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   /* header */
