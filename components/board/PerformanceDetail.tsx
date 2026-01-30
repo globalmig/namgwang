@@ -1,4 +1,6 @@
 "use client";
+import { NavItem } from "@/types/common";
+import { PerformanceProps } from "@/types/performance";
 import Image from "next/image";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,11 +12,12 @@ export default function PerformanceDetail() {
     const router = useRouter();
     const { id } = useParams();
 
-    const [performance, setPerformance] = useState<any>(null);
+    const [performance, setPerformance] = useState<PerformanceProps>();
+    const [prevItem, setPrevItem] = useState<NavItem | null>(null);
+    const [nextItem, setNextItem] = useState<NavItem | null>(null);
 
     useEffect(() => {
         if (!id) return;
-
         fetch(`/api/performance/${id}`)
             .then(res => {
                 if (!res.ok) throw new Error("정보 조회를 실패했습니다.");
@@ -46,7 +49,7 @@ export default function PerformanceDetail() {
         router.push(`/admin/write/performance/${id}/edit`);
     };
 
-    if(!performance) return <div className="loading">정보를 불러오는 중입니다.</div>
+    if (!performance) return <div className="loading">정보를 불러오는 중입니다.</div>
 
     return (
         // 실적 상세페이지
@@ -57,13 +60,13 @@ export default function PerformanceDetail() {
                     <p><span>SPEC</span> | {performance.spec}</p>
                 </div>
                 <div>
-                    <Image src={performance.img} alt={performance.name} width={1000} height={500}/>
+                    <Image src={performance.img} alt={performance.name} width={1000} height={500} />
                 </div>
                 {!isPathnameProduct &&
-                <div className="display-flex admin-btn">
-                    <button type="button" onClick={()=> goEdit(String(id))}>수정하기</button>
-                    <button type="button" onClick={onPerformanceDelete}>삭제하기</button>
-                </div>
+                    <div className="display-flex admin-btn">
+                        <button type="button" onClick={() => goEdit(String(id))}>수정하기</button>
+                        <button type="button" onClick={onPerformanceDelete}>삭제하기</button>
+                    </div>
                 }
             </div>
         </article>

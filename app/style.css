@@ -464,11 +464,11 @@ main.category-main>div>h2 {
     object-fit: cover;
 }
 
-.performance-detail>div .admin-btn {
+.admin-btn {
     margin-top: 50px;
 }
 
-.performance-detail>div>div button {
+.admin-btn button {
     width: 48%;
     padding: 10px;
     background-color: #034694;
@@ -476,7 +476,7 @@ main.category-main>div>h2 {
     cursor: pointer;
 }
 
-.performance-detail>div>div button:last-of-type {
+.admin-btn button:last-of-type {
     background-color: #eee;
     color: #555;
 }

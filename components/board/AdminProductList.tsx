@@ -7,6 +7,7 @@ import Pagination from "../Pagination";
 import { usePagination } from "@/hooks/usePagination";
 import { useParams } from "next/navigation";
 import { PerformanceProps } from "@/types/performance";
+import { ADMIN_PRODUCT_CATEGORY_NAME } from "@/data/category";
 
 export default function AdminProductList() {
 
@@ -66,7 +67,9 @@ export default function AdminProductList() {
                             <li>
                                 {isPerformance
                                     ? (p as PerformanceProps).spec
-                                    : (p as ProductProps).category}
+                                    : ADMIN_PRODUCT_CATEGORY_NAME[
+                                    (p as ProductProps).category]
+                                }
                             </li>
                         </ul>
                     </Link>

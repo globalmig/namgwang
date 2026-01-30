@@ -93,3 +93,11 @@ export const ADMIN_SUBCATEGORY : {
     { name: "유압 유니트 게시판", category: "unit" },
     { name: "기타 기기 게시판", category: "other" },
 ]
+
+export const ADMIN_PRODUCT_CATEGORY_NAME : {[key: string] : string} = {
+    small: "소형 유니트",
+    medium: "중형 유니트",
+    large: "대형 유니트",
+    extra: "특수형 유니트",
+    other: "기타 기기"
+}

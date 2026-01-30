@@ -1,7 +1,7 @@
 "use client";
 import PerformanceDetail from "@/components/board/PerformanceDetail";
 import CylinderDetail from "@/components/CylinderDetail";
-import ProductDetail from "@/components/ProductDetail";
+import ProductDetail from "@/components/board/ProductDetail";
 import { usePathname } from "next/navigation";
 
 export default function DetailPage() {

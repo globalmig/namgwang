@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase/server";
+
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ category: string; id: string }> }
+  { params }: { params: Promise<{ id: string; category: string}> }
 ) {
   try {
-    const { category, id } = await params; 
+    const { id, category} = await params;
 
     const tableName = `${category}s`;
 
@@ -24,23 +25,30 @@ export async function GET(
   }
 }
 
-const isUnit = (cat: string) => ["small", "medium", "large", "extra", "unit"].includes(cat);
+const TABLE_MAP : Record<string,string>= {
+  small: "units",
+  medium: "units",
+  large: "units",
+  extra: "units",
+  unit: "units",
+  other: "others",
+}
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string, category: string }> }
+  { params }: { params: Promise<{ id: string, category: string}> }
 ) {
   try {
-    const { id, category: oldCategory } = await params;
+    const { id } = await params;
     const formData = await req.formData();
-    const newCategory = formData.get("category") as string;
-
-    const oldTable = isUnit(oldCategory) ? "units" : "others";
-    const newTable = isUnit(newCategory) ? "units" : "others";
+    const newSubCategory = formData.get("category") as string; // 폼에서 선택된 category (sub)
+    
+    // 테이블 위치 찾기
+    const editTable = TABLE_MAP[newSubCategory]; // ?
 
     // [기존 데이터 조회] 삭제된 파일 찾기
     const { data: currentProduct } = await supabaseServer
-      .from(oldTable)
+      .from(editTable)
       .select("images, thumbnail")
       .eq("id", id)
       .single();
@@ -57,20 +65,20 @@ export async function PATCH(
       // currentProduct: 이전의 select("thumbnail")로 가져온 기존 DB
       const oldThumbnailUrl = currentProduct?.thumbnail;
       if (oldThumbnailUrl) {
-        // URL에서 스토리지 경로(path) 추출 (예: products/thumbnail/...)
-        const oldPath = oldThumbnailUrl.split("/public/products/")[1];
+        // URL에서 스토리지 경로(path) 추출
+        const oldPath = oldThumbnailUrl.split(`/public/${editTable}/`)[1];
         if (oldPath) {
-          await supabaseServer.storage.from(oldTable).remove([oldPath]);
+          await supabaseServer.storage.from(editTable).remove([oldPath]);
         }
       }
 
       // B. 새 썸네일 파일 업로드
       const buffer = await thumbnailFile.arrayBuffer();
       const ext = thumbnailFile.name.split(".").pop();
-      const newPath = `products/thumbnail/${Date.now()}_${crypto.randomUUID()}.${ext}`;
+      const newPath = `${editTable}/thumbnail/${Date.now()}_${crypto.randomUUID()}.${ext}`;
 
       const { error: uploadError } = await supabaseServer.storage
-        .from(newTable)
+        .from(editTable)
         .upload(newPath, buffer, {
           contentType: thumbnailFile.type,
           upsert: true
@@ -78,12 +86,15 @@ export async function PATCH(
 
       if (uploadError) {
         console.error("대표 이미지 업로드 에러:", uploadError);
+        console.error("newSubCategory", newSubCategory);
+        console.error("newPath", newPath);
+        console.error("editTable", editTable);
         throw new Error("대표 이미지 업로드를 실패했습니다.");
       }
 
       // C. 새 URL 발급
       const { data: urlData } = supabaseServer.storage
-        .from(newTable)
+        .from(editTable)
         .getPublicUrl(newPath);
 
       thumbnailUrl = urlData.publicUrl;
@@ -95,8 +106,8 @@ export async function PATCH(
     // [삭제] 기존에 있었지만 existingImages에 없는 파일은 스토리지에서 삭제
     const toDelete = oldImagesUrls.filter(url => !existingImages.includes(url));
     for (const url of toDelete) {
-      const path = url.split("/public/products/")[1];
-      if (path) await supabaseServer.storage.from(oldTable).remove([path]);
+      const path = url.split(`/public/${editTable}/`)[1];
+      if (path) await supabaseServer.storage.from(editTable).remove([path]);
     }
 
     // [추가] 새로 넘어온 파일들 업로드
@@ -104,13 +115,13 @@ export async function PATCH(
     const newUrls: string[] = [];
 
     for (const file of imageFiles) {
-      const path = `products/images/${Date.now()}_${crypto.randomUUID()}`;
+      const path = `${editTable}/images/${Date.now()}_${crypto.randomUUID()}`;
       const { error: err } = await supabaseServer.storage
-        .from(newTable)
+        .from(editTable)
         .upload(path, await file.arrayBuffer(), { contentType: file.type });
 
       if (!err) {
-        newUrls.push(supabaseServer.storage.from(newTable).getPublicUrl(path).data.publicUrl);
+        newUrls.push(supabaseServer.storage.from(editTable).getPublicUrl(path).data.publicUrl);
       } else {
         console.error("파일 업로드 오류:", err.message);
       }
@@ -120,7 +131,7 @@ export async function PATCH(
 
     // 3. DB 업데이트
     const { error: dbError } = await supabaseServer
-      .from(newTable)
+      .from(editTable)
       .update({
         name: formData.get("name"),
         category: formData.get("category"),
@@ -145,7 +156,7 @@ export async function DELETE(
 ) {
   try {
     const { id, category } = await params;
-    const table = category === "unit" ? "units" : "others";
+    const table = `${category}s`
 
     // 해당 상품의 이미지 URL 정보 조회
     const { data: product, error: fetchError } = await supabaseServer
@@ -163,14 +174,14 @@ export async function DELETE(
 
     // 썸네일 경로 추출
     if (product.thumbnail) {
-      const thumbPath = product.thumbnail.split("/public/products/")[1];
+      const thumbPath = product.thumbnail.split(`/public/${table}/`)[1];
       if (thumbPath) pathsToDelete.push(thumbPath);
     }
 
     // 상세 이미지 경로 추출
     if (product.images && Array.isArray(product.images)) {
       product.images.forEach((url: string) => {
-        const detailPath = url.split("/public/products/")[1];
+        const detailPath = url.split(`/public/${table}/`)[1];
         if (detailPath) pathsToDelete.push(detailPath);
       });
     }

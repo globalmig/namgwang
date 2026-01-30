@@ -28,48 +28,30 @@ export default function CylinderDetail() {
     const [prevItem, setPrevItem] = useState<NavItem | null>(null);
     const [nextItem, setNextItem] = useState<NavItem | null>(null);
 
+    console.log("prev: ", prevItem);
+    console.log("next: ", nextItem);
+
     useEffect(() => {
-        const fetchCylinderData = async () => {
+        const fetchData = async () => {
+
             try {
-                // 상세 데이터 가져오기
-                const { data: current, error } = await supabase
-                    .from("cylinders")
-                    .select("*")
-                    .eq("id", id)
-                    .single();
+                const res = await fetch(`/api/product/${category}/${id}`);
+                if (!res.ok) {
+                    const errorData = await res.json();
+                    throw new Error(errorData.error || "데이터를 불러오지 못했습니다.");
+                }
+                const data = await res.json();
+                
+                setDetail(data);
+                setPrevItem(data.prev);
+                setNextItem(data.next);
 
-                if (error || !current) throw error;
-                setDetail(current);
-
-                // 이전 제품
-                const { data: prev } = await supabase
-                    .from("cylinders")
-                    .select("id, name")
-                    .eq("category", current.category) // 같은 타입 내에서 탐색
-                    .lt("created_at", current.created_at)
-                    .order("created_at", { ascending: false })
-                    .limit(1)
-                    .maybeSingle();
-
-                // 다음 제품
-                const { data: next } = await supabase
-                    .from("cylinders")
-                    .select("id, name")
-                    .eq("category", current.category)
-                    .gt("created_at", current.created_at)
-                    .order("created_at", { ascending: true })
-                    .limit(1)
-                    .maybeSingle();
-
-                setPrevItem(prev);
-                setNextItem(next);
-
-            } catch (err) {
-                console.error("Cylinder load error:", err);
+            } catch (error) {
+                console.error("API Fetch Error: ", error);
             }
         };
 
-        if (id) fetchCylinderData();
+        if (id) fetchData();
     }, [id]);
 
     const specLayout = CYLINDER_SUBCATEGORY.find(c => c.category === subCategory)?.category
@@ -120,7 +102,6 @@ export default function CylinderDetail() {
                         {specLayout === "double" && <DoubleSpecSet />}
                     </div>
                 </div>
-                {/* error fix: prevItem, prevItem.id : undefined */}
                 <ProductNavigator
                     prevItem={prevItem}
                     nextItem={nextItem}

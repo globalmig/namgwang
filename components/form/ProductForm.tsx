@@ -7,7 +7,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react"
 export default function ProductForm({ mode, initialData }: ProductFormProps) {
 
     const router = useRouter();
-    const { id } = useParams();
+    const { id, type } = useParams();
 
     const isUpload = mode === "upload";
     const isEdit = mode === "edit";
@@ -154,7 +154,7 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
         });
 
         try {
-            const res = await fetch(isUpload ? "/api/product" : `/api/product/${id}`, {
+            const res = await fetch(isUpload ? "/api/product" : `/api/product/${type}/${id}`, {
                 method: isUpload ? "POST" : "PATCH",
                 body: formData,
             });

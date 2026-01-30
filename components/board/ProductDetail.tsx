@@ -1,49 +1,59 @@
-"use client";
-import { ProductProps } from "@/types/product";
+'use client';
 import Image from "next/image";
+import ProductNavigator from "../ProductNavigator";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ProductProps } from "@/types/product";
+import { NavItem } from "@/types/common";
 
+// 유니트, 기타기기 상세페이지
 export default function ProductDetail() {
 
-    const pathname = usePathname();
-    const isPathnameProduct = pathname.startsWith("/product");
     const router = useRouter();
-    const { id, category } = useParams();
+    const pathname = usePathname();
+    const { id, category, type } = useParams();
+    const isPathnameProduct = pathname.startsWith("/product");
+    const getCategory = isPathnameProduct ? category : type;
 
-    const [product, setProduct] = useState<ProductProps>();
+    const [detail, setDetail] = useState<ProductProps>();
+    const [prevItem, setPrevItem] = useState<NavItem | null>(null);
+    const [nextItem, setNextItem] = useState<NavItem | null>(null);
+
+    console.log("prev: ", prevItem);
+    console.log("next: ", nextItem);
+    console.log("getCategory: ", getCategory);
 
     useEffect(() => {
-    const fetchDetail = async () => {
-        if (!id || !category) return;
+        const fetchData = async () => {
+            if (!id || (!category && !type)) return;
 
-        try {
-            const res = await fetch(`/api/product/${category}/${id}`);
-            
-            if (!res.ok) {
-                const errorData = await res.json();
-                throw new Error(errorData.error || "제품을 찾을 수 없습니다.");
+            try {
+                const res = await fetch(`/api/product/${getCategory}/${id}`);
+                if (!res.ok) {
+                    const errorData = await res.json();
+                    throw new Error(errorData.error || "데이터를 불러오지 못했습니다.");
+                }
+                const data = await res.json();
+                setDetail(data);
+                setPrevItem(data.prev);
+                setNextItem(data.next);
+
+            } catch (error) {
+                console.error("API Fetch Error: ", error);
             }
+        };
 
-            const data = await res.json();
-            setProduct(data);
-        } catch (err: any) {
-            console.error("Data load error: ", err);
-            // 여기서 발생하는 에러가 현재 보시는 콘솔 에러입니다.
-        }
-    };
-
-    fetchDetail();
-}, [id, category]);
+        fetchData();
+    }, [id, getCategory]);
 
     // 삭제
     const onProductDelete = async () => {
-        if (!product) return;
+        if (!detail) return;
         if (!confirm("제품을 삭제하시겠습니까?")) return;
         try {
-            const res = await fetch(`/api/product/${id}`, { method: "DELETE" });
+            const res = await fetch(`/api/product/${getCategory}/${id}`, { method: "DELETE" });
             const result = await res.json();
-            if (!res.ok) throw new Error(result.error || "제품 삭제를 실패했습니다. 다시 시도해주세요.");
+            if (!res.ok) throw new Error(result.error || "삭제 실패했습니다. 다시 시도해주세요.");
 
             alert(result.message);
             router.push("/admin");
@@ -55,29 +65,33 @@ export default function ProductDetail() {
 
     // 수정
     const goEdit = (id: string) => {
-        router.push(`/admin/write/product/${id}/edit`);
+        router.push(`/admin/write/${getCategory}/${id}/edit`);
     };
 
-    if (!product) return <div className="loading">정보를 불러오는 중입니다.</div>
+    if (!detail) return <div className="loading">정보를 불러오는 중입니다.</div>
 
     return (
-        // 제품 상세페이지
         <article className="product-detail">
             <div>
                 <div>
-                    <h2 className="page-title">{product.name}</h2>
+                    <h3 className="page-title">{getCategory === "unit" ? "유압 유니트" : "기타 기기"}</h3>
                 </div>
                 <div>
-                    <Image src={product.thumbnail} alt={product.name} width={1000} height={500} />
-                </div>
-                <div>
+                    <div className="stroke-text">
+                        <h3>{detail.name}</h3>
+                    </div>
                     <div>
+                        <Image src={detail.thumbnail} alt={detail.name} width={500} height={500} />
+                    </div>
+                </div>
+                <div>
+                    <div className="stroke-text">
                         <h3>제품 특징</h3>
                     </div>
                     <div>
-                        {product.images.map((p, index) =>
+                        {detail.images.map((i, index) =>
                             <div key={index}>
-                                <Image src={p} alt={`${product.name} ${index}`} width={1000} height={600} />
+                                <Image src={i} alt={detail.name} width={500} height={500} />
                             </div>
                         )}
                     </div>
@@ -87,6 +101,14 @@ export default function ProductDetail() {
                         <button type="button" onClick={() => goEdit(String(id))}>수정하기</button>
                         <button type="button" onClick={onProductDelete}>삭제하기</button>
                     </div>
+                }
+                {
+                    isPathnameProduct &&
+                    <ProductNavigator
+                        prevItem={prevItem}
+                        nextItem={nextItem}
+                        onPrev={() => router.push(`/product/${category}/${prevItem?.id}`)}
+                        onNext={() => router.push(`/product/${category}/${nextItem?.id}`)} />
                 }
             </div>
         </article>

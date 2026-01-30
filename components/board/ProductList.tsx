@@ -8,13 +8,12 @@ import { usePagination } from "@/hooks/usePagination";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function ProductList() { // 사용자페이지 리스트
+export default function ProductList() {
 
-    const { category } = useParams(); // /product/[category] : /product/unit
+    const { category } = useParams();
     const searchParams = useSearchParams();
-    const subCategory = searchParams.get("sub"); // /product/unit?sub=
-
-    // cylinder, unit, other
+    const subCategory = searchParams.get("sub");
+    
     const [products, setProducts] = useState<AllProductDataProps[]>([]);
 
     const {
@@ -31,7 +30,13 @@ export default function ProductList() { // 사용자페이지 리스트
                 if (subCategory) {
                     query = query.eq("category", subCategory);
                 } else {
-                    query = query.eq("category", category);
+                    if (category === "cylinder"){
+                        query = query.eq("category", "standard");
+                    } else if (category === "unit"){
+                        query = query.eq("category", "small");
+                    } else {
+                        query = query.eq("category", category);
+                    }
                 }
 
                 const { data, error } = await query.order("id", { ascending: true });

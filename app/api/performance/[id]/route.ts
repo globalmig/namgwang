@@ -94,7 +94,7 @@ export async function PATCH(
       .eq("id", id);
 
     if (dbError) throw dbError;
-
+ 
     return NextResponse.json({ message: "실적이 수정되었습니다." });
   } catch (err: any) {
     console.error("PATCH ERROR:", err);
