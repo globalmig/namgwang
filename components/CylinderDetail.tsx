@@ -13,7 +13,6 @@ import ProductNavigator from "./ProductNavigator";
 import { useEffect, useState } from "react";
 import { NavItem } from "@/types/common";
 import { CylinderProps } from "@/types/product";
-import { supabase } from "@/lib/supabase/clinet";
 import "../app/table.css";
 
 
@@ -62,11 +61,11 @@ export default function CylinderDetail() {
         <article className="cylinder-detail">
             <div >
                 <div>
-                    <h2 className="page-title">{category}</h2>
+                    <h2 className="page-title">유압 실린더</h2>
                 </div>
                 <div className="display-flex-flow">
                     <div>
-                        <Image src={detail.thumbnail} alt={detail.name} width={500} height={373} />
+                        <Image src={detail.thumbnail} alt={detail.name} width={500} height={500} />
                     </div>
                     <div>
                         <div className="stroke-text">
@@ -94,12 +93,12 @@ export default function CylinderDetail() {
                         <h3>제품 특징</h3>
                     </div>
                     <div className="spec-set">
-                        {specLayout === "standard" && <StandardSpecSet />}
-                        {specLayout === "high-pressure" && <HighPressureSpecSet />}
-                        {specLayout === "rectangular" && <RectangularSpecSet />}
-                        {specLayout === "round" && <RoundSpecSet />}
-                        {specLayout === "compact" && <CompactSpecSet />}
-                        {specLayout === "double" && <DoubleSpecSet />}
+                        {specLayout === "standard" && <StandardSpecSet detail={detail}/>}
+                        {specLayout === "high-pressure" && <HighPressureSpecSet detail={detail}/>}
+                        {specLayout === "rectangular" && <RectangularSpecSet detail={detail}/>}
+                        {specLayout === "round" && <RoundSpecSet detail={detail}/>}
+                        {specLayout === "compact" && <CompactSpecSet detail={detail}/>}
+                        {specLayout === "double" && <DoubleSpecSet detail={detail}/>}
                     </div>
                 </div>
                 <ProductNavigator

@@ -5,8 +5,9 @@ import SealPartsDiagram from "./SealPartsDiagram";
 import Specifications from "./Specifications";
 import StrokeLimit from "./StrokeLimit";
 import Rod from "./Rod";
+import { CylinderDetailProps } from "@/types/product";
 
-export default function RoundSpecSet() {
+export default function RoundSpecSet(detail: CylinderDetailProps) {
    return (
       <>
          <section>

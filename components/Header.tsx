@@ -19,7 +19,7 @@ export default function Header() {
                     </Link>
                 </div>
                 <nav className={isOpen ? "open-menu" : ""}>
-                        <div>
+                        <div className="mo">
                             <Image onClick={()=> setIsOpen(false)} src="/icons/nav-close.png" alt="메뉴 닫기" width={30} height={30} />
                         </div>
                     <ul>
@@ -27,7 +27,7 @@ export default function Header() {
                             <li key={key}>
                                 <div className={`display-flex ${isOpenSub === key ? "open-sub" : ""}`} onClick={() => setIsOpenSub(key)}>
                                     <h3>{c.title}</h3>
-                                    <Image src="/icons/arrow.png" alt="서브메뉴 열기" width={26} height={15}/>
+                                    <Image className="mo" src="/icons/arrow.png" alt="서브메뉴 열기" width={26} height={15}/>
                                 </div>
                                 {c.categories &&
                                     <ul className={isOpenSub === key ? "open-sub" : ""}>
@@ -40,7 +40,7 @@ export default function Header() {
                         )}
                     </ul>
                 </nav>
-                <div>
+                <div className="mo">
                     <Image onClick={()=> setIsOpen(true)} src="/icons/nav.png" alt="메뉴 열기" width={21} height={21} />
                 </div>
             </div>

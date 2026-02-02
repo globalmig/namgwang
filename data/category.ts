@@ -10,7 +10,7 @@ export const CATEGORY_MAP: {
         title: '회사소개',
         banner: {
             mo: "/images/company_banner_mo.jpg",
-            pc: "/images/company_banner.jpg"
+            pc: "/images/company_banner_pc.jpg"
         },
         categories: [
             { name: "회사개요", url: "about" },

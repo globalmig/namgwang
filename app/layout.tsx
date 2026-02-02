@@ -23,7 +23,7 @@ export const metadata: Metadata = {
         url: 'https://.../images/og_image.jpg',
         width: 1200,
         height: 630,
-        alt: '(주)남광유압',
+        alt: '남광유압',
       },
     ],
     locale: 'ko_KR',

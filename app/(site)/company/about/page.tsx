@@ -11,7 +11,7 @@ export default function AboutPage() {
                     지도오
                 </div>
                 <div>
-                    <h4>(주)남광유압</h4>
+                    <h4>남광유압</h4>
                     <h2>인천 미추홀구 도화동 969-6</h2>
                     <div className="display-flex">
                         <p>(지번) 도화동 969-6</p>

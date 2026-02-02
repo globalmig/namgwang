@@ -668,11 +668,98 @@ footer>div>:last-child>:last-child>p {
     font-size: 1.1rem;
   }
 
-  /* header */
+  header>div {
+    padding: 25px 0;
+    width: 1200px;
+    margin: 0 auto;
+  }
+
+  header>div>:first-child img {
+    width: 100px;
+  }
 
   /* nav */
 
-  /* main */
+  nav {
+    position: unset;
+    width: 600px;
+    height: auto;
+    background-color: transparent;
+    padding: 0;
+    margin: auto 0;
+  }
+
+  nav>div {
+    display: flex;
+    justify-content: right;
+    cursor: pointer;
+    margin-bottom: 50px;
+  }
+
+  nav>ul {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  nav>ul>li {
+    position: relative;
+  }
+
+  nav>ul>li>div {
+    padding: 0;
+    border-bottom: 0px;
+  }
+
+  nav>ul>li>div.open-sub {
+    border-bottom: 0px;
+    color: #034694;
+  }
+
+  nav>ul>li>ul {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    height: auto;
+    background-color: white;
+    width: 250px;
+  }
+
+  nav>ul>li>ul.open-sub {
+    max-height: auto;
+  }
+
+  nav>ul>li>ul>li {
+    margin: 15px 0;
+    padding-left: 30px;
+  }
+
+  nav>ul>li>ul>li::before {
+    left: 15px;
+  }
+
+  nav>ul>li>ul>li.select a:hover {
+    color: #034694;
+    font-weight: bold;
+  }
+
+  /* tab-menu*/
+
+  .tab-menu {
+    margin-top: 70px;
+  }
+
+  .tab-menu>ul {
+    width: 1000px;
+    margin: 0 auto;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .tab-menu>ul>li {
+    width: auto;
+    height: auto;
+    padding: 15px 45px;
+  }
 
   /* article */
 
@@ -690,5 +777,68 @@ footer>div>:last-child>:last-child>p {
 
   /* pagination */
 
-  /* footer */
+  /* footer 여기*/
+
+  footer {
+    background-color: #222;
+    position: relative;
+    color: #aaa;
+  }
+
+  footer>div {
+    width: 100%;
+    padding: 80px 5%;
+  }
+
+  footer>div>:first-child {
+    position: fixed;
+    right: 5%;
+    bottom: 80px;
+    cursor: pointer;
+  }
+
+  footer>div>ul {
+    justify-content: left !important;
+    gap: 15px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 30px;
+  }
+
+  footer>div>ul li {
+    position: relative;
+    padding-left: 10px;
+  }
+
+  footer>div>ul li::before {
+    content: "";
+    width: 3px;
+    height: 3px;
+    border-radius: 100%;
+    background-color: #aaa;
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    transform: translate(0, -50%);
+  }
+
+  footer>div>ul li a {
+    color: #aaa;
+  }
+
+  footer>div>:last-child>:last-child ul {
+    margin-top: 20px;
+  }
+
+  footer>div>:last-child>:last-child ul li {
+    margin: 10px 0;
+  }
+
+  footer>div>:last-child>:last-child ul li span {
+    font-weight: bold;
+  }
+
+  footer>div>:last-child>:last-child>p {
+    margin-top: 40px;
+  }
 }

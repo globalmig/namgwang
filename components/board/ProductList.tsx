@@ -61,7 +61,7 @@ export default function ProductList() {
                 {products.map(p =>
                     <section key={p.id}>
                         <Link href={`/product/${category}/${p.id}`}>
-                            <Image src={p.thumbnail} alt={p.name} width={400} height={400} />
+                            <Image src={p.thumbnail} alt={p.name} width={500} height={500} />
                         </Link>
                         <div>
                             <h4>{p.name}</h4>

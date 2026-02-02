@@ -30,6 +30,11 @@ export interface CylinderProps {
     seal_material_img?: string,
     mounting?: string[],
     series_img: string,
+    cheats?: string,
+}
+
+export interface CylinderDetailProps {
+   detail: CylinderProps
 }
 
 export type AllProductDataProps = ProductProps | CylinderProps;

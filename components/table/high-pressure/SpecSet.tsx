@@ -6,14 +6,20 @@ import SealPartsDiagram from "./SealPartsDiagram";
 import Specifications from "./Specifications";
 import StrokeLimit from "./StrokeLimit";
 import Rod from "./Rod";
+import { CylinderDetailProps } from "@/types/product";
 
-export default function HighPressureSpecSet() {
+export default function HighPressureSpecSet(detail: CylinderDetailProps) {
+   const { name, product_img, series_img, seal_material_img, cheats, mounting } = detail.detail;
+
    return (
       <>
          <section>
             <div>
-               {/* product_img */}
-               <Image src="" alt="" width={500} height={500} />
+               {product_img.map((p, index) =>
+                  <div key={index}>
+                     <Image src={p} alt={name} width={1200} height={500} />
+                  </div>
+               )}
             </div>
             <div className="table-wrapper">
                <Rod />
@@ -53,24 +59,31 @@ export default function HighPressureSpecSet() {
                <li>* HA SERIES SWTCH는 Ro Sensor입니다.</li>
             </ul>
          </section>
-         <section>
-            <h3>표기 요령</h3>
-         </section>
-         <section>
-            <h3>작동유와 적합한 패킹 재질</h3>
-            <div className="display-flex=flow">
+         {cheats &&
+            <section>
+               <h3>표기 요령</h3>
                <div>
-                  <Image src="" alt="작동유와 적합한 패킹재질" width={300} height={300} />
+                  <Image src={cheats} alt="표기요령" width={1000} height={187} />
                </div>
-               <div className="table-wrapper">
-                  <SealMaterial />
+            </section>
+         }
+         {seal_material_img &&
+            <section>
+               <h3>작동유와 적합한 패킹 재질</h3>
+               <div className="display-flex=flow">
+                  <div>
+                     <Image src={seal_material_img} alt="작동유와 적합한 패킹재질" width={500} height={228} />
+                  </div>
+                  <div className="table-wrapper">
+                     <SealMaterial />
+                  </div>
                </div>
-            </div>
-         </section>
+            </section>
+         }
          <section>
             <h3>HA SERIES 내부구조도</h3>
             <div>
-               <Image src="" alt="내부구조도" width={1000} height={500} />
+               <Image src={series_img} alt="내부구조도" width={1000} height={417} />
             </div>
          </section>
          <section>
