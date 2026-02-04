@@ -46,7 +46,7 @@ export default function AuthForm({ setIsAuth }: AuthFormProps) {
             console.error("auth error:", error);
             alert("인증에 실패했습니다.");
         }
-    }, []);
+    }, [password]);
 
     return (
         <form onSubmit={onSubmit}>

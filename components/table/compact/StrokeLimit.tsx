@@ -4,7 +4,7 @@ export default function StrokeLimit() {
         <table className="stroke-limit compact">
             <thead>
                 <tr>
-                    <th>내 경</th>
+                    <th>내경</th>
                     <th>ø40 ~ ø50</th>
                     <th>ø63 ~ ø80</th>
                     <th>ø100</th>

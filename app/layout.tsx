@@ -11,7 +11,8 @@ export const metadata: Metadata = {
   "유압",
   "설비",
   "유압실린더",
-  "유압유니트"
+  "유압유니트",
+  "남광유압",
 ],
   openGraph: {
     title: '남광유압',

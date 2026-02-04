@@ -1,13 +1,12 @@
 "use client";
 import AuthForm from "@/components/form/AuthForm";
-import { usePathname, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react";
 
 export default function AdminPage() {
 
     const router = useRouter();
-    const pathname = usePathname();
-    const [isAuth, setIsAuth] = useState<boolean>(true);
+    const [isAuth, setIsAuth] = useState<boolean>(false);
 
     useEffect(() => {
         if (isAuth) {

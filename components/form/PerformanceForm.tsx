@@ -125,8 +125,8 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
             router.push("/admin");
             router.refresh();
 
-        } catch (err: any) {
-            alert(err.message);
+        } catch (err) {
+            console.error(err)
         }
 
     }, [form, initialData, id, isUpload, router]);

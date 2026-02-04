@@ -6,266 +6,175 @@ export default function Rod() {
                 <tr>
                     <th rowSpan={2}>
                         <span>기호</span>
-                        <span>내경</span>
+                        <span>기종</span>
                     </th>
-                    <th colSpan={4}>Rod경 (B형)</th>
-                    <th colSpan={4}>Rod경 (C형)</th>
-                    <th rowSpan={2}>B</th>
-                    <th rowSpan={2}>JJ</th>
-                    <th rowSpan={2}>E</th>
-                    <th rowSpan={2}>CF</th>
-                    <th rowSpan={2}>CD</th>
-                    <th rowSpan={2}>CE</th>
-                    <th rowSpan={2}>CC</th>
-                    <th rowSpan={2}>CT</th>
-                    <th rowSpan={2}>CR</th>
-                    <th rowSpan={2}>R</th>
-                </tr>
-                <tr>
                     <th>A</th>
+                    <th>CD</th>
                     <th>D</th>
-                    <th>M</th>
-                    <th>G</th>
-                    <th>A</th>
-                    <th>D</th>
-                    <th>M</th>
-                    <th>G</th>
+                    <th>DM</th>
+                    <th>E</th>
+                    <th>EE</th>
+                    <th>EW</th>
+                    <th>FP</th>
+                    <th>HK</th>
+                    <th>K</th>
+                    <th>KK</th>
+                    <th>L</th>
+                    <th>LR</th>
+                    <th>MM</th>
+                    <th>MR</th>
+                    <th>P</th>
+                    <th>RD</th>
+                    <th>UE</th>
+                    <th>VA</th>
+                    <th>VD</th>
+                    <th>VE</th>
+                    <th>W</th>
+                    <th>XC</th>
+                    <th>ZC</th>
+                    <th>EK</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Ø40</td>
-                    <td>30</td>
-                    <td>Ø40</td>
-                    <td>M20x1.5P</td>
-                    <td>Ø22.4</td>
+                    <td>10형</td>
                     <td>25</td>
-                    <td>Ø36</td>
-                    <td>M16x1.5P</td>
-                    <td>Ø18</td>
-                    <td>30</td>
-                    <td>15</td>
-                    <td>Ø65</td>
-                    <td>25</td>
-                    <td>Ø16</td>
-                    <td>R16</td>
-                    <td>38</td>
-                    <td>14</td>
-                    <td>209</td>
-                    <td>141</td>
-                </tr>
-                <tr>
-                    <td>Ø50</td>
-                    <td>35</td>
-                    <td>Ø45</td>
-                    <td>M24x1.5P</td>
-                    <td>Ø28</td>
-                    <td>30</td>
-                    <td>Ø40</td>
-                    <td>M20x1.5P</td>
-                    <td>Ø22.4</td>
-                    <td>30</td>
-                    <td>15</td>
-                    <td>Ø76</td>
-                    <td>31.5</td>
-                    <td>Ø20</td>
-                    <td>R20</td>
-                    <td>45</td>
-                    <td>15</td>
-                    <td>230</td>
-                    <td>155</td>
-                </tr>
-                <tr>
-                    <td>Ø63</td>
-                    <td>45</td>
-                    <td>Ø55</td>
-                    <td>M30x1.5P</td>
-                    <td>Ø35</td>
-                    <td>35</td>
-                    <td>Ø46</td>
-                    <td>M24x1.5P</td>
-                    <td>Ø28</td>
-                    <td>35</td>
-                    <td>15</td>
-                    <td>Ø90</td>
-                    <td>40</td>
-                    <td>Ø31.5</td>
-                    <td>R31.5</td>
-                    <td>63</td>
-                    <td>17</td>
-                    <td>261</td>
-                    <td>163</td>
-                </tr>
-                <tr>
-                    <td>Ø80</td>
-                    <td>60</td>
-                    <td>Ø65</td>
-                    <td>M39x1.5P</td>
-                    <td>Ø45</td>
-                    <td>45</td>
-                    <td>Ø55</td>
-                    <td>M30x1.5P</td>
-                    <td>Ø35</td>
-                    <td>35</td>
-                    <td>15</td>
-                    <td>Ø110</td>
-                    <td>40</td>
-                    <td>Ø31.5</td>
-                    <td>R31.5</td>
-                    <td>72</td>
-                    <td>20</td>
-                    <td>291</td>
-                    <td>184</td>
-                </tr>
-                <tr>
-                    <td>Ø100</td>
-                    <td>75</td>
-                    <td>Ø80</td>
-                    <td>M48x1.5P</td>
-                    <td>Ø55</td>
-                    <td>60</td>
-                    <td>Ø65</td>
-                    <td>M39x1.5P</td>
-                    <td>Ø45</td>
-                    <td>40</td>
-                    <td>15</td>
-                    <td>Ø135</td>
-                    <td>50</td>
-                    <td>Ø40</td>
-                    <td>R40</td>
-                    <td>84</td>
-                    <td>22</td>
-                    <td>316</td>
-                    <td>192</td>
-                </tr>
-                <tr>
-                    <td>Ø125</td>
-                    <td>95</td>
-                    <td>Ø90</td>
-                    <td>M64x2P</td>
-                    <td>Ø70</td>
-                    <td>75</td>
-                    <td>Ø80</td>
-                    <td>M48x1.5P</td>
-                    <td>Ø55</td>
-                    <td>45</td>
-                    <td>18</td>
-                    <td>Ø165</td>
-                    <td>63</td>
-                    <td>Ø50</td>
-                    <td>R50</td>
-                    <td>100</td>
+                    <td>ø25H10</td>
                     <td>24</td>
-                    <td>365</td>
-                    <td>220</td>
-                </tr>
-
-                <tr>
-                    <td>Ø140</td>
-                    <td>110</td>
-                    <td>Ø105</td>
-                    <td>M72x2P</td>
-                    <td>Ø80</td>
-                    <td>80</td>
-                    <td>Ø85</td>
-                    <td>M56x2P</td>
-                    <td>Ø60</td>
-                    <td>50</td>
-                    <td>18</td>
-                    <td>Ø185</td>
-                    <td>80</td>
-                    <td>Ø63</td>
-                    <td>R63</td>
-                    <td>120</td>
+                    <td>ø73</td>
+                    <td>98</td>
+                    <td>PT 3/8"</td>
+                    <td>28 -0.1/-0.4</td>
+                    <td>48</td>
+                    <td>ø21h9</td>
                     <td>26</td>
-                    <td>400</td>
-                    <td>230</td>
-                </tr>
-
-                <tr>
-                    <td>Ø160</td>
-                    <td>120</td>
-                    <td>Ø115</td>
-                    <td>M80x2P</td>
-                    <td>Ø90</td>
-                    <td>95</td>
-                    <td>Ø95</td>
-                    <td>M64x2P</td>
-                    <td>Ø70</td>
-                    <td>55</td>
-                    <td>18</td>
-                    <td>Ø210</td>
-                    <td>80</td>
-                    <td>Ø71</td>
-                    <td>R71</td>
-                    <td>137</td>
-                    <td>33</td>
-                    <td>445</td>
-                    <td>253</td>
-
+                    <td>M24 x 2P</td>
+                    <td>30</td>
+                    <td>R27</td>
+                    <td>ø28</td>
+                    <td>R22</td>
+                    <td>25</td>
+                    <td>ø59</td>
+                    <td>ø98</td>
+                    <td>14</td>
+                    <td>32</td>
+                    <td>35</td>
+                    <td>13</td>
+                    <td>175</td>
+                    <td>197</td>
+                    <td>97</td>
                 </tr>
                 <tr>
-                    <td>Ø180</td>
-                    <td>140</td>
-                    <td>Ø125</td>
-                    <td>M95x2P</td>
-                    <td>Ø100</td>
-                    <td>110</td>
-                    <td>Ø105</td>
-                    <td>M72x2P</td>
-                    <td>Ø80</td>
-                    <td>55</td>
-                    <td>18</td>
-                    <td>Ø235</td>
-                    <td>100</td>
-                    <td>Ø80</td>
-                    <td>R80</td>
-                    <td>150</td>
-                    <td>38</td>
-                    <td>480</td>
+                    <td>20형</td>
+                    <td>35</td>
+                    <td>ø35H10</td>
+                    <td>32</td>
+                    <td>ø105</td>
+                    <td>138</td>
+                    <td>PT 1/2"</td>
+                    <td>40 -0.1/-0.4</td>
+                    <td>67</td>
+                    <td>ø30h9</td>
+                    <td>34</td>
+                    <td>M33 x 2P</td>
+                    <td>45</td>
+                    <td>R44</td>
+                    <td>ø40</td>
+                    <td>R30</td>
+                    <td>35</td>
+                    <td>ø88</td>
+                    <td>ø138</td>
+                    <td>21</td>
+                    <td>43</td>
+                    <td>50</td>
+                    <td>17</td>
+                    <td>245</td>
                     <td>275</td>
+                    <td>137</td>
                 </tr>
                 <tr>
-                    <td>Ø200</td>
-                    <td>150</td>
-                    <td>Ø140</td>
-                    <td>M100x2P</td>
-                    <td>Ø112</td>
-                    <td>120</td>
-                    <td>Ø115</td>
-                    <td>M80x2P</td>
-                    <td>Ø90</td>
+                    <td>30형</td>
+                    <td>40</td>
+                    <td>ø45H10</td>
+                    <td>41</td>
+                    <td>ø125</td>
+                    <td>158</td>
+                    <td>PT 1/2"</td>
+                    <td>50 -0.1/-0.4</td>
+                    <td>80</td>
+                    <td>ø36h9</td>
+                    <td>42</td>
+                    <td>M39 x 2P</td>
                     <td>55</td>
-                    <td>18</td>
-                    <td>Ø262</td>
-                    <td>125</td>
-                    <td>Ø90</td>
-                    <td>R90</td>
-                    <td>170</td>
-                    <td>44</td>
-                    <td>526</td>
-                    <td>301</td>
+                    <td>R54</td>
+                    <td>ø45</td>
+                    <td>R38</td>
+                    <td>40</td>
+                    <td>ø115</td>
+                    <td>ø158</td>
+                    <td>25</td>
+                    <td>50</td>
+                    <td>60</td>
+                    <td>20</td>
+                    <td>290</td>
+                    <td>328</td>
+                    <td>158</td>
                 </tr>
                 <tr>
-                    <td>Ø250</td>
-                    <td>195</td>
-                    <td>Ø170</td>
-                    <td>M130x2P</td>
-                    <td>Ø140</td>
-                    <td>150</td>
-                    <td>Ø145</td>
-                    <td>M100x2P</td>
-                    <td>Ø112</td>
+                    <td>40형</td>
+                    <td>45</td>
+                    <td>ø55H10</td>
+                    <td>46</td>
+                    <td>ø145</td>
+                    <td>178</td>
+                    <td>PT 3/4"</td>
+                    <td>55 -0.1/-0.4</td>
+                    <td>93</td>
+                    <td>ø42h9</td>
+                    <td>47</td>
+                    <td>M45 x 2P</td>
                     <td>65</td>
-                    <td>18</td>
-                    <td>Ø325</td>
-                    <td>125</td>
-                    <td>Ø100</td>
-                    <td>R100</td>
-                    <td>185</td>
-                    <td>54</td>
-                    <td>596</td>
-                    <td>346</td>
+                    <td>R64</td>
+                    <td>ø53</td>
+                    <td>R45</td>
+                    <td>45</td>
+                    <td>ø112</td>
+                    <td>ø177</td>
+                    <td>28</td>
+                    <td>57</td>
+                    <td>69</td>
+                    <td>23</td>
+                    <td>335</td>
+                    <td>380</td>
+                    <td>183</td>
+                </tr>
+                <tr>
+                    <td>50형</td>
+                    <td>52</td>
+                    <td>ø60H10</td>
+                    <td>55</td>
+                    <td>ø165</td>
+                    <td>196</td>
+                    <td>PT 3/4"</td>
+                    <td>63 -0.1/-0.4</td>
+                    <td>107</td>
+                    <td>ø49h9</td>
+                    <td>48</td>
+                    <td>M52 x 2P</td>
+                    <td>70</td>
+                    <td>R69</td>
+                    <td>ø60</td>
+                    <td>R50</td>
+                    <td>50</td>
+                    <td>ø128</td>
+                    <td>ø196</td>
+                    <td>31</td>
+                    <td>65</td>
+                    <td>82</td>
+                    <td>25</td>
+                    <td>373</td>
+                    <td>423</td>
+                    <td>196</td>
                 </tr>
             </tbody>
         </table>

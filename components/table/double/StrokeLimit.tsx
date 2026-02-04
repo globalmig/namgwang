@@ -4,20 +4,22 @@ export default function StrokeLimit() {
         <table className="stroke-limit double">
             <thead>
                 <tr>
-                    <th>내 경</th>
-                    <th>ø40 ~ ø50</th>
-                    <th>ø63 ~ ø80</th>
-                    <th>ø100</th>
-                    <th>ø125 ~ ø250</th>
+                    <th>기종</th>
+                    <th>10형</th>
+                    <th>20형</th>
+                    <th>30형</th>
+                    <th>40형</th>
+                    <th>50형</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>스트로크 한계</td>
-                    <td>1200</td>
-                    <td>1600</td>
-                    <td>2000</td>
-                    <td>2000</td>
+                    <td>1700</td>
+                    <td>2500</td>
+                    <td>3100</td>
+                    <td>3100</td>
+                    <td>3100</td>
                 </tr>
             </tbody>
         </table>

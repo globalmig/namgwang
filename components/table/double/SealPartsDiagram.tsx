@@ -4,109 +4,115 @@ export default function SealPartsDiagram() {
         <table className="seal-parts-diagram double">
             <thead>
                 <tr>
-                    <th rowSpan={4}>내경</th>
-                    <th>NO</th>
-                    <th>4</th>
-                    <th>7</th>
-                    <th>9</th>
+                    <th colSpan={2}>NO</th>
+                    <th>10</th>
                     <th>11</th>
                     <th>12</th>
+                    <th>13</th>
+                    <th>14</th>
                     <th>15</th>
                     <th>16</th>
+                    <th>17</th>
+                    <th>18</th>
                 </tr>
                 <tr>
-                    <th>명칭</th>
-                    <th>보스오링</th>
-                    <th>피스톤패킹</th>
-                    <th>커버오링</th>
-                    <th>더스트씰</th>
-                    <th>보스U패킹</th>
-                    <th>오링</th>
-                    <th>로드오링</th>
+                    <th colSpan={2}>명칭</th>
+                    <td>더스트씰</td>
+                    <td>U-패킹</td>
+                    <td>오링</td>
+                    <td>더스트씰</td>
+                    <td>U-패킹</td>
+                    <td>오링</td>
+                    <td>오링</td>
+                    <td>오링</td>
+                    <td>오링</td>
                 </tr>
                 <tr>
-                    <th>재질</th>
-                    <th>NBR</th>
-                    <th>NBR+TEFLON</th>
-                    <th>NBR</th>
-                    <th>NBR OR URETHANE</th>
-                    <th>NBR OR URETHANE</th>
-                    <th>NBR</th>
-                    <th>NBR</th>
+                    <th colSpan={2}>재질</th>
+                    <td>NBR</td>
+                    <td>NBR</td>
+                    <td>NBR</td>
+                    <td>NBR</td>
+                    <td>NBR</td>
+                    <td>NBR</td>
+                    <td>NBR</td>
+                    <td>NBR</td>
+                    <td>NBR</td>
                 </tr>
                 <tr>
-                    <th>수량</th>
-                    <th>1</th>
-                    <th>1 Set</th>
-                    <th>2</th>
-                    <th>1</th>
-                    <th>1</th>
-                    <th>1</th>
-                    <th>1</th>
-                </tr>
-                <tr>
-                    <th>내경</th>
-                    <th>구분</th>
-                    <th>B형</th>
-                    <th>C형</th>
-                    <th>C, B형</th>
-                    <th>C, B형</th>
-                    <th>B형</th>
-                    <th>C형</th>
-                    <th>B형</th>
-                    <th>C형</th>
-                    <th>B형</th>
-                    <th>C형</th>
-                    <th>B형</th>
-                    <th>C형</th>
+                    <th colSpan={2}>수량</th>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>1</td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>ø40</td>
-                    <td>G25</td>
-                    <td>G25</td>
-                    <td>L43, 40-30</td>
-                    <td>G35</td>
-                    <td>PU 6-22,4</td>
-                    <td>PU 6-18</td>
-                    <td>NI 300-22,4</td>
-                    <td>NI 300-18</td>
-                    <td>P16</td>
-                    <td>P16</td>
-                    <td>P16</td>
-                    <td>P16</td>
+                    <th rowSpan={5}>기종</th>
+                    <td>10형</td>
+                    <td>LBH28</td>
+                    <td>USH28</td>
+                    <td>G40</td>
+                    <td>LBH53</td>
+                    <td>USH53</td>
+                    <td>G60</td>
+                    <td>P39</td>
+                    <td>P10A(EA)</td>
+                    <td>P53</td>
                 </tr>
                 <tr>
-                    <td>ø50</td>
-                    <td>G30</td>
-                    <td>G30</td>
-                    <td>L43, 50-34</td>
-                    <td>G45</td>
-                    <td>PU 6-28</td>
-                    <td>PU 6-22,4</td>
-                    <td>NI 300-28</td>
-                    <td>NI 300-22,4</td>
-                    <td>P22</td>
-                    <td>P20</td>
-                    <td>P20</td>
-                    <td>P20</td>
-                </tr>
-                {/* 63,80,100,125,140,150,160,180,200 */}
-                <tr>
-                    <td>ø250</td>
-                    <td>G155</td>
-                    <td>G125</td>
-                    <td>L26, 250-225</td>
-                    <td>G240</td>
-                    <td>PU 6-140</td>
-                    <td>★ LBH 112</td>
-                    <td>NI 300-140</td>
-                    <td>USH 112</td>
-                    <td>G120</td>
-                    <td>G100</td>
-                    <td>G115</td>
+                    <td>20형</td>
+                    <td>LBH40</td>
+                    <td>USH40</td>
+                    <td>G60</td>
+                    <td>LBH75</td>
+                    <td>USH75</td>
                     <td>G95</td>
+                    <td>P55</td>
+                    <td>P15</td>
+                    <td>P80</td>
+                </tr>
+                <tr>
+                    <td>30형</td>
+                    <td>LBH45</td>
+                    <td>USH45</td>
+                    <td>G75</td>
+                    <td>LBH90</td>
+                    <td>USH90</td>
+                    <td>G115</td>
+                    <td>P70</td>
+                    <td>P18</td>
+                    <td>P100</td>
+                </tr>
+                <tr>
+                    <td>40형</td>
+                    <td>LBH53</td>
+                    <td>USH53</td>
+                    <td>G85</td>
+                    <td>LBH106</td>
+                    <td>USH106</td>
+                    <td>G130</td>
+                    <td>P80</td>
+                    <td>P18</td>
+                    <td>P115</td>
+                </tr>
+                <tr>
+                    <td>50형</td>
+                    <td>LBH60</td>
+                    <td>USH60</td>
+                    <td>G95</td>
+                    <td>LBH118</td>
+                    <td>USH118</td>
+                    <td>G145</td>
+                    <td>P90</td>
+                    <td>P18</td>
+                    <td>P130</td>
                 </tr>
             </tbody>
         </table>

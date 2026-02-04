@@ -7,28 +7,24 @@ import RoundSpecSet from "./table/round/SpecSet";
 import CompactSpecSet from "./table/compact/SpecSet";
 import DoubleSpecSet from "./table/double/SpecSet";
 import Link from "next/link";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { CYLINDER_SUBCATEGORY } from "@/data/category";
 import ProductNavigator from "./ProductNavigator";
 import { useEffect, useState } from "react";
 import { NavItem } from "@/types/common";
 import { CylinderProps } from "@/types/product";
 import "../app/table.css";
+import RodEndLoopSet from "./table/standard/RodEndLoopSet";
 
 
 export default function CylinderDetail() {
 
-    const router = useRouter();
     const params = useParams();
     const { id, category } = params;
-    const searchParams = useSearchParams();
-    const subCategory = searchParams.get("sub") || "standard";
     const [detail, setDetail] = useState<CylinderProps>();
     const [prevItem, setPrevItem] = useState<NavItem | null>(null);
     const [nextItem, setNextItem] = useState<NavItem | null>(null);
-
-    console.log("prev: ", prevItem);
-    console.log("next: ", nextItem);
+    const isRod = detail?.name === "선단고리 & 로크너트";
 
     useEffect(() => {
         const fetchData = async () => {
@@ -40,8 +36,8 @@ export default function CylinderDetail() {
                     throw new Error(errorData.error || "데이터를 불러오지 못했습니다.");
                 }
                 const data = await res.json();
-                
-                setDetail(data);
+
+                setDetail(data.currentData);
                 setPrevItem(data.prev);
                 setNextItem(data.next);
 
@@ -53,7 +49,10 @@ export default function CylinderDetail() {
         if (id) fetchData();
     }, [id]);
 
-    const specLayout = CYLINDER_SUBCATEGORY.find(c => c.category === subCategory)?.category
+    const specLayout = CYLINDER_SUBCATEGORY.find(c => c.category === detail?.category)?.category;
+
+    console.log("prev: ", prevItem);
+    console.log("next: ", nextItem);
 
     if (!detail) return <div className="loading">정보를 불러오는 중입니다.</div>
 
@@ -93,19 +92,19 @@ export default function CylinderDetail() {
                         <h3>제품 특징</h3>
                     </div>
                     <div className="spec-set">
-                        {specLayout === "standard" && <StandardSpecSet detail={detail}/>}
-                        {specLayout === "high-pressure" && <HighPressureSpecSet detail={detail}/>}
-                        {specLayout === "rectangular" && <RectangularSpecSet detail={detail}/>}
-                        {specLayout === "round" && <RoundSpecSet detail={detail}/>}
-                        {specLayout === "compact" && <CompactSpecSet detail={detail}/>}
-                        {specLayout === "double" && <DoubleSpecSet detail={detail}/>}
+                        {isRod ? <RodEndLoopSet category={specLayout}/> : <>
+                            {specLayout === "standard" && <StandardSpecSet detail={detail} />}
+                            {specLayout === "high-pressure" && <HighPressureSpecSet detail={detail} />}
+                            {specLayout === "rectangular" && <RectangularSpecSet detail={detail} />}
+                            {specLayout === "round" && <RoundSpecSet detail={detail} />}
+                            {specLayout === "compact" && <CompactSpecSet detail={detail} />}
+                            {specLayout === "double" && <DoubleSpecSet detail={detail} />}
+                        </>}
                     </div>
                 </div>
                 <ProductNavigator
                     prevItem={prevItem}
-                    nextItem={nextItem}
-                    onPrev={() => router.push(`/product/cylinder/${prevItem?.id}`)}
-                    onNext={() => router.push(`/product/cylinder/${nextItem?.id}`)} />
+                    nextItem={nextItem} />
             </div>
         </article>
     )

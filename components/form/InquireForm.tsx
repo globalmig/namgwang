@@ -102,7 +102,7 @@ export default function InquireForm() {
         try {
             const formData = new FormData();
             Object.entries(form).forEach(([key, value]) => {
-                if (value !== null) formData.append(key, value as any);
+                if (value !== null) formData.append(key, value);
             });
 
             const response = await fetch("/api/inquire", {

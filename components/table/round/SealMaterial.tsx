@@ -4,8 +4,10 @@ export default function SealMaterial() {
         <table className="seal-material round">
             <thead>
                 <tr>
-                    <th rowSpan={2}>작동유</th>
-                    <th>패킹재질</th>
+                    <th rowSpan={2}>
+                        <span>작동유</span>
+                        <span>패킹재질</span>
+                    </th>
                     <th>NBR</th>
                     <th>URETHANE</th>
                     <th>불소 (VITON)</th>
@@ -13,37 +15,37 @@ export default function SealMaterial() {
             </thead>
             <tbody>
                 <tr>
-                    <td colSpan={2}>일반 광물성 작동유</td>
+                    <td>일반 광물성 작동유</td>
                     <td>O</td>
                     <td>O</td>
                     <td>O</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>수용성 글리코겔 작동유</td>
+                    <td>수용성 글리코겔 작동유</td>
                     <td>O</td>
                     <td>X</td>
                     <td>O</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>W / O 작동유</td>
+                    <td>W / O 작동유</td>
                     <td>O</td>
                     <td>O</td>
                     <td>O</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>O / W 작동유</td>
+                    <td>O / W 작동유</td>
                     <td>O</td>
                     <td>O</td>
                     <td>O</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>인산 에스테르계 작동유</td>
+                    <td>인산 에스테르계 작동유</td>
                     <td>X</td>
                     <td>X</td>
                     <td>O</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>지방산 에스테르계 작동유</td>
+                    <td>지방산 에스테르계 작동유</td>
                     <td>△</td>
                     <td>△</td>
                     <td>△</td>

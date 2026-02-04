@@ -9,81 +9,66 @@ import Rod from "./Rod";
 import { CylinderDetailProps } from "@/types/product";
 
 export default function CompactSpecSet(detail: CylinderDetailProps) {
+   const { name, product_img, series_img, seal_material_img, cheats, mounting } = detail.detail;
+
    return (
       <>
-         <section>
+         <section className="product_img-section">
             <div>
-               {/* product_img */}
-               <Image src="" alt="" width={500} height={500} />
+               {product_img.map((p, index) =>
+                  <div key={index}>
+                     <Image src={p} alt={name} width={1200} height={500} />
+                  </div>
+               )}
             </div>
             <div className="table-wrapper">
                <Rod />
             </div>
          </section>
-         <section>
+         <section className="specifications-section">
             <h3>사양</h3>
             <div className="table-wrapper">
                <Specifications />
             </div>
             <ul>
-               <li>1. 지지형식중 70kgf/cm²용입니다.</li>
-               <li>2. 사용온도 100도 이상 장시간 작동 시, 고속작동 시 (별도문의요망)</li>
-               <li>단동형 사용 시 별도문의 요망</li>
+               <li>- 사용 압력 140kgf/cm² 이상은 문의바랍니다.</li>
+               <li>- 사용온도 100도 이상 사용 시 문의바랍니다.</li>
+               <li>- 오토센서 (S/R) Type도 제작 가능함 (문의요망)</li>
+               <li>- S/R Type 제작 시 R차수 변경됨</li>
             </ul>
          </section>
-         <section>
-            <div className="display-flex">
-               <h3>쿠션길이</h3>
-               <p>단위 mm</p>
-            </div>
-            <div className="table-wrapper">
-               <CushionLength />
-            </div>
-            <ul>
-               <li>* 하기 내용은 쿠션을 취부할 수 없음 </li>
-               <li>1. 로드 A TYPE : ø40, ø50, ø63의 로드축 </li>
-               <li>2. 로드 B TYPE : ø40의 로드축</li>
-            </ul>
-         </section>
-         <section>
-            <div className="display-flex">
-               <h3>스트로크 한계</h3>
-               <p>단위 mm</p>
-            </div>
-            <div className="table-wrapper">
-               <StrokeLimit />
-            </div>
-            <ul>
-               <li>* 상가 이외의 스트로크는 별도 설계 제작합니다. (문의 요망)</li>
-            </ul>
-         </section>
-         <section>
+         <section className="cheats-section compact">
             <h3>표기 요령</h3>
-         </section>
-         <section>
-            <h3>작동유와 적합한 패킹 재질</h3>
-            <div className="display-flex=flow">
-               <div>
-                  <Image src="" alt="작동유와 적합한 패킹재질" width={300} height={300} />
-               </div>
-               <div className="table-wrapper">
-                  <SealMaterial />
-               </div>
+            <div>
+               <Image src="/images/compact/cheats.jpg" alt="표기요령" width={500} height={204} />
             </div>
          </section>
          <section>
+            <h3>제작종류</h3>
+            <ul>
+               <li>- D: 일반형 실린더</li>
+               <li>- M: 수나사</li>
+               <li>- T: 양드로형 실린더</li>
+               <li>- S/R: Switch Type (SO TYPE DC 24V/AC 100V)</li>
+            </ul>
+         </section>
+         <section className="series-section">
             <h3>HA SERIES 내부구조도</h3>
             <div>
-               <Image src="" alt="내부구조도" width={1000} height={500} />
+               <Image src={series_img} alt="내부구조도" width={1000} height={417} />
             </div>
          </section>
-         <section>
+         <section className="part-diagram-section">
             <h3>부품도</h3>
-            <PartDiagram />
+            <div>
+               <PartDiagram />
+            </div>
          </section>
-         <section>
+         <section className="seal-diagram-section">
             <h3>패킹 부품도</h3>
-            <SealPartsDiagram />
+            <div className="table-wrapper">
+               <SealPartsDiagram />
+            </div>
          </section>
       </>
    )

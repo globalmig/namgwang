@@ -170,95 +170,93 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
             router.push("/admin");
             router.refresh();
 
-        } catch (err: any) {
-            alert(err.message);
+        } catch (err) {
+            console.error(err)
         }
 
     }, [form, existingImages, newImageFiles, initialData, id, isUpload, router]);
 
     return (
-            <form onSubmit={onSubmitForm}>
-                <div className="fm-name">
-                    <label htmlFor="name">
-                        <h3 className="required">제품명</h3>
-                    </label>
-                    <input type="text" id="name" name="name" placeholder="제품명을 입력해주세요." onChange={onChangeForm} value={form.name}/>
+        <form onSubmit={onSubmitForm} className="product-form">
+            <div className="fm-name">
+                <label htmlFor="name">
+                    <h3 className="required">제품명</h3>
+                </label>
+                <input type="text" id="name" name="name" placeholder="제품명을 입력해주세요." onChange={onChangeForm} value={form.name} />
+            </div>
+            <div className="fm-category">
+                <label htmlFor="category">
+                    <h3 className="required">카테고리</h3>
+                </label>
+                <select id="category" name="category" onChange={onChangeForm} value={form.category}>
+                    <option value="">카테고리를 선택해주세요</option>
+                    <option value="small">소형 유니트</option>
+                    <option value="medium">중형 유니트</option>
+                    <option value="large">대형 유니트</option>
+                    <option value="extra">특수형 유니트</option>
+                    <option value="other">기타 기기</option>
+                </select>
+            </div>
+            <div className="fm-thumbnail">
+                <label htmlFor="thumbnail">
+                    <h3 className="required">대표 이미지</h3>
+                    <p>이미지는 가로 1000px 이상의 크기, 가로형 이미지를 권장합니다.<br />이미지의 크기가 작거나 세로형 이미지를 업로드하실 경우, 화질이 낮거나 잘릴 수 있습니다.</p>
+                </label>
+                <input type="file" id="thumbnail" name="thumbnail" accept=".jpg,.jpeg, .png" onChange={onChangeFile} />
+                <div className="fm-thumbnail-img">
+                    {isEdit && initialData?.thumbnail && !form.thumbnail && (
+                        <Image src={initialData.thumbnail} alt="image" width={1000} height={619} />
+                    )}
                 </div>
-                <div className="fm-category">
-                    <label htmlFor="category">
-                        <h3 className="required">카테고리</h3>
-                    </label>
-                    <select id="category" name="category" onChange={onChangeForm} value={form.category}>
-                        <option value="">카테고리를 선택해주세요</option>
-                        <option value="small">소형 유니트</option>
-                        <option value="medium">중형 유니트</option>
-                        <option value="large">대형 유니트</option>
-                        <option value="extra">특수형 유니트</option>
-                        <option value="other">기타 기기</option>
-                    </select>
-                </div>
-                <div className="fm-thumbnail">
-                    <label htmlFor="thumbnail">
-                        <h3 className="required">대표 이미지</h3>
-                        <p>이미지는 가로 1000px 이상의 크기, 가로형 이미지를 권장합니다.<br />이미지의 크기가 작거나 세로형 이미지를 업로드하실 경우, 화질이 낮거나 잘릴 수 있습니다.</p>
-                    </label>
-                    <input type="file" id="thumbnail" name="thumbnail" accept=".jpg,.jpeg, .png" onChange={onChangeFile} />
-                    <div className="fm-thumbnail-img">
-                        {isEdit && initialData?.thumbnail && !form.thumbnail && (
-                            <Image src={initialData.thumbnail} alt="image" width={1000} height={619} />
-                        )}
-                    </div>
-                </div>
-                <div className="fm-images">
-                    <label htmlFor="images">
-                        <h3 className="required">상세 이미지</h3>
-                        <p>이미지는 가로 1000px 이상의 크기, 가로형 이미지를 권장합니다.<br />이미지의 크기가 작거나 세로형 이미지를 업로드하실 경우, 화질이 낮거나 잘릴 수 있습니다.</p>
-                    </label>
-
-                    <input
-                        type="file"
-                        id="images"
-                        name="images"
-                        accept=".jpg,.jpeg,.png"
-                        multiple
-                        onChange={(e) => setNewImageFiles(Array.from(e.target.files || []))}
-                    />
-
-                    <div className="display-flex-flow">
-                        {existingImages.map((url, idx) => (
-                            <div key={idx} style={{ position: 'relative' }}>
-                                <Image src={url} alt="image" width={1000} height={619} />
-                                {
-                                    <button type="button" onClick={() => onRemoveExistingImage(url)}>
-                                        삭제
-                                    </button>
-                                }
-                            </div>
-                        ))}
-                    </div>
-                    {isEdit &&
-                        <div className="fm-detail-add">
-                            <h5>추가 이미지</h5>
-                            <div className="display-flex-flow">
-                                {newImageFiles.map((file, idx) => (
-                                    <div key={`new-${idx}`}>
-                                        <Image
-                                            src={URL.createObjectURL(file)}
-                                            alt="새 이미지"
-                                            width={1000} height={619}
-                                        />
-                                    </div>
-                                ))}
-                            </div>
+            </div>
+            <div className="fm-images">
+                <label htmlFor="images">
+                    <h3 className="required">상세 이미지</h3>
+                    <p>이미지는 가로 1000px 이상의 크기, 가로형 이미지를 권장합니다.<br />이미지의 크기가 작거나 세로형 이미지를 업로드하실 경우, 화질이 낮거나 잘릴 수 있습니다.</p>
+                </label>
+                <input
+                    type="file"
+                    id="images"
+                    name="images"
+                    accept=".jpg,.jpeg,.png"
+                    multiple
+                    onChange={(e) => setNewImageFiles(Array.from(e.target.files || []))}
+                />
+                <div className="display-flex-flow">
+                    {existingImages.map((url, idx) => (
+                        <div key={idx} style={{ position: 'relative' }}>
+                            <Image src={url} alt="image" width={1000} height={619} />
+                            {
+                                <button type="button" onClick={() => onRemoveExistingImage(url)}>
+                                    삭제
+                                </button>
+                            }
                         </div>
-                    }
+                    ))}
                 </div>
-                {(isUpload || isEdit) && (
-                    <div className="display-flex">
-                        <button type="submit">{isUpload ? "등록" : "수정"}</button>
-                        <button type="button" onClick={onClickCancel}>취소</button>
+                {isEdit &&
+                    <div className="fm-detail-add">
+                        <h5>추가 이미지</h5>
+                        <div className="display-flex-flow">
+                            {newImageFiles.map((file, idx) => (
+                                <div key={`new-${idx}`}>
+                                    <Image
+                                        src={URL.createObjectURL(file)}
+                                        alt="새 이미지"
+                                        width={1000} height={619}
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                )}
-            </form>
+                }
+            </div>
+            {(isUpload || isEdit) && (
+                <div className="display-flex">
+                    <button type="submit">{isUpload ? "등록" : "수정"}</button>
+                    <button type="button" onClick={onClickCancel}>취소</button>
+                </div>
+            )}
+        </form>
     )
 }

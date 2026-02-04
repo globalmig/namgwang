@@ -14,7 +14,7 @@ export default function StandardSpecSet(detail: CylinderDetailProps) {
 
    return (
       <>
-         <section>
+         <section className="product_img-section">
             <div>
                {product_img.map((p, index) =>
                   <div key={index}>
@@ -26,7 +26,7 @@ export default function StandardSpecSet(detail: CylinderDetailProps) {
                <Rod />
             </div>
          </section>
-         <section>
+         <section className="specifications-section">
             <h3>사양</h3>
             <div className="table-wrapper">
                <Specifications />
@@ -37,7 +37,7 @@ export default function StandardSpecSet(detail: CylinderDetailProps) {
                <li>단동형 사용 시 별도문의 요망</li>
             </ul>
          </section>
-         <section>
+         <section className="cushion-section">
             <div className="display-flex">
                <h3>쿠션길이</h3>
                <p>단위 mm</p>
@@ -46,7 +46,7 @@ export default function StandardSpecSet(detail: CylinderDetailProps) {
                <CushionLength />
             </div>
          </section>
-         <section>
+         <section className="stroke-section">
             <div className="display-flex">
                <h3>스트로크 한계</h3>
                <p>단위 mm</p>
@@ -61,7 +61,7 @@ export default function StandardSpecSet(detail: CylinderDetailProps) {
             </ul>
          </section>
          {cheats &&
-            <section>
+            <section className="cheats-section">
                <h3>표기 요령</h3>
                <div>
                   <Image src={cheats} alt="표기요령" width={1000} height={187} />
@@ -69,9 +69,9 @@ export default function StandardSpecSet(detail: CylinderDetailProps) {
             </section>
          }
          {seal_material_img &&
-            <section>
+            <section className="seal-section">
                <h3>작동유와 적합한 패킹 재질</h3>
-               <div className="display-flex=flow">
+               <div className="display-flex-flow">
                   <div>
                      <Image src={seal_material_img} alt="작동유와 적합한 패킹재질" width={500} height={228} />
                   </div>
@@ -81,19 +81,19 @@ export default function StandardSpecSet(detail: CylinderDetailProps) {
                </div>
             </section>
          }
-         <section>
+         <section className="series-section">
             <h3>HA SERIES 내부구조도</h3>
             <div>
                <Image src={series_img} alt="내부구조도" width={1000} height={417} />
             </div>
          </section>
-         <section>
+         <section className="part-diagram-section">
             <h3>부품도</h3>
-            <div className="table-wrapper">
+            <div>
                <PartDiagram />
             </div>
          </section>
-         <section>
+         <section className="seal-diagram-section">
             <h3>패킹 부품도</h3>
             <div className="table-wrapper">
                <SealPartsDiagram />

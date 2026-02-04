@@ -3,29 +3,52 @@ import { supabaseServer } from "@/lib/supabase/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string; category: string}> }
+  { params }: { params: Promise<{ id: string; category: string }> }
 ) {
   try {
-    const { id, category} = await params;
-
+    const { id, category } = await params;
     const tableName = `${category}s`;
 
-    const { data, error } = await supabaseServer
+    const { data: currentData, error: currentError } = await supabaseServer
       .from(tableName)
       .select("*")
       .eq("id", id)
       .maybeSingle();
 
-    if (error) throw error;
-    if (!data) return NextResponse.json({ error: "제품 없음" }, { status: 404 });
+    if (currentError) throw currentError;
 
-    return NextResponse.json(data);
+    const productCategory = currentData.category;
+
+    const { data: prevData } = await supabaseServer
+      .from(tableName)
+      .select("id, name")
+      .lt("created_at", currentData.created_at)
+      .eq("category", productCategory)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    const { data: nextData } = await supabaseServer
+      .from(tableName)
+      .select("id, name")
+      .gt("created_at", currentData.created_at)
+      .eq("category", productCategory)
+      .order("created_at", { ascending: true })
+      .limit(1)
+      .maybeSingle();
+
+    return NextResponse.json({
+      currentData,
+      prev: prevData || null,
+      next: nextData || null,
+    });
+
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
 
-const TABLE_MAP : Record<string,string>= {
+const TABLE_MAP: Record<string, string> = {
   small: "units",
   medium: "units",
   large: "units",
@@ -36,13 +59,13 @@ const TABLE_MAP : Record<string,string>= {
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string, category: string}> }
+  { params }: { params: Promise<{ id: string, category: string }> }
 ) {
   try {
     const { id } = await params;
     const formData = await req.formData();
     const newSubCategory = formData.get("category") as string; // 폼에서 선택된 category (sub)
-    
+
     // 테이블 위치 찾기
     const editTable = TABLE_MAP[newSubCategory]; // ?
 

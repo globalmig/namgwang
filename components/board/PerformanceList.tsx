@@ -11,11 +11,8 @@ export default function PerformanceList() {
 
     const [performances, setPerformances] = useState<PerformanceProps[]>([]);
 
-    const {
-            currentPage,
-            totalCount,
-            onPageChange,
-        } = usePagination(performances, 10);
+        const {currentPage, currentItems, totalCount, onPageChange} = usePagination(performances, 10);
+
 
     useEffect(() => {
         const fetchPerformances = async () => {
@@ -43,10 +40,10 @@ export default function PerformanceList() {
                     <li>프로젝트명</li>
                     <li>SPEC</li>
                 </ul>
-                {performances.map((p, index) =>
+                {currentItems.map((p, index) =>
                     <Link href={`/product/performance/${p.id}`} key={p.id}>
                         <ul className="display-flex">
-                            <li>{performances.length - index}</li>
+                            <li>{currentItems.length - index}</li>
                             <li>{p.name}</li>
                             <li>{p.spec}</li>
                         </ul>
@@ -54,7 +51,7 @@ export default function PerformanceList() {
                 )}
             </div>
             <Pagination
-                dataPerPage={12}
+                dataPerPage={10}
                 currentPage={currentPage}
                 totalCount={totalCount}
                 onPageChange={onPageChange} />

@@ -4,9 +4,12 @@ export default function Rod() {
         <table className="rod rectangular">
             <thead>
                 <tr>
-                    <th rowSpan={3}>기호</th>
-                    <th colSpan={4}>로드경A형</th>
-                    <th colSpan={4}>로드경B형</th>
+                    <th rowSpan={3} className="line">
+                        <span>기호</span>
+                        <span>내경</span>
+                    </th>
+                    <th colSpan={4}>로드경 A형</th>
+                    <th colSpan={4}>로드경 B형</th>
                     <th rowSpan={3}>B</th>
                     <th rowSpan={3}>E</th>
                     <th rowSpan={3}>BW</th>
@@ -31,17 +34,16 @@ export default function Rod() {
                     <th rowSpan={2}>M</th>
                     <th rowSpan={2}>G</th>
                 </tr>
+                {/* 3행: 소분류 헤더 */}
                 <tr>
                     <th>1형</th>
                     <th>2형</th>
                     <th>1형</th>
                     <th>2형</th>
-                </tr>
-                <tr>
-                    <th colSpan={25}>내경</th>
                 </tr>
             </thead>
             <tbody>
+                {/* ø40 데이터 */}
                 <tr>
                     <td>ø40</td>
                     <td>35</td>
@@ -68,6 +70,7 @@ export default function Rod() {
                     <td>27</td>
                     <td>118</td>
                 </tr>
+                {/* ø50 데이터 */}
                 <tr>
                     <td>ø50</td>
                     <td>45</td>
@@ -94,6 +97,7 @@ export default function Rod() {
                     <td>27</td>
                     <td>122</td>
                 </tr>
+                {/* ø63 데이터 */}
                 <tr>
                     <td>ø63</td>
                     <td>60</td>
@@ -120,6 +124,7 @@ export default function Rod() {
                     <td>27</td>
                     <td>141</td>
                 </tr>
+                {/* ø80 데이터 */}
                 <tr>
                     <td>ø80</td>
                     <td>75</td>
@@ -146,6 +151,7 @@ export default function Rod() {
                     <td>29</td>
                     <td>155</td>
                 </tr>
+                {/* ø100 데이터 */}
                 <tr>
                     <td>ø100</td>
                     <td>95</td>
@@ -172,6 +178,7 @@ export default function Rod() {
                     <td>29</td>
                     <td>154</td>
                 </tr>
+                {/* ø125 데이터 */}
                 <tr>
                     <td>ø125</td>
                     <td>120</td>
@@ -198,6 +205,7 @@ export default function Rod() {
                     <td>34</td>
                     <td>174</td>
                 </tr>
+                {/* ø140 데이터 */}
                 <tr>
                     <td>ø140</td>
                     <td>140</td>
@@ -224,6 +232,7 @@ export default function Rod() {
                     <td>34</td>
                     <td>184</td>
                 </tr>
+                {/* ø160 데이터 */}
                 <tr>
                     <td>ø160</td>
                     <td>150</td>
@@ -250,6 +259,7 @@ export default function Rod() {
                     <td>36</td>
                     <td>204</td>
                 </tr>
+                {/* ø180 데이터 */}
                 <tr>
                     <td>ø180</td>
                     <td>180</td>
@@ -276,6 +286,7 @@ export default function Rod() {
                     <td>41</td>
                     <td>224</td>
                 </tr>
+                {/* ø200 데이터 */}
                 <tr>
                     <td>ø200</td>
                     <td>195</td>
@@ -302,6 +313,7 @@ export default function Rod() {
                     <td>51</td>
                     <td>254</td>
                 </tr>
+                {/* ø224 데이터 */}
                 <tr>
                     <td>ø224</td>
                     <td>225</td>
@@ -328,6 +340,7 @@ export default function Rod() {
                     <td>51</td>
                     <td>264</td>
                 </tr>
+                {/* ø250 데이터 */}
                 <tr>
                     <td>ø250</td>
                     <td>255</td>

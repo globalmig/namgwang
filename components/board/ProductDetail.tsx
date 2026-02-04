@@ -19,10 +19,6 @@ export default function ProductDetail() {
     const [prevItem, setPrevItem] = useState<NavItem | null>(null);
     const [nextItem, setNextItem] = useState<NavItem | null>(null);
 
-    console.log("prev: ", prevItem);
-    console.log("next: ", nextItem);
-    console.log("getCategory: ", getCategory);
-
     useEffect(() => {
         const fetchData = async () => {
             if (!id || (!category && !type)) return;
@@ -34,10 +30,10 @@ export default function ProductDetail() {
                     throw new Error(errorData.error || "데이터를 불러오지 못했습니다.");
                 }
                 const data = await res.json();
-                setDetail(data);
+
+                setDetail(data.currentData);
                 setPrevItem(data.prev);
                 setNextItem(data.next);
-
             } catch (error) {
                 console.error("API Fetch Error: ", error);
             }
@@ -58,8 +54,8 @@ export default function ProductDetail() {
             alert(result.message);
             router.push("/admin");
             router.refresh();
-        } catch (err: any) {
-            alert(err.message);
+        } catch (err) {
+            console.error(err)
         }
     };
 
@@ -106,9 +102,7 @@ export default function ProductDetail() {
                     isPathnameProduct &&
                     <ProductNavigator
                         prevItem={prevItem}
-                        nextItem={nextItem}
-                        onPrev={() => router.push(`/product/${category}/${prevItem?.id}`)}
-                        onNext={() => router.push(`/product/${category}/${nextItem?.id}`)} />
+                        nextItem={nextItem}/>
                 }
             </div>
         </article>

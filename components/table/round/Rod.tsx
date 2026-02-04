@@ -4,7 +4,7 @@ export default function Rod() {
         <table className="rod round">
             <thead>
                 <tr>
-                    <th rowSpan={2}>
+                    <th rowSpan={2} className="line">
                         <span>기호</span>
                         <span>내경</span>
                     </th>

@@ -29,6 +29,18 @@ main.home-main>:nth-child(2) h2 {
     margin-bottom: 10px;
 }
 
+@keyframes bounce {
+
+    0%,
+    100% {
+        bottom: 18%;
+    }
+
+    50% {
+        bottom: 20%;
+    }
+}
+
 main.home-main>:nth-child(3) {
     text-align: center;
     color: white;
@@ -36,6 +48,7 @@ main.home-main>:nth-child(3) {
     bottom: 18%;
     left: 50%;
     transform: translate(-50%, 0%);
+    animation: bounce 1.5s infinite ease-in-out;
 }
 
 main.home-main>:nth-child(3) p {
@@ -195,6 +208,14 @@ main.category-main>div>h2 {
     border: 1px solid #aaa;
 }
 
+.home2>div>:last-child section>button:hover {
+    background-color: #00A8E9;
+}
+
+.home2>div>:last-child section>button:hover a {
+    color: white;
+}
+
 .home2>div>:last-child section>:last-child {
     position: absolute;
     right: 0px;
@@ -295,7 +316,7 @@ main.category-main>div>h2 {
 .product-list>section>a img {
     width: 100%;
     height: 140px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .product-list>section h4 {
@@ -311,6 +332,37 @@ main.category-main>div>h2 {
 
 .product-list>section p {
     color: #aaa;
+}
+
+/* product-detail */
+
+.product-detail>div>:nth-child(2)>div img {
+    margin-top: 30px;
+    width: 100%;
+    height: 256px;
+    object-fit: contain;
+}
+
+.product-detail>div>:nth-child(2) {
+    margin-bottom: 30px;
+}
+
+.product-detail>div>:nth-child(3) {
+    margin-bottom: 80px;
+}
+
+.product-detail>div>:nth-child(3)>div {
+    margin-top: 30px;
+}
+
+.product-detail>div>:nth-child(3)>div>div {
+    margin: 20px 0;
+}
+
+.product-detail>div>:nth-child(3)>div>div>img {
+    width: 100%;
+    height: 256px;
+    object-fit: cover;
 }
 
 /* commmon-list */
@@ -390,7 +442,7 @@ main.category-main>div>h2 {
 .cylinder-detail>div>:nth-child(2)>div>img {
     width: 100%;
     height: 400px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .cylinder-detail>div>:nth-child(2)>:last-child {
@@ -447,15 +499,13 @@ main.category-main>div>h2 {
 .product-nav>li {
     padding: 20px 0;
     cursor: pointer;
-}
-
-.product-nav>li:first-of-type {
-    border-bottom: 1px solid #aaa;
+    color: #555;
 }
 
 .product-nav>li span {
     font-weight: bold;
     color: #034694;
+    margin-right: 10px;
 }
 
 /* performance-detail */
@@ -606,8 +656,8 @@ main.category-main>div>h2 {
 }
 
 .tech-cylinder .cy-calculator>div>section>div>div img {
-    margin: 15px 0;
-    width: 100%;
+    margin: 20px 0;
+    width: 85%;
     height: auto;
 }
 
@@ -648,7 +698,7 @@ main.category-main>div>h2 {
 }
 
 .tech-cylinder .buckling>div>section>:last-child>section>div {
-    margin: 20px 0;
+    margin-bottom: 20px;
 }
 
 .tech-cylinder .buckling>div>section>:last-child>section>div>button {
@@ -667,13 +717,13 @@ main.category-main>div>h2 {
 }
 
 .tech-cylinder .buckling>div>section>:last-child>section>div>ul li {
-    margin: 8px 0;
+    margin-bottom: 8px;
 }
 
 .tech-cylinder .support>div>section,
 .tech-cylinder .caution>div>section {
     width: 100%;
-    margin: 15px 0;
+    margin: 20px 0;
 }
 
 .tech-cylinder .support>div>section h4,
@@ -683,11 +733,20 @@ main.category-main>div>h2 {
 
 .tech-cylinder .support>div>section>div,
 .tech-cylinder .caution>div>section>div {
-    border: 1px solid #aaa;
+    border: 1px solid #ccc;
 }
 
 .tech-cylinder .caution>div {
     margin-top: 20px;
+}
+
+.tech-cylinder .caution>div>section>div {
+    padding: 20px 0;
+}
+
+.tech-cylinder .caution>div>section>div img {
+    width: 90%;
+    margin: auto;
 }
 
 .tech-cylinder .speed-piping>:nth-child(2) {
@@ -704,7 +763,7 @@ main.category-main>div>h2 {
 }
 
 .tech-cylinder .caution2>div {
-    margin: 40px 0;
+    margin: 25px 0;
 }
 
 .tech-cylinder .caution2 h4 {
@@ -715,21 +774,36 @@ main.category-main>div>h2 {
     margin: 20px 0;
 }
 
+.tech-cylinder .caution2>div>div {
+    width: 100%;
+}
+
 .tech-cylinder .caution2>div>div>div {
     width: 100%;
     margin: 15px 0;
+    border: 1px solid #ccc;
 }
 
 .tech-cylinder .caution2>div>div>section {
     width: 100%;
 }
 
+.tech-cylinder .caution2>:last-child>div section {
+    margin-bottom: 30px;
+}
+
+.tech-cylinder .caution2>:last-child>div section>div>div {
+    border: 1px solid #ccc;
+    width: 48%;
+    margin-top: 8px;
+}
+
 .tech-unit>div>section {
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 .tech-unit>div>section>ul {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .tech-unit>div>section>ul li {
@@ -920,6 +994,24 @@ main.category-main>div>h2 {
         font-size: 1.2rem;
     }
 
+    /* product-detail */
+
+    .product-detail>div>:nth-child(2)>:last-child,
+    .product-detail>div>:nth-child(3)>:last-child{
+        width: 800px;
+        margin: 0 auto;
+    }
+
+    .product-detail>div>:nth-child(2)>div> img,
+    .product-detail>div>:nth-child(3)>div>div img {
+        height: 500px;
+        object-fit: cover;
+    }
+
+    .product-detail>div>:nth-child(3)>div>div {
+        margin: 30px 0;
+    }
+
     /* commmon-list */
 
     .common-list>ul>li {
@@ -967,6 +1059,11 @@ main.category-main>div>h2 {
     }
 
     /* performance-detail */
+
+    .performance-detail>div>:nth-child(2) {
+        width: 800px;
+        margin: 0 auto;
+    }
 
     .performance-detail>div>div>img {
         height: 500px;
@@ -1140,6 +1237,12 @@ main.category-main>div>h2 {
         margin: auto 0;
     }
 
+    /* company */
+
+    .about2>div>:last-child img {
+        margin: 80px auto 0;
+    }
+
     /* product-list */
 
     .product-list {
@@ -1204,13 +1307,13 @@ main.category-main>div>h2 {
     /* performance-detail */
 
     .performance-detail>div>div>img {
-        width: 1000px;
-        height: 610px;
+        width: 800px;
+        height: auto;
         margin: 0 auto;
     }
 
     .admin-btn {
-        margin-top: 80px;
+        margin-top: 100px;
     }
 
     .admin-btn button {
@@ -1227,6 +1330,12 @@ main.category-main>div>h2 {
 
     /* technology */
 
+    .tech-cylinder>div>div>section h3,
+    .tech-unit>div>section>h3 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
     .tech-cylinder .process>div {
         margin-top: 50px;
         justify-content: space-between;
@@ -1235,11 +1344,12 @@ main.category-main>div>h2 {
     }
 
     .tech-cylinder .process>div>section {
-        padding: 20px 5px;
+        padding: 40px 5px 20px;
     }
 
     .tech-cylinder .process>div>div {
-        margin: auto 0;
+        margin: auto -10px;
+        z-index: 2;
     }
 
     .tech-cylinder .process>div>div img {
@@ -1252,7 +1362,8 @@ main.category-main>div>h2 {
     }
 
     .tech-cylinder .cy-calculator>div>section>div>div img {
-        width: 100%;
+        width: auto;
+        margin: 30px 0;
     }
 
     .tech-cylinder .type-table h3 span {
@@ -1265,10 +1376,12 @@ main.category-main>div>h2 {
 
     .tech-cylinder .type-table>p {
         margin-top: 8px;
+        color: #555;
     }
 
     .tech-cylinder .buckling>div>section {
         flex-wrap: nowrap;
+        margin: 50px 0;
     }
 
     .tech-cylinder .buckling>div>section>:first-child {
@@ -1298,18 +1411,53 @@ main.category-main>div>h2 {
         font-size: 1rem;
     }
 
+    .tech-cylinder .support>div>section,
+    .tech-cylinder .caution>div>section {
+        width: 570px;
+        margin: 20px 0 30px;
+    }
+
+    .tech-cylinder .support>div>section h4,
+    .tech-cylinder .caution>div>section h4,
+    .tech-cylinder .caution2>div>section h4 {
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+    }
+
+    .tech-cylinder .caution2>div:first-of-type>div>div,
+    .tech-cylinder .caution2>div:nth-of-type(2)>div,
+    .tech-cylinder .caution2>div:last-of-type>div>section {
+        width: 570px;
+    }
+
+    .tech-unit>div>section:not(.tech-unit>div>section:last-of-type) {
+        margin-bottom: 80px;
+    }
+
+    .tech-unit>div>section>table {
+        width: 600px;
+        margin-top: 20px;
+    }
+
     .tech-unit>div>section>table thead th {
-        padding: 25px 0px;
-        font-size: 1.2rem;
+        padding: 20px;
     }
 
     .tech-unit>div>section>table tbody td {
-        padding: 25px 0;
-         font-size: 1.2rem;
+        padding: 20px 0;
+    }
+
+    .tech-unit>div>section ul {
+        margin-top: 20px;
+    }
+
+    .tech-unit>div>section>div {
+        width: 600px;
+        margin-top: 20px;
     }
 
     .tech-unit>div>section>div>div {
-        padding: 20px 0;
+        padding: 30px 0;
     }
 
     /* inquire */

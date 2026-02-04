@@ -26,7 +26,7 @@ export default function Pagination({ dataPerPage, totalCount, currentPage, onPag
                 onClick={() => onPageChange(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
             >
-                <Image src="/icons/page_prev.png" alt="이전" width={20} height={20} />
+                <Image src="/icons/page_prev.png" alt="이전" width={23} height={42} />
             </button>
 
             <div>
@@ -45,7 +45,7 @@ export default function Pagination({ dataPerPage, totalCount, currentPage, onPag
                 onClick={() => onPageChange(Math.min(pageCount, currentPage + 1))}
                 disabled={currentPage === pageCount}
             >
-                <Image src="/icons/page_next.png" alt="다음" width={20} height={20} />
+                <Image src="/icons/page_next.png" alt="다음" width={23} height={42} />
             </button>
         </div>
     );

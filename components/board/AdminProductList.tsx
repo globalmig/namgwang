@@ -15,11 +15,7 @@ export default function AdminProductList() {
     const [products, setProducts] = useState<AllAdminDataProps[]>([]);
     const isPerformance = type === "performance";
 
-    const {
-        currentPage,
-        totalCount,
-        onPageChange,
-    } = usePagination(products, 10);
+    const {currentPage, currentItems, totalCount, onPageChange,} = usePagination(products, 10);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -59,10 +55,10 @@ export default function AdminProductList() {
                     <li>{isPerformance ? "프로젝트명" : "제품명"}</li>
                     <li>{isPerformance ? "SPEC" : "카테고리"}</li>
                 </ul>
-                {products.map((p, index) =>
+                {currentItems.map((p, index) =>
                     <Link href={`/admin/board/${type}/${p.id}`} key={p.id}>
                         <ul className="display-flex">
-                            <li>{products.length - index}</li>
+                            <li>{currentItems.length - index}</li>
                             <li>{p.name}</li>
                             <li>
                                 {isPerformance
@@ -85,7 +81,6 @@ export default function AdminProductList() {
                 totalCount={totalCount}
                 currentPage={currentPage}
                 onPageChange={onPageChange} />
-            {/* 등록버튼 css, 이전/다음제품 네비게이션 추가 */}
         </>
     )
 }

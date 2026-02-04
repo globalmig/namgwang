@@ -5,10 +5,8 @@ export default function CushionLength() {
         <thead>
           <tr>
             <th>내경</th>
-            <th>ø40 ~ ø63</th>
-            <th>ø80 ~ ø160</th>
-            <th>ø180 ~ ø200</th>
-            <th>ø250</th>
+            <th>ø40 ~ ø50</th>
+            <th>ø63 ~ ø160</th>
           </tr>
         </thead>
         <tbody>
@@ -16,8 +14,6 @@ export default function CushionLength() {
             <td>쿠션길이</td>
             <td>20</td>
             <td>25</td>
-            <td>30</td>
-            <td>35</td>
           </tr>
         </tbody>
       </table>

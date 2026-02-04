@@ -112,7 +112,7 @@ export default function TechnologyCylinderPage() {
                                 <div>
                                     <p>피스톤의 면적을 구한다.</p>
                                     <div>
-                                        <Image className="mo" src="/images/피스톤면적공식mo.png" alt="피스톤 면적" width={100} height={50} />
+                                        <Image className="mo" src="/images/피스톤면적공식mo.png" alt="피스톤 면적" width={255} height={101} />
                                         <Image className="mo" src="/images/내경공식mo.png" alt="내경" width={255} height={76} />
                                         <Image className="pc" src="/images/피스톤면적공식pc.png" alt="피스톤 면적" width={529} height={55} />
                                         <Image className="pc" src="/images/내경공식pc.png" alt="내경" width={494} height={58} />
@@ -162,7 +162,7 @@ export default function TechnologyCylinderPage() {
                     <div>
                         <section className="display-flex-flow">
                             <div>
-                                <Image src="/images/tech_좌굴표_선단하중.jpg" alt="선단하중의 한계를 구할 때" width={1000} height={800} />
+                                <Image src="/images/tech_좌굴표_선단하중.png" alt="선단하중의 한계를 구할 때" width={1184} height={864} />
                             </div>
                             <div>
                                 <h4>▶ 선단하중의 한계를 구할 때</h4>
@@ -189,7 +189,7 @@ export default function TechnologyCylinderPage() {
                         </section>
                         <section className="display-flex-flow">
                             <div>
-                                <Image src="/images/tech_좌굴표_표준실린더.jpg" alt="표준실린더 내경을 구할 때" width={448} height={315} />
+                                <Image src="/images/tech_좌굴표_표준실린더.png" alt="표준실린더 내경을 구할 때" width={1184} height={864} />
                             </div>
                             <div>
                                 <h4>▶ 표준실린더 내경을 구할 때</h4>
@@ -216,7 +216,7 @@ export default function TechnologyCylinderPage() {
                         </section>
                         <section className="display-flex-flow">
                             <div>
-                                <Image src="/images/tech_좌굴표_스트로크.jpg" alt="최대 스트로크를 구할 때" width={448} height={315} />
+                                <Image src="/images/tech_좌굴표_스트로크.png" alt="최대 스트로크를 구할 때" width={1184} height={864} />
                             </div>
                             <div>
                                 <h4>▶ 최대 스트로크를 구할 때</h4>
@@ -281,7 +281,7 @@ export default function TechnologyCylinderPage() {
                         <h3>좌굴표</h3>
                     </section>
                     <div>
-                        <Image src="/images/tech_좌굴표.jpg" alt="좌굴표" width={1000} height={800} />
+                        <Image src="/images/tech_좌굴표.png" alt="좌굴표" width={1152} height={896} />
                     </div>
                 </div>
 

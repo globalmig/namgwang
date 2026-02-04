@@ -32,7 +32,7 @@ export default function Header() {
                                 {c.categories &&
                                     <ul className={isOpenSub === key ? "open-sub" : ""}>
                                         {c.categories.map(sub =>
-                                            <li key={sub.name} onClick={()=> {setIsOpen(false); setIsSelect(sub.name)}} className={isSelect === sub.name ? "select" : ""}>
+                                            <li key={sub.name} onClick={()=> {setIsOpen(false); setIsSelect(sub.name); setIsOpenSub("")}} className={isSelect === sub.name ? "select" : ""}>
                                                 <Link href={`/${key}/${sub.url}`}>{sub.name}</Link>
                                             </li>)}
                                     </ul>}

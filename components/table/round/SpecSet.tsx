@@ -6,20 +6,26 @@ import Specifications from "./Specifications";
 import StrokeLimit from "./StrokeLimit";
 import Rod from "./Rod";
 import { CylinderDetailProps } from "@/types/product";
+import CushionLength from "./CushionLength";
 
 export default function RoundSpecSet(detail: CylinderDetailProps) {
+   const { name, product_img, series_img, seal_material_img, cheats, mounting } = detail.detail;
+
    return (
       <>
-         <section>
+         <section className="product_img-section">
             <div>
-               {/* product_img */}
-               <Image src="" alt="" width={500} height={500} />
+               {product_img.map((p, index) =>
+                  <div key={index}>
+                     <Image src={p} alt={name} width={1200} height={500} />
+                  </div>
+               )}
             </div>
             <div className="table-wrapper">
                <Rod />
             </div>
          </section>
-         <section>
+         <section className="specifications-section">
             <h3>사양</h3>
             <div className="table-wrapper">
                <Specifications />
@@ -29,7 +35,16 @@ export default function RoundSpecSet(detail: CylinderDetailProps) {
                <li>2. 250도 이상 대형 실린더를 제작합니다.</li>
             </ul>
          </section>
-         <section>
+         <section className="cushion-section">
+            <div className="display-flex">
+               <h3>쿠션길이</h3>
+               <p>단위 mm</p>
+            </div>
+            <div className="table-wrapper">
+               <CushionLength />
+            </div>
+         </section>
+         <section className="stroke-section">
             <div className="display-flex">
                <h3>스트로크 한계</h3>
                <p>단위 mm</p>
@@ -42,33 +57,44 @@ export default function RoundSpecSet(detail: CylinderDetailProps) {
                <li>2. 스트로크 한계 이상 시 설계 제작합니다. (문의 요망)</li>
             </ul>
          </section>
-         <section>
-            <h3>표기 요령</h3>
-         </section>
-         <section>
-            <h3>작동유와 적합한 패킹 재질</h3>
-            <div className="display-flex=flow">
+         {cheats &&
+            <section className="cheats-section">
+               <h3>표기 요령</h3>
                <div>
-                  <Image src="" alt="작동유와 적합한 패킹재질" width={300} height={300} />
+                  <Image src={cheats} alt="표기요령" width={1000} height={187} />
                </div>
-               <div className="table-wrapper">
-                  <SealMaterial />
+            </section>
+         }
+         {seal_material_img &&
+            <section className="seal-section">
+               <h3>작동유와 적합한 패킹 재질</h3>
+               <div className="display-flex-flow">
+                  <div>
+                     <Image src={seal_material_img} alt="작동유와 적합한 패킹재질" width={500} height={228} />
+                  </div>
+                  <div className="table-wrapper">
+                     <SealMaterial />
+                  </div>
                </div>
-            </div>
-         </section>
-         <section>
+            </section>
+         }
+         <section className="series-section">
             <h3>HA SERIES 내부구조도</h3>
             <div>
-               <Image src="" alt="내부구조도" width={1000} height={500} />
+               <Image src={series_img} alt="내부구조도" width={1000} height={417} />
             </div>
          </section>
-         <section>
+         <section className="part-diagram-section">
             <h3>부품도</h3>
-            <PartDiagram />
+            <div>
+               <PartDiagram />
+            </div>
          </section>
-         <section>
+         <section className="seal-diagram-section">
             <h3>패킹 부품도</h3>
-            <SealPartsDiagram />
+            <div className="table-wrapper">
+               <SealPartsDiagram />
+            </div>
          </section>
       </>
    )

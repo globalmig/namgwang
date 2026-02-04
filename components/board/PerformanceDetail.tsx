@@ -39,8 +39,8 @@ export default function PerformanceDetail() {
             alert(result.message);
             router.push("/admin");
             router.refresh();
-        } catch (err: any) {
-            alert(err.message);
+        } catch (err) {
+            console.error(err);
         }
     };
 
@@ -60,7 +60,7 @@ export default function PerformanceDetail() {
                     <p><span>SPEC</span> | {performance.spec}</p>
                 </div>
                 <div>
-                    <Image src={performance.img} alt={performance.name} width={1000} height={500} />
+                    <Image src={performance.img} alt={performance.name} width={800} height={500} />
                 </div>
                 {!isPathnameProduct &&
                     <div className="display-flex admin-btn">

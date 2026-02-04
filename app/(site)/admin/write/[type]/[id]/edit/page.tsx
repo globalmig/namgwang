@@ -48,7 +48,7 @@ export default function AdminEditPage() {
                     } as InitialProductDataProps;
 
                 setInitialData(formattedData);
-            } catch (err: any) {
+            } catch (err) {
                 console.error("edit data load:", err);
                 alert("오류가 발생했습니다.");
             } finally {

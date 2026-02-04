@@ -1,13 +1,17 @@
 /* specSet layout */
 
 .spec-set>section {
-    margin: 50px 0;
+    margin: 60px 0;
 }
 
 .spec-set>section>div img {
     width: 100%;
     height: auto;
     margin-bottom: 30px;
+}
+
+.spec-set>section>div>p{
+    margin: auto 0;
 }
 
 .spec-set>section h3 {
@@ -26,7 +30,7 @@
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translate(0%,-50%);
+    transform: translate(0%, -50%);
 }
 
 .spec-set>section ul {
@@ -35,8 +39,207 @@
 
 .spec-set>section ul li {
     color: #555;
+    margin: 5px 0;
 }
 
-@media screen and (min-width: 768px) { }
+.cushion-section.double >div>div{
+    width: 100%;
+    max-width: 570px;
+}
 
-@media screen and (min-width: 1366px) { }
+.cushion-section.double >div>div:not(:last-of-type) {
+margin-bottom: 60px;
+}
+
+.cushion-section.double >div>div ul li {
+    margin: 8px 0;
+    position: relative;
+    padding-left: 15px;
+    color: black;
+}
+
+.cushion-section.double >div>div ul li::before {
+    content: '';
+    width: 3px;
+    height: 3px;
+    border-radius: 100%;
+    background-color: black;
+    position: absolute;
+    top: 12px;
+    left: 0;
+    transform: translate(0%, -50%);
+}
+
+.cushion-section.double >div>div img {
+    width: 100%;
+    height: auto;
+}
+
+.mounting-section>div>div {
+    width: 100%;
+    max-width: 570px;
+}
+
+.mounting-section>div>div>div img {
+    width: 100%;
+    height: auto;
+}
+
+.line {
+    background-color: rgba(3, 71, 148, 1);
+    background-image: linear-gradient(to top right, transparent calc(50% - 0.5px), white 50%, transparent calc(50% + 0.5px));
+    position: relative;
+    padding: 20px 40px;
+}
+
+.line span:first-of-type {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.line span:last-of-type {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+}
+
+.specifications>thead>tr>th:first-of-type {
+    background-color: rgba(3, 71, 148, 1);
+}
+
+.cushion-length>thead,
+.stroke-limit>thead {
+    background-color: #d5dae0;
+    color: #222;
+}
+
+.cushion-length>thead>tr>th:first-of-type,
+.stroke-limit>thead>tr>th:first-of-type {
+    background-color: #b6bbc2;
+}
+
+.seal-material>thead>tr>th:first-of-type {
+    background-color: rgba(3, 71, 148, 1);
+    background-image: linear-gradient(to top right, transparent calc(50% - 0.5px), white 50%, transparent calc(50% + 0.5px));
+    position: relative;
+}
+
+.seal-material>thead>tr>th:first-of-type span:first-of-type {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+}
+
+.seal-material>thead>tr>th:first-of-type span:last-of-type {
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
+}
+
+.part-diagram-section>div>div>div {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.part-diagram>thead>tr>th:first-of-type {
+    background-color: rgba(3, 71, 148, 1);
+}
+
+.seal-parts-diagram>thead {
+    border-bottom: 2px solid #034694;
+}
+
+.seal-parts-diagram>thead>tr>th:first-of-type,
+.seal-parts-diagram>tbody>tr>th:first-of-type {
+    background-color: rgba(3, 71, 148, 1);
+    color: white;
+}
+
+.seal-parts-diagram>thead>tr:nth-of-type(2)>th:not(th:first-of-type),
+.seal-parts-diagram>thead>tr:nth-of-type(4)>th:not(th:first-of-type) {
+    background-color: #eeeeee;
+    color: #222
+}
+
+.seal-parts-diagram>thead>tr:not(.seal-parts-diagram>thead>tr:first-of-type) {
+    background-color: white;
+    color: #222;
+}
+
+.seal-parts-diagram.high-pressure>thead>tr:first-of-type>th:nth-of-type(2) {
+    background-color: rgba(3, 71, 148, 1);
+}
+
+.seal-parts-diagram.compact>thead>tr:first-of-type>th:nth-of-type(2) {
+    background-color: rgba(3, 71, 148, 1);
+}
+
+.seal-parts-diagram.double>thead>tr>th:first-of-type {
+    background-color: rgba(3, 71, 148, 0.3);
+}
+
+.seal-parts-diagram.double>thead>tr:nth-of-type(2)>td,
+.seal-parts-diagram.double>thead>tr:nth-of-type(4)>td {
+    background-color: #eee;
+    color: #222
+}
+
+.seal-parts-diagram.double tr>:first-child {
+    padding: 0 15px ;
+}
+
+.thread>thead>tr:first-of-type>:first-child {
+    background-color: rgba(3, 71, 148, 1);
+}
+
+@media screen and (min-width: 768px) {}
+
+@media screen and (min-width: 1366px) {
+
+    /* specSet layout */
+
+    .spec-set>section {
+        margin: 80px 0;
+    }
+
+    .spec-set>section ul li {
+    margin: 8px 0;
+}
+
+    .spec-set>section>div img {
+        width: 900px;
+        margin: 0 auto 40px;
+    }
+
+    .spec-set>section h3 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .spec-set .seal-section>div>:first-child {
+        margin: auto 0;
+    }
+
+    .spec-set .seal-section img {
+        width: 500px;
+    }
+
+    .spec-set .seal-section .table-wrapper {
+        width: 600px;
+    }
+
+    .spec-set .part-diagram-section>div>div>div {
+        width: 570px;
+    }
+
+    .spec-set .part-diagram-section>div>div>table {
+        width: 100%;
+    }
+
+    .spec-set .cheats-section.compact img {
+        width: 500px;
+        margin: 0;
+    }
+
+}

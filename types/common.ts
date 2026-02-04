@@ -6,6 +6,4 @@ export interface NavItem {
 export interface ProductNavigatorProps {
     prevItem?: NavItem | null;
     nextItem?: NavItem | null;
-    onPrev?: () => void;
-    onNext?: () => void;
 }

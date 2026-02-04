@@ -13,14 +13,10 @@ export default function ProductList() {
     const { category } = useParams();
     const searchParams = useSearchParams();
     const subCategory = searchParams.get("sub");
-    
+
     const [products, setProducts] = useState<AllProductDataProps[]>([]);
 
-    const {
-        currentPage,
-        totalCount,
-        onPageChange,
-    } = usePagination(products, 12);
+    const { currentPage, currentItems, totalCount, onPageChange, } = usePagination(products, 12);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -30,9 +26,9 @@ export default function ProductList() {
                 if (subCategory) {
                     query = query.eq("category", subCategory);
                 } else {
-                    if (category === "cylinder"){
+                    if (category === "cylinder") {
                         query = query.eq("category", "standard");
-                    } else if (category === "unit"){
+                    } else if (category === "unit") {
                         query = query.eq("category", "small");
                     } else {
                         query = query.eq("category", category);
@@ -58,7 +54,7 @@ export default function ProductList() {
     return (
         <>
             <div className="product-list display-flex-flow">
-                {products.map(p =>
+                {currentItems.map(p =>
                     <section key={p.id}>
                         <Link href={`/product/${category}/${p.id}`}>
                             <Image src={p.thumbnail} alt={p.name} width={500} height={500} />
