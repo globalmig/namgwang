@@ -51,9 +51,6 @@ export default function CylinderDetail() {
 
     const specLayout = CYLINDER_SUBCATEGORY.find(c => c.category === detail?.category)?.category;
 
-    console.log("prev: ", prevItem);
-    console.log("next: ", nextItem);
-
     if (!detail) return <div className="loading">정보를 불러오는 중입니다.</div>
 
     return (

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import CushionLength from "./CushionLength";
 import PartDiagram from "./PartDiagram";
 import SealMaterial from "./SealMaterial";
 import SealPartsDiagram from "./SealPartsDiagram";
@@ -11,9 +10,7 @@ import Thread from "./Thread";
 
 export default function DoubleSpecSet(detail: CylinderDetailProps) {
    const { name, product_img, series_img, seal_material_img, cheats, mounting } = detail.detail;
-
-   const mounting1 = mounting?.[0];
-   const mounting2 = mounting?.[1];
+   console.log("mounting data:", mounting)
 
    return (
       <>
@@ -107,24 +104,22 @@ export default function DoubleSpecSet(detail: CylinderDetailProps) {
                <Thread/>
             </div>
          </section>
-         {(mounting1 && mounting2) ?
             <section className="mounting-section">
                <div className="display-flex-flow">
                   <div>
                      <h3>지지형식 LA/LT</h3>
                      <div>
-                        <Image src={mounting1} alt="지지형식" width={1000} height={417} />
+                        <Image src="/images/double/HTP_mounting1.jpg" alt="지지형식" width={1000} height={417} />
                      </div>
                   </div>
                   <div>
                      <h3>지지형식 FA/FB/CA/TA/TB</h3>
                      <div>
-                        <Image src={mounting2} alt="지지형식" width={1000} height={417} />
+                        <Image src="/images/double/HTP_mounting2.jpg" alt="지지형식" width={1000} height={417} />
                      </div>
                   </div>
                </div>
-            </section> : <></>
-         }
+            </section>
          <section className="series-section">
             <h3>HA SERIES 내부구조도</h3>
             <div>
