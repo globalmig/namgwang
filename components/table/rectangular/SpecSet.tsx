@@ -21,7 +21,7 @@ export default function RectangularSpecSet(detail: CylinderDetailProps) {
                   </div>
                )}
             </div> */}
-            <div className="display-flex-flow">
+            {/* <div className="display-flex-flow">
                <div>
                   <div>
                      <Image src="/images/rectangular/product1.jpg" alt="" width={500} height={500} />
@@ -63,7 +63,7 @@ export default function RectangularSpecSet(detail: CylinderDetailProps) {
                      </ul>
                   </section>
                </div>
-            </div>
+            </div> */}
             <div className="table-wrapper">
                <Rod />
             </div>
