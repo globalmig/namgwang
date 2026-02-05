@@ -101,13 +101,21 @@ export default function InquireForm() {
         // API
         try {
             const formData = new FormData();
-            Object.entries(form).forEach(([key, value]) => {
-                if (value !== null) formData.append(key, value);
-            });
+            formData.append("title", form.title);
+            formData.append("name", form.name);
+            formData.append("phone", form.phone);
+            formData.append("email", form.email);
+            formData.append("fax", form.fax);
+            formData.append("contents", form.contents);
+            formData.append("privacy", String(form.privacy));
+
+            if (form.file) {
+                formData.append("file", form.file);
+            }
 
             const response = await fetch("/api/inquire", {
                 method: "POST",
-                body: formData,
+                body: formData, // FormData는 Headers의 Content-Type을 자동으로 multipart/form-data로 설정
             });
 
             const data = await response.json();
@@ -115,16 +123,16 @@ export default function InquireForm() {
             if (data.success) {
                 alert("문의가 정상적으로 접수되었습니다.");
                 router.push("/");
-                window.location.reload();
             } else {
-                alert("문자 발송 중 오류가 발생했습니다.");
+                alert(`문의 발송 중 오류가 발생했습니다. 다시 시도해주세요.` );
+                console.error(data.error);
             }
         } catch (error) {
             console.error(error);
             alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
         }
 
-    }, [form]);
+    }, [form, router]);
 
     return (
         <>

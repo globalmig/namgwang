@@ -1,0 +1,88 @@
+import { google } from "googleapis";
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+import { Options } from "nodemailer/lib/mailer";
+
+export async function POST(req: Request) {
+  try {
+    const formData = await req.formData();
+
+    const title = formData.get("title") as string;
+    const name = formData.get("name") as string;
+    const phone = formData.get("phone") as string;
+    const email = formData.get("email") as string;
+    const fax = formData.get("fax") as string;
+    const contents = formData.get("contents") as string;
+    const file = formData.get("file") as File | null;
+
+    // OAuth2 클라이언트 설정
+    const OAuth2 = google.auth.OAuth2;
+    const oauth2Client = new OAuth2(
+      process.env.GOOGLE_CLIENT_ID,
+      process.env.GOOGLE_CLIENT_SECRET,
+      "https://developers.google.com/oauthplayground" 
+    );
+
+    oauth2Client.setCredentials({
+      refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
+    });
+
+    // 액세스 토큰 자동 생성
+    const accessToken = await oauth2Client.getAccessToken();
+
+    // Nodemailer 설정 (Gmail API OAuth2 모드)
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: process.env.EMAIL_USER,
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+        accessToken: accessToken.token || '',
+      },
+    } as any);
+
+    // 첨부파일 처리
+    const attachments: Options['attachments'] = [];
+
+    if (file) {
+      const arrayBuffer = await file.arrayBuffer(); // File 객체를 ArrayBuffer로 읽음
+      const buffer = Buffer.from(arrayBuffer); // Buffer로 변환
+
+      attachments.push({
+        filename: file.name,
+        content: buffer, // Buffer 형태로 첨부
+        contentType: file.type,
+      });
+    }
+
+    // 메일 내용
+    const mailOptions = {
+      from: `남광유압 문의 <${process.env.EMAIL_USER}>`,
+      to: process.env.RECEIVER_EMAIL, // 받는 사람: 내 메일
+      subject: `[남광유압 신규 문의] ${name} 신규 문의가 접수 되었습니다.`,
+      html: `
+        <h3>${title}</h3>
+        <ul>
+          <li><strong>회사명/이름: ${name}</strong></li>
+          <li><strong>연락처: ${phone}</strong></li>
+          <li><strong>이메일: ${email}</strong></li>
+          <li><strong>팩스 : ${fax ? fax : "-"}</strong></li>
+          <li><strong>문의 내용</strong>
+          <p>${contents}<p>
+          </li>
+        </ul>
+      `,
+      attachments: attachments.length > 0 ? attachments : undefined
+    };
+
+    // 5. 전송
+    await transporter.sendMail(mailOptions);
+
+    return NextResponse.json({ success: true }, { status: 200 });
+  } catch (error: any) {
+    console.error('메일 전송 에러:', error);
+    return NextResponse.json({ error: error.message || "서버 내부 오류" }, { status: 500 });
+  }
+}

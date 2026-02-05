@@ -1,0 +1,339 @@
+export default function RecRod2() {
+    return (
+        <table className="rod2 rectangular">
+            <thead>
+  <tr>
+    <th rowSpan={3} className="line">
+      <span>기호</span>
+      <span>내경</span>
+    </th>
+    <th colSpan={2}>CA</th>
+    <th rowSpan={3}>CC</th>
+    <th rowSpan={3}>CD</th>
+    <th colSpan={2}>CF</th>
+    <th colSpan={3}>CT</th>
+    <th rowSpan={3}>CW</th> 
+    <th colSpan={3}>RF</th> 
+    <th colSpan={2}>FW</th>
+    <th colSpan={2}>J</th>
+    <th colSpan={2}>KK</th>
+    <th colSpan={2}>RA</th>
+  </tr>
+  <tr>
+    <th rowSpan={2}>1산</th>
+    <th rowSpan={2}>2산</th>
+    <th rowSpan={2}>1산</th>
+    <th rowSpan={2}>2산</th>
+    <th colSpan={2}>1산</th>
+    <th rowSpan={2}>2산</th>
+    <th colSpan={2}>1산</th>
+    <th rowSpan={2}>2산</th>
+    <th rowSpan={2}>1산</th>
+    <th rowSpan={2}>2산</th>
+    <th rowSpan={2}>1산</th>
+    <th rowSpan={2}>2산</th>
+    <th rowSpan={2}>A형</th>
+    <th rowSpan={2}>B형</th>
+    <th rowSpan={2}>1산</th>
+    <th rowSpan={2}>2산</th>
+  </tr>
+  <tr>
+    <th>A형</th>
+    <th>B형</th>
+    <th>A형</th>
+    <th>B형</th>
+  </tr>
+</thead>
+            <tbody>
+                <tr>
+                    <th>Ø40</th>
+                    <td>80</td>
+                    <td>65</td>
+                    <td>30</td>
+                    <td>Ø20</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>40</td>
+                    <td>35</td>
+                    <td>70±2</td>
+                    <td>16</td>
+                    <td>40</td>
+                    <td>35</td>
+                    <td>35</td>
+                    <td>31.5</td>
+                    <td>38</td>
+                    <td>8</td>
+                    <td>8</td>
+                    <td>M24x1.5P</td>
+                    <td>M20x1.5P</td>
+                    <td>105</td>
+                    <td>90</td>
+                </tr>
+                <tr>
+                    <th>Ø50</th>
+                    <td>95</td>
+                    <td>80</td>
+                    <td>35</td>
+                    <td>Ø25</td>
+                    <td>60</td>
+                    <td>60</td>
+                    <td>50</td>
+                    <td>45</td>
+                    <td>75±2</td>
+                    <td>17.5</td>
+                    <td>50</td>
+                    <td>40</td>
+                    <td>40</td>
+                    <td>35.5</td>
+                    <td>40</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td>M30x1.5P</td>
+                    <td>M24x1.5P</td>
+                    <td>125</td>
+                    <td>110</td>
+                </tr>
+                <tr>
+                    <th>Ø63</th>
+                    <td>115</td>
+                    <td>100</td>
+                    <td>40</td>
+                    <td>Ø31.5</td>
+                    <td>70</td>
+                    <td>70</td>
+                    <td>60</td>
+                    <td>50</td>
+                    <td>85±2</td>
+                    <td>20</td>
+                    <td>65</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>40</td>
+                    <td>45</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td>M39x1.5P</td>
+                    <td>M30x1.5P</td>
+                    <td>150</td>
+                    <td>135</td>
+                </tr>
+                <tr>
+                    <th>Ø80</th>
+                    <td>140</td>
+                    <td>125</td>
+                    <td>50</td>
+                    <td>Ø40</td>
+                    <td>90</td>
+                    <td>80</td>
+                    <td>70</td>
+                    <td>60</td>
+                    <td>105±2</td>
+                    <td>25</td>
+                    <td>80</td>
+                    <td>65</td>
+                    <td>65</td>
+                    <td>50</td>
+                    <td>55</td>
+                    <td>20</td>
+                    <td>15</td>
+                    <td>M48x1.5P</td>
+                    <td>M39x1.5P</td>
+                    <td>185</td>
+                    <td>165</td>
+                </tr>
+                <tr>
+                    <th>Ø100</th>
+                    <td>180</td>
+                    <td>160</td>
+                    <td>65</td>
+                    <td>Ø50</td>
+                    <td>110</td>
+                    <td>100</td>
+                    <td>90</td>
+                    <td>75</td>
+                    <td>130±2</td>
+                    <td>30</td>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>80</td>
+                    <td>63</td>
+                    <td>70</td>
+                    <td>25</td>
+                    <td>20</td>
+                    <td>M64x2P</td>
+                    <td>M48x1.5P</td>
+                    <td>235</td>
+                    <td>210</td>
+                </tr>
+                <tr>
+                    <th>Ø125</th>
+                    <td>220</td>
+                    <td>200</td>
+                    <td>80</td>
+                    <td>Ø63</td>
+                    <td>140</td>
+                    <td>130</td>
+                    <td>110</td>
+                    <td>100</td>
+                    <td>170±2</td>
+                    <td>40</td>
+                    <td>125</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>90</td>
+                    <td>30</td>
+                    <td>25</td>
+                    <td>M80x2P</td>
+                    <td>M64x2P</td>
+                    <td>290</td>
+                    <td>265</td>
+                </tr>
+                <tr>
+                    <th>Ø140</th>
+                    <td>255</td>
+                    <td>230</td>
+                    <td>90</td>
+                    <td>Ø71</td>
+                    <td>160</td>
+                    <td>150</td>
+                    <td>130</td>
+                    <td>110</td>
+                    <td>170±2</td>
+                    <td>40</td>
+                    <td>145</td>
+                    <td>115</td>
+                    <td>115</td>
+                    <td>80</td>
+                    <td>90</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>M95x2P</td>
+                    <td>M72x2P</td>
+                    <td>335</td>
+                    <td>305</td>
+                </tr>
+                <tr>
+                    <th>Ø160</th>
+                    <td>275</td>
+                    <td>250</td>
+                    <td>100</td>
+                    <td>Ø80</td>
+                    <td>180</td>
+                    <td>160</td>
+                    <td>140</td>
+                    <td>120</td>
+                    <td>210±2</td>
+                    <td>50</td>
+                    <td>155</td>
+                    <td>125</td>
+                    <td>125</td>
+                    <td>100</td>
+                    <td>110</td>
+                    <td>40</td>
+                    <td>30</td>
+                    <td>M100x2P</td>
+                    <td>M80x2P</td>
+                    <td>365</td>
+                    <td>330</td>
+                </tr>
+                <tr>
+                    <th>Ø180</th>
+                    <td>325</td>
+                    <td>295</td>
+                    <td>115</td>
+                    <td>Ø90</td>
+                    <td>210</td>
+                    <td>180</td>
+                    <td>170</td>
+                    <td>150</td>
+                    <td>260±2</td>
+                    <td>62.5</td>
+                    <td>185</td>
+                    <td>145</td>
+                    <td>145</td>
+                    <td>125</td>
+                    <td>135</td>
+                    <td>40</td>
+                    <td>40</td>
+                    <td>M120x2P</td>
+                    <td>M95x2P</td>
+                    <td>430</td>
+                    <td>385</td>
+                </tr>
+                <tr>
+                    <th>Ø200</th>
+                    <td>355</td>
+                    <td>320</td>
+                    <td>125</td>
+                    <td>Ø100</td>
+                    <td>230</td>
+                    <td>200</td>
+                    <td>190</td>
+                    <td>160</td>
+                    <td>260±2</td>
+                    <td>62.5</td>
+                    <td>200</td>
+                    <td>155</td>
+                    <td>155</td>
+                    <td>125</td>
+                    <td>135</td>
+                    <td>40</td>
+                    <td>40</td>
+                    <td>M130x2P</td>
+                    <td>M100x2P</td>
+                    <td>470</td>
+                    <td>420</td>
+                </tr>
+                <tr>
+                    <th>Ø224</th>
+                    <td>405</td>
+                    <td>365</td>
+                    <td>140</td>
+                    <td>Ø112</td>
+                    <td>250</td>
+                    <td>230</td>
+                    <td>220</td>
+                    <td>190</td>
+                    <td>290±2</td>
+                    <td>70</td>
+                    <td>230</td>
+                    <td>185</td>
+                    <td>185</td>
+                    <td>140</td>
+                    <td>150</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>M150x2P</td>
+                    <td>M120x2P</td>
+                    <td>530</td>
+                    <td>480</td>
+                </tr>
+                <tr>
+                    <th>Ø250</th>
+                    <td>455</td>
+                    <td>415</td>
+                    <td>160</td>
+                    <td>Ø125</td>
+                    <td>280</td>
+                    <td>250</td>
+                    <td>250</td>
+                    <td>210</td>
+                    <td>330±2</td>
+                    <td>80</td>
+                    <td>260</td>
+                    <td>200</td>
+                    <td>200</td>
+                    <td>160</td>
+                    <td>170</td>
+                    <td>60</td>
+                    <td>60</td>
+                    <td>M170x2P</td>
+                    <td>M130x2P</td>
+                    <td>595</td>
+                    <td>540</td>
+                </tr>
+            </tbody>
+        </table>
+    )
+}

@@ -53,7 +53,7 @@ export default function SealPartsDiagram() {
             </thead>
             <tbody>
                 <tr>
-                    <td colSpan={2}>ø 40</td>
+                    <td colSpan={2}>ø40</td>
                     <td>G40</td>
                     <td>P16</td>
                     <td>-</td>
@@ -64,7 +64,7 @@ export default function SealPartsDiagram() {
                     <td>P16</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>ø 50</td>
+                    <td colSpan={2}>ø50</td>
                     <td>G50</td>
                     <td>P20</td>
                     <td>-</td>
@@ -75,7 +75,7 @@ export default function SealPartsDiagram() {
                     <td>P20</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>ø 63</td>
+                    <td colSpan={2}>ø63</td>
                     <td>G60</td>
                     <td>P24</td>
                     <td>-</td>
@@ -86,7 +86,7 @@ export default function SealPartsDiagram() {
                     <td>P24</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>ø 80</td>
+                    <td colSpan={2}>ø80</td>
                     <td>G70</td>
                     <td>G40</td>
                     <td>G75</td>
@@ -97,7 +97,7 @@ export default function SealPartsDiagram() {
                     <td>G35</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>ø 100</td>
+                    <td colSpan={2}>ø100</td>
                     <td>G85</td>
                     <td>G50</td>
                     <td>G95</td>
@@ -108,7 +108,7 @@ export default function SealPartsDiagram() {
                     <td>G45</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>ø 125</td>
+                    <td colSpan={2}>ø125</td>
                     <td>G105</td>
                     <td>G60</td>
                     <td>G120</td>
@@ -119,7 +119,7 @@ export default function SealPartsDiagram() {
                     <td>G55</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>ø 140</td>
+                    <td colSpan={2}>ø140</td>
                     <td>G115</td>
                     <td>G70</td>
                     <td>G135</td>
@@ -130,7 +130,7 @@ export default function SealPartsDiagram() {
                     <td>G65</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>ø 150</td>
+                    <td colSpan={2}>ø150</td>
                     <td>G125</td>
                     <td>G70</td>
                     <td>G145</td>
@@ -141,7 +141,7 @@ export default function SealPartsDiagram() {
                     <td>G65</td>
                 </tr>
                 <tr>
-                    <td colSpan={2}>ø 160</td>
+                    <td colSpan={2}>ø160</td>
                     <td>G130</td>
                     <td>G75</td>
                     <td>G150</td>

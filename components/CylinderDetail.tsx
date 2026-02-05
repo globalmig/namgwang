@@ -14,8 +14,7 @@ import { useEffect, useState } from "react";
 import { NavItem } from "@/types/common";
 import { CylinderProps } from "@/types/product";
 import "../app/table.css";
-import RodEndLoopSet from "./table/standard/RodEndLoopSet";
-
+import RodEndLoopSet from "./table/RodEndLoopSet";
 
 export default function CylinderDetail() {
 
@@ -89,7 +88,7 @@ export default function CylinderDetail() {
                         <h3>제품 특징</h3>
                     </div>
                     <div className="spec-set">
-                        {isRod ? <RodEndLoopSet category={specLayout}/> : <>
+                        {isRod ? <RodEndLoopSet category={specLayout} detail={detail}/> : <>
                             {specLayout === "standard" && <StandardSpecSet detail={detail} />}
                             {specLayout === "high-pressure" && <HighPressureSpecSet detail={detail} />}
                             {specLayout === "rectangular" && <RectangularSpecSet detail={detail} />}

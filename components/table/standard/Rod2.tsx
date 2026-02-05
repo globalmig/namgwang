@@ -42,13 +42,13 @@ export default function Rod2() {
             </thead>
             <tbody>
                 <tr>
-                    <th>ø 40</th>
+                    <th>ø40</th>
                     <td>60</td>
                     <td>23</td>
                     <td>27</td>
-                    <td>ø 16H10</td>
-                    <td>ø 16</td>
-                    <td>ø 39</td>
+                    <td>ø16H10</td>
+                    <td>ø16</td>
+                    <td>ø39</td>
                     <td>32</td>
                     <td>50</td>
                     <td>66</td>
@@ -66,13 +66,13 @@ export default function Rod2() {
                     <td>27</td>
                 </tr>
                 <tr>
-                    <th>ø 50</th>
+                    <th>ø50</th>
                     <td>70</td>
                     <td>28</td>
                     <td>32</td>
-                    <td>ø 20H10</td>
-                    <td>ø 20</td>
-                    <td>ø 49</td>
+                    <td>ø20H10</td>
+                    <td>ø20</td>
+                    <td>ø49</td>
                     <td>40</td>
                     <td>63.5</td>
                     <td>79</td>
@@ -90,13 +90,13 @@ export default function Rod2() {
                     <td>32</td>
                 </tr>
                 <tr>
-                    <th>ø 63</th>
+                    <th>ø63</th>
                     <td>115</td>
                     <td>43</td>
                     <td>50</td>
-                    <td>ø 31.5H10</td>
-                    <td>ø 31.5</td>
-                    <td>ø 62</td>
+                    <td>ø31.5H10</td>
+                    <td>ø31.5</td>
+                    <td>ø62</td>
                     <td>60</td>
                     <td>80</td>
                     <td>96</td>
@@ -114,13 +114,13 @@ export default function Rod2() {
                     <td>37</td>
                 </tr>
                 <tr>
-                    <th>ø 80</th>
+                    <th>ø80</th>
                     <td>115</td>
                     <td>43</td>
                     <td>50</td>
-                    <td>ø 31.5H10</td>
-                    <td>ø 31.5</td>
-                    <td>ø 62</td>
+                    <td>ø31.5H10</td>
+                    <td>ø31.5</td>
+                    <td>ø62</td>
                     <td>60</td>
                     <td>80</td>
                     <td>96</td>
@@ -138,13 +138,13 @@ export default function Rod2() {
                     <td>47</td>
                 </tr>
                 <tr>
-                    <th>ø 100</th>
+                    <th>ø100</th>
                     <td>145</td>
                     <td>55</td>
                     <td>60</td>
-                    <td>ø 40H10</td>
-                    <td>ø 40</td>
-                    <td>ø 79</td>
+                    <td>ø40H10</td>
+                    <td>ø40</td>
+                    <td>ø79</td>
                     <td>80</td>
                     <td>100</td>
                     <td>116</td>
@@ -162,13 +162,13 @@ export default function Rod2() {
                     <td>62</td>
                 </tr>
                 <tr>
-                    <th>ø 125</th>
+                    <th>ø125</th>
                     <td>180</td>
                     <td>65</td>
                     <td>70</td>
-                    <td>ø 50H10</td>
-                    <td>ø 50</td>
-                    <td>ø 100</td>
+                    <td>ø50H10</td>
+                    <td>ø50</td>
+                    <td>ø100</td>
                     <td>100</td>
                     <td>126</td>
                     <td>144</td>
@@ -186,13 +186,13 @@ export default function Rod2() {
                     <td>77</td>
                 </tr>
                 <tr>
-                    <th>ø 140</th>
+                    <th>ø140</th>
                     <td>225</td>
                     <td>85</td>
                     <td>90</td>
-                    <td>ø 63H10</td>
-                    <td>ø 63</td>
-                    <td>ø 130</td>
+                    <td>ø63H10</td>
+                    <td>ø63</td>
+                    <td>ø130</td>
                     <td>120</td>
                     <td>160</td>
                     <td>178</td>
@@ -210,13 +210,13 @@ export default function Rod2() {
                     <td>82</td>
                 </tr>
                 <tr>
-                    <th>ø 150</th>
+                    <th>ø150</th>
                     <td>225</td>
                     <td>85</td>
                     <td>90</td>
-                    <td>ø 63H10</td>
-                    <td>ø 63</td>
-                    <td>ø 130</td>
+                    <td>ø63H10</td>
+                    <td>ø63</td>
+                    <td>ø130</td>
                     <td>120</td>
                     <td>160</td>
                     <td>178</td>
@@ -234,13 +234,13 @@ export default function Rod2() {
                     <td>87</td>
                 </tr>
                 <tr>
-                    <th>ø 160</th>
+                    <th>ø160</th>
                     <td>240</td>
                     <td>90</td>
                     <td>100</td>
-                    <td>ø 71H10</td>
-                    <td>ø 71</td>
-                    <td>ø 140</td>
+                    <td>ø71H10</td>
+                    <td>ø71</td>
+                    <td>ø140</td>
                     <td>140</td>
                     <td>160</td>
                     <td>178</td>
