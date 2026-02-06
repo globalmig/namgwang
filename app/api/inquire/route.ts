@@ -61,7 +61,7 @@ export async function POST(req: Request) {
     const mailOptions = {
       from: `남광유압 문의 <${process.env.EMAIL_USER}>`,
       to: process.env.RECEIVER_EMAIL,
-      subject: `[남광유압 신규 문의] ${name} 신규 문의가 접수 되었습니다.`,
+      subject: `[신규 문의] ${name} 신규 문의가 접수 되었습니다.`,
       html: `
         <div style="padding: 50px;">
             <div style="margin-top: 20px;">
