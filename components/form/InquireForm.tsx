@@ -91,11 +91,11 @@ export default function InquireForm() {
                 alert("JPG 파일만 업로드 가능합니다.");
                 return;
             }
-            const fileSizeKB = form.file.size / 1024;
-            if (fileSizeKB > 200) {
-                alert("첨부파일 용량은 200KB이하이어야 합니다.");
-                return;
-            }
+            // const fileSizeKB = form.file.size / 1024;
+            // if (fileSizeKB > 200) {
+            //     alert("첨부파일 용량은 200KB이하이어야 합니다.");
+            //     return;
+            // }
         }
 
         // API
@@ -166,7 +166,7 @@ export default function InquireForm() {
                         <h3>
                             첨부파일 (선택)
                         </h3>
-                        <p>사진(JPG)만 업로드 가능하며, 최대 용량 200KB입니다.</p>
+                        {/* <p>사진(JPG)만 업로드 가능하며, 최대 용량 200KB입니다.</p> */}
                     </label>
                     <input type="file" id="file" name="file" accept=".jpg,.jpeg" onChange={onChangeForm} />
                 </div>
