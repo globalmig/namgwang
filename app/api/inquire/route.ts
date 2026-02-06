@@ -60,19 +60,27 @@ export async function POST(req: Request) {
     // 메일 내용
     const mailOptions = {
       from: `남광유압 문의 <${process.env.EMAIL_USER}>`,
-      to: process.env.RECEIVER_EMAIL, // 받는 사람: 내 메일
+      to: process.env.RECEIVER_EMAIL,
       subject: `[남광유압 신규 문의] ${name} 신규 문의가 접수 되었습니다.`,
       html: `
-        <h3>${title}</h3>
-        <ul>
-          <li><strong>회사명/이름: ${name}</strong></li>
-          <li><strong>연락처: ${phone}</strong></li>
-          <li><strong>이메일: ${email}</strong></li>
-          <li><strong>팩스 : ${fax ? fax : "-"}</strong></li>
-          <li><strong>문의 내용</strong>
-          <p>${contents}<p>
-          </li>
-        </ul>
+        <div style="padding: 50px;">
+            <div style="display: flex;">
+                <img src="/icons/logo.png" alt="남광유압" style="width: 50px; height: auto; margin: auto 10px 5px 0;" />
+                <h2>남광유압 신규 문의입니다.</h2>
+            </div>
+            <div style="margin-top: 20px;">
+                <div style="margin-bottom: 70px;">
+                    <h2 style="margin-bottom: 8px; font-size: 1.7rem;">${title}</h2>
+                    <p>${contents}</p>
+                </div>
+                <ul style="width: 500px; list-style: none; padding: 0;">
+                    <li style="padding: 20px 0; border-bottom: 1px solid #ddd; border-top: 2px solid #034694;"><strong>회사명/이름 :</strong> ${name}</li>
+                    <li style="padding: 20px 0; border-bottom: 1px solid #ddd;"><strong>연락처 :</strong> ${phone}</li>
+                    <li style="padding: 20px 0; border-bottom: 1px solid #ddd;"><strong>이메일 :</strong> ${email}</li>
+                    <li style="padding: 20px 0; border-bottom: 2px solid #034694;"><strong>팩스 :</strong> ${fax ? fax : "-"}</li>
+                </ul>
+            </div>
+        </div>
       `,
       attachments: attachments.length > 0 ? attachments : undefined
     };

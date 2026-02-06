@@ -252,25 +252,25 @@ export default function TechnologyCylinderPage() {
                         <section>
                             <h4>▶ 양단 핀결합인 경우 (D=L)</h4>
                             <div>
-                                <Image src="/images/tech_support1.jpg" alt="양단 핀결합인 경우" width={550} height={282} />
+                                <Image src="/images/tech_support1.jpg" alt="양단 핀결합인 경우" width={1000} height={667} />
                             </div>
                         </section>
                         <section>
                             <h4>▶ 실린더 고정, 로드선단 자유단의 경우 (D=L/2)</h4>
                             <div>
-                                <Image src="/images/tech_support2.jpg" alt="실린더 고정, 로드선단 자유단의 경우" width={550} height={282} />
+                                <Image src="/images/tech_support2.jpg" alt="실린더 고정, 로드선단 자유단의 경우" width={1000} height={667} />
                             </div>
                         </section>
                         <section>
                             <h4>▶ 실린더 고정, 로드선단 핀결합의 경우 (D=1.4L)</h4>
                             <div>
-                                <Image src="/images/tech_support3.jpg" alt="실린더 고정, 로드선단 핀결합의 경우" width={550} height={282} />
+                                <Image src="/images/tech_support3.jpg" alt="실린더 고정, 로드선단 핀결합의 경우" width={1000} height={667} />
                             </div>
                         </section>
                         <section>
                             <h4>▶ 실린더 고정, 로드선단 가이드의 경우 (D=2L)</h4>
                             <div>
-                                <Image src="/images/tech_support4.jpg" alt="실린더 고정, 로드선단 가이드의 경우" width={550} height={282} />
+                                <Image src="/images/tech_support4.jpg" alt="실린더 고정, 로드선단 가이드의 경우" width={1000} height={667} />
                             </div>
                         </section>
                     </div>
@@ -294,13 +294,13 @@ export default function TechnologyCylinderPage() {
                         <section>
                             <h4>▶ 내부정지 방식의 경우 하중</h4>
                             <div>
-                                <Image src="/images/tech_support5.jpg" alt="내부정지 방식의 경우 하중" width={550} height={282} />
+                                <Image src="/images/tech_support5.jpg" alt="내부정지 방식의 경우 하중" width={1000} height={667} />
                             </div>
                         </section>
                         <section>
                             <h4>▶ 외부정지 방식의 경우 하중 (D=2L)</h4>
                             <div>
-                                <Image src="/images/tech_support6.jpg" alt="외부정지 방식의 경우 하중" width={550} height={282} />
+                                <Image src="/images/tech_support6.jpg" alt="외부정지 방식의 경우 하중" width={1000} height={667} />
                             </div>
                         </section>
                     </div>
@@ -352,7 +352,7 @@ export default function TechnologyCylinderPage() {
                                 <p>자체고정외에 스토퍼를 설치하면 완벽하게 고정시킬 수 있습니다.</p>
                             </section>
                             <div>
-                                <Image src="/images/tech_caution_type1.jpg" alt="LA, LB형의 경우" width={550} height={282} />
+                                <Image src="/images/tech_caution_type1.jpg" alt="LA, LB형의 경우" width={1000} height={667} />
                             </div>
                         </div>
                         <div>
@@ -361,10 +361,10 @@ export default function TechnologyCylinderPage() {
                             </section>
                             <div className="display-flex">
                                 <div>
-                                    <Image src="/images/tech_caution_type2.jpg" alt="전진시 하중이 걸릴때" width={550} height={282} />
+                                    <Image src="/images/tech_caution_type2.jpg" alt="전진시 하중이 걸릴때" width={1000} height={667} />
                                 </div>
                                 <div>
-                                    <Image src="/images/tech_caution_type3.jpg" alt="후진시 하중이 걸릴때" width={550} height={282} />
+                                    <Image src="/images/tech_caution_type3.jpg" alt="후진시 하중이 걸릴때" width={1000} height={667} />
                                 </div>
                             </div>
                         </div>

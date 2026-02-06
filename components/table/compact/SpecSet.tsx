@@ -31,10 +31,10 @@ export default function CompactSpecSet(detail: CylinderDetailProps) {
                <Specifications />
             </div>
             <ul>
-               <li>- 사용 압력 140kgf/cm² 이상은 문의바랍니다.</li>
-               <li>- 사용온도 100도 이상 사용 시 문의바랍니다.</li>
-               <li>- 오토센서 (S/R) Type도 제작 가능함 (문의요망)</li>
-               <li>- S/R Type 제작 시 R차수 변경됨</li>
+               <li>⦁ 사용 압력 140kgf/cm² 이상은 문의바랍니다.</li>
+               <li>⦁ 사용온도 100도 이상 사용 시 문의바랍니다.</li>
+               <li>⦁ 오토센서 (S/R) Type도 제작 가능함 (문의요망)</li>
+               <li>⦁ S/R Type 제작 시 R차수 변경됨</li>
             </ul>
          </section>
          <section className="cheats-section compact">
@@ -46,10 +46,10 @@ export default function CompactSpecSet(detail: CylinderDetailProps) {
          <section>
             <h3>제작종류</h3>
             <ul>
-               <li>- D: 일반형 실린더</li>
-               <li>- M: 수나사</li>
-               <li>- T: 양드로형 실린더</li>
-               <li>- S/R: Switch Type (SO TYPE DC 24V/AC 100V)</li>
+               <li>⦁ D: 일반형 실린더</li>
+               <li>⦁ M: 수나사</li>
+               <li>⦁ T: 양드로형 실린더</li>
+               <li>⦁ S/R: Switch Type (SO TYPE DC 24V/AC 100V)</li>
             </ul>
          </section>
          <section className="series-section">

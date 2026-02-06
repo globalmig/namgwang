@@ -5,6 +5,8 @@ main.home-main {
 
 .main-slider {
     height: 600px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .main-slider-item>img {
@@ -101,6 +103,7 @@ main.category-main>div>h2 {
 
 .home>div>:first-child>h2 {
     font-family: 'Gong-L';
+    width: 70%;
 }
 
 .home>div>:first-child>h2 span {
@@ -110,7 +113,7 @@ main.category-main>div>h2 {
 .home>div>:first-child>h2 span::after {
     content: '';
     position: absolute;
-    width: 100px;
+    width: 80px;
     height: 1px;
     background-color: black;
     left: 15px;
@@ -166,6 +169,7 @@ main.category-main>div>h2 {
 
 .home2>div>:first-child h2 {
     font-family: 'Gong-L';
+    width: 70%;
 }
 
 .home2>div>:first-child>h2 span {
@@ -1061,12 +1065,12 @@ main.category-main>div>h2 {
     /* performance-detail */
 
     .performance-detail>div>:nth-child(2) {
-        width: 800px;
+        width: 700px;
         margin: 0 auto;
     }
 
-    .performance-detail>div>div>img {
-        height: 500px;
+    .performance-detail>div>:nth-child(2) img {
+        width: 500px;
     }
 
     .admin-btn button {

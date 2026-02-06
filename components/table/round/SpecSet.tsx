@@ -70,7 +70,7 @@ export default function RoundSpecSet(detail: CylinderDetailProps) {
                <h3>작동유와 적합한 패킹 재질</h3>
                <div className="display-flex-flow">
                   <div>
-                     <Image src={seal_material_img} alt="작동유와 적합한 패킹재질" width={500} height={228} />
+                     <Image src={seal_material_img} alt="작동유와 적합한 패킹재질" width={800} height={388} />
                   </div>
                   <div className="table-wrapper">
                      <SealMaterial />

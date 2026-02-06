@@ -10,17 +10,68 @@ import { CylinderDetailProps } from "@/types/product";
 
 
 export default function StandardSpecSet(detail: CylinderDetailProps) {
-   const { name, product_img, series_img, seal_material_img, cheats, mounting } = detail.detail;
+   const { name, product_img, series_img, seal_material_img, cheats } = detail.detail;
 
    return (
       <>
-         <section className="product_img-section">
+         <section className="product_img-section standard">
             <div>
                {product_img.map((p, index) =>
                   <div key={index}>
                      <Image src={p} alt={name} width={1200} height={500} />
                   </div>
                )}
+            </div>
+            <div className="display-flex-flow">
+               <div>
+                  <Image src="/images/standard/HA-product_3.jpg" alt={name} width={482} height={337} />
+               </div>
+               <div>
+                  <div>
+                     <table>
+                        <thead>
+                           <tr>
+                              <th>로드경</th>
+                              <th>W</th>
+                              <th>WD</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>Ø80</td>
+                              <td>Ø77</td>
+                              <td>Ø15</td>
+                           </tr>
+                           <tr>
+                              <td>Ø85</td>
+                              <td>Ø81</td>
+                              <td>Ø15</td>
+                           </tr>
+                           <tr>
+                              <td>Ø90</td>
+                              <td>Ø86</td>
+                              <td>Ø15</td>
+                           </tr>
+                           <tr>
+                              <td>Ø100</td>
+                              <td>Ø97</td>
+                              <td>Ø15</td>
+                           </tr>
+                           <tr>
+                              <td>Ø112</td>
+                              <td>Ø108</td>
+                              <td>Ø15</td>
+                           </tr>
+                           <tr>
+                              <td>Ø140</td>
+                              <td>Ø136</td>
+                              <td>Ø15</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <p>* 로드경 Ø80이상은 드릴 홀로 됩니다.</p>
+               </div>
             </div>
             <div className="table-wrapper">
                <Rod />
@@ -73,7 +124,7 @@ export default function StandardSpecSet(detail: CylinderDetailProps) {
                <h3>작동유와 적합한 패킹 재질</h3>
                <div className="display-flex-flow">
                   <div>
-                     <Image src={seal_material_img} alt="작동유와 적합한 패킹재질" width={500} height={228} />
+                     <Image src={seal_material_img} alt="작동유와 적합한 패킹재질" width={800} height={388} />
                   </div>
                   <div className="table-wrapper">
                      <SealMaterial />

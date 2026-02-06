@@ -9,11 +9,11 @@ import Rod from "./Rod";
 import { CylinderDetailProps } from "@/types/product";
 
 export default function RectangularSpecSet(detail: CylinderDetailProps) {
-   const { name, product_img, series_img, seal_material_img, cheats, mounting } = detail.detail;
+   const { series_img, cheats} = detail.detail;
 
    return (
       <>
-         <section className="product_img-section">
+         <section className="product_img-section recangular">
             {/* <div>
                {product_img.map((p, index) =>
                   <div key={index}>
@@ -21,20 +21,20 @@ export default function RectangularSpecSet(detail: CylinderDetailProps) {
                   </div>
                )}
             </div> */}
-            {/* <div className="display-flex-flow">
+            <div className="display-flex-flow">
                <div>
                   <div>
-                     <Image src="/images/rectangular/product1.jpg" alt="" width={500} height={500} />
+                     <Image src="/images/rectangular/product1.jpg" alt="제품 특징" width={500} height={500} />
                   </div>
-                  <p>주) 배관위치 및 쿠션 위치의 표준 PT: A쿠션, 에어벤트: B입니다.<br />변경을 원하실 때는 위 그림을 이용하십시오.</p>
+                  <p>주) 배관위치 및 쿠션 위치의 표준 PT: A쿠션, 에어벤트: B입니다. 변경을 원하실 때는 위 그림을 이용하십시오.</p>
                   <ul>
                      <li>1. 패킹의 별도 선정이 가능합니다. (문의요망)</li>
                      <li>2. 표준품의 패킹재질은 URETHANE or NBR 입니다.</li>
                      <li>3. 배관, 쿠션밸브, 에어벤트의 위치 표시는 로드측에서 볼 때 아래 그림의 A,B,C,D로 방향 선정</li>
                      <li>4. 하기 내용은 쿠션이 없습니다.
                         <ul>
-                           <li>-로드 A TYPE : ø40, ø50, ø63의 로드 측</li>
-                           <li>-로드 B TYPE : ø40의 로드 측</li>
+                           <li>⦁ 로드 A TYPE : ø40, ø50, ø63의 로드 측</li>
+                           <li>⦁ 로드 B TYPE : ø40의 로드 측</li>
                         </ul>
                      </li>
                   </ul>
@@ -46,24 +46,24 @@ export default function RectangularSpecSet(detail: CylinderDetailProps) {
                   <section>
                      <h4>▶ 로드 선단 나사 형식</h4>
                      <div>
-                        <Image src="/images/rectangular/로드선단나사형식.jpg" alt="로드 선단 나사 형식" width={500} height={500} />
+                        <Image src="/images/rectangular/로드선단나사형식.jpg" alt="로드 선단 나사 형식" width={500} height={200} />
                      </div>
                      <ul>
-                        <li>- 2형은 선단나사가 1형보다 길고 로크너트가 체결됩니다.</li>
-                        <li>- 별도 지시가 없는 경우 1형으로 제작합니다.</li>
+                        <li>⦁ 2형은 선단나사가 1형보다 길고 로크너트가 체결됩니다.</li>
+                        <li>⦁ 별도 지시가 없는 경우 1형으로 제작합니다.</li>
                      </ul>
                   </section>
                   <section>
                      <h4>▶ 배관 형식</h4>
                      <div>
-                        <Image src="/images/rectangular/배관형식.jpg" alt="배관 형식" width={500} height={500} />
+                        <Image src="/images/rectangular/배관형식.jpg" alt="배관 형식" width={500} height={200} />
                      </div>
                      <ul>
                         <li>※ 별도 지시가 없는 경우 X형으로 제작합니다.</li>
                      </ul>
                   </section>
                </div>
-            </div> */}
+            </div>
             <div className="table-wrapper">
                <Rod />
             </div>
@@ -98,7 +98,7 @@ export default function RectangularSpecSet(detail: CylinderDetailProps) {
                <h3>스트로크 한계</h3>
                <p>단위 mm</p>
             </div>
-            <div className="table-wrapper">
+            <div>
                <StrokeLimit />
             </div>
             <ul>
