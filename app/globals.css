@@ -28,6 +28,7 @@
 body {
   color: black;
   overflow-x: hidden;
+  background-color: white;
 }
 
 p,

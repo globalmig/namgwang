@@ -63,17 +63,25 @@ export async function POST(req: Request) {
       to: process.env.RECEIVER_EMAIL,
       subject: `[신규 문의] ${name} 신규 문의가 접수 되었습니다.`,
       html: `
-        <div style="padding: 50px;">
+        <div style="padding: 20px 0;">
             <div style="margin-top: 20px;">
-                <div style="margin-bottom: 70px;">
+                <div style="margin-bottom: 100px;">
                     <h2 style="margin-bottom: 8px; font-size: 1.7rem;">${title}</h2>
-                    <p>${contents}</p>
+                    <p style="font-size: 1.1rem">${contents}</p>
                 </div>
-                <ul style="width: 500px; list-style: none; padding: 0;">
-                    <li style="font-size: 1.2rem; padding: 20px 0; border-bottom: 1px solid #ddd; border-top: 2px solid #034694;"><strong>회사명/이름 :</strong> ${name}</li>
-                    <li style="font-size: 1.2rem; padding: 20px 0; border-bottom: 1px solid #ddd;"><strong>연락처 :</strong> ${phone}</li>
-                    <li style="font-size: 1.2rem; padding: 20px 0; border-bottom: 1px solid #ddd;"><strong>이메일 :</strong> ${email}</li>
-                    <li style="font-size: 1.2rem; padding: 20px 0; border-bottom: 2px solid #034694;"><strong>팩스 :</strong> ${fax ? fax : "-"}</li>
+                <ul style="width: 400px; list-style: none; padding: 0;">
+                    <li style="font-size: 1rem; padding: 20px 8px; border-bottom: 1px solid #ddd; border-top: 2px solid #034694;">
+                      <strong>회사명/이름 :</strong> <span style="color: #555;">${name}</span>
+                    </li>
+                    <li style="font-size: 1rem; padding: 20px 8px; border-bottom: 1px solid #ddd;">
+                      <strong>연락처 :</strong> <span style="color: #555;">${phone}</span>
+                    </li>
+                      <li style="font-size: 1rem; padding: 20px 8px; border-bottom: 1px solid #ddd;">
+                    <strong>이메일 :</strong> <span style="color: #555;">${email}</span>
+                    </li>
+                      <li style="font-size: 1rem; padding: 20px 8px; border-bottom: 1px solid #ddd;">
+                    <strong>팩스 :</strong> <span style="color: #555;">${fax ? fax : "-"}</span>
+                    </li>
                 </ul>
             </div>
         </div>
