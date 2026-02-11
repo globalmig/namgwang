@@ -59,8 +59,8 @@ export default function SealPartsDiagram() {
                     <td>-</td>
                     <td>G35</td>
                     <td>L43, 40-30</td>
-                    <td>PU6-22,4</td>
-                    <td>NI 300-22,4</td>
+                    <td>PU6-22.4</td>
+                    <td>NI 300-22.4</td>
                     <td>P16</td>
                 </tr>
                 <tr>

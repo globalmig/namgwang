@@ -21,7 +21,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                     <h4>남광유압</h4>
-                    <h2>인천 미추홀구 도화동 969-6</h2>
+                    <h2>인천광역시 미추홀구 봉수대로13번길 28-1</h2>
                     <div className="display-flex">
                         <p>(지번) 도화동 969-6</p>
                         <p>(우)22129</p>

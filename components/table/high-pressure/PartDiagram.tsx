@@ -15,7 +15,7 @@ export default function PartDiagram() {
                     <tbody>
                         <tr><td>1</td>
                             <td>로드</td>
-                            <td>기계구조용탄소강 강재</td>
+                            <td>기계구조용 탄소강 강재</td>
                             <td>1</td>
                         </tr>
                         <tr>
@@ -33,19 +33,13 @@ export default function PartDiagram() {
                         <tr>
                             <td>8</td>
                             <td>튜브</td>
-                            <td>기계구조용탄소강 강관</td>
+                            <td>기계구조용 탄소강 강관</td>
                             <td>1</td>
                         </tr>
                         <tr>
                             <td>9</td>
                             <td>쿠션링</td>
                             <td>청동</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>피스톤</td>
-                            <td>기계구조용탄소강 강재</td>
                             <td>1</td>
                         </tr>
                     </tbody>
@@ -65,7 +59,7 @@ export default function PartDiagram() {
                         <tr>
                             <td>11</td>
                             <td>피스톤</td>
-                            <td>기계구조용탄소강 강재</td>
+                            <td>기계구조용 탄소강 강재</td>
                             <td>1</td>
                         </tr>
                         <tr

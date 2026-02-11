@@ -7,6 +7,7 @@ interface AuthFormProps {
 
 export default function AuthForm({ setIsAuth }: AuthFormProps) {
     const [password, setPassword] = useState<String>("");
+    const [loginLoading, setLoginLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const authStorage = sessionStorage.getItem("isAdminAuthenticated");
@@ -21,12 +22,16 @@ export default function AuthForm({ setIsAuth }: AuthFormProps) {
 
     const onSubmit = useCallback(async (e: React.FormEvent) => {
         e.preventDefault();
+        if (loginLoading) return;
+
         if (!password.trim()) {
             alert("비밀번호를 입력해주세요.");
             return;
         }
         // /api/auth
         try {
+            setLoginLoading(true);
+
             const response = await fetch("/api/auth", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -45,6 +50,8 @@ export default function AuthForm({ setIsAuth }: AuthFormProps) {
         } catch (error) {
             console.error("auth error:", error);
             alert("인증에 실패했습니다.");
+        } finally {
+            setLoginLoading(false);
         }
     }, [password]);
 
@@ -54,7 +61,7 @@ export default function AuthForm({ setIsAuth }: AuthFormProps) {
                 <label htmlFor="password"><h3>비밀번호 입력</h3></label>
                 <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요." onChange={onChangePassword} />
             </div>
-            <button type="submit"> 로그인</button>
+            <button type="submit">{loginLoading ? "로그인 중..." : "로그인"}</button>
         </form>
     )
 }

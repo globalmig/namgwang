@@ -37,7 +37,7 @@ export interface CylinderDetailProps {
    detail: CylinderProps
 }
 
-export type AllProductDataProps = ProductProps | CylinderProps;
+export type AllProductDataProps = ProductProps | CylinderProps | PerformanceProps;
 
 export type AllAdminDataProps = ProductProps | PerformanceProps;
 

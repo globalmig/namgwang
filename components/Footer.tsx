@@ -31,7 +31,7 @@ export default function Footer() {
                             <li><span>대표전화</span> : 032-574-4030</li>
                             <li><span>팩스</span> : 032-574-4031</li>
                             <li><span>사업자번호</span> : 137-86-26460</li>
-                            <li><span>주소</span> : 인천 미추홀구 도화동 969-6</li>
+                            <li><span>주소</span> : 인천광역시 미추홀구 봉수대로13번길 28-1</li>
                         </ul>
                         <p>Copyright ⓒ 2026 (주)남광유압 All rights reserved.</p>
                     </div>

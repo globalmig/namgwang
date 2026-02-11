@@ -8,6 +8,7 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
 
     const router = useRouter();
     const { id, type } = useParams();
+    const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
     const isUpload = mode === "upload";
     const isEdit = mode === "edit";
@@ -86,6 +87,7 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
     // 등록&수정
     const onSubmitForm = useCallback(async (e: React.FormEvent) => {
         e.preventDefault();
+        if (submitLoading) return;
 
         // 유효성 검증
         if (!form.name.trim()) {
@@ -154,6 +156,8 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
         });
 
         try {
+            setSubmitLoading(true);
+
             const res = await fetch(isUpload ? "/api/product" : `/api/product/${type}/${id}`, {
                 method: isUpload ? "POST" : "PATCH",
                 body: formData,
@@ -172,6 +176,8 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
 
         } catch (err) {
             console.error(err)
+        } finally {
+            setSubmitLoading(false);
         }
 
     }, [form, existingImages, newImageFiles, initialData, id, isUpload, router]);
@@ -190,11 +196,11 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
                 </label>
                 <select id="category" name="category" onChange={onChangeForm} value={form.category}>
                     <option value="">카테고리를 선택해주세요</option>
-                    <option value="small">소형 유니트</option>
-                    <option value="medium">중형 유니트</option>
-                    <option value="large">대형 유니트</option>
-                    <option value="extra">특수형 유니트</option>
-                    <option value="other">기타 기기</option>
+                    <option value="small">유압 유니트 - 소형</option>
+                    <option value="medium">유압 유니트 - 중형</option>
+                    <option value="large">유압 유니트 - 대형</option>
+                    <option value="extra">유압 유니트 - 특수형</option>
+                    <option value="other">기타 유압 기기</option>
                 </select>
             </div>
             <div className="fm-thumbnail">
@@ -253,7 +259,11 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
             </div>
             {(isUpload || isEdit) && (
                 <div className="display-flex">
-                    <button type="submit">{isUpload ? "등록" : "수정"}</button>
+                    <button type="submit">{submitLoading
+                        ? "등록중..."
+                        : isUpload
+                            ? "등록"
+                            : "수정"}</button>
                     <button type="button" onClick={onClickCancel}>취소</button>
                 </div>
             )}

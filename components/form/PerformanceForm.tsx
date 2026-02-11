@@ -8,6 +8,7 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
 
     const router = useRouter();
     const { id } = useParams();
+    const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
     const isUpload = mode === "upload";
     const isEdit = mode === "edit";
@@ -64,6 +65,7 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
     // 등록&수정
     const onSubmitForm = useCallback(async (e: React.FormEvent) => {
         e.preventDefault();
+        if (submitLoading) return;
 
         // 유효성 검증
         if (!form.name.trim()) {
@@ -109,6 +111,7 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
         }
 
         try {
+            setSubmitLoading(true);
             const res = await fetch(isUpload ? "/api/performance" : `/api/performance/${id}`, {
                 method: isUpload ? "POST" : "PATCH",
                 body: formData,
@@ -127,6 +130,8 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
 
         } catch (err) {
             console.error(err)
+        } finally {
+            setSubmitLoading(false);
         }
 
     }, [form, initialData, id, isUpload, router]);
@@ -159,7 +164,11 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
             </div>
             {(isUpload || isEdit) && (
                 <div className="display-flex">
-                    <button type="submit">{isUpload ? "등록" : "수정"}</button>
+                    <button type="submit">{submitLoading
+                        ? "등록중..."
+                        : isUpload
+                            ? "등록"
+                            : "수정"}</button>
                     <button type="button" onClick={onClickCancel}>취소</button>
                 </div>
             )}

@@ -5,8 +5,9 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ProductProps } from "@/types/product";
 import { NavItem } from "@/types/common";
+import { PerformanceProps } from "@/types/performance";
 
-// 유니트, 기타기기 상세페이지
+// 상세페이지
 export default function ProductDetail() {
 
     const router = useRouter();
@@ -14,8 +15,9 @@ export default function ProductDetail() {
     const { id, category, type } = useParams();
     const isPathnameProduct = pathname.startsWith("/product");
     const getCategory = isPathnameProduct ? category : type;
+    const isPerformance = category === "performance";
 
-    const [detail, setDetail] = useState<ProductProps>();
+    const [detail, setDetail] = useState<ProductProps | PerformanceProps>();
     const [prevItem, setPrevItem] = useState<NavItem | null>(null);
     const [nextItem, setNextItem] = useState<NavItem | null>(null);
 
@@ -24,7 +26,8 @@ export default function ProductDetail() {
             if (!id || (!category && !type)) return;
 
             try {
-                const res = await fetch(`/api/product/${getCategory}/${id}`);
+
+                const res = await fetch(`/api/${isPerformance ? "performance" : "product"}/${getCategory}/${id}`);
                 if (!res.ok) {
                     const errorData = await res.json();
                     throw new Error(errorData.error || "데이터를 불러오지 못했습니다.");
@@ -47,7 +50,7 @@ export default function ProductDetail() {
         if (!detail) return;
         if (!confirm("제품을 삭제하시겠습니까?")) return;
         try {
-            const res = await fetch(`/api/product/${getCategory}/${id}`, { method: "DELETE" });
+            const res = await fetch(`/api/${isPerformance ? "performance" : "product"}/${getCategory}/${id}`, { method: "DELETE" })
             const result = await res.json();
             if (!res.ok) throw new Error(result.error || "삭제 실패했습니다. 다시 시도해주세요.");
 
@@ -70,16 +73,23 @@ export default function ProductDetail() {
         <article className="product-detail">
             <div>
                 <div>
-                    <h3 className="page-title">{getCategory === "unit" ? "유압 유니트" : "기타 기기"}</h3>
+                    <h3 className="page-title">{getCategory === "unit" ? "유압 유니트" : "기타 유압 기기"}</h3>
+                    {'spec' in detail && <p><span>SPEC </span>| {detail.spec}</p>}
                 </div>
                 <div>
                     <div className="stroke-text">
                         <h3>{detail.name}</h3>
                     </div>
-                    <div>
-                        <Image src={detail.thumbnail} alt={detail.name} width={500} height={500} />
-                    </div>
+                    {'thumbnail' in detail ?
+                        <Image
+                            src={detail.thumbnail}
+                            alt={detail.name}
+                            width={500}
+                            height={500}
+                        />
+                     : <Image src={detail.img} alt={detail.name} width={800} height={500} />}
                 </div>
+                {'images' in detail &&
                 <div>
                     <div className="stroke-text">
                         <h3>제품 특징</h3>
@@ -92,6 +102,7 @@ export default function ProductDetail() {
                         )}
                     </div>
                 </div>
+                }
                 {!isPathnameProduct &&
                     <div className="display-flex admin-btn">
                         <button type="button" onClick={() => goEdit(String(id))}>수정하기</button>
@@ -102,7 +113,7 @@ export default function ProductDetail() {
                     isPathnameProduct &&
                     <ProductNavigator
                         prevItem={prevItem}
-                        nextItem={nextItem}/>
+                        nextItem={nextItem} />
                 }
             </div>
         </article>

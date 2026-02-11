@@ -66,9 +66,9 @@ export default function SealPartsDiagram() {
                     <td>G25</td>
                     <td>L43, 40-30</td>
                     <td>G35</td>
-                    <td>PU 6-22,4</td>
+                    <td>PU 6-22.4</td>
                     <td>PU 6-18</td>
-                    <td>NI 300-22,4</td>
+                    <td>NI 300-22.4</td>
                     <td>NI 300-18</td>
                     <td>P16</td>
                     <td>P16</td>
@@ -82,9 +82,9 @@ export default function SealPartsDiagram() {
                     <td>L43, 50-34</td>
                     <td>G45</td>
                     <td>PU 6-28</td>
-                    <td>PU 6-22,4</td>
+                    <td>PU 6-22.4</td>
                     <td>NI 300-28</td>
-                    <td>NI 300-22,4</td>
+                    <td>NI 300-22.4</td>
                     <td>P22</td>
                     <td>P20</td>
                     <td>P20</td>

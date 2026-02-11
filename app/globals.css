@@ -475,6 +475,7 @@ td {
   text-align: center;
   padding: 5px;
   font-size: 0.8rem;
+  white-space: nowrap;
 }
 
 tfoot {
@@ -659,6 +660,7 @@ footer>div>:last-child>:last-child>p {
   td {
     padding: 10px;
     font-size: 1rem;
+    white-space: unset;
   }
 
   /* pagination */
@@ -877,7 +879,7 @@ footer>div>:last-child>:last-child>p {
 
   footer>div>:last-child {
     display: flex;
-    gap: 50px;
+    gap: 10px;
     margin: auto 0;
   }
 

@@ -23,15 +23,17 @@ export default function ProductList() {
             try {
                 let query = supabase.from(`${category as string}s`).select("*");
 
-                if (subCategory) {
-                    query = query.eq("category", subCategory);
-                } else {
-                    if (category === "cylinder") {
-                        query = query.eq("category", "standard");
-                    } else if (category === "unit") {
-                        query = query.eq("category", "small");
+                if (category !== "performance") {
+                    if (subCategory) {
+                        query = query.eq("category", subCategory);
                     } else {
-                        query = query.eq("category", category);
+                        if (category === "cylinder") {
+                            query = query.eq("category", "standard");
+                        } else if (category === "unit") {
+                            query = query.eq("category", "small");
+                        } else {
+                            query = query.eq("category", category);
+                        }
                     }
                 }
 
@@ -57,7 +59,7 @@ export default function ProductList() {
                 {currentItems.map(p =>
                     <section key={p.id}>
                         <Link href={`/product/${category}/${p.id}`}>
-                            <Image src={p.thumbnail} alt={p.name} width={500} height={500} />
+                            <Image src={'thumbnail' in p ? p.thumbnail : p.img} alt={p.name} width={500} height={500} />
                         </Link>
                         <div>
                             <h4>{p.name}</h4>

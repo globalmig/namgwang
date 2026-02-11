@@ -19,11 +19,11 @@ export default function Specifications() {
                 </tr>
                 <tr>
                     <td colSpan={2}>최고사용압력</td>
-                    <td>70 kgf/cm² (6.864Mpa) | 140 kgf/cm² (13.729Mpa)</td>
+                    <td>70 kgf/cm² (6,864Mpa) | 140 kgf/cm² (13,729Mpa)</td>
                 </tr>
                 <tr>
                     <td colSpan={2}>내압력</td>
-                    <td>105 kgf/cm² (16.67Mpa) | 210 kgf/cm² (27.459Mpa)</td>
+                    <td>105 kgf/cm² (1,667Mpa) | 210 kgf/cm² (27,459Mpa)</td>
                 </tr>
                 <tr>
                     <td colSpan={2}>최저작동압력</td>

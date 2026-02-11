@@ -16,6 +16,7 @@ interface InquireFormProps {
 export default function InquireForm() {
 
     const router = useRouter();
+    const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
     const [form, setForm] = useState<InquireFormProps>({
         title: "",
@@ -51,6 +52,8 @@ export default function InquireForm() {
 
     const onSubmitForm = useCallback(async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (submitLoading) return;
 
         // 유효성 검증
         if (!form.name.trim()) {
@@ -95,6 +98,8 @@ export default function InquireForm() {
 
         // API
         try {
+            setSubmitLoading(true);
+
             const formData = new FormData();
             formData.append("title", form.title);
             formData.append("name", form.name);
@@ -110,7 +115,7 @@ export default function InquireForm() {
 
             const response = await fetch("/api/inquire", {
                 method: "POST",
-                body: formData, // FormData는 Headers의 Content-Type을 자동으로 multipart/form-data로 설정
+                body: formData,
             });
 
             const data = await response.json();
@@ -119,12 +124,14 @@ export default function InquireForm() {
                 alert("문의가 정상적으로 접수되었습니다.");
                 router.push("/");
             } else {
-                alert(`문의 발송 중 오류가 발생했습니다. 다시 시도해주세요.` );
+                alert(`문의 발송 중 오류가 발생했습니다. 다시 시도해주세요.`);
                 console.error(data.error);
             }
         } catch (error) {
             console.error(error);
             alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+        } finally {
+            setSubmitLoading(false);
         }
 
     }, [form, router]);
@@ -150,7 +157,7 @@ export default function InquireForm() {
                 </div>
                 <div>
                     <label htmlFor="fax"><h3>팩스</h3></label>
-                    <input type="text" id="fax" name="fax" placeholder="이메일을 입력해주세요." onChange={onChangeForm} value={form.fax} />
+                    <input type="text" id="fax" name="fax" placeholder="팩스번호를 입력해주세요." onChange={onChangeForm} value={form.fax} />
                 </div>
                 <div>
                     <label htmlFor="contents"><h3 className="required">문의 내용</h3></label>
@@ -185,7 +192,7 @@ export default function InquireForm() {
                     </div>
                 </div>
 
-                <button type="submit">문의 접수하기</button>
+                <button type="submit">{submitLoading ? "접수 중..." : "문의 접수하기"}</button>
 
             </form>
         </>

@@ -13,10 +13,10 @@ export default function PartDiagram() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1</td><td>로드</td><td>기계구조용탄소강 강재</td><td>1</td></tr>
+                        <tr><td>1</td><td>로드</td><td>기계구조용 탄소강 강재</td><td>1</td></tr>
                         <tr><td>4</td><td>보스</td><td>청동</td><td>1</td></tr>
                         <tr><td>3</td><td>보스</td><td>청동</td><td>1</td></tr>
-                        <tr><td>6</td><td>몸체</td><td>기계구조용탄소강 강재</td><td>1</td></tr>
+                        <tr><td>6</td><td>몸체</td><td>기계구조용 탄소강 강재</td><td>1</td></tr>
                         <tr><td>9</td><td>피스톤</td><td>청동</td><td>1</td></tr>
                         <tr><td>10</td><td>마그네트</td><td>-</td><td>1</td></tr>
                     </tbody>

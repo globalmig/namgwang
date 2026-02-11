@@ -26,8 +26,7 @@ export const CATEGORY_MAP: {
         categories: [
             { name: "유압 실린더", url: "cylinder" },
             { name: "유압 유니트", url: "unit" },
-            { name: "기타 기기 제작", url: "other" },
-             { name: "실적", url: "performance" },
+            { name: "기타 유압 기기", url: "other" },
         ],
     },
     inquire: {
@@ -79,10 +78,10 @@ export const UNIT_SUBCATEGORY : {
     name: string,
     category: string,
 } [] = [
-    { name: "소형 유니트", category: "small" },
-    { name: "중형 유니트", category: "medium" },
-    { name: "대형 유니트", category: "large" },
-    { name: "특수형 유니트", category: "extra" },
+    { name: "소형", category: "small" },
+    { name: "중형", category: "medium" },
+    { name: "대형", category: "large" },
+    { name: "특수형", category: "extra" },
 ]
 
 export const ADMIN_SUBCATEGORY : {
@@ -91,13 +90,13 @@ export const ADMIN_SUBCATEGORY : {
 } [] = [
     { name: "실적게시판", category: "performance" },
     { name: "유압 유니트 게시판", category: "unit" },
-    { name: "기타 기기 게시판", category: "other" },
+    { name: "기타 유압 기기 게시판", category: "other" },
 ]
 
 export const ADMIN_PRODUCT_CATEGORY_NAME : {[key: string] : string} = {
-    small: "소형 유니트",
-    medium: "중형 유니트",
-    large: "대형 유니트",
-    extra: "특수형 유니트",
-    other: "기타 기기"
+    small: "소형",
+    medium: "중형",
+    large: "대형",
+    extra: "특수형",
+    other: "기타 유압 기기"
 }

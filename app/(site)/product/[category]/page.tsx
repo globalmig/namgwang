@@ -19,7 +19,7 @@ export default function ProductListPage() {
                     <h2 className="page-title">{categoryTitle}</h2>
                     <SubCategoryTab />
                 </div>
-                {category === "performance" ? <PerformanceList /> : <ProductList />}
+               <ProductList />
             </div>
         </article>
     )

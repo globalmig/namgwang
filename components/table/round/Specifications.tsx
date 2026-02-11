@@ -11,7 +11,7 @@ export default function Specifications() {
             <tbody>
                 <tr>
                     <td colSpan={2}>형식</td>
-                    <td>250kgf/cm²</td>
+                    <td>210kgf/cm²</td>
                 </tr>
                 <tr>
                     <td colSpan={2}>실린더 내경(mm)</td>
@@ -19,7 +19,7 @@ export default function Specifications() {
                 </tr>
                 <tr>
                     <td colSpan={2}>최고 사용 압력</td>
-                    <td>250kgf/cm²</td>
+                    <td>210kgf/cm²</td>
                 </tr>
                 <tr>
                     <td colSpan={2}>내압력</td>

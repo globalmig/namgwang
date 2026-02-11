@@ -56,10 +56,10 @@ export default function Home() {
             <section>
               <Link href="/product/other">
                 <div>
-                  <Image src="/images/기타기기.jpg" alt="기타 기기 제작" width={378} height={378} />
+                  <Image src="/images/기타기기.jpg" alt="기타 유압 기기 제작" width={378} height={378} />
                 </div>
                 <div>
-                  <p>기타 기기</p>
+                  <p>기타 유압 기기</p>
                   <h3>OTHER</h3>
                 </div>
               </Link>
