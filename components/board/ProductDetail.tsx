@@ -81,20 +81,20 @@ export default function ProductDetail() {
                         <h3>{detail.name}</h3>
                     </div>
                     {'thumbnail' in detail ?
-                        <Image
+                        <Image style={{marginTop: "30px"}}
                             src={detail.thumbnail}
                             alt={detail.name}
                             width={500}
                             height={500}
                         />
-                     : <Image src={detail.img} alt={detail.name} width={800} height={500} />}
+                     : <Image style={{marginTop: "30px"}} src={detail.img} alt={detail.name} width={800} height={500} />}
                 </div>
                 {'images' in detail &&
                 <div>
                     <div className="stroke-text">
                         <h3>제품 특징</h3>
                     </div>
-                    <div style={{marginTop: "30px"}}>
+                    <div>
                         {detail.images.map((i, index) =>
                             <div key={index}>
                                 <Image src={i} alt={detail.name} width={500} height={500} />
