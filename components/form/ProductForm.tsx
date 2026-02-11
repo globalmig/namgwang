@@ -158,10 +158,12 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
         try {
             setSubmitLoading(true);
 
+            console.log("before fetch");
             const res = await fetch(isUpload ? "/api/product" : `/api/product/${type}/${id}`, {
                 method: isUpload ? "POST" : "PATCH",
                 body: formData,
             });
+            console.log("after fetch", res);
 
             const result = await res.json();
 
@@ -175,7 +177,8 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
             router.refresh();
 
         } catch (err) {
-            console.error(err)
+            console.error("전송 에러:", err);
+            alert("등록 중 오류가 발생했습니다. 브라우저 콘솔을 확인하거나 관리자에게 문의하세요.");
         } finally {
             setSubmitLoading(false);
         }
