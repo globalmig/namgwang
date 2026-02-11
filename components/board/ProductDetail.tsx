@@ -94,7 +94,7 @@ export default function ProductDetail() {
                     <div className="stroke-text">
                         <h3>제품 특징</h3>
                     </div>
-                    <div>
+                    <div style={{marginTop: "30px"}}>
                         {detail.images.map((i, index) =>
                             <div key={index}>
                                 <Image src={i} alt={detail.name} width={500} height={500} />
