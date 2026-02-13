@@ -1,5 +1,5 @@
-import BType from "@/components/table/technology/BType";
-import CType from "@/components/table/technology/CType";
+import BType from "@/components/table/BType";
+import CType from "@/components/table/CType";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -400,8 +400,8 @@ export default function TechnologyCylinderPage() {
             <article className="contact technology">
                 <div>
                     <div>
-                        <h2>맞춤형 유압 유니트 설계·제작 </h2>
-                        <p>당사는 고객 장비 조건에 최적화된 <span>유압 유니트 설계 및 제작 서비스를 제공합니다.</span><br />사양 문의 및 상담은 언제든지 가능합니다.</p>
+                        <h2>맞춤형 유압 실린더 설계·제작 </h2>
+                        <p>당사는 고객 장비 조건에 최적화된 <span>유압 실린더 설계 및 제작 서비스를 제공합니다.</span><br />사양 문의 및 상담은 언제든지 가능합니다.</p>
                     </div>
                     <div>
                         <button>

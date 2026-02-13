@@ -458,6 +458,10 @@ form>div>button:last-of-type {
   margin-bottom: 10px;
 }
 
+.table-wrapper table>thead tr:first-of-type th:first-of-type{
+background: #034694;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;

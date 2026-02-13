@@ -143,7 +143,7 @@
 
 .line {
     background-color: rgba(3, 71, 148, 1);
-    background-image: linear-gradient(to top right, transparent calc(50% - 0.5px), white 50%, transparent calc(50% + 0.5px));
+    background-image: linear-gradient(to top right, transparent calc(50% - 0.5px), white 50%, transparent calc(50% + 0.5px)) !important;
     position: relative;
     padding: 20px 40px;
 }
@@ -164,15 +164,15 @@
     background-color: rgba(3, 71, 148, 1);
 }
 
-.cushion-length>thead,
-.stroke-limit>thead {
-    background-color: #d5dae0;
+.cushion-section thead,
+.stroke-section thead {
+    background-color: #d5dae0 !important;
     color: #222;
 }
 
-.cushion-length>thead>tr>th:first-of-type,
-.stroke-limit>thead>tr>th:first-of-type {
-    background-color: #b6bbc2;
+.cushion-section thead>tr>th:first-of-type,
+.stroke-section thead>tr>th:first-of-type {
+    background-color: #b6bbc2 !important;
 }
 
 .stroke-section table {
@@ -181,7 +181,7 @@
 
 .seal-material>thead>tr>th:first-of-type {
     background-color: rgba(3, 71, 148, 1);
-    background-image: linear-gradient(to top right, transparent calc(50% - 0.5px), white 50%, transparent calc(50% + 0.5px));
+    background-image: linear-gradient(to top right, transparent calc(50% - 0.5px), white 50%, transparent calc(50% + 0.5px)) !important;
     position: relative;
 }
 
@@ -197,7 +197,7 @@
     left: 15px;
 }
 
-.part-diagram-section>div>div>div {
+.part-diagram-section>div {
     width: 100%;
     margin-bottom: 20px;
 }
@@ -206,46 +206,46 @@
     background-color: rgba(3, 71, 148, 1);
 }
 
-.seal-parts-diagram>thead {
-    border-bottom: 2px solid #034694;
+.seal-diagram-section table thead {
+    border-bottom: 2px solid #034694 !important;
 }
 
-.seal-parts-diagram>thead>tr>th:first-of-type,
-.seal-parts-diagram>tbody>tr>th:first-of-type {
+.seal-diagram-section thead>tr>th:first-of-type,
+.seal-diagram-section tbody>tr>th:first-of-type {
     background-color: rgba(3, 71, 148, 1);
     color: white;
 }
 
-.seal-parts-diagram>thead>tr:nth-of-type(2)>th:not(th:first-of-type),
-.seal-parts-diagram>thead>tr:nth-of-type(4)>th:not(th:first-of-type) {
+.seal-diagram-section thead>tr:nth-of-type(2)>th:not(th:first-of-type),
+.seal-diagram-section thead>tr:nth-of-type(4)>th:not(th:first-of-type) {
     background-color: #eeeeee;
     color: #222
 }
 
-.seal-parts-diagram>thead>tr:not(.seal-parts-diagram>thead>tr:first-of-type) {
+.seal-diagram-section thead>tr:not(.seal-diagram-section thead>tr:first-of-type) {
     background-color: white;
     color: #222;
 }
 
-.seal-parts-diagram.high-pressure>thead>tr:first-of-type>th:nth-of-type(2) {
+.seal-diagram-section.high-pressure>thead>tr:first-of-type>th:nth-of-type(2) {
     background-color: rgba(3, 71, 148, 1);
 }
 
-.seal-parts-diagram.compact>thead>tr:first-of-type>th:nth-of-type(2) {
+.seal-diagram-section.compact>thead>tr:first-of-type>th:nth-of-type(2) {
     background-color: rgba(3, 71, 148, 1);
 }
 
-.seal-parts-diagram.double>thead>tr>th:first-of-type {
+.seal-diagram-section.double>thead>tr>th:first-of-type {
     background-color: rgba(3, 71, 148, 0.3);
 }
 
-.seal-parts-diagram.double>thead>tr:nth-of-type(2)>td,
-.seal-parts-diagram.double>thead>tr:nth-of-type(4)>td {
+.seal-diagram-section.double>thead>tr:nth-of-type(2)>td,
+.seal-diagram-section.double>thead>tr:nth-of-type(4)>td {
     background-color: #eee;
     color: #222
 }
 
-.seal-parts-diagram.double tr>:first-child {
+.seal-diagram-section.double tr>:first-child {
     padding: 0 15px;
 }
 
@@ -309,7 +309,7 @@
         width: 600px;
     }
 
-    .spec-set .part-diagram-section>div>div>div {
+    .spec-set .part-diagram-section>div>div {
         width: 570px;
     }
 

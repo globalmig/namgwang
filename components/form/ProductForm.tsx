@@ -48,25 +48,21 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
     };
 
     const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, files } = e.target;
-        if (!files) return;
-        if (name === "thumbnail") {
-            setForm(prev => ({ ...prev, thumbnail: files[0] }));
-        }
-        if (name === "images") {
-            setForm(prev => ({ ...prev, images: Array.from(files) }));
-        }
-    };
+    const { name, files } = e.target;
+    if (!files || files.length === 0) return;
+
+    if (name === "thumbnail") {
+        setForm(prev => ({ ...prev, thumbnail: files[0] }));
+    }
+    if (name === "images") {
+        // 상세 이미지의 경우, 기존 로직(newImageFiles)과 싱크를 맞춰야 함
+        setNewImageFiles(Array.from(files)); 
+    }
+};
 
     const onChangeForm = useCallback((e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target;
 
-        if (type === "file") {
-            const fileInput = e.target as HTMLInputElement;
-            const file = fileInput.files?.[0] ?? null;
-            setForm(prev => ({ ...prev, file }));
-            return;
-        }
         setForm(prev => ({
             ...prev,
             [name]: value

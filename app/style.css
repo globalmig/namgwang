@@ -340,11 +340,11 @@ main.category-main>div>h2 {
 
 /* product-detail */
 
-.product-detail>div>:nth-child(2)>div img {
+.product-detail div img {
     margin-top: 30px;
     width: 100%;
     height: 256px;
-    object-fit: contain;
+    object-fit: cover
 }
 
 .product-detail>div>:nth-child(2) {
@@ -1445,6 +1445,10 @@ main.category-main>div>h2 {
 
     .tech-unit>div>section>table thead th {
         padding: 20px;
+    }
+
+    .tech-unit>div>section>table th, .tech-unit>div>section>table td {
+        font-size: 1.1rem;
     }
 
     .tech-unit>div>section>table tbody td {

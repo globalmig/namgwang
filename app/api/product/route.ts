@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase/server";
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '4mb', 
+    },
+  },
+};
+
+// api/product/route.ts
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
