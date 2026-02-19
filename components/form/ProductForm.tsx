@@ -154,12 +154,10 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
         try {
             setSubmitLoading(true);
 
-            console.log("before fetch");
             const res = await fetch(isUpload ? "/api/product" : `/api/product/${type}/${id}`, {
                 method: isUpload ? "POST" : "PATCH",
                 body: formData,
             });
-            console.log("after fetch", res);
 
             const result = await res.json();
 
