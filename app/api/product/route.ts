@@ -1,14 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase/server";
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '4mb', 
-    },
-  },
-};
-
 // api/product/route.ts
 export async function POST(req: NextRequest) {
   try {
@@ -32,19 +24,19 @@ export async function POST(req: NextRequest) {
       return `${Date.now()}_${crypto.randomUUID()}.${ext}`;
     }
 
-    const thumbnailBuffer = await thumbnail.arrayBuffer();
-    const safeName = safeFileName(thumbnail.name);
-    const thumbnailPath = `${targetTable}/thumbnail/${safeName}`;
+    const thumSafeName = safeFileName(thumbnail.name);
+    const thumbnailPath = `${targetTable}/thumbnail/${thumSafeName}`;
 
     const { error: thumError } = await supabaseServer.storage
       .from(targetTable)
-      .upload(thumbnailPath, thumbnailBuffer, {
+      .upload(thumbnailPath, thumbnail, { // buffer 변환 없이 직접 전달
         contentType: thumbnail.type,
+        upsert: false, // 동일 파일명 덮어쓰기 방지
       });
 
     if (thumError) throw thumError;
 
-    const { data: thumUrl } = supabaseServer.storage
+    const { data: thumUrlData } = supabaseServer.storage
       .from(targetTable)
       .getPublicUrl(thumbnailPath);
 
@@ -52,13 +44,14 @@ export async function POST(req: NextRequest) {
     const imagesUrls: string[] = [];
 
     for (const file of imagesFiles) {
-      const buffer = await file.arrayBuffer();
       const safeName = safeFileName(file.name);
-      const path = `${targetTable}/images/${safeName}`;
-
+      const path = `${targetTable}/images/${safeName}`
       const { error } = await supabaseServer.storage
         .from(targetTable)
-        .upload(path, buffer, { contentType: file.type });
+        .upload(path, file, {
+          contentType: file.type,
+          upsert: false
+        });
 
       if (error) throw error;
 
@@ -73,9 +66,9 @@ export async function POST(req: NextRequest) {
     const { error: dbError } = await supabaseServer.from(targetTable).insert({
       name,
       category,
-      thumbnail: thumUrl.publicUrl,
+      thumbnail: thumUrlData.publicUrl,
       images: imagesUrls,
-    });
+    })
 
     if (dbError) throw dbError;
 
@@ -83,9 +76,19 @@ export async function POST(req: NextRequest) {
 
   } catch (err: any) {
     console.error("PRODUCT POST ERROR", err);
+    console.error("PRODUCT POST ERROR", err);
+
+    if (err.message?.includes("Payload Too Large") || err.status === 413) {
+      return NextResponse.json(
+        { error: "파일 용량이 너무 큽니다. (최대 약 4MB)" },
+        { status: 413 }
+      );
+    }
+
     return NextResponse.json(
-      { error: err.message || "제품 등록을 실패했습니다. 다시 시도해주세요." },
+      { error: err.message || "제품 등록을 실패했습니다." },
       { status: 500 }
     );
+
   }
 }

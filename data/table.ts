@@ -2242,18 +2242,18 @@ export const TABLE_DATA = [
     table: {
       thead: [
         [
-          { label: "1" },
+          { label: "❶" },
           { label: "지지형식 (LA, LT, FA, FB, TA, TB, CA)", colSpan: 3 }
         ]
       ],
       tbody: [
         {
           id: 2,
-          data: ["2", { value: "기종 (10형, 20형, 30형, 40형, 50형)", colSpan: 3 }]
+          data: ["❷", { value: "기종 (10형, 20형, 30형, 40형, 50형)", colSpan: 3 }]
         },
         {
           id: 3,
-          data: [{ value: "3", rowSpan: 2 }, { value: "선단나사길이", rowSpan: 2 }, "A", "표준"]
+          data: [{ value: "❸", rowSpan: 2 }, { value: "선단나사길이", rowSpan: 2 }, "A", "표준"]
         },
         {
           id: 4,
@@ -2261,7 +2261,7 @@ export const TABLE_DATA = [
         },
         {
           id: 5,
-          data: [{ value: "4", rowSpan: 2 }, { value: "쿠션형식", rowSpan: 2 }, "B", "양측 오리피스형 감쇠기구 (표준)"]
+          data: [{ value: "❹", rowSpan: 2 }, { value: "쿠션형식", rowSpan: 2 }, "B", "양측 오리피스형 감쇠기구 (표준)"]
         },
         {
           id: 6,
@@ -2269,15 +2269,15 @@ export const TABLE_DATA = [
         },
         {
           id: 7,
-          data: ["5", { value: "스트로크", colSpan: 3 }]
+          data: ["❺", { value: "스트로크", colSpan: 3 }]
         },
         {
           id: 8,
-          data: ["6", { value: "포트위치 (A, B, C, D, E, F, G, H)", colSpan: 3 }]
+          data: ["❻", { value: "포트위치 (A, B, C, D, E, F, G, H)", colSpan: 3 }]
         },
         {
           id: 9,
-          data: ["7", { value: "에어빼기위치 (A, B, C, D, E, F, G, H)", colSpan: 3 }]
+          data: ["❼", { value: "에어빼기위치 (A, B, C, D, E, F, G, H)", colSpan: 3 }]
         }
       ]
     }
