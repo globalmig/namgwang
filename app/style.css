@@ -213,7 +213,7 @@ main.category-main>div>h2 {
 }
 
 .home2>div>:last-child section>button:hover {
-    background-color: #00A8E9;
+    background-color: #034694;
 }
 
 .home2>div>:last-child section>button:hover a {
@@ -258,6 +258,11 @@ main.category-main>div>h2 {
 .contact>div>:last-child button {
     padding: 5px 13px;
     border: 1px solid white;
+}
+
+.contact>div>:last-child button:hover {
+    background-color: rgba(4, 9, 15, 0.6);
+    border: 1px solid #034694;
 }
 
 .contact>div>:last-child button a {
@@ -879,6 +884,11 @@ main.category-main>div>h2 {
 
 .contact.technology {
     background-image: url('/images/contact_bg2.jpg');
+}
+
+.contact.technology >div>:last-child button:hover {
+    background-color: #00A8E9;
+    border: 1px solid white;
 }
 
 .inquire>div>form>div:last-of-type>:nth-child(2) {

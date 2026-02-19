@@ -11,12 +11,15 @@ export default function ProductListPage() {
     const pathnameSplit = pathname.split('/').filter(Boolean);
     const categoryKey = pathnameSplit[0];
     const categoryTitle = CATEGORY_MAP[categoryKey].categories?.find(c => c.url === category)?.name;
+    
+    const performance = pathnameSplit[1];
+    console.log(performance)
 
     return (
         <article className="product">
             <div>
                 <div>
-                    <h2 className="page-title">{categoryTitle}</h2>
+                    <h2 className="page-title">{performance !== "performance" ? categoryTitle : "유압 실린더"}</h2>
                     <SubCategoryTab />
                 </div>
                <ProductList />
