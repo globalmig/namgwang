@@ -56,7 +56,7 @@ export default function CylinderDetail() {
                     </div>
                     <div>
                         <div className="stroke-text">
-                            <h3>{detail.name}</h3>
+                            <h3>{detail.name} TYPE</h3>
                         </div>
                         <ul>
                             {detail.type &&

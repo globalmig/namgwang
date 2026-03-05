@@ -131,8 +131,8 @@ export default function TechnologyCylinderPage() {
                             <h5 className="mo">(이론 효율 100%)</h5>
                             <p>단위: kgf(1000kg = 1 Ton)</p>
                         </section>
-                        <div className="table-wrapper">
-                            <CType />
+                        <div>
+                            <Image src="/images/CTYPE.jpg" alt="C Type 이론 출력표" width={1194} height={730}/>
                         </div>
                         <p>* 실제 작동 시 효율은 이론 효율의 80%로 적용합니다.</p>
                     </div>
@@ -143,8 +143,9 @@ export default function TechnologyCylinderPage() {
                             <h5 className="mo">(이론 효율 100%)</h5>
                             <p>단위: kgf (1000kg = 1 Ton)</p>
                         </section>
-                        <div className="table-wrapper">
-                            <BType />
+                        <div>
+                            <Image src="/images/BTYPE.jpg" alt="B Type 이론 출력표" width={1194} height={730}/>
+                       
                         </div>
                         <p>* 실제 작동 시 효율은 이론 효율의 80%로 적용합니다.</p>
                     </div>
@@ -283,7 +284,7 @@ export default function TechnologyCylinderPage() {
                             <h3>좌굴표</h3>
                         </section>
                         <div>
-                            <Image src="/images/tech_좌굴표.png" alt="좌굴표" width={1152} height={896} />
+                            <Image src="/images/tech_좌굴표.png" alt="좌굴표" width={1136} height={784} />
                         </div>
                     </div>
 
@@ -323,7 +324,7 @@ export default function TechnologyCylinderPage() {
                         </div>
                         <div>
                             <div>
-                                <Image src="/images/tech_speed-piping그래프.jpg" alt="그래프" width={1000} height={663} />
+                                <Image src="/images/tech_speed-piping그래프.jpg" alt="그래프" width={931} height={697} />
                             </div>
                             <p>실린더 각 사이즈에 대한 필요 유량과 속도, PT경과 관내 유속의 관계 그래프</p>
                         </div>

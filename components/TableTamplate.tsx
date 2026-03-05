@@ -44,14 +44,13 @@ export default function TableTemplate({ data, type, category }: TableTemplatePro
                                     const rowSpan = "rowSpan" in cell ? (cell as any).rowSpan : undefined;
                                     const colSpan = "colSpan" in cell ? (cell as any).colSpan : undefined;
                                     const value = "main" in cell ? cell.main : (cell as any).value;
-
                                     return (
                                         <td key={i} rowSpan={rowSpan} colSpan={colSpan}>
-                                            <span className="clamp-text">{value}</span>
+                                            <span>{value}</span>
                                         </td>
                                     );
                                 }
-                                return <td key={i}><span className="clamp-text">{cell}</span></td>;
+                                return <td key={i}><span>{cell}</span></td>;
                             })}
                         </tr>
                     ))}

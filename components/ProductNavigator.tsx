@@ -20,13 +20,13 @@ export default function ProductNavigator({ prevItem, nextItem }: ProductNavigato
         <ul className="product-nav">
             {prevItem && (
                 <li onClick={onPrev} style={{borderBottom: nextItem && !(nextItem || prevItem) ? "1px solid #aaa": ""}}>
-                    <span>이전 제품</span> {prevItem.name}
+                    <span>이전 제품</span> {prevItem.name} TYPE
                 </li>
             )}
 
             {nextItem && (
                 <li onClick={onNext} style={{borderTop: prevItem ? "1px solid #aaa": ""}}>
-                    <span>다음 제품</span> {nextItem.name}
+                    <span>다음 제품</span> {nextItem.name} TYPE
                 </li>
             )}
         </ul>

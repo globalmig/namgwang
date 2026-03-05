@@ -62,7 +62,7 @@ export default function ProductList() {
                             <Image src={'thumbnail' in p ? p.thumbnail : p.img} alt={p.name} width={500} height={500} />
                         </Link>
                         <div>
-                            <h4>{p.name}</h4>
+                            <h4>{p.name} {p.name !== "선단고리 & 로크너트" && "TYPE"}</h4>
                             {'type' in p && <p>{p.type}</p>}
                         </div>
                     </section>

@@ -6,7 +6,7 @@ import TableTemplate from "./TableTamplate";
 // 선단고리 레이아웃
 export default function TableLayout2({ detail }: CylinderDetailProps) {
 
-    const { name, product_img, series_img, seal_material_img, cheats, category, mounting } = detail;
+    const { name, category } = detail;
 
     // 로컬 데이터에서 일치하는 객체
     const tableData = TABLE_DATA.find((data) => String(data.id) === String(detail.id));
@@ -39,7 +39,6 @@ export default function TableLayout2({ detail }: CylinderDetailProps) {
                                 <Image src={`/images/${category}/이산너클.jpg`} alt="선단고리 I, Y TYPE" width={1000} height={400} />
                             </div>
                         </div>
-                        <TableTemplate data={tableData.table} type={tableData.type} category={tableData.category} />
                     </> :
                     <>
                         <h3>IB TYPE (일산 너클조인트)</h3>
@@ -48,33 +47,30 @@ export default function TableLayout2({ detail }: CylinderDetailProps) {
                                 <Image src={`/images/${category}/일산너클.jpg`} alt="선단고리 IB TYPE" width={1000} height={400} />
                             </div>
                         </div>
-                        <TableTemplate data={tableData.table} type={tableData.type} category={tableData.category} />
+                        <div>
+                            <Image src={`/images/${category}/rod2.jpg`} alt={name} width={1000} height={500} />
+                        </div>
                     </>
                 }
             </section>
             <section className="dust-section">
                 <h3>방진망 부착 실린더</h3>
                 <div>
-                    <Image src={`/images/${category}/방진망부착실린더.jpg`} alt="방진망 부착 실린더" width={1000} height={358} />
+                    <Image src={`/images/${category}/방진망부착실린더.jpg`} alt="방진망 부착 실린더" width={1350} height={358} />
                 </div>
-                {(() => {
-                    const target = getTableByType("dust-proof");
-                    return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                })()}
+                <div>
+                    <Image src={`/images/${category}/dust-proof.jpg`} alt={name} width={1000} height={500} />
+                </div>
             </section>
-            {category !== "round" &&
+            {/* {category !== "round" &&
                 <>
                     <section className="nut-section">
                         <h3>로크너트</h3>
                         <div>
                             <Image src={`/images/${category}/로크너트.jpg`} alt="로크너트" width={800} height={533} />
                         </div>
-                        {(() => {
-                    const target = getTableByType("rod2");
-                    return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                })()}
                     </section>
-                </>}
+                </>} */}
             {/* {category === "rectangular" &&
                 <section className="ks-section">
                     <h3>배관용 플랜지 (KS B 1521)</h3>

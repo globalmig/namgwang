@@ -1,11 +1,10 @@
 import { TABLE_DATA } from "@/data/table";
 import { CylinderDetailProps } from "@/types/product";
-import TableTemplate from "./TableTamplate";
 import Image from "next/image";
 
 export default function TableLayout({ detail }: CylinderDetailProps) {
 
-    const { name, product_img, series_img, seal_material_img, cheats, category, mounting } = detail;
+    const { name, product_img, series_img, seal_material_img, cheats, category } = detail;
 
     // 로컬 데이터에서 일치하는 객체
     const tableData = TABLE_DATA.find((data) => String(data.id) === String(detail.id));
@@ -23,28 +22,22 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
     return (
         <>
             <section className={`product_img-section ${category}`}>
-                {category !== "rectangular" ?
-                    <>
+        
                         <div>
                             {product_img.map((p, index) =>
                                 <div key={index}>
-                                    <Image src={p} alt={name} width={1200} height={500} />
+                                    <Image src={p} alt={name} width={1355} height={500} />
                                 </div>
                             )}
                         </div>
                         {tableData.name === "박형-HTT" || tableData.name === "박형-HTT-LA" &&
-                            (() => {
-                                const target = getTableByType("stroke-suna");
-                                return target &&
-                                    <>
-                                        <h3>스트로크 한계 및 수나사형 치수표</h3>
-                                        <TableTemplate data={target.table} type={target.type} category={target.category} />
-                                    </>
-                            })()
+                            <>
+                                <h3>스트로크 한계 및 수나사형 치수표</h3>
+                                <div>
+                                    <Image src={`/images/${category}/${name}-stroke-limit.jpg`} alt={name} width={1000} height={500} />
+                                </div>
+                            </>
                         }
-                    </>
-                    :
-                    <>
                         {/* <div className="display-flex-flow">
                             <div>
                                 <div>
@@ -88,61 +81,16 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                                 </section>
                             </div>
                         </div> */}
-                        <div>
-                            {product_img.map((p, index) =>
-                                <div key={index}>
-                                    <Image src={p} alt={name} width={1200} height={500} />
-                                </div>
-                            )}
-                        </div>
-                    </>
-                }
-                {category === "standard" || category === "high-pressure" &&
-                    <div className="display-flex-flow">
-                        <div>
-                            <Image src="/images/standard/HA-product_3.jpg" alt={name} width={482} height={337} />
-                        </div>
-                        <div>
-                            <div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>로드경</th>
-                                            <th>W</th>
-                                            <th>WD</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Ø80</td>
-                                            <td>Ø77</td>
-                                            <td>Ø15</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ø85</td>
-                                            <td>Ø81</td>
-                                            <td>Ø15</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ø90</td>
-                                            <td>Ø86</td>
-                                            <td>Ø15</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <p>* 로드경 Ø80이상은 드릴 홀 작업</p>
-                        </div>
-                    </div>
-                }
-                <TableTemplate data={tableData.table} type={tableData.type} category={tableData.category} />
+                <div>
+                    <Image src={`/images/${category}/${name !== "HA-SD-S/R" ? name : "HA-SD-SR"}_rod.jpg`} alt={name} width={1192} height={500} />
+                </div>
+                {/* <TableTemplate data={tableData.table} type={tableData.type} category={tableData.category} /> */}
             </section>
             <section className={`specifications-section ${category}`}>
                 <h3>사양</h3>
-                {(() => {
-                    const target = getTableByType("spec");
-                    return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                })()}
+                <div>
+                    <Image src={`/images/${category}/spec.jpg`} alt={name} width={1000} height={500} />
+                </div>
                 <ul>
                     {category === "standard" || category === "rectangular" || category === "high-pressure" ?
                         <>
@@ -179,10 +127,9 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                         <h3>쿠션길이</h3>
                         <p>단위 mm</p>
                     </div>
-                    {(() => {
-                        const target = getTableByType("cushion");
-                        return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                    })()}
+                    <div>
+                        <Image src={`/images/${category}/cushion.jpg`} alt={name} width={1000} height={500} />
+                    </div>
                     {category === "rectangular" &&
                         <ul>
                             <li>* 하기 내용은 쿠션을 취부할 수 없음 </li>
@@ -193,7 +140,7 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                 </section>
             }
             {category !== "compact" ?
-                (category === "rectangular") ?
+                (category === "round") ?
                     <section className={`stroke-section ${category}`}>
                         <div className="display-flex">
                             <h3>스트로크 한계</h3>
@@ -201,17 +148,19 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                         </div>
                         <section>
                             <h4>▶ TC형 이외의 지지형식</h4>
-                            {(() => {
+                            <div>
+                                <Image src={`/images/${category}/stroke-limit.jpg`} alt={name} width={1190} height={73} />
+                            </div>
+                            {/* {(() => {
                                 const target = getTableByType("stroke-limit1");
                                 return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                            })()}
+                            })()} */}
                         </section>
                         <section>
                             <h4>▶ TC형</h4>
-                            {(() => {
-                                const target = getTableByType("stroke-limit2");
-                                return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                            })()}
+                            <div>
+                                <Image src={`/images/${category}/stroke-limit2.jpg`} alt={name} width={1190} height={73} />
+                            </div>
                         </section>
                     </section>
                     :
@@ -220,10 +169,9 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                             <h3>스트로크 한계</h3>
                             <p>단위 mm</p>
                         </div>
-                        {(() => {
-                            const target = getTableByType("stroke-limit");
-                            return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                        })()}
+                        <div>
+                            <Image src={`/images/${category}/stroke-limit.jpg`} alt={name} width={1000} height={500} />
+                        </div>
                         <ul>
                             <li>1. 지지형식에 따른 좌굴은 별도로 계산해주세요.</li>
                             <li>2. 스트로크 한계 이상 시 설계 제작합니다. (문의 요망)</li>
@@ -239,10 +187,9 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                             <Image src={cheats} alt="표기요령" width={1000} height={187} />
                         </div>
                         {category === "double" &&
-                            (() => {
-                                const target = getTableByType("cheats");
-                                return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                            })()
+                            <div>
+                                <Image src={`/images/${category}/표기요령.jpg`} alt={name} width={1000} height={500} />
+                            </div>
                         }
                     </div>
                 </section>
@@ -332,10 +279,9 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                 <>
                     <section className="thread-section">
                         <h3>나사선단부 길이 (A차수)</h3>
-                        {(() => {
-                            const target = getTableByType("nasan");
-                            return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                        })()}
+                        <div>
+                            <Image src={`/images/double/HTP-나사선단부길이.jpg`} alt={name} width={1000} height={500} />
+                        </div>
                     </section>
                     <section className="mounting-section">
                         <div className="display-flex-flow">
@@ -357,28 +303,25 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
             <section className={`series-section ${category}`}>
                 <h3>HA SERIES 내부구조도</h3>
                 <div>
-                    <Image src={series_img} alt="내부구조도" width={1000} height={417} />
+                    <Image src={series_img} alt="내부구조도" width={1350} height={417} />
                 </div>
             </section>
             <section className={`part-diagram-section ${category}`}>
                 <h3>부품도</h3>
                 <div className="display-flex-flow">
-                    {(() => {
-                        const target = getTableByType("parts-list1");
-                        return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                    })()}
-                    {(() => {
-                        const target = getTableByType("parts-list2");
-                        return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                    })()}
+                    <div>
+                        <Image src={`/images/${category}/parts-list1.jpg`} alt={name} width={582} height={220} />
+                    </div>
+                    <div>
+                        <Image src={`/images/${category}/parts-list2.jpg`} alt={name} width={582} height={220} />
+                    </div>
                 </div>
             </section>
             <section className={`seal-diagram-section ${category}`}>
                 <h3>패킹 부품도</h3>
-                {(() => {
-                    const target = getTableByType("packing-list");
-                    return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                })()}
+                <div>
+                    <Image src={`/images/${category}/packing-list.jpg`} alt={name} width={1194} height={500} />
+                </div>
             </section>
         </>
     )

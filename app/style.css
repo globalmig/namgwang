@@ -1,3 +1,4 @@
+/* style.css */
 /* main */
 main.home-main {
     height: 600px;
@@ -886,7 +887,7 @@ main.category-main>div>h2 {
     background-image: url('/images/contact_bg2.jpg');
 }
 
-.contact.technology >div>:last-child button:hover {
+.contact.technology>div>:last-child button:hover {
     background-color: #00A8E9;
     border: 1px solid white;
 }
@@ -1179,7 +1180,7 @@ main.category-main>div>h2 {
 
     main.home-main>:last-child {
         bottom: -2px;
-    }
+    } 
 
     /* home */
 
@@ -1260,12 +1261,12 @@ main.category-main>div>h2 {
     /* product-list */
 
     .product-list {
-        justify-content: left;
+        justify-content: left !important;
         gap: 0 30px;
     }
 
     .product-list>section {
-        width: 277px;
+        width: 272px;
     }
 
     .product-list>section>a img {
@@ -1457,7 +1458,8 @@ main.category-main>div>h2 {
         padding: 20px;
     }
 
-    .tech-unit>div>section>table th, .tech-unit>div>section>table td {
+    .tech-unit>div>section>table th,
+    .tech-unit>div>section>table td {
         font-size: 1.1rem;
     }
 

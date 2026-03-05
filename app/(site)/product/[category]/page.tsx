@@ -1,5 +1,4 @@
 "use client";
-import PerformanceList from "@/components/board/PerformanceList";
 import ProductList from "@/components/board/ProductList";
 import SubCategoryTab from "@/components/SubCategoryTab";
 import { CATEGORY_MAP } from "@/data/category";

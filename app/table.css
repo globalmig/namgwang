@@ -126,6 +126,10 @@
     height: auto;
 }
 
+.intro-section h4 {
+    margin-bottom: 30px;
+}
+
 .mounting-section>div>div {
     width: 100%;
     max-width: 570px;
@@ -163,6 +167,19 @@
     background-color: rgba(3, 71, 148, 1);
 }
 
+.stroke-section.round img {
+    width: 100%;
+    height: auto;
+}
+
+.stroke-section.round section {
+    margin: 20px 0;
+}
+
+.stroke-section.round section h4 {
+    margin-bottom: 20px;
+}
+
 .cushion-section thead,
 .stroke-section thead {
     background-color: #d5dae0 !important;
@@ -179,8 +196,8 @@
 }
 
 .cheats-section.double>div>:last-child table thead th:first-of-type {
-        font-weight: 400;
-    }
+    font-weight: 400;
+}
 
 .seal-material>thead>tr>th:first-of-type {
     background-color: rgba(3, 71, 148, 1);
@@ -203,6 +220,11 @@
 .part-diagram-section>div {
     width: 100%;
     margin-bottom: 20px;
+}
+
+.part-diagram-section img {
+    width: 100%;
+    height: auto;
 }
 
 .part-diagram>thead>tr>th:first-of-type {
@@ -290,8 +312,17 @@
         margin: 8px 0;
     }
 
-    .spec-set>section>div img {
+    .spec-set>section>div>div>img {
         width: 900px;
+        margin: 0 auto 40px;
+    }
+
+    .part-diagram-section img {
+        width: 570px !important;
+    }
+
+    .spec-set>section>div>img {
+        width: 1200px;
         margin: 0 auto 40px;
     }
 
@@ -323,17 +354,6 @@
     .product_img-section.standard>:nth-child(2),
     .product_img-section.high-pressure>:nth-child(2) {
         margin-bottom: 80px;
-    }
-
-    .product_img-section.standard>:nth-child(2)>:first-child,
-    .product_img-section.high-pressure>:nth-child(2)>:first-child {
-        width: 550px;
-    }
-
-    .product_img-section.standard>:nth-child(2)>:last-child,
-    .product_img-section.high-pressure>:nth-child(2)>:last-child {
-        width: 550px;
-        margin: auto 0;
     }
 
     .product_img-section.standard>:nth-child(2)>div img,
@@ -373,6 +393,10 @@
 
     .product_img-section.recangular>div>div>section h4 {
         font-size: 1.1rem;
+    }
+
+    .stroke-section.round section h4 {
+        font-size: 1.2rem;
     }
 
     .intro-section h4 {
