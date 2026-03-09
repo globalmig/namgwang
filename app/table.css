@@ -4,10 +4,34 @@
     margin: 60px 0;
 }
 
+.spec-set>section .img-box {
+    width: 100%;
+    overflow-x: scroll;
+    margin-bottom: 30px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.spec-set>section .img-box::-webkit-scrollbar {
+  padding-top: 20px;
+  height: 4px;
+  background-color: #eee;
+}
+
+.spec-set>section .img-box::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+
+.spec-set>section .img-box img {
+    height: 100%;
+    max-height: 400px;
+    width: auto;
+    margin-bottom: 5px;
+}
+
 .spec-set>section>div img {
     width: 100%;
     height: auto;
-    margin-bottom: 30px;
 }
 
 .spec-set>section>div>p {
@@ -40,6 +64,10 @@
 .spec-set>section ul li {
     color: #555;
     margin: 5px 0;
+}
+
+.product_img-section>div>div {
+    margin: 30px 0;
 }
 
 .product_img-section.standard>:nth-child(2)>div,
@@ -217,7 +245,7 @@
     left: 15px;
 }
 
-.part-diagram-section>div {
+.part-diagram-section>div>div {
     width: 100%;
     margin-bottom: 20px;
 }
@@ -308,6 +336,15 @@
         margin: 80px 0;
     }
 
+    .spec-set>section .img-box {
+        overflow-x: hidden;
+    }
+
+    .spec-set>section .img-box img {
+        width: 100%;
+        max-height: 100%;
+    }
+
     .spec-set>section ul li {
         margin: 8px 0;
     }
@@ -350,6 +387,10 @@
     .spec-set .part-diagram-section>div>div>table {
         width: 100%;
     }
+
+    .product_img-section>div>div {
+    margin: 70px 0;
+}
 
     .product_img-section.standard>:nth-child(2),
     .product_img-section.high-pressure>:nth-child(2) {
@@ -423,5 +464,17 @@
 
     .cheats-section.double>div>:last-child {
         width: 550px;
+    }
+
+    .ks-section>div div img {
+        width: 550px !important;
+    }
+
+    .nut-section .hp {
+        width: 550px !important;
+    }
+
+    .nut-section .hp2{
+        width: 1200px !important;
     }
 }

@@ -445,12 +445,12 @@ form>div>button:last-of-type {
 
 .table-wrapper::-webkit-scrollbar {
   padding-top: 20px;
-  height: 8px;
+  height: 4px;
   background-color: #eee;
 }
 
 .table-wrapper::-webkit-scrollbar-thumb {
-  background: #034694;
+  background: #555;
   border-radius: 10px;
 }
 

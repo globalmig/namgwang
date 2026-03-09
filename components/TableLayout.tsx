@@ -12,11 +12,6 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
     // type 필터링
     const allTables = TABLE_DATA.filter((data) => String(data.category) === String(detail.category));
 
-    // 특정 타입의 테이블 데이터를 찾는 헬퍼 함수
-    const getTableByType = (type: string) => {
-        return allTables.find(t => t.type === type);
-    };
-
     if (allTables.length === 0 || !tableData) return null;
 
     return (
@@ -26,7 +21,7 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                         <div>
                             {product_img.map((p, index) =>
                                 <div key={index}>
-                                    <Image src={p} alt={name} width={1355} height={500} />
+                                    <Image src={p} alt={name} width={1355} height={500}/>
                                 </div>
                             )}
                         </div>
@@ -34,7 +29,7 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                             <>
                                 <h3>스트로크 한계 및 수나사형 치수표</h3>
                                 <div>
-                                    <Image src={`/images/${category}/${name}-stroke-limit.jpg`} alt={name} width={1000} height={500} />
+                                    <Image src={`/images/${category}/${name}-stroke-limit.jpg`} alt={name} width={1192} height={500} />
                                 </div>
                             </>
                         }
@@ -81,15 +76,14 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                                 </section>
                             </div>
                         </div> */}
-                <div>
+                <div className="img-box">
                     <Image src={`/images/${category}/${name !== "HA-SD-S/R" ? name : "HA-SD-SR"}_rod.jpg`} alt={name} width={1192} height={500} />
                 </div>
-                {/* <TableTemplate data={tableData.table} type={tableData.type} category={tableData.category} /> */}
             </section>
             <section className={`specifications-section ${category}`}>
                 <h3>사양</h3>
-                <div>
-                    <Image src={`/images/${category}/spec.jpg`} alt={name} width={1000} height={500} />
+                <div className="img-box">
+                    <Image src={`/images/${category}/spec.jpg`} alt={name} width={1193} height={500} />
                 </div>
                 <ul>
                     {category === "standard" || category === "rectangular" || category === "high-pressure" ?
@@ -127,8 +121,8 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                         <h3>쿠션길이</h3>
                         <p>단위 mm</p>
                     </div>
-                    <div>
-                        <Image src={`/images/${category}/cushion.jpg`} alt={name} width={1000} height={500} />
+                    <div className="img-box">
+                        <Image src={`/images/${category}/cushion.jpg`} alt={name} width={1192} height={500} />
                     </div>
                     {category === "rectangular" &&
                         <ul>
@@ -151,10 +145,6 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                             <div>
                                 <Image src={`/images/${category}/stroke-limit.jpg`} alt={name} width={1190} height={73} />
                             </div>
-                            {/* {(() => {
-                                const target = getTableByType("stroke-limit1");
-                                return target && <TableTemplate data={target.table} type={target.type} category={target.category} />;
-                            })()} */}
                         </section>
                         <section>
                             <h4>▶ TC형</h4>
@@ -169,8 +159,8 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                             <h3>스트로크 한계</h3>
                             <p>단위 mm</p>
                         </div>
-                        <div>
-                            <Image src={`/images/${category}/stroke-limit.jpg`} alt={name} width={1000} height={500} />
+                        <div className="img-box">
+                            <Image src={`/images/${category}/stroke-limit.jpg`} alt={name} width={1192} height={500} />
                         </div>
                         <ul>
                             <li>1. 지지형식에 따른 좌굴은 별도로 계산해주세요.</li>
@@ -186,11 +176,6 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                         <div>
                             <Image src={cheats} alt="표기요령" width={1000} height={187} />
                         </div>
-                        {category === "double" &&
-                            <div>
-                                <Image src={`/images/${category}/표기요령.jpg`} alt={name} width={1000} height={500} />
-                            </div>
-                        }
                     </div>
                 </section>
             }
@@ -279,8 +264,8 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                 <>
                     <section className="thread-section">
                         <h3>나사선단부 길이 (A차수)</h3>
-                        <div>
-                            <Image src={`/images/double/HTP-나사선단부길이.jpg`} alt={name} width={1000} height={500} />
+                        <div className="img-box">
+                            <Image src={`/images/double/HTP-나사선단부길이.jpg`} alt={name} width={1184} height={500} />
                         </div>
                     </section>
                     <section className="mounting-section">
@@ -288,13 +273,13 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
                             <div>
                                 <h3>지지형식 LA/LT</h3>
                                 <div>
-                                    <Image src="/images/double/HTP_mounting1.jpg" alt="지지형식" width={1000} height={417} />
+                                    <Image src="/images/double/HTP_mounting1.jpg" alt="지지형식" width={988} height={801} />
                                 </div>
                             </div>
                             <div>
                                 <h3>지지형식 FA/FB/CA/TA/TB</h3>
                                 <div>
-                                    <Image src="/images/double/HTP_mounting2.jpg" alt="지지형식" width={1000} height={417} />
+                                    <Image src="/images/double/HTP_mounting2.jpg" alt="지지형식" width={988} height={801} />
                                 </div>
                             </div>
                         </div>
@@ -303,23 +288,23 @@ export default function TableLayout({ detail }: CylinderDetailProps) {
             <section className={`series-section ${category}`}>
                 <h3>HA SERIES 내부구조도</h3>
                 <div>
-                    <Image src={series_img} alt="내부구조도" width={1350} height={417} />
+                    <Image src={series_img} alt="내부구조도" width={1351} height={417} />
                 </div>
             </section>
             <section className={`part-diagram-section ${category}`}>
                 <h3>부품도</h3>
                 <div className="display-flex-flow">
                     <div>
-                        <Image src={`/images/${category}/parts-list1.jpg`} alt={name} width={582} height={220} />
+                        <Image src={`/images/${category}/parts-list1.jpg`} alt={name} width={582} height={183} />
                     </div>
                     <div>
-                        <Image src={`/images/${category}/parts-list2.jpg`} alt={name} width={582} height={220} />
+                        <Image src={`/images/${category}/parts-list2.jpg`} alt={name} width={582} height={183} />
                     </div>
                 </div>
             </section>
             <section className={`seal-diagram-section ${category}`}>
                 <h3>패킹 부품도</h3>
-                <div>
+                <div className="img-box">
                     <Image src={`/images/${category}/packing-list.jpg`} alt={name} width={1194} height={500} />
                 </div>
             </section>

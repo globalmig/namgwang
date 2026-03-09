@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { CylinderDetailProps, CylinderProps } from "@/types/product";
 import { TABLE_DATA } from "@/data/table";
-import TableTemplate from "./TableTamplate";
 
 // 선단고리 레이아웃
 export default function TableLayout2({ detail }: CylinderDetailProps) {
@@ -58,29 +57,41 @@ export default function TableLayout2({ detail }: CylinderDetailProps) {
                 <div>
                     <Image src={`/images/${category}/방진망부착실린더.jpg`} alt="방진망 부착 실린더" width={1350} height={358} />
                 </div>
-                <div>
+                <div className="img-box">
                     <Image src={`/images/${category}/dust-proof.jpg`} alt={name} width={1000} height={500} />
                 </div>
             </section>
-            {/* {category !== "round" &&
+            {category !== "round" &&
                 <>
                     <section className="nut-section">
                         <h3>로크너트</h3>
-                        <div>
-                            <Image src={`/images/${category}/로크너트.jpg`} alt="로크너트" width={800} height={533} />
+                        <div className={category !== "high-pressure" ? "display-flex-flow" : ""}>
+                            <div>
+                                <Image src={`/images/${category}/로크너트1.jpg`} alt="로크너트" width={657} height={474} className={category !== "high-pressure" ? "hp" : ""}/>
+                            </div>
+                            {category !== "high-pressure" ?
+                             <div>
+                                <Image src={`/images/${category}/로크너트2.jpg`} alt="로크너트" width={666} height={482} className="hp"/>
+                            </div> :
+                             <div className="img-box">
+                                <Image src={`/images/${category}/로크너트2.jpg`} alt="로크너트" width={1363} height={394} className="hp2"/>
+                            </div>
+                            }
                         </div>
                     </section>
-                </>} */}
-            {/* {category === "rectangular" &&
+                </>}
+            {category === "rectangular" &&
                 <section className="ks-section">
                     <h3>배관용 플랜지 (KS B 1521)</h3>
-                    <div>
-                        <Image src="/images/rectangular/배관용플랜지.jpg" alt="배관용 플랜지" width={800} height={500} />
+                    <div className="display-flex-flow">
+                        <div>
+                            <Image src="/images/rectangular/배관용플랜지1.jpg" alt="배관용 플랜지" width={656} height={432} />
+                        </div>
+                        <div>
+                            <Image src="/images/rectangular/배관용플랜지2.jpg" alt="배관용 플랜지" width={665} height={443} />
+                        </div>
                     </div>
-                    <div className="table-wrapper">
-                    </div>
-                </section> }
-                */}
+                </section>}
         </>
     )
 }
