@@ -1,7 +1,7 @@
 'use client';
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase/clinet";
+import { supabase } from "@/lib/supabase/client";
 import { AllProductDataProps } from "@/types/product";
 import Pagination from "../Pagination";
 import { usePagination } from "@/hooks/usePagination";

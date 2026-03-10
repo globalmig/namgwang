@@ -1,5 +1,5 @@
 'use client';
-import { supabase } from "@/lib/supabase/clinet";
+import { supabase } from "@/lib/supabase/client";
 import { InitialPerformanceDataProps } from "@/types/performance";
 import { InitialProductDataProps } from "@/types/product";
 import { useParams } from "next/navigation";

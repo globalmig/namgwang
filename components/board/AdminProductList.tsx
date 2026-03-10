@@ -1,5 +1,5 @@
 'use client';
-import { supabase } from "@/lib/supabase/clinet";
+import { supabase } from "@/lib/supabase/client";
 import { AllAdminDataProps, ProductProps } from "@/types/product";
 import Link from "next/link";
 import { useEffect, useState } from "react";

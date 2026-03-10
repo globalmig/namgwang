@@ -1,6 +1,6 @@
 'use client';
 
-import { supabase } from "@/lib/supabase/clinet";
+import { supabase } from "@/lib/supabase/client";
 import { PerformanceProps } from "@/types/performance";
 import Link from "next/link";
 import { useEffect, useState } from "react";

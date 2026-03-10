@@ -10,7 +10,7 @@ interface InquireFormProps {
     fax: string; // 팩스
     contents: string; // 문의내용
     file?: File | null; // 첨부파일
-    privacy: false; // 개인정보처리방침
+    privacy: boolean; // 개인정보처리방침
 }
 
 export default function InquireForm() {
