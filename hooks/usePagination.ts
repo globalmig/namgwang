@@ -1,25 +1,46 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-export function usePagination<T>(data: T[], dataPerPage: number) {
-  const [currentPage, setCurrentPage] = useState(1);
+interface UsePaginationOptions {
+  initialPage?: number;
+  resetOnDataChange?: boolean;
+  onPageChange?: (page: number) => void;
+}
+
+export function usePagination<T>(
+  data: T[],
+  dataPerPage: number,
+  options: UsePaginationOptions = {}
+) {
+  const { initialPage = 1, resetOnDataChange = true, onPageChange: onChange } = options;
+  const [currentPage, setCurrentPage] = useState(initialPage);
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [data]);
+    if (resetOnDataChange) setCurrentPage(initialPage);
+  }, [data, initialPage, resetOnDataChange]);
 
   const totalCount = data.length;
-  const indexOfLastItem = currentPage * dataPerPage;
-  const indexOfFirstItem = indexOfLastItem - dataPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.max(1, Math.ceil(totalCount / dataPerPage));
 
-  const onPageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+  const currentItems = useMemo(() => {
+    const startIndex = (currentPage - 1) * dataPerPage;
+    return data.slice(startIndex, startIndex + dataPerPage);
+  }, [currentPage, data, dataPerPage]);
+
+  const onPageChange = useCallback(
+    (page: number) => {
+      const nextPage = Math.max(1, Math.min(totalPages, page));
+      if (nextPage === currentPage) return;
+      setCurrentPage(nextPage);
+      onChange?.(nextPage);
+    },
+    [currentPage, onChange, totalPages]
+  );
 
   return {
     currentPage,
     currentItems,
     totalCount,
+    totalPages,
     onPageChange,
     setCurrentPage,
   };

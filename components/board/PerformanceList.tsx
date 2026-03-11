@@ -18,7 +18,7 @@ export default function PerformanceList() {
         const fetchPerformances = async () => {
             try {
                 const query = supabase.from("performances").select("*");
-                const { data, error } = await query.order("created_at", { ascending: false });
+                const { data, error } = await query.order("created_at", { ascending: true });
 
                 if (error) throw error;
                 setPerformances(data || []);

@@ -57,17 +57,21 @@ const TABLE_MAP: Record<string, string> = {
   other: "others",
 }
 
+function mapCategoryToTable(category: string) {
+  return TABLE_MAP[category] ?? `${category}s`;
+}
+
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string, category: string }> }
+  { params }: { params: Promise<{ id: string; category: string }> }
 ) {
   try {
-    const { id } = await params;
+    const { id, category: urlCategory } = await params;
     const formData = await req.formData();
     const newSubCategory = formData.get("category") as string; // 폼에서 선택된 category (sub)
 
-    // 테이블 위치 찾기
-    const editTable = TABLE_MAP[newSubCategory]; // ?
+    // 업데이트 대상 테이블은 URL에 따라 결정
+    const editTable = mapCategoryToTable(urlCategory);
 
     // [기존 데이터 조회] 삭제된 파일 찾기
     const { data: currentProduct } = await supabaseServer
@@ -153,7 +157,7 @@ export async function PATCH(
     const finalImages = [...existingImages, ...newUrls];
 
     // 3. DB 업데이트
-    const { error: dbError } = await supabaseServer
+    const { data: updatedData, error: dbError } = await supabaseServer
       .from(editTable)
       .update({
         name: formData.get("name"),
@@ -162,9 +166,14 @@ export async function PATCH(
         images: finalImages,
         updated_at: new Date().toISOString(),
       })
-      .eq("id", id);
+      .eq("id", id)
+      .select()
+      .single();
 
     if (dbError) throw dbError;
+    if (!updatedData) {
+      return NextResponse.json({ error: "수정된 제품을 찾을 수 없습니다." }, { status: 404 });
+    }
 
     return NextResponse.json({ message: "제품이 수정되었습니다." });
   } catch (err: any) {

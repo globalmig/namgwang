@@ -37,7 +37,7 @@ export default function ProductList() {
                     }
                 }
 
-                const { data, error } = await query.order("id", { ascending: true });
+                const { data, error } = await query.order("created_at", { ascending: true });
 
                 if (error) throw error;
                 setProducts(data || []);
@@ -62,7 +62,9 @@ export default function ProductList() {
                             <Image src={'thumbnail' in p ? p.thumbnail : p.img} alt={p.name} width={500} height={500} />
                         </Link>
                         <div>
-                            <h4>{p.name} {p.name !== "선단고리 & 로크너트" && "TYPE"}</h4>
+                            <h4>{p.name} {p.name !== "선단고리 & 로크너트" &&
+                                category === "cylinder" ? "TYPE" : ""
+                            }</h4>
                             {'type' in p && <p>{p.type}</p>}
                         </div>
                     </section>

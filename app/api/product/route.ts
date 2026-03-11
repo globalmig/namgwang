@@ -10,14 +10,14 @@ export async function POST(req: NextRequest) {
     const category = formData.get("category") as string;
 
     const unitCategories = ["small", "medium", "large"]; // 프로젝트에 맞게 리스트업
-    const targetTable = unitCategories.includes(category) ? "units" : "others";
+    const targetStorage = unitCategories.includes(category) ? "units" : "others";
 
     const thumbnail = formData.get("thumbnail") as File | null;
     if (!thumbnail) throw new Error("대표 이미지 없음");
 
     const imagesFiles = formData.getAll("images") as File[];
     if (imagesFiles.length === 0) throw new Error("상세 이미지 없음");
-
+ 
     /* ---------- 대표 이미지 업로드 ---------- */
     function safeFileName(originalName: string) {
       const ext = originalName.split(".").pop();
@@ -25,10 +25,10 @@ export async function POST(req: NextRequest) {
     }
 
     const thumSafeName = safeFileName(thumbnail.name);
-    const thumbnailPath = `${targetTable}/thumbnail/${thumSafeName}`;
+    const thumbnailPath = `${targetStorage}/thumbnail/${thumSafeName}`;
 
     const { error: thumError } = await supabaseServer.storage
-      .from(targetTable)
+      .from("products")
       .upload(thumbnailPath, thumbnail, { // buffer 변환 없이 직접 전달
         contentType: thumbnail.type,
         upsert: false, // 동일 파일명 덮어쓰기 방지
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     if (thumError) throw thumError;
 
     const { data: thumUrlData } = supabaseServer.storage
-      .from(targetTable)
+      .from("products")
       .getPublicUrl(thumbnailPath);
 
     /* ---------- 상세 이미지 업로드 ---------- */
@@ -45,9 +45,9 @@ export async function POST(req: NextRequest) {
 
     for (const file of imagesFiles) {
       const safeName = safeFileName(file.name);
-      const path = `${targetTable}/images/${safeName}`
+      const path = `${"products"}/images/${safeName}`
       const { error } = await supabaseServer.storage
-        .from(targetTable)
+        .from("products")
         .upload(path, file, {
           contentType: file.type,
           upsert: false
@@ -56,14 +56,14 @@ export async function POST(req: NextRequest) {
       if (error) throw error;
 
       const { data } = supabaseServer.storage
-        .from(targetTable)
+        .from("products")
         .getPublicUrl(path);
 
       imagesUrls.push(data.publicUrl);
     }
 
     /* ---------- DB 저장 ---------- */
-    const { error: dbError } = await supabaseServer.from(targetTable).insert({
+    const { error: dbError } = await supabaseServer.from("products").insert({
       name,
       category,
       thumbnail: thumUrlData.publicUrl,

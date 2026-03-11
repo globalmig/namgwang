@@ -59,7 +59,7 @@ export default function AuthForm({ setIsAuth }: AuthFormProps) {
         <form onSubmit={onSubmit}>
             <div>
                 <label htmlFor="password"><h3>비밀번호 입력</h3></label>
-                <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요." onChange={onChangePassword} />
+                <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요." onChange={onChangePassword} autoComplete="off" />
             </div>
             <button type="submit">{loginLoading ? "로그인 중..." : "로그인"}</button>
         </form>

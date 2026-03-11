@@ -11,7 +11,7 @@ import { ADMIN_PRODUCT_CATEGORY_NAME } from "@/data/category";
 
 export default function AdminProductList() {
 
-    const { type } = useParams();
+    const { type } = useParams(); // performance or product
     const [products, setProducts] = useState<AllAdminDataProps[]>([]);
     const isPerformance = type === "performance";
 

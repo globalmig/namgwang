@@ -89,8 +89,7 @@ export const ADMIN_SUBCATEGORY : {
     category: string,
 } [] = [
     { name: "실적게시판", category: "performance" },
-    { name: "유압 유니트 게시판", category: "unit" },
-    { name: "기타 유압 기기 게시판", category: "other" },
+    { name: "제품 게시판", category: "product" },
 ]
 
 export const ADMIN_PRODUCT_CATEGORY_NAME : {[key: string] : string} = {

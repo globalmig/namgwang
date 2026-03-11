@@ -1011,6 +1011,10 @@ main.category-main>div>h2 {
 
     /* product-detail */
 
+    .product-detail div img {
+        height: 500px;
+    }
+
     .product-detail>div>:nth-child(2)>:last-child,
     .product-detail>div>:nth-child(3)>:last-child {
         width: 800px;

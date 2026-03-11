@@ -1,5 +1,4 @@
 "use client";
-import { NavItem } from "@/types/common";
 import { PerformanceProps } from "@/types/performance";
 import Image from "next/image";
 import { useParams, usePathname, useRouter } from "next/navigation";
@@ -13,8 +12,6 @@ export default function PerformanceDetail() {
     const { id } = useParams();
 
     const [performance, setPerformance] = useState<PerformanceProps>();
-    const [prevItem, setPrevItem] = useState<NavItem | null>(null);
-    const [nextItem, setNextItem] = useState<NavItem | null>(null);
 
     useEffect(() => {
         if (!id) return;

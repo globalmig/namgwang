@@ -12,7 +12,6 @@ export default function ProductListPage() {
     const categoryTitle = CATEGORY_MAP[categoryKey].categories?.find(c => c.url === category)?.name;
     
     const performance = pathnameSplit[1];
-    console.log(performance)
 
     return (
         <article className="product">

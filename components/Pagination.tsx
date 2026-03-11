@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useEffect } from "react";
 
 interface PaginationProps {
     dataPerPage: number;
@@ -19,6 +20,10 @@ export default function Pagination({ dataPerPage, totalCount, currentPage, onPag
         { length: groupSize },
         (_, index) => index + groupStartPage
     ).filter(page => page <= pageCount);
+
+    useEffect(()=> {
+        window.scrollTo(0,0);
+    },[onPageChange])
 
     return (
         <div className="pagination display-flex">

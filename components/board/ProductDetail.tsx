@@ -80,28 +80,30 @@ export default function ProductDetail() {
                     <div className="stroke-text">
                         <h3>{detail.name}</h3>
                     </div>
-                    {'thumbnail' in detail ?
-                        <Image style={{marginTop: "30px"}}
-                            src={detail.thumbnail}
-                            alt={detail.name}
-                            width={500}
-                            height={500}
-                        />
-                     : <Image style={{marginTop: "30px"}} src={detail.img} alt={detail.name} width={800} height={500} />}
+                    <div>
+                        {'thumbnail' in detail ?
+                            <Image style={{ marginTop: "30px" }}
+                                src={detail.thumbnail}
+                                alt={detail.name}
+                                width={500}
+                                height={500}
+                            />
+                            : <Image style={{ marginTop: "30px" }} src={detail.img} alt={detail.name} width={800} height={500} />}
+                    </div>
                 </div>
                 {'images' in detail &&
-                <div>
-                    <div className="stroke-text">
-                        <h3>제품 특징</h3>
-                    </div>
                     <div>
-                        {detail.images.map((i, index) =>
-                            <div key={index}>
-                                <Image src={i} alt={detail.name} width={500} height={500} />
-                            </div>
-                        )}
+                        <div className="stroke-text">
+                            <h3>제품 특징</h3>
+                        </div>
+                        <div>
+                            {detail.images.map((i, index) =>
+                                <div key={index}>
+                                    <Image src={i} alt={detail.name} width={500} height={500} />
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
                 }
                 {!isPathnameProduct &&
                     <div className="display-flex admin-btn">
