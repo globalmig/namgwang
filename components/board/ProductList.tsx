@@ -10,33 +10,45 @@ import Image from "next/image";
 
 export default function ProductList() {
 
-    const { category } = useParams();
+    const { category } = useParams(); // cylinder, unit, other, performance
     const searchParams = useSearchParams();
     const subCategory = searchParams.get("sub");
 
     const [products, setProducts] = useState<AllProductDataProps[]>([]);
-
     const { currentPage, currentItems, totalCount, onPageChange, } = usePagination(products, 12);
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                let query = supabase.from(`${category as string}s`).select("*");
+
+                let tableName = "";
+                if (category === "performance") {
+                    tableName = "performances";
+                } else if (category === "unit" || category === "other") {
+                    tableName = "products";
+                } else {
+                    // cylinder 등 기존 구조 유지 시
+                    tableName = `${category}s`;
+                }
+
+                let query = supabase.from(tableName).select("*");
 
                 if (category !== "performance") {
                     if (subCategory) {
+                        // 쿼리 스트링(?sub=...)이 있을 때
                         query = query.eq("category", subCategory);
                     } else {
+                        // 기본값 설정
                         if (category === "cylinder") {
-                            query = query.eq("category", "standard");
+                            query = query.eq("category", "standard"); // 요청하신 조건
                         } else if (category === "unit") {
                             query = query.eq("category", "small");
-                        } else {
-                            query = query.eq("category", category);
+                        } else if (category === "other") {
+                            query = query.eq("category", "other");
                         }
                     }
                 }
-
+                
                 const { data, error } = await query.order("created_at", { ascending: true });
 
                 if (error) throw error;

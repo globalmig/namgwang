@@ -7,7 +7,15 @@ export async function GET(
 ) {
   try {
     const { id, category } = await params;
-    const tableName = `${category}s`;
+
+    // 1. 테이블 이름 결정 로직 수정
+    // unit과 other는 통합 테이블인 'products'를 사용합니다.
+    let tableName = "";
+    if (category === "unit" || category === "other") {
+        tableName = "products";
+    } else {
+        tableName = `${category}s`; // cylinder -> cylinders 등 기존 규칙
+    }
 
     const { data: currentData, error: currentError } = await supabaseServer
       .from(tableName)
@@ -16,9 +24,15 @@ export async function GET(
       .maybeSingle();
 
     if (currentError) throw currentError;
+    
+    // 데이터가 없는 경우를 대비한 방어 코드
+    if (!currentData) {
+      return NextResponse.json({ error: "제품을 찾을 수 없습니다." }, { status: 404 });
+    }
 
     const productCategory = currentData.category;
 
+    // 2. 이전/다음 데이터 가져오기 (결정된 tableName 사용)
     const { data: prevData } = await supabaseServer
       .from(tableName)
       .select("id, name")
@@ -44,6 +58,7 @@ export async function GET(
     });
 
   } catch (err: any) {
+    console.error("API Route Error:", err.message); // 서버 터미널에서 확인용
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
@@ -188,56 +203,71 @@ export async function DELETE(
 ) {
   try {
     const { id, category } = await params;
-    const table = `${category}s`
 
-    // 해당 상품의 이미지 URL 정보 조회
+    // 1. DB 테이블명 결정 (통합 테이블)
+    let tableName = "";
+    if (category === "unit" || category === "other") {
+      tableName = "products";
+    } else {
+      tableName = `${category}s`; 
+    }
+
+    // 2. 스토리지 버킷명 결정 (기존 분리된 구조 유지)
+    // category가 'unit'이면 'units', 'other'이면 'others'
+    const bucketName = `${category}s`;
+
+    // 해당 상품 정보 조회
     const { data: product, error: fetchError } = await supabaseServer
-      .from(table)
+      .from(tableName)
       .select("thumbnail, images")
       .eq("id", id)
-      .single();
+      .maybeSingle();
 
     if (fetchError || !product) {
       return NextResponse.json({ error: "삭제할 제품을 찾을 수 없습니다." }, { status: 404 });
     }
 
-    // 삭제할 파일 경로 리스트 생성
+    // 3. 삭제할 파일 경로 리스트 생성
     const pathsToDelete: string[] = [];
 
-    // 썸네일 경로 추출
+    // URL에서 파일명만 추출하는 함수
+    // 스토리지 버킷 이름(bucketName)을 기준으로 자릅니다.
+    const extractPath = (url: string) => {
+        return url.split(`/public/${bucketName}/`)[1];
+    };
+
     if (product.thumbnail) {
-      const thumbPath = product.thumbnail.split(`/public/${table}/`)[1];
+      const thumbPath = extractPath(product.thumbnail);
       if (thumbPath) pathsToDelete.push(thumbPath);
     }
 
-    // 상세 이미지 경로 추출
     if (product.images && Array.isArray(product.images)) {
       product.images.forEach((url: string) => {
-        const detailPath = url.split(`/public/${table}/`)[1];
+        const detailPath = extractPath(url);
         if (detailPath) pathsToDelete.push(detailPath);
       });
     }
 
-    // 3. 스토리지에서 파일 삭제 (파일이 있을 때만 실행)
+    // 4. 스토리지에서 파일 삭제 (bucketName 사용)
     if (pathsToDelete.length > 0) {
       const { error: storageError } = await supabaseServer.storage
-        .from(table)
+        .from(bucketName) 
         .remove(pathsToDelete);
 
       if (storageError) {
-        console.error("storage file delete error:", storageError.message);
+        console.error("Storage delete error:", storageError.message);
       }
     }
 
-    // 4. DB 삭제
+    // 5. DB에서 데이터 삭제 (tableName 사용)
     const { error: dbError } = await supabaseServer
-      .from(table)
+      .from(tableName)
       .delete()
       .eq("id", id);
 
     if (dbError) throw dbError;
 
-    return NextResponse.json({ message: "제품이 삭제되었습니다." });
+    return NextResponse.json({ message: "제품이 성공적으로 삭제되었습니다." });
 
   } catch (err: any) {
     console.error("DELETE ERROR:", err);

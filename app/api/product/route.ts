@@ -12,6 +12,7 @@ export async function POST(req: NextRequest) {
     const unitCategories = ["small", "medium", "large"]; // 프로젝트에 맞게 리스트업
     const targetStorage = unitCategories.includes(category) ? "units" : "others";
 
+
     const thumbnail = formData.get("thumbnail") as File | null;
     if (!thumbnail) throw new Error("대표 이미지 없음");
 
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest) {
     const thumbnailPath = `${targetStorage}/thumbnail/${thumSafeName}`;
 
     const { error: thumError } = await supabaseServer.storage
-      .from("products")
+      .from(targetStorage)
       .upload(thumbnailPath, thumbnail, { // buffer 변환 없이 직접 전달
         contentType: thumbnail.type,
         upsert: false, // 동일 파일명 덮어쓰기 방지
@@ -37,7 +38,7 @@ export async function POST(req: NextRequest) {
     if (thumError) throw thumError;
 
     const { data: thumUrlData } = supabaseServer.storage
-      .from("products")
+      .from(targetStorage)
       .getPublicUrl(thumbnailPath);
 
     /* ---------- 상세 이미지 업로드 ---------- */
@@ -45,9 +46,9 @@ export async function POST(req: NextRequest) {
 
     for (const file of imagesFiles) {
       const safeName = safeFileName(file.name);
-      const path = `${"products"}/images/${safeName}`
+      const path = `${targetStorage}/images/${safeName}`
       const { error } = await supabaseServer.storage
-        .from("products")
+        .from(targetStorage)
         .upload(path, file, {
           contentType: file.type,
           upsert: false
@@ -56,7 +57,7 @@ export async function POST(req: NextRequest) {
       if (error) throw error;
 
       const { data } = supabaseServer.storage
-        .from("products")
+        .from(targetStorage)
         .getPublicUrl(path);
 
       imagesUrls.push(data.publicUrl);

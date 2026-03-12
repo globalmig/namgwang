@@ -10,57 +10,82 @@ import { PerformanceProps } from "@/types/performance";
 // 상세페이지
 export default function ProductDetail() {
 
-    const router = useRouter();
-    const pathname = usePathname();
-    const { id, category, type } = useParams();
-    const isPathnameProduct = pathname.startsWith("/product");
-    const getCategory = isPathnameProduct ? category : type;
-    const isPerformance = category === "performance";
-
     const [detail, setDetail] = useState<ProductProps | PerformanceProps>();
     const [prevItem, setPrevItem] = useState<NavItem | null>(null);
     const [nextItem, setNextItem] = useState<NavItem | null>(null);
 
+    const router = useRouter();
+    const pathname = usePathname();
+    const params = useParams();
+
+    const id = params.id;
+    const type = params.type as string;
+    const category = params.category as string;
+
+    const isPathnameProduct = pathname.startsWith("/product");
+    const getCategory = isPathnameProduct ? category : type;
+    const isPerformance = getCategory === "performance";
+
     useEffect(() => {
         const fetchData = async () => {
-            if (!id || (!category && !type)) return;
+            if (!id || !getCategory) {
+                console.warn("필수 파라미터 누락:", { id, getCategory });
+                return;
+            }
 
             try {
+                const apiUrl = isPerformance
+                    ? `/api/performance/${id}`
+                    : `/api/product/${getCategory}/${id}`;
 
-                const res = await fetch(`/api/${isPerformance ? "performance" : "product"}/${getCategory}/${id}`);
-                if (!res.ok) {
-                    const errorData = await res.json();
-                    throw new Error(errorData.error || "데이터를 불러오지 못했습니다.");
+                const res = await fetch(apiUrl);
+
+                const contentType = res.headers.get("content-type");
+                if (!res.ok || !contentType?.includes("application/json")) {
+                    throw new Error(`서버 응답 오류 (${res.status})`);
                 }
-                const data = await res.json();
 
+                const data = await res.json();
                 setDetail(data.currentData);
                 setPrevItem(data.prev);
                 setNextItem(data.next);
             } catch (error) {
-                console.error("API Fetch Error: ", error);
+                console.error("데이터 로드 실패:", error);
             }
         };
 
         fetchData();
-    }, [id, getCategory]);
+    }, [id, getCategory, isPerformance]);
 
     // 삭제
-    const onProductDelete = async () => {
-        if (!detail) return;
-        if (!confirm("제품을 삭제하시겠습니까?")) return;
-        try {
-            const res = await fetch(`/api/${isPerformance ? "performance" : "product"}/${getCategory}/${id}`, { method: "DELETE" })
-            const result = await res.json();
-            if (!res.ok) throw new Error(result.error || "삭제 실패했습니다. 다시 시도해주세요.");
+const onProductDelete = async () => {
+    if (!detail) return;
+    if (!confirm("제품을 삭제하시겠습니까?")) return;
 
-            alert(result.message);
-            router.push("/admin");
-            router.refresh();
-        } catch (err) {
-            console.error(err)
+    try {
+        const apiUrl = isPerformance 
+            ? `/api/performance/${id}` 
+            : `/api/product/${getCategory}/${id}`;
+
+        const res = await fetch(apiUrl, { method: "DELETE" });
+
+        const contentType = res.headers.get("content-type");
+        if (!res.ok || !contentType?.includes("application/json")) {
+            const errorData = await res.json().catch(() => ({}));
+            throw new Error(errorData.error || `삭제 실패 (상태 코드: ${res.status})`);
         }
-    };
+
+        const result = await res.json();
+        alert(result.message);
+        
+        router.push("/admin");
+        router.refresh();
+        
+    } catch (err: any) {
+        console.error("삭제 에러:", err);
+        alert(err.message || "삭제 실패했습니다. 다시 시도해주세요.");
+    }
+};
 
     // 수정
     const goEdit = (id: string) => {
@@ -73,7 +98,12 @@ export default function ProductDetail() {
         <article className="product-detail">
             <div>
                 <div>
-                    <h3 className="page-title">{getCategory === "unit" ? "유압 유니트" : "기타 유압 기기"}</h3>
+                    <h3 className="page-title">
+                        {type === "product" ?
+                        getCategory === "unit" ? "유압 유니트" : "기타 유압 기기"
+                            : (category === "other" ? "기타 유압 기기" : "유압 유니트")
+                        }
+                    </h3>
                     {'spec' in detail && <p><span>SPEC </span>| {detail.spec}</p>}
                 </div>
                 <div>

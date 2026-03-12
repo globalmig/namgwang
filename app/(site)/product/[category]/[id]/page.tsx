@@ -9,16 +9,12 @@ export default function DetailPage() {
     const pathnameSplit = pathname.split('/').filter(Boolean);
     const category = pathnameSplit[1];
 
-
     return (
         <>
-            {category === "performance" ?
-                <PerformanceDetail /> :
-                (category === "cylinder"
-                    ? <CylinderDetail />
-                    : <ProductDetail />)
+            {category === "performance" ? 
+                <PerformanceDetail /> : 
+                (category === "cylinder" ? <CylinderDetail /> : <ProductDetail />)
             }
         </>
-
-    )
+    );
 }
