@@ -8,14 +8,13 @@ export default function ProductNavigator({ prevItem, nextItem }: ProductNavigato
     const pathname = usePathname();
     const pathnameSplit = pathname.split('/').filter(Boolean);
     const firstPath = pathnameSplit[0];
-    const secondPath = pathnameSplit[1];
     const { category } = useParams();
 
-    if (!nextItem && !prevItem) return null;
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [prevItem]);
 
-useEffect(() => {
-    window.scrollTo(0, 0);
-}, [prevItem]);
+    if (!nextItem && !prevItem) return null;
 
     return (
         <ul className="product-nav">

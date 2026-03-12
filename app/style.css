@@ -501,6 +501,19 @@ main.category-main>div>h2 {
     margin-top: 80px;
 }
 
+.cylinder-feature>div {
+    margin: 30px 0;
+}
+
+.cylinder-feature>div:last-of-type {
+    margin-bottom: 50px;
+}
+
+.cylinder-feature>div img {
+    width: 100%;
+    height: auto;
+}
+
 .product-nav {
     border-top: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
@@ -1184,7 +1197,7 @@ main.category-main>div>h2 {
 
     main.home-main>:last-child {
         bottom: -2px;
-    } 
+    }
 
     /* home */
 
@@ -1321,6 +1334,14 @@ main.category-main>div>h2 {
 
     .cylinder-detail>div>:nth-child(2)>div>button {
         margin-top: 40px;
+    }
+
+    .cylinder-feature>div {
+        margin: 100px 0;
+    }
+
+    .cylinder-feature>div:last-of-type {
+        margin-bottom: 100px;
     }
 
     /* performance-detail */

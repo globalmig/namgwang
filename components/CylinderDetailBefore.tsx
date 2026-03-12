@@ -3,10 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import ProductNavigator from "./ProductNavigator";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { NavItem } from "@/types/common";
 import { CylinderProps } from "@/types/product";
-import { CYLINDER_DATA } from "@/data/cylinder";
 
 interface CylinderDetailProps {
     currentData: CylinderProps;
@@ -14,35 +13,50 @@ interface CylinderDetailProps {
     next?: NavItem | null;
 }
 
-export default function CylinderDetail() {
+export default function CylinderDetailBefore() {
 
     const params = useParams();
-    const id = params?.id;
+    const { id, category } = params;
 
+    const [detail, setDetail] = useState<CylinderProps>();
     const [prevItem, setPrevItem] = useState<NavItem | null>(null);
     const [nextItem, setNextItem] = useState<NavItem | null>(null);
 
-    const detail = useMemo(() => {
-        return CYLINDER_DATA.find(item => item.id === Number(id));
-    }, [id]);
+    // rerender 방지, detail.name memoization
+    const isSpecialType = useMemo(()=> {
+        return detail?.name === "선단고리 & 로크너트";
+    }, [detail?.name])
+
+    // component unmount 시 fetch 취소를 위한 AbortController
+    // AbortController : 동일 component 내에서 매개변수 (id)만 
+    const fetchData = useCallback(async (signal: AbortSignal) => {
+        if(!id || !category) return;
+
+        try {
+            const res = await fetch(`/api/product/${category}/${id}`, { signal });
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.error || "데이터를 불러오지 못했습니다.");
+            }
+            const data = await res.json() as CylinderDetailProps;
+
+            setDetail(data.currentData ?? null);
+            setPrevItem(data.prev ?? null);
+            setNextItem(data.next ?? null);
+
+        } catch (error: any) {
+            if (error.name === "AbortError") {
+                return;
+            }
+            console.error("API Fetch Error: ", error);
+        }
+    },[category, id]);
 
     useEffect(() => {
-        if (!detail) return;
-
-        const sameCategoryProducts = CYLINDER_DATA.filter(
-            item => item.category === detail.category
-        );
-        const currentIndex = sameCategoryProducts.findIndex(item => String(item.id) === id);
-
-        if (currentIndex !== -1) {
-            setPrevItem(currentIndex > 0 ? (sameCategoryProducts[currentIndex - 1] as any) : null);
-            setNextItem(
-                currentIndex < sameCategoryProducts.length - 1
-                    ? (sameCategoryProducts[currentIndex + 1] as any)
-                    : null
-            );
-        }
-    }, [id, detail]);
+        const controller = new AbortController();
+        fetchData(controller.signal);
+        return () => controller.abort();
+    },[fetchData])
 
     if (!detail) return <div className="loading">정보를 불러오는 중입니다.</div>
 
@@ -81,12 +95,8 @@ export default function CylinderDetail() {
                     <div className="stroke-text">
                         <h3>제품 특징</h3>
                     </div>
-                    <div className="cylinder-feature">
-                        {detail.product_img.map((img, index) =>
-                            <div key={index}>
-                                <Image src={img} alt={`${detail.name} ${index + 1}`} width={1452} height={1880} />
-                            </div>
-                        )}
+                    <div>
+                        {/* 여기에 product_img map function */}
                     </div>
                     {/* <div className="spec-set">
                         {isSpecialType ?

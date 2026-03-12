@@ -7,10 +7,11 @@ import Pagination from "../Pagination";
 import { usePagination } from "@/hooks/usePagination";
 import Link from "next/link";
 import Image from "next/image";
+import { CYLINDER_DATA } from "@/data/cylinder";
 
 export default function ProductList() {
 
-    const { category } = useParams(); // cylinder, unit, other, performance
+    const { category } = useParams(); // unit, other, performance, (cylinder)
     const searchParams = useSearchParams();
     const subCategory = searchParams.get("sub");
 
@@ -21,13 +22,24 @@ export default function ProductList() {
         const fetchProducts = async () => {
             try {
 
+                if (category === "cylinder") {
+                    const targetSub = subCategory || "standard";
+                    const filteredLocal = CYLINDER_DATA.filter(item => item.category === targetSub);
+                    const formattedLocal = filteredLocal.map(item => ({
+                        ...item,
+                        product_img: typeof item.product_img === 'string' ? JSON.parse(item.product_img) : item.product_img
+                    })) as AllProductDataProps[];
+
+                    setProducts(formattedLocal);
+                    return;
+                }
+
                 let tableName = "";
                 if (category === "performance") {
                     tableName = "performances";
                 } else if (category === "unit" || category === "other") {
                     tableName = "products";
                 } else {
-                    // cylinder 등 기존 구조 유지 시
                     tableName = `${category}s`;
                 }
 
@@ -61,9 +73,8 @@ export default function ProductList() {
         fetchProducts();
     }, [category, subCategory]);
 
-    if (!products) return <div className="loading">정보를 불러오는 중입니다.</div>
-
     if (products.length === 0) return <div className="loading">제품이 존재하지 않습니다.</div>
+    if (!products) return <div className="loading">정보를 불러오는 중입니다.</div>
 
     return (
         <>
