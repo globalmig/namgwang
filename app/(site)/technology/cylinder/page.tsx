@@ -1,5 +1,3 @@
-import BType from "@/components/table/BType";
-import CType from "@/components/table/CType";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -284,7 +282,7 @@ export default function TechnologyCylinderPage() {
                             <h3>좌굴표</h3>
                         </section>
                         <div>
-                            <Image src="/images/tech_좌굴표.jpg" alt="좌굴표" width={1136} height={784} />
+                            <Image src="/images/tech-좌굴표.jpg" alt="좌굴표" width={1136} height={784} />
                         </div>
                     </div>
 

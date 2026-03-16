@@ -7,7 +7,7 @@ interface PaginationProps {
     currentPage: number;     // 현재 선택된 페이지
     onPageChange: (page: number) => void; // 페이지 변경 시 실행할 함수
 }
-
+  
 export default function Pagination({ dataPerPage, totalCount, currentPage, onPageChange }: PaginationProps) {
 
     const pageCount = Math.ceil(totalCount / dataPerPage);
