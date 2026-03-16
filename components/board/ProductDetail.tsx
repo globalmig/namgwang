@@ -2,14 +2,14 @@
 import Image from "next/image";
 import ProductNavigator from "../ProductNavigator";
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ProductProps } from "@/types/product";
 import { NavItem } from "@/types/common";
 import { PerformanceProps } from "@/types/performance";
 
 // 상세페이지
 export default function ProductDetail() {
-
+    
     const [detail, setDetail] = useState<ProductProps | PerformanceProps>();
     const [prevItem, setPrevItem] = useState<NavItem | null>(null);
     const [nextItem, setNextItem] = useState<NavItem | null>(null);
@@ -26,14 +26,10 @@ export default function ProductDetail() {
     const getCategory = isPathnameProduct ? category : type;
     const isPerformance = getCategory === "performance";
 
-    useEffect(() => {
-        const fetchData = async () => {
-            if (!id || !getCategory) {
-                console.warn("필수 파라미터 누락:", { id, getCategory });
-                return;
-            }
+    const fetchData = useCallback(async (signal?: AbortSignal) => {
+        if (!id || !getCategory) return;
 
-            try {
+        try {
                 const apiUrl = isPerformance
                     ? `/api/performance/${id}`
                     : `/api/product/${getCategory}/${id}`;
@@ -49,13 +45,17 @@ export default function ProductDetail() {
                 setDetail(data.currentData);
                 setPrevItem(data.prev);
                 setNextItem(data.next);
-            } catch (error) {
-                console.error("데이터 로드 실패:", error);
+            } catch (error: any) {
+                if(error.name === "AbortError") return;
+                console.error("API fetch error:", error);
             }
-        };
+    },[id, getCategory, isPerformance]);
 
-        fetchData();
-    }, [id, getCategory, isPerformance]);
+    useEffect(() => {
+        const controller = new AbortController();
+        fetchData(controller.signal);
+        return () => controller.abort();
+    }, [fetchData]);
 
     // 삭제
 const onProductDelete = async () => {

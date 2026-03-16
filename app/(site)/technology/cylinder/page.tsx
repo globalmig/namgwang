@@ -142,8 +142,7 @@ export default function TechnologyCylinderPage() {
                             <p>단위: kgf (1000kg = 1 Ton)</p>
                         </section>
                         <div>
-                            <Image src="/images/BTYPE.jpg" alt="B Type 이론 출력표" width={1194} height={730}/>
-                       
+                            <Image src="/images/B-TYPE.jpg" alt="B Type 이론 출력표" width={1194} height={730}/>
                         </div>
                         <p>* 실제 작동 시 효율은 이론 효율의 80%로 적용합니다.</p>
                     </div>

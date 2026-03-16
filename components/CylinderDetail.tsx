@@ -5,14 +5,7 @@ import { useParams } from "next/navigation";
 import ProductNavigator from "./ProductNavigator";
 import { useEffect, useMemo, useState } from "react";
 import { NavItem } from "@/types/common";
-import { CylinderProps } from "@/types/product";
 import { CYLINDER_DATA } from "@/data/cylinder";
-
-interface CylinderDetailProps {
-    currentData: CylinderProps;
-    prev?: NavItem | null;
-    next?: NavItem | null;
-}
 
 export default function CylinderDetail() {
 
@@ -88,13 +81,6 @@ export default function CylinderDetail() {
                             </div>
                         )}
                     </div>
-                    {/* <div className="spec-set">
-                        {isSpecialType ?
-                            <TableLayout2 detail={detail} />
-                            :
-                            <TableLayout detail={detail}
-                            />}
-                    </div> */}
                 </div>
                 <ProductNavigator
                     prevItem={prevItem}
