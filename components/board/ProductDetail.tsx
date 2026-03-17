@@ -9,7 +9,7 @@ import { PerformanceProps } from "@/types/performance";
 
 // 상세페이지
 export default function ProductDetail() {
-    
+
     const [detail, setDetail] = useState<ProductProps | PerformanceProps>();
     const [prevItem, setPrevItem] = useState<NavItem | null>(null);
     const [nextItem, setNextItem] = useState<NavItem | null>(null);
@@ -26,30 +26,30 @@ export default function ProductDetail() {
     const getCategory = isPathnameProduct ? category : type;
     const isPerformance = getCategory === "performance";
 
-    const fetchData = useCallback(async (signal?: AbortSignal) => {
+    const fetchData = useCallback(async (signal: AbortSignal) => {
         if (!id || !getCategory) return;
 
         try {
-                const apiUrl = isPerformance
-                    ? `/api/performance/${id}`
-                    : `/api/product/${getCategory}/${id}`;
+            const apiUrl = isPerformance
+                ? `/api/performance/${id}`
+                : `/api/product/${getCategory}/${id}`;
 
-                const res = await fetch(apiUrl);
+            const res = await fetch(apiUrl, { signal });
 
-                const contentType = res.headers.get("content-type");
-                if (!res.ok || !contentType?.includes("application/json")) {
-                    throw new Error(`서버 응답 오류 (${res.status})`);
-                }
-
-                const data = await res.json();
-                setDetail(data.currentData);
-                setPrevItem(data.prev);
-                setNextItem(data.next);
-            } catch (error: any) {
-                if(error.name === "AbortError") return;
-                console.error("API fetch error:", error);
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.error || "데이터를 불러오지 못했습니다.");
             }
-    },[id, getCategory, isPerformance]);
+
+            const data = await res.json();
+            setDetail(data.currentData);
+            setPrevItem(data.prev);
+            setNextItem(data.next);
+        } catch (error: any) {
+            if (error.name === "AbortError") return;
+            console.error("API fetch error:", error);
+        }
+    }, [id, getCategory, isPerformance]);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -58,34 +58,34 @@ export default function ProductDetail() {
     }, [fetchData]);
 
     // 삭제
-const onProductDelete = async () => {
-    if (!detail) return;
-    if (!confirm("제품을 삭제하시겠습니까?")) return;
+    const onProductDelete = async () => {
+        if (!detail) return;
+        if (!confirm("제품을 삭제하시겠습니까?")) return;
 
-    try {
-        const apiUrl = isPerformance 
-            ? `/api/performance/${id}` 
-            : `/api/product/${getCategory}/${id}`;
+        try {
+            const apiUrl = isPerformance
+                ? `/api/performance/${id}`
+                : `/api/product/${getCategory}/${id}`;
 
-        const res = await fetch(apiUrl, { method: "DELETE" });
+            const res = await fetch(apiUrl, { method: "DELETE" });
 
-        const contentType = res.headers.get("content-type");
-        if (!res.ok || !contentType?.includes("application/json")) {
-            const errorData = await res.json().catch(() => ({}));
-            throw new Error(errorData.error || `삭제 실패 (상태 코드: ${res.status})`);
+            const contentType = res.headers.get("content-type");
+            if (!res.ok || !contentType?.includes("application/json")) {
+                const errorData = await res.json().catch(() => ({}));
+                throw new Error(errorData.error || `삭제 실패 (상태 코드: ${res.status})`);
+            }
+
+            const result = await res.json();
+            alert(result.message);
+
+            router.push("/admin");
+            router.refresh();
+
+        } catch (err: any) {
+            console.error("삭제 에러:", err);
+            alert(err.message || "삭제 실패했습니다. 다시 시도해주세요.");
         }
-
-        const result = await res.json();
-        alert(result.message);
-        
-        router.push("/admin");
-        router.refresh();
-        
-    } catch (err: any) {
-        console.error("삭제 에러:", err);
-        alert(err.message || "삭제 실패했습니다. 다시 시도해주세요.");
-    }
-};
+    };
 
     // 수정
     const goEdit = (id: string) => {
@@ -100,7 +100,7 @@ const onProductDelete = async () => {
                 <div>
                     <h3 className="page-title">
                         {type === "product" ?
-                        getCategory === "unit" ? "유압 유니트" : "기타 유압 기기"
+                            getCategory === "unit" ? "유압 유니트" : "기타 유압 기기"
                             : (category === "other" ? "기타 유압 기기" : "유압 유니트")
                         }
                     </h3>

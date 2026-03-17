@@ -95,16 +95,6 @@ export default function CylinderDetailBefore() {
                     <div className="stroke-text">
                         <h3>제품 특징</h3>
                     </div>
-                    <div>
-                        {/* 여기에 product_img map function */}
-                    </div>
-                    {/* <div className="spec-set">
-                        {isSpecialType ?
-                            <TableLayout2 detail={detail} />
-                            :
-                            <TableLayout detail={detail}
-                            />}
-                    </div> */}
                 </div>
                 <ProductNavigator
                     prevItem={prevItem}

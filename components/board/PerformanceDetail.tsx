@@ -1,6 +1,7 @@
 "use client";
 import { PerformanceProps } from "@/types/performance";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -59,6 +60,10 @@ export default function PerformanceDetail() {
                 <div>
                     <Image src={performance.img} alt={performance.name} width={800} height={500} />
                 </div>
+                {isPathnameProduct &&
+                <div className="list-btn">
+                    <button><Link href="/product/performance">목록</Link></button>
+                </div>}
                 {!isPathnameProduct &&
                     <div className="display-flex admin-btn">
                         <button type="button" onClick={() => goEdit(String(id))}>수정하기</button>

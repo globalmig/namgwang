@@ -338,10 +338,10 @@ export default function TechnologyCylinderPage() {
                             </section>
                             <div className="display-flex-flow">
                                 <div>
-                                    <Image src="/images/tech_caution_고정형1.jpg" alt="고정형의 경우 (LA, LB, FB, FC, FD)" width={549} height={517} />
+                                    <Image src="/images/tech_caution_고정형1.jpg" alt="고정형의 경우 (LA, LB, FB, FC, FD)" width={592} height={567} />
                                 </div>
                                 <div>
-                                    <Image src="/images/tech_caution_고정형2.jpg" alt="고정형의 경우 (LA, LB, FB, FC, FD)" width={549} height={517} />
+                                    <Image src="/images/tech_caution_고정형2.jpg" alt="고정형의 경우 (LA, LB, FB, FC, FD)" width={592} height={567} />
                                 </div>
                             </div>
                         </div>
@@ -382,10 +382,10 @@ export default function TechnologyCylinderPage() {
                                     <h4>▶ TA, TC형의 경우</h4>
                                     <div className="display-flex">
                                         <div>
-                                            <Image src="/images/tech_caution_type4.jpg" alt="TA, TC형의 경우" width={260} height={153} />
+                                            <Image src="/images/tech_caution_type4.jpg" alt="TA, TC형의 경우" width={318} height={153} />
                                         </div>
                                         <div>
-                                            <Image src="/images/tech_caution_type5.jpg" alt="TA, TC형의 경우" width={260} height={153} />
+                                            <Image src="/images/tech_caution_type5.jpg" alt="TA, TC형의 경우" width={318} height={153} />
                                         </div>
                                     </div>
                                 </section>

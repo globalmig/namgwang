@@ -173,7 +173,7 @@ export const CYLINDER_DATA = [
         name: "HB-SD",
         thumbnail: "/images/thumbnail/HB-SD_thumb.jpg",
         type: "기본형",
-        cad: null,
+        cad: "HB-SD TYPE.dwg",
         product_img: [
             "/images/high-pressure/HB-SD.jpg",
             "/images/high-pressure/HB-SERIES_1.jpg",
@@ -186,7 +186,7 @@ export const CYLINDER_DATA = [
         name: "HB-LA",
         thumbnail: "/images/thumbnail/HB-LA_thumb.jpg",
         type: "측면 푸트형",
-        cad: null,
+        cad: "HB-LA TYPE.dwg",
         product_img: [
             "/images/high-pressure/HB-LA.jpg",
             "/images/high-pressure/HB-SERIES_1.jpg",
@@ -199,7 +199,7 @@ export const CYLINDER_DATA = [
         name: "HB-FA",
         thumbnail: "/images/thumbnail/HB-FA_thumb.jpg",
         type: "로드측 직사각 플랜지형",
-        cad: null,
+        cad: "HB-FA TYPE.dwg",
         product_img: [
             "/images/high-pressure/HB-FA.jpg",
             "/images/high-pressure/HB-SERIES_1.jpg",
@@ -212,7 +212,7 @@ export const CYLINDER_DATA = [
         name: "HB-FB",
         thumbnail: "/images/thumbnail/HB-FB_thumb.jpg",
         type: "헤드측 직사각 플랜지형",
-        cad: null,
+        cad: "HB-FB TYPE.dwg",
         product_img: [
             "/images/high-pressure/HB-FB.jpg",
             "/images/high-pressure/HB-SERIES_1.jpg",
@@ -225,7 +225,7 @@ export const CYLINDER_DATA = [
         name: "HB-CA",
         thumbnail: "/images/thumbnail/HB-CA_thumb.jpg",
         type: "1산 클레비스형",
-        cad: null,
+        cad: "HB-CA TYPE.dwg",
         product_img: [
             "/images/high-pressure/HB-CA.jpg",
             "/images/high-pressure/HB-SERIES_1.jpg",
@@ -238,7 +238,7 @@ export const CYLINDER_DATA = [
         name: "HB-TC",
         thumbnail: "/images/thumbnail/HB-TC_thumb.jpg",
         type: "중간 트러나온형",
-        cad: null,
+        cad: "HB-TC TYPE.dwg",
         product_img: [
             "/images/high-pressure/HB-TC.jpg",
             "/images/high-pressure/HB-SERIES_1.jpg",
@@ -251,7 +251,7 @@ export const CYLINDER_DATA = [
         name: "선단고리 & 로크너트",
         thumbnail: "/images/thumbnail/선단고리_thumb.jpg",
         type: "선단고리&로크너트",
-        cad: null,
+        cad: "선단고리&로크너트.dwg",
         product_img: [
             "/images/high-pressure/HB-선단고리_1.jpg",
             "/images/high-pressure/HB-선단고리_2.jpg",
@@ -263,7 +263,7 @@ export const CYLINDER_DATA = [
         name: "HSM-SD",
         thumbnail: "/images/thumbnail/HSM-SD_thumb.jpg",
         type: "기본형",
-        cad: null,
+        cad: "HSM-SD.dwg",
         product_img: [
             "/images/rectangular/HSM-SD.jpg",
             "/images/rectangular/HSM-SERIES_1.jpg",
@@ -277,7 +277,7 @@ export const CYLINDER_DATA = [
         name: "HSM-LA",
         thumbnail: "/images/thumbnail/HSM-LA_thumb.jpg",
         type: "측면 푸트형",
-        cad: null,
+        cad: "HSM-LA.dwg",
         product_img: [
             "/images/rectangular/HSM-LA.jpg",
            "/images/rectangular/HSM-SERIES_1.jpg",
@@ -291,7 +291,7 @@ export const CYLINDER_DATA = [
         name: "HSM-FA",
         thumbnail: "/images/thumbnail/HSM-FA_thumb.jpg",
         type: "로드측 플랜지형",
-        cad: null,
+        cad: "HSM-FA.dwg",
         product_img: [
             "/images/rectangular/HSM-FA.jpg",
             "/images/rectangular/HSM-SERIES_1.jpg",
@@ -305,7 +305,7 @@ export const CYLINDER_DATA = [
         name: "HSM-FB",
         thumbnail: "/images/thumbnail/HSM-FB_thumb.jpg",
         type: "헤드측 플랜지형",
-        cad: null,
+        cad: "HSM-FB.dwg",
         product_img: [
             "/images/rectangular/HSM-FB.jpg",
             "/images/rectangular/HSM-SERIES_1.jpg",
@@ -319,7 +319,7 @@ export const CYLINDER_DATA = [
         name: "HSM-CA",
         thumbnail: "/images/thumbnail/HSM-CA_thumb.jpg",
         type: "1산 클레비스형",
-        cad: null,
+        cad: "HSM-CA.dwg",
         product_img: [
             "/images/rectangular/HSM-CA.jpg",
             "/images/rectangular/HSM-SERIES_1.jpg",
@@ -333,7 +333,7 @@ export const CYLINDER_DATA = [
         name: "HSM-TC",
         thumbnail: "/images/thumbnail/HSM-TC_thumb.jpg",
         type: "중간 트러나온형",
-        cad: null,
+        cad: "HSM-TC.dwg",
         product_img: [
             "/images/rectangular/HSM-TC.jpg",
             "/images/rectangular/HSM-SERIES_1.jpg",
@@ -347,7 +347,7 @@ export const CYLINDER_DATA = [
         name: "선단고리 & 로크너트",
         thumbnail: "/images/thumbnail/선단고리_thumb.jpg",
         type: "선단고리&로크너트",
-        cad: null,
+        cad: "선단고리&로크너트.dwg",
         product_img: [
             "/images/rectangular/HSM-선단고리_1.jpg",
             "/images/rectangular/HSM-선단고리_2.jpg",
@@ -359,7 +359,7 @@ export const CYLINDER_DATA = [
         name: "HCM-LA",
         thumbnail: "/images/thumbnail/HCM-LA_thumb.jpg",
         type: "측면 푸트형",
-        cad: null,
+        cad: "HCM-LA.dwg",
         product_img: [
             "/images/round/HCM-LA.jpg",
             "/images/round/HCM-SERIES_1.jpg",
@@ -372,7 +372,7 @@ export const CYLINDER_DATA = [
         name: "HCM-FA",
         thumbnail: "/images/thumbnail/HCM-FA_thumb.jpg",
         type: "로드측 플랜지형",
-        cad: null,
+        cad: "HCM-FA.dwg",
         product_img: [
             "/images/round/HCM-FA.jpg",
             "/images/round/HCM-SERIES_1.jpg",
@@ -411,7 +411,7 @@ export const CYLINDER_DATA = [
         name: "HTD",
         thumbnail: "/images/thumbnail/HTD_thumb.jpg",
         type: "박형 실린더",
-        cad: null,
+        cad: "HTD.dwg",
         product_img: [
             "/images/compact/HTD.jpg",
             "/images/compact/HTD-SERIES_1.jpg",
@@ -424,7 +424,7 @@ export const CYLINDER_DATA = [
         name: "HTT",
         thumbnail: "/images/thumbnail/HTT_thumb.jpg",
         type: "박형 실린더",
-        cad: null,
+        cad: "HTT.dwg",
         product_img: [
             "/images/compact/HTT.jpg",
             "/images/compact/HTD-SERIES_1.jpg",
@@ -437,7 +437,7 @@ export const CYLINDER_DATA = [
         name: "HTD-LA",
         thumbnail: "/images/thumbnail/HTD-LA_thumb.jpg",
         type: "박형 실린더",
-        cad: null,
+        cad: "HTD-LA.dwg",
         product_img: [
             "/images/compact/HTD-LA.jpg",
             "/images/compact/HTD-SERIES_1.jpg",
@@ -450,7 +450,7 @@ export const CYLINDER_DATA = [
         name: "HTT-LA",
         thumbnail: "/images/thumbnail/HTT-LA_thumb.jpg",
         type: "박형 실린더",
-        cad: null,
+        cad: "HTT-LA.dwg",
         product_img: [
             "/images/compact/HTT-LA.jpg",
             "/images/compact/HTD-SERIES_1.jpg",
@@ -463,7 +463,7 @@ export const CYLINDER_DATA = [
         name: "HTP-LA",
         thumbnail: "/images/thumbnail/HTP-LA_thumb.jpg",
         type: "2단 복동형",
-        cad: null,
+        cad: "HTP-LA.dwg",
         product_img: [
             "/images/double/HTP-LA.jpg",
             "/images/double/HTP-SERIES_1.jpg",
@@ -477,7 +477,7 @@ export const CYLINDER_DATA = [
         name: "HTP-LT",
         thumbnail: "/images/thumbnail/HTP-LT_thumb.jpg",
         type: "2단 복동형",
-        cad: null,
+        cad: "HTP-LT.dwg",
         product_img: [
             "/images/double/HTP-LT.jpg",
             "/images/double/HTP-SERIES_1.jpg",
@@ -491,7 +491,7 @@ export const CYLINDER_DATA = [
         name: "HTP-FA",
         thumbnail: "/images/thumbnail/HTP-FA_thumb.jpg",
         type: "2단 복동형",
-        cad: null,
+        cad: "HTP-FA.dwg",
         product_img: [
             "/images/double/HTP-FA.jpg",
             "/images/double/HTP-SERIES_1.jpg",
@@ -505,7 +505,7 @@ export const CYLINDER_DATA = [
         name: "HTP-FB",
         thumbnail: "/images/thumbnail/HTP-FB_thumb.jpg",
         type: "2단 복동형",
-        cad: null,
+        cad: "HTP-FB.dwg",
         product_img: [
             "/images/double/HTP-FB.jpg",
             "/images/double/HTP-SERIES_1.jpg",
@@ -519,7 +519,7 @@ export const CYLINDER_DATA = [
         name: "HTP-TA",
         thumbnail: "/images/thumbnail/HTP-TA_thumb.jpg",
         type: "2단 복동형",
-        cad: null,
+        cad: "HTP-TA.dwg",
         product_img: [
             "/images/double/HTP-TA.jpg",
             "/images/double/HTP-SERIES_1.jpg",
@@ -533,7 +533,7 @@ export const CYLINDER_DATA = [
         name: "HTP-TB",
         thumbnail: "/images/thumbnail/HTP-TB_thumb.jpg",
         type: "2단 복동형",
-        cad: null,
+        cad: "HTP-TB.dwg",
         product_img: [
             "/images/double/HTP-TB.jpg",
             "/images/double/HTP-SERIES_1.jpg",
@@ -547,7 +547,7 @@ export const CYLINDER_DATA = [
         name: "HTP-CA",
         thumbnail: "/images/thumbnail/HTP-CA_thumb.jpg",
         type: "2단 복동형",
-        cad: null,
+        cad: "HTP-CA.dwg",
         product_img: [
             "/images/double/HTP-CA.jpg",
             "/images/double/HTP-SERIES_1.jpg",
@@ -561,7 +561,7 @@ export const CYLINDER_DATA = [
         name: "HCM-TC",
         thumbnail: "/images/thumbnail/HCM-TC_thumb.jpg",
         type: "중간 트러나온형",
-        cad: null,
+        cad: "HCM-TC.dwg",
         product_img: [
             "/images/round/HCM-TC.jpg",
             "/images/round/HCM-SERIES_1.jpg",
@@ -571,10 +571,10 @@ export const CYLINDER_DATA = [
     {
         id: 46,
         category: "round",
-        name: "선단고리 & 로크너트",
+        name: "선단고리",
         thumbnail: "/images/thumbnail/선단고리_thumb.jpg",
-        type: "선단고리 & 로크너트",
-        cad: null,
+        type: "선단고리",
+        cad: "HCM-선단고리.dwg",
         product_img: [
             "/images/round/HCM-선단고리_1.jpg",
         ]

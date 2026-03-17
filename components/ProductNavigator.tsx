@@ -29,7 +29,7 @@ export default function ProductNavigator({ prevItem, nextItem }: ProductNavigato
             {nextItem && (
                 <li style={{ borderTop: prevItem ? "1px solid #aaa" : undefined }}>
                     <Link href={`/${firstPath}${category ? `/${category}` : ""}/${nextItem.id}`} scroll={true}>
-                        <span>다음 제품</span> {nextItem.name} {category === "cylinder" && "TYPE"}
+                        <span>다음 제품</span> {nextItem.name} {category === "cylinder" && !nextItem.name.includes("선단고리") ? "TYPE" : ""}
                     </Link>
                 </li>
             )}

@@ -501,6 +501,20 @@ main.category-main>div>h2 {
     margin-top: 80px;
 }
 
+.list-btn {
+    margin: 20px 0;
+    text-align: right;
+}
+
+.list-btn button {
+    background-color: #034694;
+    padding: 5px 13px;
+}
+
+.list-btn button a {
+    color: white;
+}
+
 .cylinder-feature>div {
     margin: 30px 0;
 }
@@ -1326,6 +1340,18 @@ main.category-main>div>h2 {
     .cylinder-detail>div>:nth-child(2)>:last-child {
         width: 600px;
         margin: auto 0;
+    }
+
+    .list-btn {
+        margin: 80px 0 50px;
+    }
+
+    .list-btn button {
+        padding: 8px 23px;
+    }
+
+    .list-btn button a {
+        font-size: 1rem;
     }
 
     .cylinder-detail>div>:nth-child(2)>:last-child>ul {

@@ -89,7 +89,7 @@ export async function POST(req: Request) {
       attachments: attachments.length > 0 ? attachments : undefined
     };
 
-    // 5. 전송
+    // 전송
     await transporter.sendMail(mailOptions);
 
     return NextResponse.json({ success: true }, { status: 200 });

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import ProductNavigator from "./ProductNavigator";
 import { useEffect, useMemo, useState } from "react";
 import { NavItem } from "@/types/common";
@@ -11,6 +11,7 @@ export default function CylinderDetail() {
 
     const params = useParams();
     const id = params?.id;
+    const router = useRouter();
 
     const [prevItem, setPrevItem] = useState<NavItem | null>(null);
     const [nextItem, setNextItem] = useState<NavItem | null>(null);
@@ -51,7 +52,7 @@ export default function CylinderDetail() {
                     </div>
                     <div>
                         <div className="stroke-text">
-                            <h3>{detail.name} TYPE</h3>
+                            <h3>{detail.name} {detail.name.includes("선단고리") ? "" : "TYPE"}</h3>
                         </div>
                         <ul>
                             {detail.type &&
@@ -62,7 +63,14 @@ export default function CylinderDetail() {
                             {detail.cad &&
                                 <li>
                                     <p>CAD</p>
-                                    <p><Link href={`/cad/${detail.cad}`} download>{detail.cad}</Link><br />*100ST 기준 1:1 도면</p>
+                                    <p><Link href={`/cad/${detail.category}/${detail.cad}`} download>{detail.cad}</Link><br />
+                                    {detail.name.includes("선단고리") ? "*1:1 도면" :
+                                     detail.category === "rectangular" && detail.name.includes("TC") ?
+                                        "*Φ40~Φ80 101ST / Φ100~Φ125 151ST / Φ140~Φ200 201ST / Φ224~Φ250 251ST 기준 1:1 도면" :
+                                        detail.category === "rectangular" ? "*Φ180~Φ250 101ST 기준 (외 100ST) 1:1 도면" :
+                                        detail.category === "compact" ? "*20ST 기준 1:1 도면" : ""
+                                    }
+                                    </p>
                                 </li>}
                         </ul>
                         <button>
@@ -81,6 +89,9 @@ export default function CylinderDetail() {
                             </div>
                         )}
                     </div>
+                </div>
+                <div className="list-btn">
+                    <button><Link href={`/product/cylinder?sub=${detail.category}`}>목록</Link></button>
                 </div>
                 <ProductNavigator
                     prevItem={prevItem}

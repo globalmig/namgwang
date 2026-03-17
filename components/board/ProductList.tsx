@@ -52,7 +52,7 @@ export default function ProductList() {
                     } else {
                         // 기본값 설정
                         if (category === "cylinder") {
-                            query = query.eq("category", "standard"); // 요청하신 조건
+                            query = query.eq("category", "standard");
                         } else if (category === "unit") {
                             query = query.eq("category", "small");
                         } else if (category === "other") {
@@ -85,7 +85,7 @@ export default function ProductList() {
                             <Image src={'thumbnail' in p ? p.thumbnail : p.img} alt={p.name} width={500} height={500} />
                         </Link>
                         <div>
-                            <h4>{p.name} {p.name !== "선단고리 & 로크너트" &&
+                            <h4>{p.name} {!p.name.includes("선단고리") &&
                                 category === "cylinder" ? "TYPE" : ""
                             }</h4>
                             {'type' in p && <p>{p.type}</p>}

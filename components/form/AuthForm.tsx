@@ -28,7 +28,7 @@ export default function AuthForm({ setIsAuth }: AuthFormProps) {
             alert("비밀번호를 입력해주세요.");
             return;
         }
-        // /api/auth
+        
         try {
             setLoginLoading(true);
 
