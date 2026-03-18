@@ -48,20 +48,28 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
     };
 
     const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, files } = e.target;
-    if (!files || files.length === 0) return;
+        const { name, files } = e.target;
+        if (!files || files.length === 0) return;
 
-    if (name === "thumbnail") {
-        setForm(prev => ({ ...prev, thumbnail: files[0] }));
-    }
-    if (name === "images") {
-        // 상세 이미지의 경우, 기존 로직(newImageFiles)과 싱크를 맞춰야 함
-        setNewImageFiles(Array.from(files)); 
-    }
-};
+        if (name === "thumbnail") {
+            setForm(prev => ({ ...prev, thumbnail: files[0] }));
+        }
+        if (name === "images") {
+            // 상세 이미지의 경우, 기존 로직(newImageFiles)과 싱크를 맞춰야 함
+            // setNewImageFiles(Array.from(files)); 
+            setForm(prev => ({ ...prev, detail: Array.from(files) }));
+        }
+    };
 
     const onChangeForm = useCallback((e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target;
+
+        if (type === "file") {
+            const fileInput = e.target as HTMLInputElement;
+            const file = fileInput.files?.[0] ?? null;
+            setForm(prev => ({ ...prev, file }));
+            return;
+        }
 
         setForm(prev => ({
             ...prev,
@@ -158,17 +166,18 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
                 method: isUpload ? "POST" : "PATCH",
                 body: formData,
             });
+            const contentType = res.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                const result = await res.json();
 
-            const result = await res.json();
-
-            if (!res.ok) {
-                alert(result.error || "제품 등록에 실패했습니다. 다시 시도해주세요.");
-                return;
+                if (!res.ok) {
+                    alert(result.error || "제품 등록에 실패했습니다. 다시 시도해주세요.");
+                    return;
+                }
+                alert(result.message);
+                router.push("/admin");
+                router.refresh();
             }
-
-            alert(result.message);
-            router.push("/admin");
-            router.refresh();
 
         } catch (err) {
             console.error("전송 에러:", err);

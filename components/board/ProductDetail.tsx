@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ProductProps } from "@/types/product";
 import { NavItem } from "@/types/common";
 import { PerformanceProps } from "@/types/performance";
+import Link from "next/link";
 
 // 상세페이지
 export default function ProductDetail() {
@@ -143,9 +144,14 @@ export default function ProductDetail() {
                 }
                 {
                     isPathnameProduct &&
-                    <ProductNavigator
+                    <>
+                    <div className="list-btn">
+                    <button><Link href={`/product/unit?sub=${detail.category}`}>목록</Link></button>
+                </div>
+                <ProductNavigator
                         prevItem={prevItem}
                         nextItem={nextItem} />
+                    </>
                 }
             </div>
         </article>

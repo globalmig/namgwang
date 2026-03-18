@@ -17,6 +17,20 @@ export async function POST(req: NextRequest) {
 
     const imagesFiles = formData.getAll("images") as File[];
     if (imagesFiles.length === 0) throw new Error("상세 이미지 없음");
+
+    
+    /* ---------- 파일 크기 제한 ---------- */
+    const MAX_TOTAL_SIZE = 10 * 1024 * 1024; // 10MB
+    let totalSize = thumbnail.size;
+    for (const file of imagesFiles) {
+      totalSize += file.size;
+    }
+    if (totalSize > MAX_TOTAL_SIZE) {
+      return NextResponse.json(
+        { error: "파일 용량이 너무 큽니다. (최대 10MB)" },
+        { status: 413 }
+      );
+    }
  
     /* ---------- 대표 이미지 업로드 ---------- */
     function safeFileName(originalName: string) {
@@ -44,11 +58,13 @@ export async function POST(req: NextRequest) {
     const imagesUrls: string[] = [];
 
     for (const file of imagesFiles) {
+      const buffer = await file.arrayBuffer();
       const safeName = safeFileName(file.name);
-      const path = `${targetStorage}/images/${safeName}`
+      const path = `${targetStorage}/images/${safeName}`;
+
       const { error } = await supabaseServer.storage
         .from(targetStorage)
-        .upload(path, file, {
+        .upload(path, buffer, {
           contentType: file.type,
           upsert: false
         });
@@ -75,7 +91,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: "제품이 등록되었습니다." });
 
   } catch (err: any) {
-    console.error("PRODUCT POST ERROR", err);
     console.error("PRODUCT POST ERROR", err);
 
     if (err.message?.includes("Payload Too Large") || err.status === 413) {

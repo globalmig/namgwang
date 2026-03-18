@@ -1,6 +1,7 @@
 // 기본 속성
 export interface PerformanceProps {
     id: string,
+    category?:string,
     name: string,
     spec: string,
     img: string
