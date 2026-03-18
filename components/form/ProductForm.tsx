@@ -42,10 +42,14 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
         }
     }, [initialData]);
 
-    // 이미지 삭제 (기존 이미지 중 삭제)
-    const onRemoveExistingImage = (url: string) => {
-        setExistingImages(prev => prev.filter(item => item !== url));
-    };
+    const onChangeForm = useCallback((e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+
+        setForm(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }, []);
 
     const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, files } = e.target;
@@ -53,29 +57,15 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
 
         if (name === "thumbnail") {
             setForm(prev => ({ ...prev, thumbnail: files[0] }));
-        }
-        if (name === "images") {
-            // 상세 이미지의 경우, 기존 로직(newImageFiles)과 싱크를 맞춰야 함
-            // setNewImageFiles(Array.from(files)); 
-            setForm(prev => ({ ...prev, detail: Array.from(files) }));
+        } else if (name === "images") {
+            setForm(prev => ({ ...prev, images: Array.from(files) }));
         }
     };
 
-    const onChangeForm = useCallback((e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value, type } = e.target;
-
-        if (type === "file") {
-            const fileInput = e.target as HTMLInputElement;
-            const file = fileInput.files?.[0] ?? null;
-            setForm(prev => ({ ...prev, file }));
-            return;
-        }
-
-        setForm(prev => ({
-            ...prev,
-            [name]: value
-        }))
-    }, []);
+    // 이미지 삭제 (기존 이미지 중 삭제)
+    const onRemoveExistingImage = (url: string) => {
+        setExistingImages(prev => prev.filter(item => item !== url));
+    };
 
     // 취소
     const onClickCancel = () => {
@@ -114,43 +104,22 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
             return;
         }
 
-        if (form.thumbnail) {
-            const ext = form.thumbnail.name.split('.').pop()?.toLowerCase() ?? "";
-            const allowedExtensions = ["jpg", "jpeg", "png"];
-
-            if (!allowedExtensions.includes(ext)) {
-                alert("이미지는 JPG, JPEG, PNG 파일만 업로드 가능합니다.");
-                return;
-            }
-        }
-
-        // 상세 이미지 유효성 검사
-        // newImageFiles: 새로 input으로 넣은 파일 배열 / existingImages: 화면에 표시되고 있는 기존 URL 배열
-        if (newImageFiles.length === 0 && existingImages.length === 0) {
-            alert("제품 이미지는 최소 1장 이상 등록해주세요.");
-            return;
-        }
-
-        for (const file of form.images) {
-            const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
-            const allowedExtensions = ["jpg", "jpeg", "png"];
-            if (!allowedExtensions.includes(ext)) {
-                alert("이미지는 JPG, JPEG, PNG 파일만 업로드 가능합니다.");
-                return;
-            }
-        }
-
         const formData = new FormData();
         formData.append("name", form.name);
         formData.append("category", form.category);
 
+        // 대표 이미지 처리
         if (form.thumbnail) {
-            // 사용자가 파일을 새로 선택한 경우
             formData.append("thumbnail", form.thumbnail);
         } else if (initialData?.thumbnail) {
-            // 파일을 선택하지 않았지만 기존 데이터가 있는 경우 (수정 시 유지)
             formData.append("thumbnail", initialData.thumbnail);
         }
+
+        // 상세 이미지 처리
+        formData.append("existingImages", JSON.stringify(existingImages));
+        form.images.forEach((file) => {
+            formData.append("images", file);
+        });
 
         // 상세 이미지 처리
         formData.append("existingImages", JSON.stringify(existingImages));
@@ -161,23 +130,28 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
 
         try {
             setSubmitLoading(true);
-
             const res = await fetch(isUpload ? "/api/product" : `/api/product/${type}/${id}`, {
                 method: isUpload ? "POST" : "PATCH",
                 body: formData,
             });
-            const contentType = res.headers.get("content-type");
-            if (contentType && contentType.includes("application/json")) {
-                const result = await res.json();
 
-                if (!res.ok) {
-                    alert(result.error || "제품 등록에 실패했습니다. 다시 시도해주세요.");
-                    return;
+            // 413 에러나 401 에러를 텍스트로 먼저 확인하여 SyntaxError 방지
+            if (!res.ok) {
+                const errorData = await res.json().catch(() => ({ error: "서버 연결에 실패했습니다." }));
+                if (res.status === 413) {
+                    alert("파일 용량이 너무 큽니다. 전체 크기를 4MB 이하로 줄여주세요.");
+                } else if (res.status === 401) {
+                    alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+                } else {
+                    alert(errorData.error || "등록에 실패했습니다.");
                 }
-                alert(result.message);
-                router.push("/admin");
-                router.refresh();
+                return;
             }
+
+            const result = await res.json();
+            alert(result.message);
+            router.push("/admin");
+            router.refresh();
 
         } catch (err) {
             console.error("전송 에러:", err);
@@ -232,7 +206,7 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
                     name="images"
                     accept=".jpg,.jpeg,.png"
                     multiple
-                    onChange={(e) => setNewImageFiles(Array.from(e.target.files || []))}
+                    onChange={onChangeFile}
                 />
                 <div className="display-flex-flow">
                     {existingImages.map((url, idx) => (
