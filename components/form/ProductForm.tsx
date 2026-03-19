@@ -139,19 +139,15 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
                 return urlData.publicUrl;
             };
 
-            // 카테고리에 따른 버킷 결정
-            const unitCategories = ["small", "medium", "large"];
-            const targetBucket = unitCategories.includes(form.category) ? "units" : "others";
-
             // [B] 대표 이미지 처리 (새 파일이 들어온 경우만 업로드)
             let finalThumbnailUrl = initialData?.thumbnail || "";
             if (form.thumbnail instanceof File) {
-                finalThumbnailUrl = await uploadFile(form.thumbnail, targetBucket, "thumbnail");
+                finalThumbnailUrl = await uploadFile(form.thumbnail, "products", "thumbnail");
             }
 
             // [C] 상세 이미지 업로드 (새로 선택한 파일들만)
             const newUploadedUrls = await Promise.all(
-                form.images.map(file => uploadFile(file, targetBucket, "images"))
+                form.images.map(file => uploadFile(file, "products", "images"))
             );
 
             // 최종 이미지 배열 (기존 유지 이미지 + 새로 업로드된 이미지 URL)
