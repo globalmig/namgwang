@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase/server";
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '4mb',
+    },
+  },
+};
+
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
@@ -20,16 +28,11 @@ export async function POST(req: NextRequest) {
 
     
     /* ---------- 파일 크기 제한 ---------- */
-    const MAX_TOTAL_SIZE = 10 * 1024 * 1024; // 10MB
-    let totalSize = thumbnail.size;
-    for (const file of imagesFiles) {
-      totalSize += file.size;
-    }
-    if (totalSize > MAX_TOTAL_SIZE) {
-      return NextResponse.json(
-        { error: "파일 용량이 너무 큽니다. (최대 10MB)" },
-        { status: 413 }
-      );
+    let totalSize = (thumbnail?.size || 0);
+    imagesFiles.forEach(file => totalSize += file.size);
+
+    if (totalSize > 4.5 * 1024 * 1024) { // 4.5MB 기준
+      return NextResponse.json({ error: "Vercel 제한으로 인해 전체 용량은 4.5MB를 넘을 수 없습니다." }, { status: 413 });
     }
  
     /* ---------- 대표 이미지 업로드 ---------- */
@@ -93,12 +96,12 @@ export async function POST(req: NextRequest) {
   } catch (err: any) {
     console.error("PRODUCT POST ERROR", err);
 
-    if (err.message?.includes("Payload Too Large") || err.status === 413) {
-      return NextResponse.json(
-        { error: "파일 용량이 너무 큽니다. (최대 약 4MB)" },
-        { status: 413 }
-      );
-    }
+    // if (err.message?.includes("Payload Too Large") || err.status === 413) {
+    //   return NextResponse.json(
+    //     { error: "파일 용량이 너무 큽니다. (최대 약 4MB)" },
+    //     { status: 413 }
+    //   );
+    // }
 
     return NextResponse.json(
       { error: err.message || "제품 등록을 실패했습니다." },

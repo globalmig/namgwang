@@ -136,17 +136,17 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
             });
 
             // 413 에러나 401 에러를 텍스트로 먼저 확인하여 SyntaxError 방지
-            if (!res.ok) {
-                const errorData = await res.json().catch(() => ({ error: "서버 연결에 실패했습니다." }));
-                if (res.status === 413) {
-                    alert("파일 용량이 너무 큽니다. 전체 크기를 4MB 이하로 줄여주세요.");
-                } else if (res.status === 401) {
-                    alert("세션이 만료되었습니다. 다시 로그인해주세요.");
-                } else {
-                    alert(errorData.error || "등록에 실패했습니다.");
-                }
-                return;
-            }
+            // if (!res.ok) {
+            //     const errorData = await res.json().catch(() => ({ error: "서버 연결에 실패했습니다." }));
+            //     if (res.status === 413) {
+            //         alert("파일 용량이 너무 큽니다. 전체 크기를 4MB 이하로 줄여주세요.");
+            //     } else if (res.status === 401) {
+            //         alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+            //     } else {
+            //         alert(errorData.error || "등록에 실패했습니다.");
+            //     }
+            //     return;
+            // }
 
             const result = await res.json();
             alert(result.message);
