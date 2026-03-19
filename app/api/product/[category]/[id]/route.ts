@@ -63,122 +63,39 @@ export async function GET(
   }
 }
 
-const TABLE_MAP: Record<string, string> = {
-  small: "units",
-  medium: "units",
-  large: "units",
-  extra: "units",
-  unit: "units",
-  other: "others",
-}
-
-function mapCategoryToTable(category: string) {
-  return TABLE_MAP[category] ?? `${category}s`;
-}
-
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string; category: string }> }
+  { params }: { params: Promise<{ id: string; type: string }> } // type은 units/others 구분용
 ) {
   try {
-    const { id, category: urlCategory } = await params;
-    const formData = await req.formData();
-    const newSubCategory = formData.get("category") as string; // 폼에서 선택된 category (sub)
+    const { id, type: urlCategory } = await params;
+    const body = await req.json(); // formData() 대신 json() 사용
+    const { name, category, thumbnail, images, oldImages, oldThumbnail } = body;
 
-    // 업데이트 대상 테이블은 URL에 따라 결정
-    const editTable = mapCategoryToTable(urlCategory);
+    const editTable = "products"; // 테이블명이 products 하나라면 고정, 아니라면 map 함수 사용
+    const bucketName = urlCategory; // URL 파라미터에서 넘어온 버킷명 (units 또는 others)
 
-    // [기존 데이터 조회] 삭제된 파일 찾기
-    const { data: currentProduct } = await supabaseServer
-      .from(editTable)
-      .select("images, thumbnail")
-      .eq("id", id)
-      .single();
-    const oldImagesUrls: string[] = currentProduct?.images || [];
-
-    // 1. 썸네일 처리
-    let thumbnailUrl = formData.get("thumbnail"); // 클라이언트가 보낸 값 (파일 혹은 기존 URL)
-    const thumbnailFile = formData.get("thumbnail") as File | null;
-
-    // [추가] 새 파일 추가한 경우, 기존 썸네일은 스토리지에서 삭제
-    if (thumbnailFile instanceof File && thumbnailFile.size > 0) {
-
-      // A. 기존 썸네일 URL: 스토리지에서 삭제
-      // currentProduct: 이전의 select("thumbnail")로 가져온 기존 DB
-      const oldThumbnailUrl = currentProduct?.thumbnail;
-      if (oldThumbnailUrl) {
-        // URL에서 스토리지 경로(path) 추출
-        const oldPath = oldThumbnailUrl.split(`/public/${editTable}/`)[1];
-        if (oldPath) {
-          await supabaseServer.storage.from(editTable).remove([oldPath]);
-        }
-      }
-
-      // B. 새 썸네일 파일 업로드
-      const buffer = await thumbnailFile.arrayBuffer();
-      const ext = thumbnailFile.name.split(".").pop();
-      const newPath = `${editTable}/thumbnail/${Date.now()}_${crypto.randomUUID()}.${ext}`;
-
-      const { error: uploadError } = await supabaseServer.storage
-        .from(editTable)
-        .upload(newPath, buffer, {
-          contentType: thumbnailFile.type,
-          upsert: true
-        });
-
-      if (uploadError) {
-        console.error("대표 이미지 업로드 에러:", uploadError);
-        console.error("newSubCategory", newSubCategory);
-        console.error("newPath", newPath);
-        console.error("editTable", editTable);
-        throw new Error("대표 이미지 업로드를 실패했습니다.");
-      }
-
-      // C. 새 URL 발급
-      const { data: urlData } = supabaseServer.storage
-        .from(editTable)
-        .getPublicUrl(newPath);
-
-      thumbnailUrl = urlData.publicUrl;
+    // [파일 정리 1] 썸네일이 변경되었다면 기존 파일 삭제
+    if (oldThumbnail && oldThumbnail !== thumbnail) {
+      const oldPath = oldThumbnail.split(`/public/${bucketName}/`)[1];
+      if (oldPath) await supabaseServer.storage.from(bucketName).remove([oldPath]);
     }
 
-    // 2. 상세 이미지 처리
-    const existingImages: string[] = JSON.parse(formData.get("existingImages") as string || "[]");
-
-    // [삭제] 기존에 있었지만 existingImages에 없는 파일은 스토리지에서 삭제
-    const toDelete = oldImagesUrls.filter(url => !existingImages.includes(url));
+    // [파일 정리 2] 상세 이미지 중 삭제된 것들 스토리지에서 제거
+    const toDelete = oldImages.filter((url: string) => !images.includes(url));
     for (const url of toDelete) {
-      const path = url.split(`/public/${editTable}/`)[1];
-      if (path) await supabaseServer.storage.from(editTable).remove([path]);
+      const path = url.split(`/public/${bucketName}/`)[1];
+      if (path) await supabaseServer.storage.from(bucketName).remove([path]);
     }
 
-    // [추가] 새로 넘어온 파일들 업로드
-    const imageFiles = formData.getAll("images").filter(f => f instanceof File) as File[];
-    const newUrls: string[] = [];
-
-    for (const file of imageFiles) {
-      const path = `${editTable}/images/${Date.now()}_${crypto.randomUUID()}`;
-      const { error: err } = await supabaseServer.storage
-        .from(editTable)
-        .upload(path, await file.arrayBuffer(), { contentType: file.type });
-
-      if (!err) {
-        newUrls.push(supabaseServer.storage.from(editTable).getPublicUrl(path).data.publicUrl);
-      } else {
-        console.error("파일 업로드 오류:", err.message);
-      }
-    }
-
-    const finalImages = [...existingImages, ...newUrls];
-
-    // 3. DB 업데이트
+    // [DB 업데이트]
     const { data: updatedData, error: dbError } = await supabaseServer
       .from(editTable)
       .update({
-        name: formData.get("name"),
-        category: formData.get("category"),
-        thumbnail: thumbnailUrl,
-        images: finalImages,
+        name,
+        category,
+        thumbnail, // 이미 업로드 완료된 URL
+        images,    // 이미 업로드 완료된 URL 배열
         updated_at: new Date().toISOString(),
       })
       .eq("id", id)
@@ -186,9 +103,6 @@ export async function PATCH(
       .single();
 
     if (dbError) throw dbError;
-    if (!updatedData) {
-      return NextResponse.json({ error: "수정된 제품을 찾을 수 없습니다." }, { status: 404 });
-    }
 
     return NextResponse.json({ message: "제품이 수정되었습니다." });
   } catch (err: any) {
@@ -204,17 +118,10 @@ export async function DELETE(
   try {
     const { id, category } = await params;
 
-    // 1. DB 테이블명 결정 (통합 테이블)
-    let tableName = "";
-    if (category === "unit" || category === "other") {
-      tableName = "products";
-    } else {
-      tableName = `${category}s`; 
-    }
-
-    // 2. 스토리지 버킷명 결정 (기존 분리된 구조 유지)
+    // 1. DB 테이블명 및 스토리지 버킷명 결정
     // category가 'unit'이면 'units', 'other'이면 'others'
-    const bucketName = `${category}s`;
+    const tableName = "products"; // 통합 테이블 사용 시
+    const bucketName = category.endsWith('s') ? category : `${category}s`;
 
     // 해당 상품 정보 조회
     const { data: product, error: fetchError } = await supabaseServer
@@ -227,20 +134,28 @@ export async function DELETE(
       return NextResponse.json({ error: "삭제할 제품을 찾을 수 없습니다." }, { status: 404 });
     }
 
-    // 3. 삭제할 파일 경로 리스트 생성
+    // 2. 삭제할 파일 경로 리스트 생성
     const pathsToDelete: string[] = [];
 
-    // URL에서 파일명만 추출하는 함수
-    // 스토리지 버킷 이름(bucketName)을 기준으로 자릅니다.
+    /**
+     * URL에서 스토리지 내부 경로(Path)만 안전하게 추출하는 함수
+     * 예: .../storage/v1/object/public/units/thumbnail/123.jpg -> thumbnail/123.jpg
+     */
     const extractPath = (url: string) => {
-        return url.split(`/public/${bucketName}/`)[1];
+      if (!url || typeof url !== 'string') return null;
+      // 버킷명 다음의 경로만 가져오기 위함
+      const identifier = `/public/${bucketName}/`;
+      if (!url.includes(identifier)) return null;
+      return url.split(identifier)[1];
     };
 
+    // 대표 이미지 경로 추가
     if (product.thumbnail) {
       const thumbPath = extractPath(product.thumbnail);
       if (thumbPath) pathsToDelete.push(thumbPath);
     }
 
+    // 상세 이미지 경로들 추가
     if (product.images && Array.isArray(product.images)) {
       product.images.forEach((url: string) => {
         const detailPath = extractPath(url);
@@ -248,18 +163,19 @@ export async function DELETE(
       });
     }
 
-    // 4. 스토리지에서 파일 삭제 (bucketName 사용)
+    // 3. 스토리지에서 파일 먼저 삭제
     if (pathsToDelete.length > 0) {
       const { error: storageError } = await supabaseServer.storage
-        .from(bucketName) 
+        .from(bucketName)
         .remove(pathsToDelete);
 
       if (storageError) {
-        console.error("Storage delete error:", storageError.message);
+        // 파일 삭제 실패가 전체 프로세스를 중단시키지 않도록 로깅만 함
+        console.error(`Storage delete error (${bucketName}):`, storageError.message);
       }
     }
 
-    // 5. DB에서 데이터 삭제 (tableName 사용)
+    // 4. DB에서 데이터 삭제 (참조 무결성을 위해 파일 삭제 후 수행)
     const { error: dbError } = await supabaseServer
       .from(tableName)
       .delete()
@@ -267,10 +183,10 @@ export async function DELETE(
 
     if (dbError) throw dbError;
 
-    return NextResponse.json({ message: "제품이 성공적으로 삭제되었습니다." });
+    return NextResponse.json({ message: "제품과 관련 파일이 성공적으로 삭제되었습니다." });
 
   } catch (err: any) {
     console.error("DELETE ERROR:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: err.message || "삭제 중 오류가 발생했습니다." }, { status: 500 });
   }
 }

@@ -1,4 +1,5 @@
 "use client";
+import { supabase } from "@/lib/supabase/client";
 import { type ProductForm, ProductFormProps } from "@/types/product";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
@@ -55,10 +56,13 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
         const { name, files } = e.target;
         if (!files || files.length === 0) return;
 
+        const fileArray = Array.from(files);
+        
         if (name === "thumbnail") {
             setForm(prev => ({ ...prev, thumbnail: files[0] }));
         } else if (name === "images") {
             setForm(prev => ({ ...prev, images: Array.from(files) }));
+            setNewImageFiles(fileArray);
         }
     };
 
@@ -83,14 +87,14 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
         e.preventDefault();
         if (submitLoading) return;
 
-        // 유효성 검증
+        // 1. 유효성 검증
         if (!form.name.trim()) {
-            alert("제품명을 입력해주세요.")
+            alert("제품명을 입력해주세요.");
             return;
         }
 
         if (!form.category.trim()) {
-            alert("카테고리를 선택해주세요.")
+            alert("카테고리를 선택해주세요.");
             return;
         }
 
@@ -104,63 +108,92 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
             return;
         }
 
-        const formData = new FormData();
-        formData.append("name", form.name);
-        formData.append("category", form.category);
-
-        // 대표 이미지 처리
-        if (form.thumbnail) {
-            formData.append("thumbnail", form.thumbnail);
-        } else if (initialData?.thumbnail) {
-            formData.append("thumbnail", initialData.thumbnail);
+        // 상세 이미지 유효성 검사 (새 파일 + 기존 유지 파일 합쳐서 최소 1장)
+        if (form.images.length === 0 && existingImages.length === 0) {
+            alert("제품 이미지는 최소 1장 이상 등록해주세요.");
+            return;
         }
-
-        // 상세 이미지 처리
-        formData.append("existingImages", JSON.stringify(existingImages));
-        form.images.forEach((file) => {
-            formData.append("images", file);
-        });
-
-        // 상세 이미지 처리
-        formData.append("existingImages", JSON.stringify(existingImages));
-        // 새로 추가할 파일들 전송
-        newImageFiles.forEach((file) => {
-            formData.append("images", file);
-        });
 
         try {
             setSubmitLoading(true);
+
+            // [A] 이미지 직접 업로드 헬퍼 함수
+            const uploadFile = async (file: File, bucket: string, folder: string) => {
+                const ext = file.name.split(".").pop();
+                const fileName = `${Date.now()}_${crypto.randomUUID()}.${ext}`;
+                const path = `${folder}/${fileName}`;
+
+                const { data, error } = await supabase.storage
+                    .from(bucket)
+                    .upload(path, file, {
+                        upsert: true,
+                        cacheControl: '3600'
+                    });
+
+                if (error) throw error;
+
+                const { data: urlData } = supabase.storage
+                    .from(bucket)
+                    .getPublicUrl(path);
+
+                return urlData.publicUrl;
+            };
+
+            // 카테고리에 따른 버킷 결정
+            const unitCategories = ["small", "medium", "large"];
+            const targetBucket = unitCategories.includes(form.category) ? "units" : "others";
+
+            // [B] 대표 이미지 처리 (새 파일이 들어온 경우만 업로드)
+            let finalThumbnailUrl = initialData?.thumbnail || "";
+            if (form.thumbnail instanceof File) {
+                finalThumbnailUrl = await uploadFile(form.thumbnail, targetBucket, "thumbnail");
+            }
+
+            // [C] 상세 이미지 업로드 (새로 선택한 파일들만)
+            const newUploadedUrls = await Promise.all(
+                form.images.map(file => uploadFile(file, targetBucket, "images"))
+            );
+
+            // 최종 이미지 배열 (기존 유지 이미지 + 새로 업로드된 이미지 URL)
+            const finalImagesUrls = [...existingImages, ...newUploadedUrls];
+
+            // [D] 서버 API 전송 (파일 데이터 없이 URL 정보만 JSON으로 전송)
+            const payload = {
+                name: form.name,
+                category: form.category,
+                thumbnail: finalThumbnailUrl,
+                images: finalImagesUrls,
+                // 수정 시 스토리지 청소를 위해 기존 데이터 정보 포함
+                oldThumbnail: initialData?.thumbnail || "",
+                oldImages: initialData?.images || []
+            };
+
             const res = await fetch(isUpload ? "/api/product" : `/api/product/${type}/${id}`, {
                 method: isUpload ? "POST" : "PATCH",
-                body: formData,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload),
             });
 
-            // 413 에러나 401 에러를 텍스트로 먼저 확인하여 SyntaxError 방지
-            // if (!res.ok) {
-            //     const errorData = await res.json().catch(() => ({ error: "서버 연결에 실패했습니다." }));
-            //     if (res.status === 413) {
-            //         alert("파일 용량이 너무 큽니다. 전체 크기를 4MB 이하로 줄여주세요.");
-            //     } else if (res.status === 401) {
-            //         alert("세션이 만료되었습니다. 다시 로그인해주세요.");
-            //     } else {
-            //         alert(errorData.error || "등록에 실패했습니다.");
-            //     }
-            //     return;
-            // }
-
             const result = await res.json();
-            alert(result.message);
+
+            if (!res.ok) {
+                throw new Error(result.error || "제품 등록을 실패했습니다.");
+            }
+
+            alert(result.message || "처리가 완료되었습니다.");
             router.push("/admin");
             router.refresh();
 
-        } catch (err) {
+        } catch (err: any) {
             console.error("전송 에러:", err);
-            alert("등록 중 오류가 발생했습니다. 브라우저 콘솔을 확인하거나 관리자에게 문의하세요.");
+            alert(err.message || "오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
         } finally {
             setSubmitLoading(false);
         }
 
-    }, [form, existingImages, newImageFiles, initialData, id, isUpload, router]);
+    }, [form, existingImages, initialData, id, type, isUpload, router, supabase, submitLoading]);
 
     return (
         <form onSubmit={onSubmitForm} className="product-form">
@@ -220,22 +253,21 @@ export default function ProductForm({ mode, initialData }: ProductFormProps) {
                         </div>
                     ))}
                 </div>
-                {isEdit &&
-                    <div className="fm-detail-add">
-                        <h5>추가 이미지</h5>
-                        <div className="display-flex-flow">
-                            {newImageFiles.map((file, idx) => (
-                                <div key={`new-${idx}`}>
-                                    <Image
-                                        src={URL.createObjectURL(file)}
-                                        alt="새 이미지"
-                                        width={1000} height={619}
-                                    />
-                                </div>
-                            ))}
-                        </div>
+                <div className="fm-detail-add">
+                    <h5>추가 이미지</h5>
+                    <div className="display-flex-flow">
+                        {newImageFiles.map((file, idx) => (
+                            <div key={`new-${idx}`}>
+                                <Image
+                                    src={URL.createObjectURL(file)}
+                                    alt="새 이미지"
+                                    width={1000} height={619}
+                                />
+                            </div>
+                        ))}
                     </div>
-                }
+                </div>
+
             </div>
             {(isUpload || isEdit) && (
                 <div className="display-flex">
