@@ -65,10 +65,10 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string; type: string }> } // type은 units/others 구분용
+  { params }: { params: Promise<{ id: string; category: string }> } // type은 units/others 구분용
 ) {
   try {
-    const { id, type: urlCategory } = await params;
+    const { id, category: urlCategory } = await params;
     const body = await req.json(); // formData() 대신 json() 사용
     const { name, category, thumbnail, images, oldImages, oldThumbnail } = body;
 
