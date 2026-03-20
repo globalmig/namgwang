@@ -68,7 +68,7 @@ export default function CylinderDetail() {
                                      detail.category === "rectangular" && detail.name.includes("TC") ?
                                         "*Φ40~Φ80 101ST / Φ100~Φ125 151ST / Φ140~Φ200 201ST / Φ224~Φ250 251ST 기준 1:1 도면" :
                                         detail.category === "rectangular" ? "*Φ180~Φ250 101ST 기준 (외 100ST) 1:1 도면" :
-                                        detail.category === "compact" ? "*20ST 기준 1:1 도면" : ""
+                                        detail.category === "compact" ? "*20ST 기준 1:1 도면" : "* 100ST 기준 1:1 도면"
                                     }
                                     </p>
                                 </li>}

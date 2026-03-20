@@ -61,7 +61,7 @@ export default function ProductList() {
                     }
                 }
                 
-                const { data, error } = await query.order("created_at", { ascending: true });
+                const { data, error } = await query.order("created_at", { ascending: false });
 
                 if (error) throw error;
                 setProducts(data || []);

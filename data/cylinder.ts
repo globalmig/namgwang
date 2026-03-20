@@ -385,7 +385,7 @@ export const CYLINDER_DATA = [
         name: "HCM-FB",
         thumbnail: "/images/thumbnail/HCM-FB_thumb.jpg",
         type: "헤드측 플랜지형",
-        cad: null,
+        cad: "HCM-FB.dwg",
         product_img: [
             "/images/round/HCM-FB.jpg",
             "/images/round/HCM-SERIES_1.jpg",
@@ -398,7 +398,7 @@ export const CYLINDER_DATA = [
         name: "HCM-CA",
         thumbnail: "/images/thumbnail/HCM-CA_thumb.jpg",
         type: "1산 클레비스형",
-        cad: null,
+        cad: "HCM-CA.dwg",
         product_img: [
             "/images/round/HCM-CA.jpg",
             "/images/round/HCM-SERIES_1.jpg",
