@@ -306,13 +306,24 @@ main.category-main>div>h2 {
     width: 30%;
 }
 
-.about2>div>div>p {
+.about2 p {
     text-align: center;
     margin: 20px 0;
 }
 
-.about2>div>:last-child img {
+.about2>div>:last-child>img {
     margin: 50px auto 0;
+}
+
+.about2>div>:last-child>div {
+    width: 100%;
+    max-width: 580px;
+}
+
+.about2>div>:last-child>div>img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
 }
 
 /* product-list */
@@ -1285,8 +1296,21 @@ main.category-main>div>h2 {
 
     /* company */
 
+    .about2>div{
+        padding: 100px 0;
+    }
+
     .about2>div>:last-child img {
         margin: 80px auto 0;
+    }
+
+    .about2>div>:last-child>div>img {
+        margin-bottom: 0px;
+        margin: auto 0;
+    }
+
+    .about2>div>:last-child>div>p {
+        text-align: left;
     }
 
     /* product-list */

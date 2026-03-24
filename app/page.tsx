@@ -27,7 +27,7 @@ export default function Home() {
       <article className="home">
         <div>
           <div>
-            <h2>NAMGWANG HYDRAULICS <span></span></h2>
+            <h2>NAMKWANG HYDRAULICS <span></span></h2>
             <p>기술의 깊이로 신뢰를 쌓아온 유압 전문 기업, 남광유압</p>
           </div>
           <div className="display-flex-flow">
@@ -71,7 +71,7 @@ export default function Home() {
       <article className="home2">
         <div>
           <div>
-            <h2>NAMGWANG PRODUCTS<span></span></h2>
+            <h2>NAMKWANG PRODUCTS<span></span></h2>
             <p>축적된 기술력으로 완성한 유압 실린더와 유압 유니트 솔루션</p>
           </div>
           <div className="display-flex-flow">
