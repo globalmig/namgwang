@@ -1,26 +1,25 @@
 "use client";
 import { useCreate } from "@/hooks/useCreate";
 import { useUpdate } from "@/hooks/useUpdate";
-import { type PerformanceForm, PerformanceFormProps } from "@/types/performance";
+import { type CertificationForm, CertificationFormProps } from "@/types/common";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useCallback, useEffect, useState } from "react"
 
-export default function PerformanceForm({ mode, initialData }: PerformanceFormProps) {
+export default function CertificationForm({ mode, initialData }: CertificationFormProps) {
 
     const router = useRouter();
     const { id } = useParams();
 
-    const {create, isPending : isCreating} = useCreate("/api/performance","/admin/board/performance");
-    const {update, isPending: isUpdating} = useUpdate("/api/performance","/admin/board/performance");
+    const {create, isPending : isCreating}= useCreate("/api/certification", "/admin/board/certification");
+    const {update, isPending : isUpdating} = useUpdate("/api/certification", "/admin/board/certification");
     const isLoading = isCreating || isUpdating;
 
     const isUpload = mode === "upload";
     const isEdit = mode === "edit";
 
-    const [form, setForm] = useState<PerformanceForm>({
+    const [form, setForm] = useState<CertificationForm>({
         name: initialData?.name ?? "",
-        spec: initialData?.spec ?? "",
         img: null
     });
 
@@ -29,7 +28,6 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
             setForm(prev => ({
                 ...prev,
                 name: initialData.name ?? "",
-                spec: initialData.spec ?? "",
             }));
         }
     }, [initialData]);
@@ -49,7 +47,6 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
     const onClickCancel = () => {
         setForm({
             name: initialData?.name ?? "",
-            spec: initialData?.spec ?? "",
             img: null,
         });
         router.back();
@@ -61,12 +58,7 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
 
         // 유효성 검증
         if (!form.name.trim()) {
-            alert("프로젝트명을 입력해주세요.")
-            return;
-        }
-
-        if (!form.spec.trim()) {
-            alert("SPEC을 입력해주세요.")
+            alert("인증서명을 입력해주세요.")
             return;
         }
 
@@ -92,7 +84,6 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
 
         const formData = new FormData();
         formData.append("name", form.name);
-        formData.append("spec", form.spec);
 
         if (form.img) {
             formData.append("img", form.img);
@@ -112,15 +103,9 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
         <form onSubmit={onSubmitForm}>
             <div>
                 <label htmlFor="name">
-                    <h3 className="required">프로젝트명</h3>
+                    <h3 className="required">인증서명</h3>
                 </label>
-                <input type="text" id="name" name="name" placeholder="프로젝트명을 입력해주세요." onChange={onChangeForm} value={form.name} />
-            </div>
-            <div>
-                <label htmlFor="spec">
-                    <h3 className="required">SPEC</h3>
-                </label>
-                <input type="text" id="spec" name="spec" placeholder="SPEC을 입력해주세요." onChange={onChangeForm} value={form.spec} />
+                <input type="text" id="name" name="name" placeholder="인증서명을 입력해주세요." onChange={onChangeForm} value={form.name} />
             </div>
             <div>
                 <label htmlFor="img">

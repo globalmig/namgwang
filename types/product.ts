@@ -34,12 +34,33 @@ export interface CylinderProps {
 }
 
 export interface CylinderDetailProps {
-   detail: CylinderProps
+    detail: CylinderProps
 }
 
-export type AllProductDataProps = ProductProps | CylinderProps | PerformanceProps;
+export type AllProductDataProps = ProductProps | CylinderProps | PerformanceProps ;
 
-export type AllAdminDataProps = ProductProps | PerformanceProps;
+export interface BaseAdminProps {
+    id: string | number;
+    name: string;
+    created_at: string; // 날짜 데이터 추가
+    contents: string;
+    title: string;
+}
+
+export interface ProductProps extends BaseAdminProps {
+    id: string;
+    category: string;
+    thumbnail: string;
+    images: string[];
+}
+
+export interface NewsProps extends BaseAdminProps {
+    id: string;
+    title: string;
+    contents: string;
+}
+
+export type AllAdminDataProps = (ProductProps | PerformanceProps | NewsProps) & BaseAdminProps;
 
 type ProductFormMode = "upload" | "edit";
 

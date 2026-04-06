@@ -8,17 +8,19 @@ import { usePagination } from "@/hooks/usePagination";
 import { useParams } from "next/navigation";
 import { PerformanceProps } from "@/types/performance";
 import { ADMIN_PRODUCT_CATEGORY_NAME } from "@/data/category";
+import Image from "next/image";
+import { BoardType } from "@/types/common";
 
 export default function AdminProductList() {
 
-    const { type } = useParams(); // performance or product
+    const { type } = useParams(); // performance, product, certification, news
     const [products, setProducts] = useState<AllAdminDataProps[]>([]);
-    const isPerformance = type === "performance";
+    const selectType = type as BoardType;
 
-    const {currentPage, currentItems, totalCount, onPageChange,} = usePagination(products, 10);
+    const { currentPage, currentItems, totalCount, onPageChange, } = usePagination(products, 10);
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchDatas = async () => {
             try {
                 let query = supabase.from(`${type as string}s`).select("*");
 
@@ -31,8 +33,39 @@ export default function AdminProductList() {
             }
         }
 
-        fetchProducts();
+        fetchDatas();
     }, [type]);
+
+    const getHeaderLabel = () => {
+        switch (selectType) {
+            case "performance": return { name: "프로젝트명", info: "SPEC" };
+            case "certification": return { name: "인증서명", info: "이미지" };
+            case "new": return { name: "제목", info: "작성일" };
+            default: return { name: "제품명", info: "카테고리" };
+        }
+    };
+
+    const renderInfoContent = (item: AllAdminDataProps) => {
+        switch (selectType) {
+            case "certification":
+                return (
+                    <div>
+                        <Image src="/icons/image.png" alt="인증서 이미지" width={20} height={20} />
+                    </div>
+                );
+            case "performance":
+                return (item as PerformanceProps).spec;
+            case "product":
+                return ADMIN_PRODUCT_CATEGORY_NAME[(item as ProductProps).category];
+            case "new":
+                return new Date(item.created_at).toLocaleDateString();
+            default:
+                return null;
+        }
+    };
+
+    const labels = getHeaderLabel();
+
 
     if (!products) return <div className="loading">데이터를 불러오는 중입니다.</div>
 
@@ -52,24 +85,20 @@ export default function AdminProductList() {
             <div className="common-list">
                 <ul className="display-flex">
                     <li>번호</li>
-                    <li>{isPerformance ? "프로젝트명" : "제품명"}</li>
-                    <li>{isPerformance ? "SPEC" : "카테고리"}</li>
+                    <li>{labels.name}</li>
+                    <li>{labels.info}</li>
                 </ul>
-                {currentItems.map((p, index) =>
-                    <Link href={`/admin/board/${type}/${p.id}`} key={p.id}>
+                {currentItems.map((p, index) => (
+                    <Link href={`/admin/board/${selectType}/${p.id}`} key={p.id}>
                         <ul className="display-flex">
-                            <li>{currentItems.length - index}</li>
-                            <li>{p.name}</li>
+                            <li>{totalCount - ((currentPage - 1) * 10) - index}</li>
                             <li>
-                                {isPerformance
-                                    ? (p as PerformanceProps).spec
-                                    : ADMIN_PRODUCT_CATEGORY_NAME[
-                                    (p as ProductProps).category]
-                                }
+                                {selectType === "new" ? p.title : p.name}
                             </li>
+                            <li>{renderInfoContent(p)}</li>
                         </ul>
                     </Link>
-                )}
+                ))}
             </div>
             <div>
                 <button type="button">

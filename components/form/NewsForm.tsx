@@ -1,26 +1,26 @@
 "use client";
 import { useCreate } from "@/hooks/useCreate";
 import { useUpdate } from "@/hooks/useUpdate";
-import { type PerformanceForm, PerformanceFormProps } from "@/types/performance";
+import { NewsFormProps, type NewsForm } from "@/types/common";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useCallback, useEffect, useState } from "react"
 
-export default function PerformanceForm({ mode, initialData }: PerformanceFormProps) {
+export default function NewsForm({ mode, initialData }: NewsFormProps) {
 
     const router = useRouter();
     const { id } = useParams();
 
-    const {create, isPending : isCreating} = useCreate("/api/performance","/admin/board/performance");
-    const {update, isPending: isUpdating} = useUpdate("/api/performance","/admin/board/performance");
+    const { create, isPending: isCreating } = useCreate("/api/news", "/admin/board/new");
+    const { update, isPending: isUpdating } = useUpdate("/api/news", "/admin/board/new");
     const isLoading = isCreating || isUpdating;
 
     const isUpload = mode === "upload";
     const isEdit = mode === "edit";
 
-    const [form, setForm] = useState<PerformanceForm>({
-        name: initialData?.name ?? "",
-        spec: initialData?.spec ?? "",
+    const [form, setForm] = useState<NewsForm>({
+        title: initialData?.title ?? "",
+        contents: initialData?.contents ?? "",
         img: null
     });
 
@@ -28,13 +28,13 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
         if (initialData) {
             setForm(prev => ({
                 ...prev,
-                name: initialData.name ?? "",
-                spec: initialData.spec ?? "",
+                title: initialData?.title ?? "",
+                contents: initialData?.contents ?? "",
             }));
         }
     }, [initialData]);
 
-    const onChangeForm = useCallback((e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const onChangeForm = useCallback((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target;
 
         if (type === "file") {
@@ -48,9 +48,9 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
     // 취소
     const onClickCancel = () => {
         setForm({
-            name: initialData?.name ?? "",
-            spec: initialData?.spec ?? "",
-            img: null,
+            title: initialData?.title ?? "",
+            contents: initialData?.contents ?? "",
+            img: null
         });
         router.back();
     };
@@ -60,17 +60,12 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
         e.preventDefault();
 
         // 유효성 검증
-        if (!form.name.trim()) {
-            alert("프로젝트명을 입력해주세요.")
+        if (!form.title.trim()) {
+            alert("기사 제목을 입력해주세요.")
             return;
         }
 
-        if (!form.spec.trim()) {
-            alert("SPEC을 입력해주세요.")
-            return;
-        }
-
-        if (isUpload && !form.img) {
+         if (isUpload && !form.img) {
             alert("이미지를 등록해주세요.");
             return;
         }
@@ -91,8 +86,8 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
         }
 
         const formData = new FormData();
-        formData.append("name", form.name);
-        formData.append("spec", form.spec);
+        formData.append("title", form.title);
+        formData.append("contents", form.contents);
 
         if (form.img) {
             formData.append("img", form.img);
@@ -100,10 +95,10 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
             formData.append("img", initialData.img);
         }
 
-        if(isUpload) {
+        if (isUpload) {
             await create(formData);
         } else {
-            await update(String(id), formData)
+            await update(String(id), formData);
         }
 
     }, [form, initialData, id, isUpload]);
@@ -111,16 +106,16 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
     return (
         <form onSubmit={onSubmitForm}>
             <div>
-                <label htmlFor="name">
-                    <h3 className="required">프로젝트명</h3>
+                <label htmlFor="title">
+                    <h3 className="required">기사 제목</h3>
                 </label>
-                <input type="text" id="name" name="name" placeholder="프로젝트명을 입력해주세요." onChange={onChangeForm} value={form.name} />
+                <input type="text" id="title" name="title" placeholder="기사 제목을 입력해주세요." onChange={onChangeForm} value={form.title} />
             </div>
             <div>
-                <label htmlFor="spec">
-                    <h3 className="required">SPEC</h3>
+                <label htmlFor="contents">
+                    <h3 className="required">기사 내용</h3>
                 </label>
-                <input type="text" id="spec" name="spec" placeholder="SPEC을 입력해주세요." onChange={onChangeForm} value={form.spec} />
+                <textarea name="contents" placeholder="기사 내용을 입력해주세요." cols={20} rows={10} onChange={onChangeForm} value={form.contents} />
             </div>
             <div>
                 <label htmlFor="img">
