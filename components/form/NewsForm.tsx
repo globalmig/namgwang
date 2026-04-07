@@ -1,6 +1,7 @@
 "use client";
 import { useCreate } from "@/hooks/useCreate";
 import { useUpdate } from "@/hooks/useUpdate";
+import { supabase } from "@/lib/supabase/client";
 import { NewsFormProps, type NewsForm } from "@/types/common";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
@@ -45,6 +46,24 @@ export default function NewsForm({ mode, initialData }: NewsFormProps) {
         }
     }, []);
 
+    const uploadToSupabase = async (file: File) => {
+        const ext = file.name.split('.').pop();
+        const fileName = `${Date.now()}_${crypto.randomUUID()}.${ext}`;
+        const path = `${fileName}`;
+
+        const { data, error } = await supabase.storage
+            .from("news") 
+            .upload(path, file);
+
+        if (error) throw new Error("이미지 업로드에 실패했습니다.");
+
+        const { data: urlData } = supabase.storage
+            .from("news")
+            .getPublicUrl(path);
+
+        return urlData.publicUrl;
+    };
+
     // 취소
     const onClickCancel = () => {
         setForm({
@@ -85,23 +104,29 @@ export default function NewsForm({ mode, initialData }: NewsFormProps) {
             }
         }
 
-        const formData = new FormData();
-        formData.append("title", form.title);
-        formData.append("contents", form.contents);
+        try {
+            let finalImgUrl = initialData?.img || "";
 
-        if (form.img) {
-            formData.append("img", form.img);
-        } else if (initialData?.img) {
-            formData.append("img", initialData.img);
+            if (form.img instanceof File) {
+                finalImgUrl = await uploadToSupabase(form.img);
+            }
+
+            const formData = new FormData();
+            formData.append("title", form.title);
+            formData.append("contents", form.contents);
+            formData.append("img", finalImgUrl);
+
+            if (isUpload) {
+                await create(formData);
+            } else {
+                await update(String(id), formData);
+            }
+        } catch (err: any) {
+            console.error(err);
+            alert(err.message || "오류가 발생했습니다."); 
         }
 
-        if (isUpload) {
-            await create(formData);
-        } else {
-            await update(String(id), formData);
-        }
-
-    }, [form, initialData, id, isUpload]);
+    }, [form, initialData, id, isUpload, create, update]);
 
     return (
         <form onSubmit={onSubmitForm}>
