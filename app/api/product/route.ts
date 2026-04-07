@@ -3,7 +3,7 @@ import { supabaseServer } from "@/lib/supabase/server";
 
 export async function POST(req: NextRequest) {
   try {
-    // 이제 formData() 대신 json()을 사용합니다.
+    // formData() 대신 json()을 사용합니다.
     const body = await req.json();
     const { name, category, thumbnail, images } = body;
 

@@ -1,26 +1,26 @@
 "use client";
 import { useCreate } from "@/hooks/useCreate";
 import { useUpdate } from "@/hooks/useUpdate";
-import { type PerformanceForm, PerformanceFormProps } from "@/types/performance";
+import { supabase } from "@/lib/supabase/client";
+import { type CertificationForm, CertificationFormProps } from "@/types/common";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useCallback, useEffect, useState } from "react"
 
-export default function PerformanceForm({ mode, initialData }: PerformanceFormProps) {
+export default function CertificationForm({ mode, initialData }: CertificationFormProps) {
 
     const router = useRouter();
     const { id } = useParams();
 
-    const {create, isPending : isCreating} = useCreate("/api/performance","/admin/board/performance");
-    const {update, isPending: isUpdating} = useUpdate("/api/performance","/admin/board/performance");
+    const {create, isPending : isCreating}= useCreate("/api/certification", "/admin/board/certification");
+    const {update, isPending : isUpdating} = useUpdate("/api/certification", "/admin/board/certification");
     const isLoading = isCreating || isUpdating;
 
     const isUpload = mode === "upload";
     const isEdit = mode === "edit";
 
-    const [form, setForm] = useState<PerformanceForm>({
+    const [form, setForm] = useState<CertificationForm>({
         name: initialData?.name ?? "",
-        spec: initialData?.spec ?? "",
         img: null
     });
 
@@ -29,7 +29,6 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
             setForm(prev => ({
                 ...prev,
                 name: initialData.name ?? "",
-                spec: initialData.spec ?? "",
             }));
         }
     }, [initialData]);
@@ -45,11 +44,28 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
         }
     }, []);
 
+    const uploadToSupabase = async (file: File) => {
+        const ext = file.name.split('.').pop();
+        const fileName = `${Date.now()}_${crypto.randomUUID()}.${ext}`;
+        const path = `${fileName}`; // 보관 폴더명
+
+        const { data, error } = await supabase.storage
+            .from("certifications")
+            .upload(path, file);
+
+        if (error) throw new Error("이미지 업로드에 실패했습니다.");
+
+        const { data: urlData } = supabase.storage
+            .from("certifications")
+            .getPublicUrl(path);
+
+        return urlData.publicUrl;
+    };
+
     // 취소
     const onClickCancel = () => {
         setForm({
             name: initialData?.name ?? "",
-            spec: initialData?.spec ?? "",
             img: null,
         });
         router.back();
@@ -61,12 +77,7 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
 
         // 유효성 검증
         if (!form.name.trim()) {
-            alert("프로젝트명을 입력해주세요.")
-            return;
-        }
-
-        if (!form.spec.trim()) {
-            alert("SPEC을 입력해주세요.")
+            alert("인증서명을 입력해주세요.")
             return;
         }
 
@@ -90,37 +101,42 @@ export default function PerformanceForm({ mode, initialData }: PerformanceFormPr
             }
         }
 
+        try {
+        let finalImgUrl = initialData?.img || "";
+
+        // 파일이 새로 선택되었다면 클라이언트에서 먼저 업로드
+        if (form.img instanceof File) {
+            finalImgUrl = await uploadToSupabase(form.img);
+        }
+
+        // 훅에 넘길 FormData 생성
         const formData = new FormData();
         formData.append("name", form.name);
-        formData.append("spec", form.spec);
+        
+        // 파일 객체(form.img)를 넣는 게 아니라, 업로드된 'URL 문자열'로 넣기
+        formData.append("img", finalImgUrl); 
 
-        if (form.img) {
-            formData.append("img", form.img);
-        } else if (initialData?.img) {
-            formData.append("img", initialData.img);
-        }
-
-        if(isUpload) {
+        // 원래 쓰던 훅 그대로 사용
+        if (isUpload) {
             await create(formData);
         } else {
-            await update(String(id), formData)
+            await update(String(id), formData);
         }
 
-    }, [form, initialData, id, isUpload]);
+    } catch (err: any) {
+        console.error(err);
+        alert(err.message || "오류가 발생했습니다.");
+    }
+
+    }, [form, initialData, id, isUpload, create, update]);
 
     return (
         <form onSubmit={onSubmitForm}>
             <div>
                 <label htmlFor="name">
-                    <h3 className="required">프로젝트명</h3>
+                    <h3 className="required">인증서명</h3>
                 </label>
-                <input type="text" id="name" name="name" placeholder="프로젝트명을 입력해주세요." onChange={onChangeForm} value={form.name} />
-            </div>
-            <div>
-                <label htmlFor="spec">
-                    <h3 className="required">SPEC</h3>
-                </label>
-                <input type="text" id="spec" name="spec" placeholder="SPEC을 입력해주세요." onChange={onChangeForm} value={form.spec} />
+                <input type="text" id="name" name="name" placeholder="인증서명을 입력해주세요." onChange={onChangeForm} value={form.name} />
             </div>
             <div>
                 <label htmlFor="img">

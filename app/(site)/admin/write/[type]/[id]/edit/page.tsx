@@ -6,13 +6,39 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import PerformanceForm from "@/components/form/PerformanceForm";
 import ProductForm from "@/components/form/ProductForm";
+import CertificationForm from "@/components/form/CertificationForm";
+import NewsForm from "@/components/form/NewsForm";
+import { BoardType, InitialCertificationDataProps, InitialNewsDataProps } from "@/types/common";
 
 export default function AdminEditPage() {
 
     const { id, type } = useParams();
-    const [initialData, setInitialData] = useState<InitialProductDataProps | InitialPerformanceDataProps | null>(null);
+    const [initialData, setInitialData] = useState<InitialProductDataProps | InitialPerformanceDataProps | InitialCertificationDataProps | InitialNewsDataProps | null>(null);
     const [loading, setLoading] = useState(true);
-    const isPerformance = type === "performance";
+
+    const selectType = type as BoardType;
+
+    const getEditForm = () => {
+        switch (selectType) {
+            case "certification": return <CertificationForm mode="edit" initialData={initialData as InitialCertificationDataProps} />;;
+            case "performance": return <PerformanceForm mode="edit" initialData={initialData as InitialPerformanceDataProps} />;
+            case "product": return <ProductForm mode="edit" initialData={initialData as InitialProductDataProps} />;
+            case "new": return <NewsForm mode="edit" initialData={initialData as InitialNewsDataProps} />;
+        }
+    }
+
+    const editForm = getEditForm();
+
+    const getHeaderLabel = () => {
+        switch (selectType) {
+            case "performance": return { name: "실적" };
+            case "certification": return { name: "인증서" };
+            case "new": return { name: "기사" };
+            default: return { name: "제품" };
+        }
+    };
+
+    const labels = getHeaderLabel();
 
     useEffect(() => {
         if (!id) return;
@@ -34,18 +60,36 @@ export default function AdminEditPage() {
                     id: String(data.id),
                     name: data.name
                 }
-                const formattedData = type === "performance"
-                    ? {
-                        ...commonData,
-                        spec: data.spec,
-                        img: data.img,
-                    } as InitialPerformanceDataProps
-                    : {
-                        ...commonData,
-                        category: data.category,
-                        thumbnail: data.thumbnail,
-                        images: data.images,
-                    } as InitialProductDataProps;
+                
+                const formattedData = () => {
+                    switch (selectType) {
+                        case "performance":
+                            return {
+                                ...commonData,
+                                spec: data.spec,
+                                img: data.img,
+                            } as InitialPerformanceDataProps;
+                        case "certification":
+                            return {
+                                ...commonData,
+                                img: data.img,
+                            } as InitialCertificationDataProps;
+                        case "new":
+                            return {
+                                ...commonData,
+                                title: data.title,
+                                contents: data.contents,
+                                img: data.img
+                            } as InitialNewsDataProps;
+                        default:
+                            return {
+                                ...commonData,
+                                category: data.category,
+                                thumbnail: data.thumbnail,
+                                images: data.images,
+                            } as InitialProductDataProps; // product
+                    }
+                }
 
                 setInitialData(formattedData);
             } catch (err) {
@@ -66,12 +110,9 @@ export default function AdminEditPage() {
         <article className="admin-form">
             <div>
                 <div>
-                    <h2 className="page-title">{isPerformance ? "실적" : "제품"} 수정하기</h2>
+                    <h2 className="page-title">{labels.name} 수정하기</h2>
                 </div>
-                {isPerformance ?
-                    <PerformanceForm mode="edit" initialData={initialData as InitialPerformanceDataProps} />
-                    : <ProductForm mode="edit" initialData={initialData as InitialProductDataProps} />
-                }
+                {editForm}
             </div>
         </article>
     )

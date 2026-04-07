@@ -7,8 +7,9 @@ import { ProductProps } from "@/types/product";
 import { NavItem } from "@/types/common";
 import { PerformanceProps } from "@/types/performance";
 import Link from "next/link";
+import { useDelete } from "@/hooks/useDelete";
 
-// 상세페이지
+// 상세페이지 (product, certification)
 export default function ProductDetail() {
 
     const [detail, setDetail] = useState<ProductProps | PerformanceProps>();
@@ -25,17 +26,17 @@ export default function ProductDetail() {
 
     const isPathnameProduct = pathname.startsWith("/product");
     const getCategory = isPathnameProduct ? category : type;
-    const isPerformance = getCategory === "performance";
+    const isCertification = getCategory === "certification";
+     const apiUrl = isCertification ? "/api/certification" : `/api/product/${getCategory}`
+
+    const {remove, isPending: isDeleting} = useDelete(apiUrl)
 
     const fetchData = useCallback(async (signal: AbortSignal) => {
         if (!id || !getCategory) return;
 
         try {
-            const apiUrl = isPerformance
-                ? `/api/performance/${id}`
-                : `/api/product/${getCategory}/${id}`;
 
-            const res = await fetch(apiUrl, { signal });
+            const res = await fetch(`${apiUrl}/${id}`, { signal });
 
             if (!res.ok) {
                 const errorData = await res.json();
@@ -43,14 +44,14 @@ export default function ProductDetail() {
             }
 
             const data = await res.json();
-            setDetail(data.currentData);
+            setDetail(isCertification ? data : data.currentData);
             setPrevItem(data.prev);
             setNextItem(data.next);
         } catch (error: any) {
             if (error.name === "AbortError") return;
             console.error("API fetch error:", error);
         }
-    }, [id, getCategory, isPerformance]);
+    }, [id, getCategory, isCertification]);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -59,33 +60,10 @@ export default function ProductDetail() {
     }, [fetchData]);
 
     // 삭제
-    const onProductDelete = async () => {
+    const onDelete = async () => {
         if (!detail) return;
-        if (!confirm("제품을 삭제하시겠습니까?")) return;
-
-        try {
-            const apiUrl = isPerformance
-                ? `/api/performance/${id}`
-                : `/api/product/${getCategory}/${id}`;
-
-            const res = await fetch(apiUrl, { method: "DELETE" });
-
-            const contentType = res.headers.get("content-type");
-            if (!res.ok || !contentType?.includes("application/json")) {
-                const errorData = await res.json().catch(() => ({}));
-                throw new Error(errorData.error || `삭제 실패 (상태 코드: ${res.status})`);
-            }
-
-            const result = await res.json();
-            alert(result.message);
-
-            router.push("/admin");
-            router.refresh();
-
-        } catch (err: any) {
-            console.error("삭제 에러:", err);
-            alert(err.message || "삭제 실패했습니다. 다시 시도해주세요.");
-        }
+        await remove(String(id));
+        router.push(`/admin/board/${getCategory}`)
     };
 
     // 수정
@@ -96,14 +74,12 @@ export default function ProductDetail() {
     if (!detail) return <div className="loading">정보를 불러오는 중입니다.</div>
 
     return (
-        <article className="product-detail">
+        <article className={`product-detail ${isCertification && "certification"}`}>
             <div>
                 <div>
                     <h3 className="page-title">
-                        {type === "product" ?
-                            getCategory === "unit" ? "유압 유니트" : "기타 유압 기기"
-                            : (category === "other" ? "기타 유압 기기" : "유압 유니트")
-                        }
+                        {type === "certification" ?  "인증서" :
+                        getCategory === "unit" ? "유압 유니트" : "기타 유압 기기"}
                     </h3>
                     {'spec' in detail && <p><span>SPEC </span>| {detail.spec}</p>}
                 </div>
@@ -139,7 +115,7 @@ export default function ProductDetail() {
                 {!isPathnameProduct &&
                     <div className="display-flex admin-btn">
                         <button type="button" onClick={() => goEdit(String(id))}>수정하기</button>
-                        <button type="button" onClick={onProductDelete}>삭제하기</button>
+                        <button type="button" onClick={onDelete}>{isDeleting ? "삭제 중..." : "삭제하기"}</button>
                     </div>
                 }
                 {

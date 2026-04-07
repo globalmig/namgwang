@@ -15,6 +15,8 @@ export const CATEGORY_MAP: {
         categories: [
             { name: "회사개요", url: "about" },
             { name: "인사말", url: "about2" },
+            { name: "회사소식", url: "news" },
+            { name: "인증서", url: "certification" },
         ],
     },
     product: {
@@ -88,8 +90,10 @@ export const ADMIN_SUBCATEGORY : {
     name: string,
     category: string,
 } [] = [
-    { name: "실적게시판", category: "performance" },
+    { name: "실적 게시판", category: "performance" },
     { name: "제품 게시판", category: "product" },
+    { name: "인증서 게시판", category: "certification" },
+    { name: "기사 게시판", category: "new" },
 ]
 
 export const ADMIN_PRODUCT_CATEGORY_NAME : {[key: string] : string} = {

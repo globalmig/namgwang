@@ -1,4 +1,5 @@
 "use client";
+import { useDelete } from "@/hooks/useDelete";
 import { PerformanceProps } from "@/types/performance";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,8 +12,9 @@ export default function PerformanceDetail() {
     const isPathnameProduct = pathname.startsWith("/product");
     const router = useRouter();
     const { id } = useParams();
-
     const [performance, setPerformance] = useState<PerformanceProps>();
+
+    const {remove, isPending: isDeleting} = useDelete("/api/performance");
 
     useEffect(() => {
         if (!id) return;
@@ -26,20 +28,10 @@ export default function PerformanceDetail() {
     }, [id]);
 
     // 삭제
-    const onPerformanceDelete = async () => {
-        if (!performance) return;
-        if (!confirm("실적을 삭제하시겠습니까?")) return;
-        try {
-            const res = await fetch(`/api/performance/${id}`, { method: "DELETE" });
-            const result = await res.json();
-            if (!res.ok) throw new Error(result.error || "실적 삭제를 실패했습니다. 다시 시도해주세요.");
-
-            alert(result.message);
-            router.push("/admin");
-            router.refresh();
-        } catch (err) {
-            console.error(err);
-        }
+    const onDelete = async () => {
+        if (!id) return;
+       await remove(String(id));
+       router.push("/admin/board/performance")
     };
 
     // 수정
@@ -67,7 +59,7 @@ export default function PerformanceDetail() {
                 {!isPathnameProduct &&
                     <div className="display-flex admin-btn">
                         <button type="button" onClick={() => goEdit(String(id))}>수정하기</button>
-                        <button type="button" onClick={onPerformanceDelete}>삭제하기</button>
+                        <button type="button" onClick={onDelete}>{isDeleting ? "삭제 중..." : "삭제하기"}</button>
                     </div>
                 }
             </div>
