@@ -22,16 +22,8 @@ export async function POST(req: NextRequest) {
     if (dbError) throw dbError;
 
     return NextResponse.json({ message: "인증서가 등록되었습니다." });
-<<<<<<< HEAD
-=======
-
->>>>>>> temp-branch
   } catch (err: any) {
     console.error("API ERROR:", err);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> temp-branch
