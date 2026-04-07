@@ -33,6 +33,7 @@ export default function NewsDetail() {
 
             const data = await res.json();
             setNews(data);
+           
             setPrevItem(data.prev);
             setNextItem(data.next);
 
