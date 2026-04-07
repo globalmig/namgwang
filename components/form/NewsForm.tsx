@@ -49,7 +49,7 @@ export default function NewsForm({ mode, initialData }: NewsFormProps) {
     const uploadToSupabase = async (file: File) => {
         const ext = file.name.split('.').pop();
         const fileName = `${Date.now()}_${crypto.randomUUID()}.${ext}`;
-        const path = `${fileName}`; // news 폴더 안에 저장
+        const path = `${fileName}`;
 
         const { data, error } = await supabase.storage
             .from("news") 
@@ -123,7 +123,7 @@ export default function NewsForm({ mode, initialData }: NewsFormProps) {
             }
         } catch (err: any) {
             console.error(err);
-            alert(err.message || "오류가 발생했습니다.");
+            alert(err.message || "오류가 발생했습니다."); 
         }
 
     }, [form, initialData, id, isUpload, create, update]);
