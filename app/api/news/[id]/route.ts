@@ -50,59 +50,37 @@ export async function PATCH(
     req: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
-
     try {
         const formData = await req.formData();
         const { id } = await params;
 
+        const title = formData.get("title") as string;
+        const contents = formData.get("contents") as string;
+        const newImgUrl = formData.get("img") as string;
+
+        // 1. 기존 데이터 조회
         const { data: currentNews } = await supabaseServer
             .from("news")
             .select("img")
             .eq("id", id)
             .single();
 
-        let imgUrl = formData.get("img");
-        const imgFile = formData.get("img") as File | null;
-
-        if (imgFile instanceof File && imgFile.size > 0) {
-
-            const oldimgUrl = currentNews?.img;
-            if (oldimgUrl) {
-                const oldPath = oldimgUrl.split("/public/news/")[1];
-                if (oldPath) {
-                    await supabaseServer.storage.from("news").remove([oldPath]);
-                }
+        // 새 이미지 URL이 기존과 다를 경우 (이미지가 교체된 경우) 기존 파일 삭제
+        if (currentNews?.img && newImgUrl && currentNews.img !== newImgUrl) {
+            // URL에서 스토리지 내부 경로 추출 (버킷명 'news' 이후의 경로)
+            const oldPath = currentNews.img.split("/news/")[1];
+            if (oldPath) {
+                await supabaseServer.storage.from("news").remove([oldPath]);
             }
-
-            const buffer = await imgFile.arrayBuffer();
-            const ext = imgFile.name.split(".").pop();
-            const newPath = `images/${Date.now()}_${crypto.randomUUID()}.${ext}`;
-
-            const { error: uploadError } = await supabaseServer.storage
-                .from("news")
-                .upload(newPath, buffer, {
-                    contentType: imgFile.type,
-                    upsert: true
-                });
-
-            if (uploadError) {
-                console.error("이미지 업로드 에러:", uploadError);
-                throw new Error("이미지 업로드를 실패했습니다.");
-            }
-
-            const { data: urlData } = supabaseServer.storage
-                .from("news")
-                .getPublicUrl(newPath);
-
-            imgUrl = urlData.publicUrl;
         }
 
+        // 2. DB 업데이트
         const { error: dbError } = await supabaseServer
             .from("news")
             .update({
-                title: formData.get("title"),
-                contents: formData.get("contents"),
-                img: imgUrl,
+                title,
+                contents,
+                img: newImgUrl, // 교체되었거나 유지된 URL 저장
                 updated_at: new Date().toISOString(),
             })
             .eq("id", id);
@@ -114,7 +92,6 @@ export async function PATCH(
         console.error("PATCH ERROR:", err);
         return NextResponse.json({ error: err.message }, { status: 500 });
     }
-
 }
 
 export async function DELETE(
@@ -124,6 +101,7 @@ export async function DELETE(
     try {
         const { id } = await params;
 
+        // 1. 삭제할 기사의 이미지 정보 먼저 조회
         const { data: news, error: fetchError } = await supabaseServer
             .from("news")
             .select("img")
@@ -134,23 +112,21 @@ export async function DELETE(
             return NextResponse.json({ error: "삭제할 기사를 찾을 수 없습니다." }, { status: 404 });
         }
 
-        const pathsToDelete: string[] = [];
-
+        // 2. 스토리지 파일 삭제 진행
         if (news.img) {
-            const imgPath = news.img.split("/public/news/")[1];
-            if (imgPath) pathsToDelete.push(imgPath);
-        }
-
-        if (pathsToDelete.length > 0) {
-            const { error: storageError } = await supabaseServer.storage
-                .from("news")
-                .remove(pathsToDelete);
-
-            if (storageError) {
-                console.error("storage file delete error:", storageError.message);
+            const imgPath = news.img.split("/news/")[1];
+            if (imgPath) {
+                const { error: storageError } = await supabaseServer.storage
+                    .from("news")
+                    .remove([imgPath]);
+                
+                if (storageError) {
+                    console.error("Storage delete error:", storageError.message);
+                }
             }
         }
 
+        // 3. DB 데이터 삭제
         const { error: dbError } = await supabaseServer
             .from("news")
             .delete()

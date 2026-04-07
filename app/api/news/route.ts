@@ -7,47 +7,23 @@ export async function POST(req: NextRequest) {
 
     const title = formData.get("title") as string;
     const contents = formData.get("contents") as string;
-    const img = formData.get("img") as File | null;
-    if (!img) throw new Error("이미지를 등록해주세요.");
+    const imgUrl = formData.get("img") as string;
 
-
-    if (!title || !contents) {
+    // 데이터 검증
+    if (!title || !contents || !imgUrl) {
       return NextResponse.json(
-        { error: "기사제목과 URL를 모두 입력해주세요." },
+        { error: "기사 제목, 내용, 이미지를 모두 입력해주세요." },
         { status: 400 }
       );
     }
 
-    /* ---------- 이미지 업로드 ---------- */
-    function safeFileName(originalName: string) {
-      const ext = originalName.split(".").pop();
-      return `${Date.now()}_${crypto.randomUUID()}.${ext}`;
-    }
-
-    const imgBuffer = await img.arrayBuffer();
-    const safeName = safeFileName(img.name);
-    const imgPath = `${safeName}`;
-
-    const { error: thumError } = await supabaseServer.storage
-      .from("news")
-      .upload(imgPath, imgBuffer, {
-        contentType: img.type,
-      });
-
-    if (thumError) throw thumError;
-
-    const { data: thumUrl } = supabaseServer.storage
-      .from("news")
-      .getPublicUrl(imgPath);
-
     /* ---------- DB 저장 ---------- */
-    
     const { error: dbError } = await supabaseServer
       .from("news") 
       .insert({
         title,
         contents,
-        img: thumUrl.publicUrl,
+        img: imgUrl, // URL 문자열 그대로 저장
       });
 
     if (dbError) throw dbError;

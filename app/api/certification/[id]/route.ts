@@ -32,66 +32,48 @@ export async function PATCH(
     const formData = await req.formData();
     const { id } = await params;
 
-    const { data: currentcertification } = await supabaseServer
+    const name = formData.get("name") as string;
+    const newImgUrl = formData.get("img") as string; // 프론트에서 보낸 새 URL
+
+    // 1. 기존 데이터 조회 (기존 이미지 삭제를 위해)
+    const { data: current } = await supabaseServer
       .from("certifications")
       .select("img")
       .eq("id", id)
       .single();
 
-    let imgUrl = formData.get("img");
-    const imgFile = formData.get("img") as File | null;
-
-    if (imgFile instanceof File && imgFile.size > 0) {
-
-      const oldimgUrl = currentcertification?.img;
-      if (oldimgUrl) {
-        const oldPath = oldimgUrl.split("/public/certifications/")[1];
-        if (oldPath) {
-          await supabaseServer.storage.from("certifications").remove([oldPath]);
-        }
+    /**
+     * 기존 이미지와 새로 들어온 이미지 URL이 다르다면 (사용자가 이미지를 교체했다면)
+     * 기존 스토리지에 있는 파일 삭제
+     */
+    if (current?.img && newImgUrl && current.img !== newImgUrl) {
+      // URL에서 파일명(경로) 추출
+      const oldPath = current.img.split("/storage/v1/object/public/certifications/")[1];
+      if (oldPath) {
+        await supabaseServer.storage.from("certifications").remove([oldPath]);
       }
-
-      const buffer = await imgFile.arrayBuffer();
-      const ext = imgFile.name.split(".").pop();
-      const newPath = `certifications/images/${Date.now()}_${crypto.randomUUID()}.${ext}`;
-
-      const { error: uploadError } = await supabaseServer.storage
-        .from("certifications")
-        .upload(newPath, buffer, {
-          contentType: imgFile.type,
-          upsert: true
-        });
-
-      if (uploadError) {
-        console.error("이미지 업로드 에러:", uploadError);
-        throw new Error("이미지 업로드를 실패했습니다.");
-      }
-
-      const { data: urlData } = supabaseServer.storage
-        .from("certifications")
-        .getPublicUrl(newPath);
-
-      imgUrl = urlData.publicUrl;
     }
 
+    // 2. DB 업데이트
     const { error: dbError } = await supabaseServer
       .from("certifications")
       .update({
-        name: formData.get("name"),
-        img: imgUrl,
+        name,
+        img: newImgUrl,
         updated_at: new Date().toISOString(),
       })
       .eq("id", id);
 
     if (dbError) throw dbError;
- 
-    return NextResponse.json({ message: "인증서이 수정되었습니다." });
+
+    return NextResponse.json({ message: "인증서가 수정되었습니다." });
   } catch (err: any) {
     console.error("PATCH ERROR:", err);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
 
+// DELETE: 삭제
 export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -99,33 +81,22 @@ export async function DELETE(
   try {
     const { id } = await params;
 
-    const { data: certification, error: fetchError } = await supabaseServer
+    // 1. 삭제할 데이터의 이미지 경로 조회
+    const { data: certification } = await supabaseServer
       .from("certifications")
       .select("img")
       .eq("id", id)
       .single();
 
-    if (fetchError || !certification) {
-      return NextResponse.json({ error: "삭제할 인증서를 찾을 수 없습니다." }, { status: 404 });
-    }
-
-    const pathsToDelete: string[] = [];
-
-    if (certification.img) {
-      const imgPath = certification.img.split("/public/certifications/")[1];
-      if (imgPath) pathsToDelete.push(imgPath);
-    }
-
-    if (pathsToDelete.length > 0) {
-      const { error: storageError } = await supabaseServer.storage
-        .from("certifications")
-        .remove(pathsToDelete);
-
-      if (storageError) {
-        console.error("storage file delete error:", storageError.message);
+    // 2. 스토리지 파일 삭제
+    if (certification?.img) {
+      const imgPath = certification.img.split("/storage/v1/object/public/certifications/")[1];
+      if (imgPath) {
+        await supabaseServer.storage.from("certifications").remove([imgPath]);
       }
     }
 
+    // 3. DB 데이터 삭제
     const { error: dbError } = await supabaseServer
       .from("certifications")
       .delete()
@@ -134,7 +105,6 @@ export async function DELETE(
     if (dbError) throw dbError;
 
     return NextResponse.json({ message: "인증서가 삭제되었습니다." });
-
   } catch (err: any) {
     console.error("DELETE ERROR:", err);
     return NextResponse.json({ error: err.message }, { status: 500 });
