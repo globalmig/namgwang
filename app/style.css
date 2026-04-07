@@ -346,10 +346,16 @@ main.category-main>div>h2 {
     text-align: left;
 }
 
-.about2.intro>div>:last-child img:last-of-type {
+.about2.intro>div>:last-child>:first-child img {
+    width: 80%;
+    height: auto;
+    margin: 0 auto 30px;
+}
+
+.about2.intro>div>:last-child>:last-child img {
+    margin-top: 40px;
     width: 120px;
     height: auto;
-    margin: 20px 0 auto;
 }
 
 .about2.company img {
@@ -1095,7 +1101,7 @@ main.category-main>div>h2 {
     width: 80%;
 }
 
-.news-detail>div>:nth-child(2)>h3{
+.news-detail>div>:nth-child(2)>h3 {
     padding-top: 25px;
     border-top: 1px solid #aaa;
 }
@@ -1474,20 +1480,8 @@ main.category-main>div>h2 {
 
     /* company */
 
-    .about>div>:nth-child(2) {
-        position: relative;
-        overflow: hidden;
-        height: 500px;
-    }
-
     .about>div>:nth-child(2) img {
-        position: absolute;
-        left: 0;
-        top: -40px;
-    }
-
-    .about2>div {
-        padding: 120px 0 100px;
+        margin-bottom: 50px;
     }
 
     .about2.intro>div>:last-child>:first-child {
@@ -1518,12 +1512,12 @@ main.category-main>div>h2 {
         margin: auto 0;
     }
 
-    .about2.intro>div>:last-child>:last-child img:last-of-type {
-        margin: 0;
+    .about2.intro>div>:last-child>:first-child img {
+        margin: 40px 0 auto;
     }
 
-    .about2.intro>div>:last-child>:last-child>div img:last-of-type {
-        margin: 40px 0 auto;
+    .about2.intro>div>:last-child>:last-child img {
+        width: 150px;
     }
 
     .about2.company {
