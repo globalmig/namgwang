@@ -68,7 +68,7 @@ export async function PATCH(
         // 새 이미지 URL이 기존과 다를 경우 (이미지가 교체된 경우) 기존 파일 삭제
         if (currentNews?.img && newImgUrl && currentNews.img !== newImgUrl) {
             // URL에서 스토리지 내부 경로 추출 (버킷명 'news' 이후의 경로)
-            const oldPath = currentNews.img.split("/news/")[1];
+            const oldPath = currentNews.img.split("/storage/v1/object/public/news/")[1];
             if (oldPath) {
                 await supabaseServer.storage.from("news").remove([oldPath]);
             }
@@ -114,7 +114,7 @@ export async function DELETE(
 
         // 2. 스토리지 파일 삭제 진행
         if (news.img) {
-            const imgPath = news.img.split("/news/")[1];
+            const imgPath = news.img.split("/storage/v1/object/public/news/")[1];
             if (imgPath) {
                 const { error: storageError } = await supabaseServer.storage
                     .from("news")
