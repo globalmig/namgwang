@@ -5,8 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "남광유압 | 유압기기 전문 메이커",
-  description: "유압 시스템 및 유압 기기 개발과 생산 전문 업체",
+  title: "(주)남광유압",
+  description: "유압 실린더, 유압 유니트, 기타 유압 기기 개발 및 생산 전문 기업",
   keywords: [
   "유압",
   "설비",
@@ -15,16 +15,16 @@ export const metadata: Metadata = {
   "남광유압",
 ],
   openGraph: {
-    title: '남광유압',
-    description: '유압 시스템 및 유압 기기 개발과 생산 전문 업체',
+    title: '(주)남광유압',
+    description: '유압 시스템 및 유압 기기 개발과 생산 전문 기업',
     url: 'https://www.nk-hyd.co.kr/',
-    siteName: '남광유압',
+    siteName: '(주)남광유압',
     images: [
       {
         url: 'https://www.nk-hyd.co.kr/images/og_image.jpg',
         width: 1200,
         height: 630,
-        alt: '남광유압',
+        alt: '(주)남광유압',
       },
     ],
     locale: 'ko_KR',
