@@ -6,4 +6,4 @@ User-agent: Yeti
 Disallow: /inquire
 Disallow: /admin
 
-Sitemap: https://www./sitemap.xml
+Sitemap: https://www.nk-hyd.co.kr/sitemap.xml
