@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import "./globals.css";
+import "./style.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import "./style.css";
-import "./globals.css";
 
 export const metadata: Metadata = {
   title: "남광유압 | 유압기기 전문 메이커",
@@ -17,11 +17,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: '남광유압',
     description: '유압 시스템 및 유압 기기 개발과 생산 전문 업체',
-    url: 'https://...',
+    url: 'https://www.nk-hyd.co.kr/',
     siteName: '남광유압',
     images: [
       {
-        url: 'https://.../images/og_image.jpg',
+        url: 'https://www.nk-hyd.co.kr/images/og_image.jpg',
         width: 1200,
         height: 630,
         alt: '남광유압',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   verification: {
     other: {
-      'naver-site-verification': '',
+      'naver-site-verification': '18b0b2bb89de93c0d2aa7103490e917737076864',
     }
   },
   robots: { index: true, follow: true },

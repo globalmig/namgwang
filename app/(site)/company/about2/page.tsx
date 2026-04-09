@@ -10,7 +10,6 @@ export default function About2Page() {
                     </div>
                     <div className="display-flex-flow">
                         <div>
-                            {/* <Image className="mo" src="/images/대표님1.png" alt="대표이사 강대유" width={920} height={629} /> */}
                             <Image src="/images/대표님2.png" alt="대표이사 강대유" width={496} height={727} />
                         </div>
                         <div>
