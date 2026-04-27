@@ -11,13 +11,11 @@ export default function ProductNavigator({ prevItem, nextItem }: ProductNavigato
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [prevItem, nextItem]); // 두 아이템 변경 시 모두 상단 이동
+    }, [prevItem, nextItem]);
 
     if (!nextItem && !prevItem) return null;
 
-    // 아이템의 표시 이름을 결정하는 헬퍼 함수
     const getDisplayName = (item: any) => {
-        // title이 있으면 우선순위, 없으면 name 사용
         return item.title || item.name || "";
     };
 
@@ -27,7 +25,6 @@ export default function ProductNavigator({ prevItem, nextItem }: ProductNavigato
                 <li style={{ borderBottom: nextItem && prevItem ? "none" : "none" }}>
                     <Link href={`${basePath}/${prevItem.id}`} scroll={true}>
                         <span>이전</span> {getDisplayName(prevItem)} 
-                        {/* 특정 카테고리(cylinder)일 때만 붙는 접미사 조건 유지 */}
                         {category === "cylinder" && " TYPE"}
                     </Link>
                 </li>

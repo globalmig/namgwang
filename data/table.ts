@@ -1330,7 +1330,6 @@ export const TABLE_DATA = [
     type: "rod",
     table: {
       thead: [
-        /* 1행: 대분류 기호 */
         [
           { label: ["기호", "내경"], rowSpan: 2, isLine: true },
           { label: "CA", rowSpan: 2 },
@@ -1348,14 +1347,13 @@ export const TABLE_DATA = [
           { label: "RF", rowSpan: 2 },
           { label: "J", rowSpan: 2 }
         ],
-        /* 2행: 1산/2산 세부 분류 */
         [
-          { label: "1산" }, { label: "2산" }, // CC
-          { label: "1산" }, { label: "2산" }, // CD
-          { label: "1산" }, { label: "2산" }, // CF
-          { label: "1산" }, { label: "2산" }, // ER
-          { label: "1산" }, { label: "2산" }, // FW
-          { label: "1산" }, { label: "2산" }  // RA
+          { label: "1산" }, { label: "2산" },
+          { label: "1산" }, { label: "2산" }, 
+          { label: "1산" }, { label: "2산" }, 
+          { label: "1산" }, { label: "2산" }, 
+          { label: "1산" }, { label: "2산" }, 
+          { label: "1산" }, { label: "2산" }  
         ]
       ],
       tbody: [
@@ -1474,25 +1472,21 @@ export const TABLE_DATA = [
         [
           { label: "내경", rowSpan: 5 },
         ],
-        /* 1행: NO 항목 */
         [
           { label: "NO", rowSpan: 1 },
           { label: "4" }, { label: "5" }, { label: "6" }, { label: "7" },
           { label: "10" }, { label: "13" }, { label: "14" }, { label: "17" }
         ],
-        /* 2행: 명칭 항목 */
         [
           { label: "명칭", rowSpan: 1 },
           { label: "보스오링" }, { label: "쿠션오링" }, { label: "백업링" }, { label: "커버오링" },
           { label: "피스톤패킹" }, { label: "더스트씰" }, { label: "U패킹" }, { label: "로드오링" }
         ],
-        /* 3행: 재질 항목 */
         [
           { label: "재질", rowSpan: 1 },
           { label: "NBR" }, { label: "NBR" }, { label: "TEFLON" }, { label: "NBR" },
           { label: "NBR + TEFLON" }, { label: "URETHANE" }, { label: "URETHANE" }, { label: "NBR" }
         ],
-        /* 4행: 수량 항목 */
         [
           { label: "수량", rowSpan: 1 },
           { label: "1" }, { label: "1" }, { label: "2" }, { label: "2" },
@@ -1777,22 +1771,18 @@ export const TABLE_DATA = [
         [
           { label: "내경", rowSpan: 5 },
         ],
-        /* 1행: NO 항목 */
         [
           { label: "NO" },
           { label: "2" }, { label: "3" }, { label: "5" }, { label: "7" }, { label: "8" }
         ],
-        /* 2행: 재질 항목 */
         [
           { label: "재질" },
           { label: "URETHANE or NBR" }, { label: "URETHANE or NBR" }, { label: "NBR" }, { label: "NBR" }, { label: "NBR + URETHANE" }
         ],
-        /* 3행: 명칭 항목 */
         [
           { label: "명칭" },
           { label: "더스트씰" }, { label: "U-패킹" }, { label: "커버오링" }, { label: "로드오링" }, { label: "피스톤패킹" }
         ],
-        /* 4행: 수량 항목 */
         [
           { label: "수량" },
           { label: "1" }, { label: "1" }, { label: "1" }, { label: "1" }, { label: "1SET" }
@@ -2068,7 +2058,6 @@ export const TABLE_DATA = [
     type: "spec",
     table: {
       thead: [
-        /* 1행: 기종 및 각 모델 번호 */
         [
           { label: "기 종", colSpan: 2 },
           { label: "10형" },
@@ -2077,12 +2066,10 @@ export const TABLE_DATA = [
           { label: "40형" },
           { label: "50형" }
         ],
-        /* 2행: 실린더 내경 1단 정보 */
         [
-          { label: "실린더 내경mm", rowSpan: 2 }, // 왼쪽 레이블 병합
+          { label: "실린더 내경mm", rowSpan: 2 },
           { label: "1단" }, { label: "ø63" }, { label: "ø90" }, { label: "ø110" }, { label: "ø125" }, { label: "ø140" }
         ],
-        /* 3행: 실린더 내경 2단 정보 */
         [
           { label: "2단" }, { label: "ø45" }, { label: "ø65" }, { label: "ø80" }, { label: "ø90" }, { label: "ø100" }
         ]
@@ -2521,7 +2508,6 @@ export const TABLE_DATA = [
     type: "rod",
     table: {
       thead: [
-      /* 1행: 대분류 (기호, 로드경A형, 로드경B형, 기타 단일 기호들, 피스톤) */
       [
         { label: ["기호", "내경"], rowSpan: 3, isLine: true },
         { label: "로드경A형", colSpan: 5 },
@@ -2805,7 +2791,6 @@ export const TABLE_DATA = [
     type: "packing-list",
     table: {
       thead: [
-        /* 1행: NO */
         [
           { label: "NO" },
           { label: "4", colSpan: 2 },
@@ -2817,7 +2802,6 @@ export const TABLE_DATA = [
           { label: "17", colSpan: 2 },
           { label: "24", colSpan: 2 }
         ],
-        /* 2행: 명칭 */
         [
           { label: "명칭" },
           { label: "보스오링", colSpan: 2 },
@@ -2829,7 +2813,6 @@ export const TABLE_DATA = [
           { label: "로드오링", colSpan: 2 },
           { label: "V-패킹", colSpan: 2 }
         ],
-        /* 3행: 재질 */
         [
           { label: "재질" },
           { label: "NBR", colSpan: 2 },
@@ -2841,7 +2824,6 @@ export const TABLE_DATA = [
           { label: "NBR", colSpan: 2 },
           { label: "FABRIC+NBR", colSpan: 2 }
         ],
-        /* 4행: 수량 */
         [
           { label: "수량" },
           { label: "1", colSpan: 2 },
@@ -2853,7 +2835,6 @@ export const TABLE_DATA = [
           { label: "1", colSpan: 2 },
           { label: "1 Set", colSpan: 2 }
         ],
-        /* 5행: 내경 및 유형(A형/B형/공통) */
         [
           { label: "내경" },
           { label: "A형" }, { label: "B형" },

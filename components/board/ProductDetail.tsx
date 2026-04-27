@@ -45,8 +45,8 @@ export default function ProductDetail() {
 
             const data = await res.json();
             setDetail(isCertification ? data : data.currentData);
-            setPrevItem(data.prev);
-            setNextItem(data.next);
+            setPrevItem(data.next);
+            setNextItem(data.prev);
         } catch (error: any) {
             if (error.name === "AbortError") return;
             console.error("API fetch error:", error);
