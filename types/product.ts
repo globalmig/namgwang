@@ -47,7 +47,7 @@ export interface BaseAdminProps {
     title: string;
 }
 
-export interface ProductProps extends BaseAdminProps {
+export interface AdminProductProps extends BaseAdminProps {
     id: string;
     category: string;
     thumbnail: string;
@@ -60,7 +60,7 @@ export interface NewsProps extends BaseAdminProps {
     contents: string;
 }
 
-export type AllAdminDataProps = (ProductProps | PerformanceProps | NewsProps) & BaseAdminProps;
+export type AllAdminDataProps = (AdminProductProps | PerformanceProps | NewsProps) & BaseAdminProps;
 
 type ProductFormMode = "upload" | "edit";
 

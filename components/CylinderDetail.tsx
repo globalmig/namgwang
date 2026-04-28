@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import ProductNavigator from "./ProductNavigator";
 import { useEffect, useMemo, useState } from "react";
 import { NavItem } from "@/types/common";
@@ -11,7 +11,6 @@ export default function CylinderDetail() {
 
     const params = useParams();
     const id = params?.id;
-    const router = useRouter();
 
     const [prevItem, setPrevItem] = useState<NavItem | null>(null);
     const [nextItem, setNextItem] = useState<NavItem | null>(null);
@@ -26,6 +25,7 @@ export default function CylinderDetail() {
         const sameCategoryProducts = CYLINDER_DATA.filter(
             item => item.category === detail.category
         );
+
         const currentIndex = sameCategoryProducts.findIndex(item => String(item.id) === id);
 
         if (currentIndex !== -1) {

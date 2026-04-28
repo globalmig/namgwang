@@ -5,23 +5,28 @@ export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await params;
+  try {
+    const { id } = await params;
 
-  const { data, error } = await supabaseServer
-    .from("performances")
-    .select("*")
-    .eq("id", id)
-    .maybeSingle();
+    const { data, error } = await supabaseServer
+      .from("performances")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    if (!data) {
+      return NextResponse.json({ error: "실적 없음" }, { status: 404 });
+    }
+
+    return NextResponse.json(data);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "서버 오류";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
-
-  if (!data) {
-    return NextResponse.json({ error: "실적 없음" }, { status: 404 });
-  }
-
-  return NextResponse.json(data);
 }
 
 export async function PATCH(

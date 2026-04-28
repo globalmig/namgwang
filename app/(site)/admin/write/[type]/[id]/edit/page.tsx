@@ -60,7 +60,7 @@ export default function AdminEditPage() {
                     id: String(data.id),
                     name: data.name
                 }
-                
+
                 const formattedData = () => {
                     switch (selectType) {
                         case "performance":
@@ -87,12 +87,12 @@ export default function AdminEditPage() {
                                 category: data.category,
                                 thumbnail: data.thumbnail,
                                 images: data.images,
-                            } as InitialProductDataProps; // product
+                            } as InitialProductDataProps;
                     }
                 }
 
                 setInitialData(formattedData);
-            } catch (err) {
+            } catch (err: unknown) {
                 console.error("edit data load:", err);
                 alert("오류가 발생했습니다.");
             } finally {

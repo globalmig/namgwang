@@ -5,45 +5,48 @@ export async function GET(
     req: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
-    const { id } = await params;
+    try {
+        const { id } = await params;
 
-    const { data: currentData, error } = await supabaseServer
-        .from("news")
-        .select("*")
-        .eq("id", id)
-        .maybeSingle();
+        const { data: currentData, error } = await supabaseServer
+            .from("news")
+            .select("*")
+            .eq("id", id)
+            .maybeSingle();
 
-    if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        if (error) {
+            return NextResponse.json({ error: error.message }, { status: 500 });
+        }
+
+        if (!currentData) {
+            return NextResponse.json({ error: "기사 내용을 찾을 수 없습니다." }, { status: 404 });
+        }
+
+        const { data: prev } = await supabaseServer
+            .from("news")
+            .select("id, title")
+            .lt("created_at", currentData.created_at)
+            .order("created_at", { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+        const { data: next } = await supabaseServer
+            .from("news")
+            .select("id, title")
+            .gt("created_at", currentData.created_at)
+            .order("created_at", { ascending: true })
+            .limit(1)
+            .maybeSingle();
+
+        return NextResponse.json({
+            ...currentData,
+            prev: prev || null,
+            next: next || null
+        });
+    } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : "서버 오류";
+        return NextResponse.json({ error: message }, { status: 500 });
     }
-
-    if (!currentData) {
-        return NextResponse.json({ error: "기사 내용을 찾을 수 없습니다." }, { status: 404 });
-    }
-
-    const { data: prev } = await supabaseServer
-        .from("news")
-        .select("id, title")
-        .lt("created_at", currentData.created_at)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-
-    const { data: next } = await supabaseServer
-        .from("news")
-        .select("id, title")
-        .gt("created_at", currentData.created_at)
-        .order("created_at", { ascending: true })
-        .limit(1)
-        .maybeSingle();
-
-
-    return NextResponse.json({
-        ...currentData,
-        prev: prev || null,
-        next: next || null
-    });
-
 }
 
 export async function PATCH(

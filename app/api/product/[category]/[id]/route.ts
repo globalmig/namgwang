@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase/server";
 
+// api/product/[category]/[id]/route.ts
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string; category: string }> }
@@ -8,13 +9,11 @@ export async function GET(
   try {
     const { id, category } = await params;
 
-    // 1. 테이블 이름 결정 로직 수정
-    // unit과 other는 통합 테이블인 'products'를 사용합니다.
     let tableName = "";
     if (category === "unit" || category === "other") {
       tableName = "products";
     } else {
-      tableName = `${category}s`; // cylinder -> cylinders 등 기존 규칙
+      tableName = `${category}s`;
     }
 
     const { data: currentData, error: currentError } = await supabaseServer
@@ -25,29 +24,27 @@ export async function GET(
 
     if (currentError) throw currentError;
 
-    // 데이터가 없는 경우를 대비한 방어 코드
     if (!currentData) {
       return NextResponse.json({ error: "제품을 찾을 수 없습니다." }, { status: 404 });
     }
 
     const productCategory = currentData.category;
 
-    // 2. 이전/다음 데이터 가져오기 (결정된 tableName 사용)
     const { data: prevData } = await supabaseServer
       .from(tableName)
       .select("id, name")
-      .lt("created_at", currentData.created_at)
+      .gt("created_at", currentData.created_at)
       .eq("category", productCategory)
-      .order("created_at", { ascending: false })
+      .order("created_at", { ascending: true })
       .limit(1)
       .maybeSingle();
 
     const { data: nextData } = await supabaseServer
       .from(tableName)
       .select("id, name")
-      .gt("created_at", currentData.created_at)
+      .lt("created_at", currentData.created_at)
       .eq("category", productCategory)
-      .order("created_at", { ascending: true })
+      .order("created_at", { ascending: false })
       .limit(1)
       .maybeSingle();
 
@@ -58,7 +55,7 @@ export async function GET(
     });
 
   } catch (err: any) {
-    console.error("API Route Error:", err.message); // 서버 터미널에서 확인용
+    console.error("API Route Error:", err.message);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
@@ -69,19 +66,18 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await req.json();
-    const { 
-      name, 
-      category, 
-      thumbnail,      // 새 대표 이미지 URL (또는 유지된 기존 URL)
-      images,         // 새 상세 이미지 URL 배열 (기존 유지분 포함)
-      oldThumbnail,   // 수정 전 DB에 있던 기존 대표 이미지 URL
-      oldImages       // 수정 전 DB에 있던 기존 상세 이미지 URL 배열
+    const {
+      name,
+      category,
+      thumbnail,
+      images,
+      oldThumbnail,
+      oldImages
     } = body;
 
     const tableName = "products";
-    const bucketName = "products"; // 단일 버킷 사용
+    const bucketName = "products";
 
-    // [헬퍼 함수] URL에서 스토리지 내부 경로(path) 추출
     const extractPath = (url: string) => {
       if (!url || typeof url !== 'string') return null;
       const identifier = `/public/${bucketName}/`;
@@ -89,7 +85,6 @@ export async function PATCH(
       return parts.length >= 2 ? parts[1] : null;
     };
 
-    // --- 1. 대표 이미지 청소 (Cleanup) ---
     // 기존 이미지가 있고, 새 이미지 URL과 다르다면 기존 파일 삭제
     if (oldThumbnail && oldThumbnail !== thumbnail) {
       const oldPath = extractPath(oldThumbnail);
@@ -98,11 +93,10 @@ export async function PATCH(
       }
     }
 
-    // --- 2. 상세 이미지 청소 (Cleanup) ---
     // 기존 이미지 배열(oldImages) 중 새 이미지 배열(images)에 포함되지 않은 것들만 삭제
     if (oldImages && Array.isArray(oldImages)) {
       const imagesToDelete = oldImages.filter((oldUrl: string) => !images.includes(oldUrl));
-      
+
       const pathsToDelete = imagesToDelete
         .map((url: string) => extractPath(url))
         .filter((p: string | null): p is string => p !== null);
@@ -157,7 +151,7 @@ export async function DELETE(
       return NextResponse.json({ error: "삭제할 제품 정보를 찾을 수 없습니다." }, { status: 404 });
     }
 
-    // 3. 삭제할 파일 경로(Path) 추출 로직 개선
+    // 삭제할 파일 경로(Path) 추출 로직 개선
     const pathsToDelete: string[] = [];
 
     const extractPath = (url: string) => {
@@ -166,7 +160,7 @@ export async function DELETE(
         const parts = url.split(`/public/${bucketName}/`);
         if (parts.length < 2) return null;
         return parts[1];
-      } catch (e) {
+      } catch (e: unknown) {
         return null;
       }
     };
